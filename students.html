@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生データベース | 近世 KINSEI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#005bac',
+                        secondary: '#0097e6',
+                        accent: '#e6b422',
+                        dark: '#1a1a1a',
+                        light: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .mobile-menu-active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .mobile-menu-hidden {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .locked-copy {
+            color: transparent;
+            text-shadow: 0 0 10px rgba(15, 23, 42, 0.45);
+            user-select: none;
+        }
+    </style>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-light text-gray-800 antialiased relative">
+
+    <header id="header" class="fixed w-full z-50 py-4 px-6 md:px-12 bg-white/95 shadow-md text-gray-800 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">K</div>
+                <span class="logo-text text-2xl font-black tracking-wider text-primary">近世 KINSEI</span>
+            </a>
+
+            <nav class="hidden md:flex gap-7 items-center font-medium">
+                <a href="index.html#about" class="hover:text-primary transition">僕たちの価値</a>
+                <a href="index.html#vision" class="hover:text-primary transition">提供価値</a>
+                <a href="students.html" class="text-primary font-bold">学生DB</a>
+                <a href="sponsor.html" class="hover:text-primary transition">協賛企業</a>
+                <a href="index.html#team" class="hover:text-primary transition">メンバー</a>
+                <a href="index.html#contact" class="bg-accent text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:scale-105 transition transform">
+                    お問い合わせ
+                </a>
+            </nav>
+
+            <button class="md:hidden text-current p-2 focus:outline-none" id="mobile-menu-btn" aria-label="メニューを開く">
+                <i data-lucide="menu" class="w-8 h-8 transition-transform duration-300" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 mobile-menu-hidden transition-all duration-300 flex flex-col items-center justify-center gap-8 text-xl font-bold">
+            <a href="index.html#about" class="mobile-nav-link text-dark hover:text-primary transition">僕たちの価値</a>
+            <a href="index.html#vision" class="mobile-nav-link text-dark hover:text-primary transition">提供価値</a>
+            <a href="students.html" class="mobile-nav-link text-primary transition">学生DB</a>
+            <a href="sponsor.html" class="mobile-nav-link text-dark hover:text-primary transition">協賛企業</a>
+            <a href="index.html#team" class="mobile-nav-link text-dark hover:text-primary transition">メンバー</a>
+            <a href="index.html#contact" class="mobile-nav-link bg-accent text-white px-10 py-4 rounded-full shadow-lg mt-4">お問い合わせ</a>
+        </div>
+    </header>
+
+    <section class="pt-36 pb-16 bg-dark text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/80 via-dark to-dark z-10"></div>
+        <div class="absolute inset-0 bg-pattern opacity-10 z-10"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-20">
+            <div class="max-w-3xl">
+                <span class="text-accent font-bold tracking-wider uppercase text-sm mb-3 block">Student Database</span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6">
+                    気になる学生を、<br class="hidden md:block">会いたい学生へ。
+                </h1>
+                <p class="text-lg text-gray-200 leading-relaxed mb-8">
+                    学生の動画・属性・志望業界を一般公開し、価値観やキャリア軸などの深掘り情報は企業会員限定で公開予定です。
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#students" class="inline-flex items-center justify-center gap-2 bg-white text-dark px-7 py-4 rounded-full font-bold hover:bg-gray-100 transition">
+                        学生を見る
+                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </a>
+                    <a href="index.html#contact" class="inline-flex items-center justify-center gap-2 bg-accent text-white px-7 py-4 rounded-full font-bold hover:brightness-110 transition">
+                        企業会員について相談
+                        <i data-lucide="lock-keyhole" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-4">
+            <div class="flex items-start gap-4 p-5 bg-light rounded-2xl">
+                <div class="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <i data-lucide="square-play" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="font-black text-dark mb-1">動画で雰囲気を見る</h2>
+                    <p class="text-sm text-gray-500 leading-relaxed">TikTok 動画を起点に、学生の熱量や人柄を直感的に把握できます。</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-light rounded-2xl">
+                <div class="w-11 h-11 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                    <i data-lucide="tags" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="font-black text-dark mb-1">属性で比較する</h2>
+                    <p class="text-sm text-gray-500 leading-relaxed">学部、学年、志望業界、活動タグから採用接点を探せます。</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-light rounded-2xl">
+                <div class="w-11 h-11 rounded-xl bg-accent/10 text-accent flex items-center justify-center shrink-0">
+                    <i data-lucide="lock" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="font-black text-dark mb-1">深掘りは会員限定</h2>
+                    <p class="text-sm text-gray-500 leading-relaxed">価値観、意思決定の軸、将来像、面談リクエストは企業会員向けです。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="students" class="py-20 bg-pattern">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm">Preview</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-dark mt-2">公開中の学生プレビュー</h2>
+                    <p class="text-gray-500 mt-3">現在はサンプルデータです。本掲載時は学生本人の同意範囲に沿って公開します。</p>
+                </div>
+                <a href="index.html#contact" class="inline-flex items-center justify-center gap-2 bg-dark text-white px-6 py-3 rounded-full font-bold hover:bg-black transition">
+                    閲覧権について問い合わせ
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <article class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="aspect-[9/16] bg-gradient-to-br from-gray-900 to-primary text-white flex items-center justify-center relative">
+                        <div class="absolute top-4 left-4 bg-black/40 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">TikTok動画枠</div>
+                        <div class="text-center px-6">
+                            <i data-lucide="play" class="w-14 h-14 mx-auto mb-4"></i>
+                            <p class="font-bold">学生紹介ショート動画</p>
+                            <p class="text-sm text-white/70 mt-2">埋め込みURL設定後に表示</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-2xl font-black text-dark">K.T.</h3>
+                                <p class="text-sm text-gray-500">経営学部 / 3年</p>
+                            </div>
+                            <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">営業志望</span>
+                        </div>
+                        <p class="font-bold text-dark mb-4">人の挑戦を近くで支える仕事がしたい。</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">長期インターン</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">企画</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">関西</span>
+                        </div>
+                        <div class="border border-dashed border-gray-300 rounded-xl p-4 bg-gray-50 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/55 backdrop-blur-[2px] flex items-center justify-center">
+                                <span class="inline-flex items-center gap-2 bg-dark text-white text-sm font-bold px-4 py-2 rounded-full">
+                                    <i data-lucide="lock" class="w-4 h-4"></i>
+                                    続きは企業会員限定
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-500 mb-2">価値観・意思決定の軸</p>
+                            <p class="locked-copy text-sm leading-relaxed">周囲の期待ではなく、自分が納得できる成長環境を選びたい。</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="aspect-[9/16] bg-gradient-to-br from-gray-900 to-secondary text-white flex items-center justify-center relative">
+                        <div class="absolute top-4 left-4 bg-black/40 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">TikTok動画枠</div>
+                        <div class="text-center px-6">
+                            <i data-lucide="play" class="w-14 h-14 mx-auto mb-4"></i>
+                            <p class="font-bold">学生紹介ショート動画</p>
+                            <p class="text-sm text-white/70 mt-2">埋め込みURL設定後に表示</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-2xl font-black text-dark">M.S.</h3>
+                                <p class="text-sm text-gray-500">総合社会学部 / 2年</p>
+                            </div>
+                            <span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">広告志望</span>
+                        </div>
+                        <p class="font-bold text-dark mb-4">生活者の気持ちが動く瞬間を設計したい。</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">SNS運用</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">編集</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">発信力</span>
+                        </div>
+                        <div class="border border-dashed border-gray-300 rounded-xl p-4 bg-gray-50 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/55 backdrop-blur-[2px] flex items-center justify-center">
+                                <span class="inline-flex items-center gap-2 bg-dark text-white text-sm font-bold px-4 py-2 rounded-full">
+                                    <i data-lucide="lock" class="w-4 h-4"></i>
+                                    続きは企業会員限定
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-500 mb-2">志望理由の深掘り</p>
+                            <p class="locked-copy text-sm leading-relaxed">単なる認知獲得ではなく、人の行動が変わる企画に関わりたい。</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="aspect-[9/16] bg-gradient-to-br from-gray-900 to-accent text-white flex items-center justify-center relative">
+                        <div class="absolute top-4 left-4 bg-black/40 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">TikTok動画枠</div>
+                        <div class="text-center px-6">
+                            <i data-lucide="play" class="w-14 h-14 mx-auto mb-4"></i>
+                            <p class="font-bold">学生紹介ショート動画</p>
+                            <p class="text-sm text-white/70 mt-2">埋め込みURL設定後に表示</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-2xl font-black text-dark">R.N.</h3>
+                                <p class="text-sm text-gray-500">情報学部 / 3年</p>
+                            </div>
+                            <span class="bg-accent/10 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full">IT志望</span>
+                        </div>
+                        <p class="font-bold text-dark mb-4">技術で現場の面倒を減らす仕組みを作りたい。</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">開発</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">業務改善</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">分析</span>
+                        </div>
+                        <div class="border border-dashed border-gray-300 rounded-xl p-4 bg-gray-50 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/55 backdrop-blur-[2px] flex items-center justify-center">
+                                <span class="inline-flex items-center gap-2 bg-dark text-white text-sm font-bold px-4 py-2 rounded-full">
+                                    <i data-lucide="lock" class="w-4 h-4"></i>
+                                    続きは企業会員限定
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-500 mb-2">キャリア軸・将来像</p>
+                            <p class="locked-copy text-sm leading-relaxed">ユーザーの困りごとに近い場所で、継続的に改善する人でいたい。</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-dark text-white">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <span class="text-accent font-bold tracking-wider uppercase text-sm">Members Only</span>
+            <h2 class="text-3xl md:text-5xl font-black mt-3 mb-6">詳細プロフィールと面談リクエストは企業会員限定</h2>
+            <p class="text-gray-300 leading-relaxed max-w-3xl mx-auto mb-8">
+                会員企業には、価値観、意思決定の軸、志望理由の深掘り、将来像などを閲覧できる専用エリアを提供予定です。
+                面談リクエストは初期段階では運営を経由して受け付けます。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="sponsor.html" class="inline-flex items-center justify-center gap-2 bg-white text-dark px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition">
+                    企業向けプランを見る
+                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+                </a>
+                <a href="index.html#contact" class="inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 rounded-full font-bold hover:brightness-110 transition">
+                    相談する
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white text-gray-500 py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <a href="index.html" class="flex items-center gap-2 mb-4 text-primary">
+                    <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white font-bold">K</div>
+                    <span class="text-xl font-black tracking-wider">近世 KINSEI</span>
+                </a>
+                <p class="text-sm leading-relaxed mb-4">
+                    次世代の産学共創OSを構築し、価値創出力で評価される社会へ。<br>
+                    近大から、日本をおもしろく。
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-dark font-bold mb-4 border-b border-gray-200 pb-2">コンテンツ</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="index.html#about" class="hover:text-primary transition">僕たちの価値</a></li>
+                    <li><a href="index.html#vision" class="hover:text-primary transition">提供価値</a></li>
+                    <li><a href="students.html" class="text-primary transition">学生データベース</a></li>
+                    <li><a href="index.html#team" class="hover:text-primary transition">メンバー紹介</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-dark font-bold mb-4 border-b border-gray-200 pb-2">企業様へ</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="sponsor.html" class="hover:text-primary transition">協賛・導入プラン</a></li>
+                    <li><a href="index.html#contact" class="hover:text-primary transition">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-sm mt-12 pt-8 border-t border-gray-100">
+            &copy; 2026 KINSEI. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('mobile-menu-hidden');
+                mobileMenu.classList.add('mobile-menu-active');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.remove('mobile-menu-active');
+                mobileMenu.classList.add('mobile-menu-hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
