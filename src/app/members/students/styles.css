@@ -220,6 +220,123 @@
   margin: 0;
 }
 
+.member-short-video {
+  aspect-ratio: 9 / 16;
+  background: linear-gradient(145deg, #111827, #005bac);
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 360px;
+  overflow: hidden;
+  position: relative;
+}
+
+.member-short-video > img {
+  filter: saturate(0.92);
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  opacity: 0.42;
+  position: absolute;
+  transform: scale(1.06);
+  width: 100%;
+}
+
+.member-video-scrim {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2), transparent 32%, rgba(0, 0, 0, 0.68)),
+    radial-gradient(circle at 70% 18%, rgba(255, 255, 255, 0.24), transparent 30%);
+  inset: 0;
+  position: absolute;
+}
+
+.member-video-label {
+  align-self: flex-start;
+  background: rgba(0, 0, 0, 0.42);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  margin: 14px;
+  padding: 7px 11px;
+  position: relative;
+}
+
+.member-video-play {
+  align-items: center;
+  align-self: center;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  display: flex;
+  height: 68px;
+  justify-content: center;
+  position: relative;
+  width: 68px;
+}
+
+.member-video-play span {
+  border-bottom: 13px solid transparent;
+  border-left: 21px solid white;
+  border-top: 13px solid transparent;
+  display: block;
+  margin-left: 6px;
+}
+
+.member-video-copy {
+  display: grid;
+  gap: 6px;
+  padding: 0 16px 18px;
+  position: relative;
+}
+
+.member-video-copy strong {
+  font-size: 22px;
+}
+
+.member-video-copy span {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.member-video-sky {
+  background: linear-gradient(145deg, #0f172a, #0097e6);
+}
+
+.member-video-gold {
+  background: linear-gradient(145deg, #1f2937, #b7791f);
+}
+
+.member-video-green {
+  background: linear-gradient(145deg, #111827, #047857);
+}
+
+.member-video-rose {
+  background: linear-gradient(145deg, #111827, #be123c);
+}
+
+.member-video-indigo {
+  background: linear-gradient(145deg, #111827, #4f46e5);
+}
+
+.member-video-cyan {
+  background: linear-gradient(145deg, #111827, #0891b2);
+}
+
+.member-video-slate {
+  background: linear-gradient(145deg, #111827, #475569);
+}
+
+.member-video-orange {
+  background: linear-gradient(145deg, #111827, #c2410c);
+}
+
+.member-video-teal {
+  background: linear-gradient(145deg, #111827, #0f766e);
+}
+
 .tag-row {
   display: flex;
   flex-wrap: wrap;

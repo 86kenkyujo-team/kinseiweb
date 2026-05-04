@@ -32,6 +32,8 @@ const videoThemes = [
   'theme-teal',
 ]
 
+const PUBLIC_PREVIEW_COUNT = 3
+
 function getPrimaryIndustry(student: PublicStudent) {
   return student.desired_industries?.[0] || '志望業界'
 }
@@ -65,6 +67,7 @@ export default async function StudentsPage() {
         .order('id', { ascending: true })
         .returns<PublicStudent[]>()
     : { data: null, error: null }
+  const previewStudents = students?.slice(0, PUBLIC_PREVIEW_COUNT) || []
 
   return (
     <main className="public-students-page">
@@ -91,8 +94,8 @@ export default async function StudentsPage() {
           </span>
         </div>
         <div className="hero-stat">
-          <strong>{students?.length || 0}</strong>
-          <span>公開中の学生</span>
+          <strong>{previewStudents.length}</strong>
+          <span>先出し公開中</span>
         </div>
       </section>
 
@@ -115,7 +118,7 @@ export default async function StudentsPage() {
         <div className="section-title">
           <p>Preview</p>
           <h2>公開中の学生プレビュー</h2>
-          <span>学生本人の同意範囲に沿って公開する想定のサンプル表示です。</span>
+          <span>無料公開ページでは、先出しの3名のみを掲載しています。</span>
         </div>
 
         {error ? (
@@ -133,7 +136,7 @@ export default async function StudentsPage() {
         ) : null}
 
         <div className="public-student-grid">
-          {students?.map((student, index) => (
+          {previewStudents.map((student, index) => (
             <article className="public-student-card" id={`student-${student.id}`} key={student.id}>
               <div className="student-public-profile">
                 <div className="student-public-face">

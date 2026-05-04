@@ -35,6 +35,7 @@ export type Student = {
   profile_image_url: string | null
   profile_summary: string | null
   student_member_profiles: MemberProfile | MemberProfile[] | null
+  tiktok_url: string | null
 }
 
 type MembersStudentsPageProps = {
@@ -125,6 +126,7 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
         grade,
         location,
         profile_image_url,
+        tiktok_url,
         attributes,
         desired_industries,
         catch_copy,

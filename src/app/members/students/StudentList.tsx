@@ -6,6 +6,18 @@ import type { MemberProfile, Student } from './page'
 
 const INITIAL_VISIBLE_COUNT = 6
 const LOAD_MORE_COUNT = 2
+const VIDEO_THEMES = [
+  'member-video-blue',
+  'member-video-sky',
+  'member-video-gold',
+  'member-video-green',
+  'member-video-rose',
+  'member-video-indigo',
+  'member-video-cyan',
+  'member-video-slate',
+  'member-video-orange',
+  'member-video-teal',
+]
 
 function normalizeProfile(profile: Student['student_member_profiles']): MemberProfile | null {
   if (Array.isArray(profile)) {
@@ -33,6 +45,8 @@ export function StudentList({ students }: StudentListProps) {
         {visibleStudents.map((student) => {
           const profile = normalizeProfile(student.student_member_profiles)
           const displayName = profile?.real_name || student.display_name
+          const studentIndex = students.findIndex((item) => item.id === student.id)
+          const videoTheme = VIDEO_THEMES[Math.max(studentIndex, 0) % VIDEO_THEMES.length]
 
           return (
             <article className="student-card" key={student.id}>
@@ -50,6 +64,19 @@ export function StudentList({ students }: StudentListProps) {
                   <span>{student.location || '地域未設定'}</span>
                 </div>
                 <strong>{student.initials}</strong>
+              </div>
+
+              <div className={`member-short-video ${videoTheme}`}>
+                {student.profile_image_url ? <img src={student.profile_image_url} alt="" /> : null}
+                <div className="member-video-scrim" />
+                <div className="member-video-label">ショート動画</div>
+                <div className="member-video-play">
+                  <span />
+                </div>
+                <div className="member-video-copy">
+                  <strong>{displayName}</strong>
+                  <span>{student.catch_copy}</span>
+                </div>
               </div>
 
               <p className="catch-copy">{student.catch_copy}</p>
