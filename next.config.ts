@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         destination: '/login',
         permanent: false,
       },
+      {
+        source: '/students.html',
+        destination: '/students',
+        permanent: false,
+      },
     ]
   },
 }
