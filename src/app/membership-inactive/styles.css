@@ -1,0 +1,68 @@
+.inactive-page {
+  align-items: center;
+  background:
+    linear-gradient(rgba(248, 250, 252, 0.92), rgba(248, 250, 252, 0.92)),
+    radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: auto, 20px 20px;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  padding: 24px;
+}
+
+.inactive-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+  max-width: 680px;
+  padding: clamp(28px, 5vw, 48px);
+}
+
+.inactive-card p {
+  color: #e6b422;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.inactive-card h1 {
+  color: #1a1a1a;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.2;
+  margin: 0 0 18px;
+}
+
+.inactive-card span {
+  color: #64748b;
+  display: block;
+  line-height: 1.9;
+}
+
+.inactive-card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.inactive-card a {
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #1f2937;
+  display: inline-flex;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  text-decoration: none;
+}
+
+.inactive-card a:first-child {
+  background: #005bac;
+  border-color: #005bac;
+  color: white;
+}

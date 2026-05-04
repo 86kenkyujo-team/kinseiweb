@@ -1,0 +1,21 @@
+import Link from 'next/link'
+import './styles.css'
+
+export default function MembershipInactivePage() {
+  return (
+    <main className="inactive-page">
+      <section className="inactive-card">
+        <p>Membership Status</p>
+        <h1>会員状態の確認が必要です</h1>
+        <span>
+          ログインは完了していますが、現在の会員ステータスでは学生詳細データベースを閲覧できません。
+          契約状況の確認、または再開をご希望の場合は運営へお問い合わせください。
+        </span>
+        <div>
+          <Link href="/index.html#contact">お問い合わせへ</Link>
+          <Link href="/students.html">公開DBを見る</Link>
+        </div>
+      </section>
+    </main>
+  )
+}

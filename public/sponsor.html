@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スポンサー料金プラン | 近世 KINSEI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#005bac',
+                        secondary: '#0097e6',
+                        accent: '#e6b422',
+                        dark: '#1a1a1a',
+                        light: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .heading-underline::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #005bac, #0097e6);
+            margin-top: 12px;
+            border-radius: 2px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mobile-menu-active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .mobile-menu-hidden {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+    </style>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-light text-gray-800 antialiased relative">
+
+    <header id="header" class="fixed w-full z-50 py-4 px-6 md:px-12 bg-white/95 shadow-md text-gray-800 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">K</div>
+                <span class="logo-text text-2xl font-black tracking-wider text-primary">近世 KINSEI</span>
+            </a>
+
+            <nav class="hidden md:flex gap-8 items-center font-medium">
+                <a href="index.html#about" class="hover:text-primary transition">僕たちの価値</a>
+                <a href="index.html#vision" class="hover:text-primary transition">提供価値</a>
+                <a href="students.html" class="hover:text-primary transition">学生DB</a>
+                <a href="sponsor.html" class="text-primary font-bold">協賛企業</a>
+                <a href="index.html#service" class="hover:text-primary transition">事業内容</a>
+                <a href="index.html#team" class="hover:text-primary transition">メンバー</a>
+                <a href="index.html#contact" class="bg-accent text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:scale-105 transition transform">
+                    お問い合わせ
+                </a>
+            </nav>
+
+            <button class="md:hidden text-current p-2 focus:outline-none" id="mobile-menu-btn" aria-label="メニューを開く">
+                <i data-lucide="menu" class="w-8 h-8 transition-transform duration-300" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 mobile-menu-hidden transition-all duration-300 flex flex-col items-center justify-center gap-8 text-xl font-bold">
+            <a href="index.html#about" class="mobile-nav-link text-dark hover:text-primary transition">僕たちの価値</a>
+            <a href="index.html#vision" class="mobile-nav-link text-dark hover:text-primary transition">提供価値</a>
+            <a href="students.html" class="mobile-nav-link text-dark hover:text-primary transition">学生DB</a>
+            <a href="sponsor.html" class="mobile-nav-link text-primary transition">協賛企業</a>
+            <a href="index.html#service" class="mobile-nav-link text-dark hover:text-primary transition">事業内容</a>
+            <a href="index.html#team" class="mobile-nav-link text-dark hover:text-primary transition">メンバー</a>
+            <a href="index.html#contact" class="mobile-nav-link bg-accent text-white px-10 py-4 rounded-full shadow-lg mt-4">お問い合わせ</a>
+        </div>
+    </header>
+
+    <section class="pt-40 pb-16 bg-dark text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-dark z-10"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-20 text-center">
+            <span class="text-accent font-bold tracking-wider uppercase text-sm mb-2 block">Plans & Pricing</span>
+            <h1 class="text-4xl md:text-5xl font-black mb-6">スポンサー料金プラン</h1>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                次世代の採用スキームを共に創りませんか。<br>
+                月額1万円からの応援枠や、学生を直接派遣する導入プランをご用意しています。
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24 bg-pattern relative">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                <div class="bg-white rounded-3xl shadow-lg border border-gray-200 h-full flex flex-col hover:shadow-xl transition">
+                    <div class="p-8 pb-0 text-center border-b border-gray-100 pb-8">
+                        <div class="w-16 h-16 bg-gray-50 text-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="megaphone" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-dark mb-2">応援企業枠</h3>
+                        <p class="text-gray-500 text-sm mb-6">近大生を応援するライトプラン</p>
+                        <div class="text-4xl font-black text-dark mb-1">
+                            1<span class="text-xl text-gray-500 font-medium">万円</span><span class="text-base text-gray-400 font-normal"> / 月</span>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400">契約期間: 12カ月 (自動更新)</p>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <ul class="space-y-5 mb-8 flex-1">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
+                                <span class="text-gray-700 font-medium">前提: 近大生を応援</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
+                                <span class="text-gray-700 font-medium">宣伝広告<br><span class="text-sm text-gray-500">3.5万人のポテンシャル層への露出</span></span>
+                            </li>
+                        </ul>
+                        <a href="index.html#contact" class="w-full block text-center bg-gray-100 text-dark py-4 rounded-xl font-bold hover:bg-gray-200 transition mt-auto">
+                            このプランに申し込む
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-lg border border-gray-200 h-full flex flex-col hover:shadow-xl transition">
+                    <div class="p-8 pb-0 text-center border-b border-gray-100 pb-8 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-bl-full -z-10"></div>
+                        <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="pen-tool" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-dark mb-2">応援企業枠</h3>
+                        <p class="text-gray-500 text-sm mb-6">記事投稿でより深くアピール</p>
+                        <div class="text-4xl font-black text-dark mb-1">
+                            3<span class="text-xl text-gray-500 font-medium">万円</span><span class="text-base text-gray-400 font-normal"> / 月</span>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400">契約期間: 12カ月 (自動更新)</p>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <ul class="space-y-5 mb-8 flex-1">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
+                                <span class="text-gray-700 font-medium">前提: 近大生を応援</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
+                                <span class="text-gray-700 font-medium">宣伝広告<br><span class="text-sm text-gray-500">3.5万人のポテンシャル層への露出</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
+                                <span class="text-gray-700 font-medium bg-secondary/10 px-2 py-0.5 rounded text-secondary font-bold">特設ページによる記事投稿権</span>
+                            </li>
+                        </ul>
+                        <a href="index.html#contact" class="w-full block text-center bg-gray-100 text-dark py-4 rounded-xl font-bold hover:bg-gray-200 transition mt-auto">
+                            このプランに申し込む
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-b from-primary to-blue-900 rounded-3xl p-1 shadow-2xl relative flex flex-col h-full hover:scale-[1.02] transition-transform duration-300">
+                    <div class="absolute -top-4 right-4 md:right-6 bg-accent text-dark text-sm font-bold px-4 py-1 rounded-full shadow-lg z-10">
+                        Recommend
+                    </div>
+                    <div class="bg-white rounded-[23px] h-full flex flex-col overflow-hidden relative z-0">
+                        <div class="p-8 pb-0 text-center border-b border-gray-100 pb-8 bg-blue-50/50">
+                            <div class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="briefcase" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-dark mb-2">導入企業枠</h3>
+                            <p class="text-gray-500 text-sm mb-6">学生を直接派遣し、実務で共創する</p>
+                            <div class="text-4xl font-black text-primary mb-1">
+                                45<span class="text-xl text-gray-500 font-medium">万円</span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-400">契約期間: 3ヵ月 (自動更新)</p>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col">
+                            <ul class="space-y-5 mb-8 flex-1">
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="text-primary w-6 h-6 shrink-0"></i>
+                                    <span class="text-gray-700 font-medium">実学教育の環境提供</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="text-primary w-6 h-6 shrink-0"></i>
+                                    <span class="text-gray-700 font-medium">学生派遣・PR/採用イベントの実施</span>
+                                </li>
+                            </ul>
+                            <a href="index.html#contact" class="w-full block text-center bg-primary text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition mt-auto">
+                                導入を相談する
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold mb-4">学生データベースの閲覧もご相談いただけます</h2>
+            <p class="text-gray-500 mb-8">
+                学生の動画・志望業界・深掘りプロフィールを活用した採用接点づくりを、貴社の目的に合わせてご提案いたします。<br>
+                まずは公開プレビューをご覧ください。
+            </p>
+            <a href="students.html" class="inline-flex items-center gap-2 bg-dark text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-black transition shadow-lg hover:shadow-xl">
+                学生DBプレビューを見る
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <a href="index.html" class="flex items-center gap-2 mb-4 text-white">
+                    <div class="w-8 h-8 bg-white/10 rounded flex items-center justify-center text-primary font-bold">K</div>
+                    <span class="text-xl font-black tracking-wider">近世 KINSEI</span>
+                </a>
+                <p class="text-sm leading-relaxed mb-4">
+                    次世代の産学共創OSを構築し、価値創出力で評価される社会へ。<br>
+                    近大から、日本をおもしろく。
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">コンテンツ</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="index.html#about" class="hover:text-primary transition">僕たちの価値</a></li>
+                    <li><a href="index.html#vision" class="hover:text-primary transition">提供価値</a></li>
+                    <li><a href="students.html" class="hover:text-primary transition">学生データベース</a></li>
+                    <li><a href="index.html#service" class="hover:text-primary transition">事業内容</a></li>
+                    <li><a href="index.html#team" class="hover:text-primary transition">メンバー紹介</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">企業様へ</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="students.html" class="hover:text-primary transition">学生DBを見る</a></li>
+                    <li><a href="sponsor.html" class="text-primary transition flex items-center gap-1">協賛・導入プラン</a></li>
+                    <li><a href="index.html#contact" class="hover:text-primary transition">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-sm mt-12 pt-8 border-t border-gray-800">
+            &copy; 2026 KINSEI. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('mobile-menu-hidden');
+                mobileMenu.classList.add('mobile-menu-active');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.remove('mobile-menu-active');
+                mobileMenu.classList.add('mobile-menu-hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+
+        mobileNavLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

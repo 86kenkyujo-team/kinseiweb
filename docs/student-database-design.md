@@ -267,13 +267,19 @@ CSS は各 HTML 内に Tailwind CDN とインライン設定で記述されて�
 
 アカウントは企業のみに発行する。学生アカウントは MVP では作らない。
 
+初期実装では、企業ごとに 1 アカウントを発行する。企業内の複数担当者アカウントは将来拡張とする。
+
 発行フロー:
 
 1. 企業が問い合わせ
 2. 運営が契約 / サブスク状態を確認
-3. 運営が企業アカウントを発行
+3. 運営が企業アカウントを手動発行
 4. 企業担当者にログイン情報を送付
 5. 企業がログインして会員限定エリアを閲覧
+
+認証方式:
+
+- メールアドレス + パスワード
 
 ### 7.2 権限種別
 
@@ -303,11 +309,24 @@ CSS は各 HTML 内に Tailwind CDN とインライン設定で記述されて�
 - 詳細閲覧を停止
 - 契約更新 / 運営問い合わせ導線を表示
 
+会員ステータスは初期実装から導入する。
+
+閲覧可能:
+
+- `active`: 契約中
+- `trial`: トライアル中
+
+閲覧不可:
+
+- `past_due`: 支払い確認待ち
+- `suspended`: 停止中
+- `cancelled`: 解約済み
+
 ## 8. データ設計
 
 ### 8.1 Student
 
-学生プロフィールの中心データ。
+学生プロフィールの公開データ。
 
 | 項目 | 内容 | 公開範囲 |
 | --- | --- | --- |
@@ -322,6 +341,20 @@ CSS は各 HTML 内に Tailwind CDN とインライン設定で記述されて�
 | `catch_copy` | ひとこと | 公開 |
 | `tiktok_url` | TikTok URL | 公開 |
 | `profile_summary` | 簡易紹介 | 公開 |
+| `publication_status` | 公開状態 | 内部 |
+| `created_at` | 作成日時 | 内部 |
+| `updated_at` | 更新日時 | 内部 |
+
+### 8.2 StudentMemberProfile
+
+学生プロフィールの会員限定データ。
+
+公開情報と会員限定情報をテーブルレベルで分け、非会員に詳細情報を返さない。
+
+| 項目 | 内容 | 公開範囲 |
+| --- | --- | --- |
+| `student_id` | 学生 ID | 内部 |
+| `real_name` | 実名 | 会員限定 |
 | `values` | 価値観 | 会員限定 |
 | `thinking_style` | 思考性 | 会員限定 |
 | `career_axis` | キャリア軸 | 会員限定 |
@@ -329,11 +362,10 @@ CSS は各 HTML 内に Tailwind CDN とインライン設定で記述されて�
 | `decision_axis` | 意思決定の軸 | 会員限定 |
 | `future_vision` | 将来像 | 会員限定 |
 | `deep_dive_answers` | 深掘り回答 | 会員限定 |
-| `status` | 公開状態 | 内部 |
 | `created_at` | 作成日時 | 内部 |
 | `updated_at` | 更新日時 | 内部 |
 
-### 8.2 Company
+### 8.3 Company
 
 企業アカウントの中心データ。
 
@@ -348,7 +380,7 @@ CSS は各 HTML 内に Tailwind CDN とインライン設定で記述されて�
 | `created_at` | 作成日時 |
 | `updated_at` | 更新日時 |
 
-### 8.3 InterviewRequest
+### 8.4 InterviewRequest
 
 面談リクエストのデータ。
 
@@ -363,7 +395,7 @@ CSS は各 HTML 内に Tailwind CDN とインライン設定で記述されて�
 | `status` | 対応状態 |
 | `created_at` | 送信日時 |
 
-### 8.4 ViewHistory
+### 8.5 ViewHistory
 
 将来実装用。企業ごとの閲覧履歴。
 
@@ -403,13 +435,13 @@ Phase 3:
 ### 9.2 本実装推奨スタック
 
 - フロントエンド: Next.js
-- 認証: Clerk / Auth0 / Supabase Auth
-- DB: Supabase Postgres / Neon Postgres
-- ORM: Prisma
+- 認証: Supabase Auth
+- DB: Supabase Postgres
+- DB アクセス: Supabase JS / `@supabase/ssr`
 - デプロイ: Vercel
 - フォーム通知: Resend / Slack Webhook / Google Form 連携
 
-現在の Vercel 運用と相性が良いため、Next.js + Vercel + Supabase または Neon が自然。
+現在の Vercel 運用と相性が良いため、Next.js + Vercel + Supabase で進める。
 
 ## 10. UI 設計方針
 
@@ -493,8 +525,9 @@ Phase 3:
 実装内容:
 
 - Next.js 化
-- ログイン画面
-- 企業アカウント管理
+- Supabase Auth によるログイン画面
+- 企業ごと 1 アカウントの手動発行運用
+- 会員ステータス判定
 - 学生一覧 / 詳細ページ
 - 認証済み企業のみ詳細データ取得
 - 面談リクエストフォーム
@@ -547,11 +580,18 @@ Phase 3:
 - 学生の実名を会員企業に公開するか
 - 一般公開では名前にするかイニシャルにするか
 - TikTok 動画は学生本人のアカウントを埋め込むか、運営管理アカウントに集約するか
-- 企業会員プランに学生 DB 閲覧権を含めるか、別プランにするか
 - 面談リクエスト後の運営対応フロー
 - 学生本人への通知方法
 - 掲載同意書の形式
 - 詳細情報の更新頻度
+
+決定済み:
+
+- 企業ごとに 1 アカウントを発行する
+- アカウントは運営が手動発行する
+- 認証方式はメールアドレス + パスワードにする
+- 会員判定は初期実装から入れる
+- 技術方針は Next.js + Supabase Auth + Supabase Postgres とする
 
 ## 15. 結論
 
