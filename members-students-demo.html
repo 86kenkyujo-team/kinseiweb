@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業会員限定 学生データベース | 近世 KINSEI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#005bac',
+                        secondary: '#0097e6',
+                        accent: '#e6b422',
+                        dark: '#1a1a1a',
+                        light: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .mobile-menu-active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .mobile-menu-hidden {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .member-shell {
+            min-height: calc(100vh - 80px);
+        }
+    </style>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-light text-gray-800 antialiased">
+
+    <header id="header" class="fixed w-full z-50 py-4 px-6 md:px-12 bg-white/95 shadow-md text-gray-800 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">K</div>
+                <span class="logo-text text-2xl font-black tracking-wider text-primary">近世 KINSEI</span>
+            </a>
+
+            <nav class="hidden md:flex gap-7 items-center font-medium">
+                <a href="students.html" class="hover:text-primary transition">公開DB</a>
+                <a href="members-students-demo.html" class="text-primary font-bold">企業会員DB</a>
+                <a href="sponsor.html" class="hover:text-primary transition">協賛企業</a>
+                <a href="index.html#contact" class="bg-accent text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:scale-105 transition transform">
+                    お問い合わせ
+                </a>
+            </nav>
+
+            <button class="md:hidden text-current p-2 focus:outline-none" id="mobile-menu-btn" aria-label="メニューを開く">
+                <i data-lucide="menu" class="w-8 h-8 transition-transform duration-300" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 mobile-menu-hidden transition-all duration-300 flex flex-col items-center justify-center gap-8 text-xl font-bold">
+            <a href="students.html" class="mobile-nav-link text-dark hover:text-primary transition">公開DB</a>
+            <a href="members-students-demo.html" class="mobile-nav-link text-primary transition">企業会員DB</a>
+            <a href="sponsor.html" class="mobile-nav-link text-dark hover:text-primary transition">協賛企業</a>
+            <a href="index.html#contact" class="mobile-nav-link bg-accent text-white px-10 py-4 rounded-full shadow-lg mt-4">お問い合わせ</a>
+        </div>
+    </header>
+
+    <main class="pt-24 member-shell">
+        <section class="bg-dark text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/80 via-dark to-dark z-10"></div>
+            <div class="absolute inset-0 bg-pattern opacity-10 z-10"></div>
+            <div class="max-w-7xl mx-auto px-6 py-12 md:py-16 relative z-20">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+                    <div class="max-w-3xl">
+                        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-2 text-sm font-bold text-accent mb-5">
+                            <i data-lucide="badge-check" class="w-4 h-4"></i>
+                            企業会員デモ / ログイン後画面
+                        </div>
+                        <h1 class="text-3xl md:text-5xl font-black leading-tight mb-5">
+                            詳細を見て、<br class="hidden md:block">会いたい学生を決める。
+                        </h1>
+                        <p class="text-gray-200 leading-relaxed">
+                            公開ページでは見えない価値観、志望理由の深掘り、意思決定の軸、将来像まで確認できる企業会員限定エリアのデモです。
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 w-full lg:w-[420px]">
+                        <div class="bg-white/10 border border-white/15 rounded-2xl p-4">
+                            <p class="text-3xl font-black">3</p>
+                            <p class="text-xs text-gray-300 mt-1">閲覧可能学生</p>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-2xl p-4">
+                            <p class="text-3xl font-black">12</p>
+                            <p class="text-xs text-gray-300 mt-1">深掘り項目</p>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-2xl p-4">
+                            <p class="text-3xl font-black">1</p>
+                            <p class="text-xs text-gray-300 mt-1">リクエスト準備中</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+                <div class="flex flex-wrap gap-2">
+                    <button class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-bold">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        すべて
+                    </button>
+                    <button class="inline-flex items-center gap-2 bg-light text-gray-600 px-4 py-2 rounded-full text-sm font-bold border border-gray-200">営業志望</button>
+                    <button class="inline-flex items-center gap-2 bg-light text-gray-600 px-4 py-2 rounded-full text-sm font-bold border border-gray-200">広告志望</button>
+                    <button class="inline-flex items-center gap-2 bg-light text-gray-600 px-4 py-2 rounded-full text-sm font-bold border border-gray-200">IT志望</button>
+                </div>
+                <div class="flex items-center gap-3 bg-light border border-gray-200 rounded-full px-4 py-2 text-sm text-gray-500">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                    学部・業界・価値観タグで検索
+                </div>
+            </div>
+        </section>
+
+        <section class="py-10 bg-pattern">
+            <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[380px_1fr] gap-8 items-start">
+                <aside class="space-y-4 lg:sticky lg:top-28">
+                    <article class="bg-white border-2 border-primary shadow-lg rounded-2xl p-5">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <h2 class="text-2xl font-black text-dark">北島 太一</h2>
+                                <p class="text-sm text-gray-500">経営学部 / 3年 / K.T.</p>
+                            </div>
+                            <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">選択中</span>
+                        </div>
+                        <p class="font-bold text-dark mb-4">人の挑戦を近くで支える仕事がしたい。</p>
+                        <div class="grid grid-cols-2 gap-2 text-sm mb-4">
+                            <div class="bg-light rounded-xl p-3">
+                                <p class="text-gray-400 text-xs font-bold">志望業界</p>
+                                <p class="font-bold text-dark mt-1">人材 / 営業</p>
+                            </div>
+                            <div class="bg-light rounded-xl p-3">
+                                <p class="text-gray-400 text-xs font-bold">面談温度</p>
+                                <p class="font-bold text-dark mt-1">高</p>
+                            </div>
+                        </div>
+                        <a href="#detail" class="inline-flex items-center justify-center w-full gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold hover:bg-blue-700 transition">
+                            詳細を見る
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </article>
+
+                    <article class="bg-white border border-gray-100 shadow rounded-2xl p-5">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <h2 class="text-xl font-black text-dark">南 咲良</h2>
+                                <p class="text-sm text-gray-500">総合社会学部 / 2年 / M.S.</p>
+                            </div>
+                            <span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">広告</span>
+                        </div>
+                        <p class="text-sm font-bold text-dark mb-4">生活者の気持ちが動く瞬間を設計したい。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">SNS運用</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">編集</span>
+                        </div>
+                    </article>
+
+                    <article class="bg-white border border-gray-100 shadow rounded-2xl p-5">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <h2 class="text-xl font-black text-dark">中村 蓮</h2>
+                                <p class="text-sm text-gray-500">情報学部 / 3年 / R.N.</p>
+                            </div>
+                            <span class="bg-accent/10 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full">IT</span>
+                        </div>
+                        <p class="text-sm font-bold text-dark mb-4">技術で現場の面倒を減らす仕組みを作りたい。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">開発</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">業務改善</span>
+                        </div>
+                    </article>
+                </aside>
+
+                <section id="detail" class="space-y-6">
+                    <div class="bg-white border border-gray-100 shadow-lg rounded-2xl overflow-hidden">
+                        <div class="grid xl:grid-cols-[320px_1fr]">
+                            <div class="bg-gradient-to-br from-gray-900 to-primary text-white min-h-[420px] flex items-center justify-center relative">
+                                <div class="absolute top-5 left-5 bg-black/40 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">TikTok動画枠</div>
+                                <div class="text-center px-8">
+                                    <i data-lucide="play" class="w-16 h-16 mx-auto mb-4"></i>
+                                    <p class="font-bold">学生紹介ショート動画</p>
+                                    <p class="text-sm text-white/70 mt-2">企業会員は動画と詳細プロフィールを同じ画面で確認</p>
+                                </div>
+                            </div>
+
+                            <div class="p-6 md:p-8">
+                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5 mb-6">
+                                    <div>
+                                        <span class="text-primary font-bold tracking-wider uppercase text-sm">Selected Student</span>
+                                        <h2 class="text-3xl md:text-4xl font-black text-dark mt-2">北島 太一</h2>
+                                        <p class="text-gray-500 mt-2">経営学部 3年 / 人材・営業志望 / 大阪</p>
+                                    </div>
+                                    <a href="#request" class="inline-flex items-center justify-center gap-2 bg-accent text-white px-6 py-3 rounded-full font-bold hover:brightness-110 transition">
+                                        面談リクエスト
+                                        <i data-lucide="send" class="w-5 h-5"></i>
+                                    </a>
+                                </div>
+
+                                <div class="grid md:grid-cols-3 gap-3 mb-7">
+                                    <div class="bg-light rounded-2xl p-4">
+                                        <p class="text-xs font-bold text-gray-400">価値観タグ</p>
+                                        <p class="font-black text-dark mt-1">成長実感 / 誠実さ</p>
+                                    </div>
+                                    <div class="bg-light rounded-2xl p-4">
+                                        <p class="text-xs font-bold text-gray-400">意思決定の軸</p>
+                                        <p class="font-black text-dark mt-1">人に向き合える環境</p>
+                                    </div>
+                                    <div class="bg-light rounded-2xl p-4">
+                                        <p class="text-xs font-bold text-gray-400">面談希望</p>
+                                        <p class="font-black text-dark mt-1">オンライン可</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-5">
+                                    <section>
+                                        <h3 class="text-lg font-black text-dark flex items-center gap-2 mb-2">
+                                            <i data-lucide="user-round" class="w-5 h-5 text-primary"></i>
+                                            詳細プロフィール
+                                        </h3>
+                                        <p class="text-gray-600 leading-relaxed">
+                                            大学では学生団体の企画運営に関わり、協賛企業との打ち合わせやイベント当日の進行を経験。相手の期待を整理し、現場で動ける形に落とし込むことにやりがいを感じている。
+                                        </p>
+                                    </section>
+                                    <section>
+                                        <h3 class="text-lg font-black text-dark flex items-center gap-2 mb-2">
+                                            <i data-lucide="brain" class="w-5 h-5 text-primary"></i>
+                                            思考・価値観
+                                        </h3>
+                                        <p class="text-gray-600 leading-relaxed">
+                                            結果だけで評価されるよりも、誰かの挑戦に伴走しながら成果を作ることを重視。短期的な華やかさより、信頼を積み上げて任される範囲が広がる環境に惹かれる。
+                                        </p>
+                                    </section>
+                                    <section>
+                                        <h3 class="text-lg font-black text-dark flex items-center gap-2 mb-2">
+                                            <i data-lucide="route" class="w-5 h-5 text-primary"></i>
+                                            志望理由の深掘り
+                                        </h3>
+                                        <p class="text-gray-600 leading-relaxed">
+                                            人材業界に関心を持ったきっかけは、周囲の友人が就活で悩む姿を見たこと。本人がまだ言語化できていない強みや選択肢を一緒に整理し、挑戦の一歩を作る仕事に関わりたい。
+                                        </p>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <section class="bg-white border border-gray-100 shadow rounded-2xl p-6">
+                            <h3 class="text-xl font-black text-dark mb-4 flex items-center gap-2">
+                                <i data-lucide="compass" class="w-5 h-5 text-secondary"></i>
+                                キャリア軸
+                            </h3>
+                            <ul class="space-y-4 text-gray-600">
+                                <li class="flex gap-3">
+                                    <i data-lucide="check" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                    <span>顧客や候補者と長期的な信頼関係を作れること</span>
+                                </li>
+                                <li class="flex gap-3">
+                                    <i data-lucide="check" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                    <span>若手でも裁量を持って提案・改善に関われること</span>
+                                </li>
+                                <li class="flex gap-3">
+                                    <i data-lucide="check" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                    <span>成果だけでなく、プロセスの誠実さも大切にする文化</span>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="bg-white border border-gray-100 shadow rounded-2xl p-6">
+                            <h3 class="text-xl font-black text-dark mb-4 flex items-center gap-2">
+                                <i data-lucide="telescope" class="w-5 h-5 text-accent"></i>
+                                将来像
+                            </h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                5年後には、採用や育成の現場で「この人に相談すれば次の一歩が見える」と思ってもらえる存在になりたい。将来的には企業と学生の間にある情報差を減らす事業にも関わりたい。
+                            </p>
+                        </section>
+                    </div>
+
+                    <section class="bg-white border border-gray-100 shadow rounded-2xl p-6">
+                        <h3 class="text-xl font-black text-dark mb-5 flex items-center gap-2">
+                            <i data-lucide="message-square-text" class="w-5 h-5 text-primary"></i>
+                            深掘り Q&A
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-5">
+                            <div class="bg-light rounded-2xl p-5">
+                                <p class="text-sm font-black text-primary mb-2">Q. どんな企業に惹かれますか？</p>
+                                <p class="text-gray-600 leading-relaxed">若手を単なる作業者ではなく、顧客に向き合う一人の担当者として育てる企業です。</p>
+                            </div>
+                            <div class="bg-light rounded-2xl p-5">
+                                <p class="text-sm font-black text-primary mb-2">Q. 苦手な環境は？</p>
+                                <p class="text-gray-600 leading-relaxed">数字だけが先行して、目の前の人への向き合い方が軽くなる環境は合いにくいです。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="request" class="bg-dark text-white rounded-2xl p-6 md:p-8 shadow-xl">
+                        <div class="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
+                            <div>
+                                <span class="text-accent font-bold tracking-wider uppercase text-sm">Interview Request</span>
+                                <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4">北島 太一さんに面談リクエスト</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    初期運用では、企業から学生へ直接連絡するのではなく、運営が内容を確認して学生本人へ接続します。
+                                    このデモでは送信されません。
+                                </p>
+                            </div>
+                            <div class="bg-white text-dark rounded-2xl p-5">
+                                <label class="block text-sm font-black mb-2" for="reason">リクエスト理由</label>
+                                <textarea id="reason" class="w-full h-28 rounded-xl border border-gray-200 p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30" placeholder="例: 営業職の価値観が自社の育成方針と合いそうなため"></textarea>
+                                <label class="block text-sm font-black mt-4 mb-2" for="method">希望形式</label>
+                                <select id="method" class="w-full rounded-xl border border-gray-200 p-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/30">
+                                    <option>オンライン面談</option>
+                                    <option>大学周辺での面談</option>
+                                    <option>運営に相談して決める</option>
+                                </select>
+                                <button type="button" class="w-full mt-5 inline-flex items-center justify-center gap-2 bg-accent text-white px-5 py-3 rounded-xl font-bold hover:brightness-110 transition">
+                                    デモ送信
+                                    <i data-lucide="send" class="w-4 h-4"></i>
+                                </button>
+                                <p class="text-xs text-gray-400 mt-3">実装時は Google Form / Notion / DB 保存に接続します。</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('mobile-menu-hidden');
+                mobileMenu.classList.add('mobile-menu-active');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.remove('mobile-menu-active');
+                mobileMenu.classList.add('mobile-menu-hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
