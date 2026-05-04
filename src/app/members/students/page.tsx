@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { LogoutButton } from '@/components/LogoutButton'
 import { createClient } from '@/lib/supabase/server'
-import { createInterviewRequest } from './actions'
+import { StudentList } from './StudentList'
 import './styles.css'
 
 export const dynamic = 'force-dynamic'
@@ -12,7 +12,7 @@ type Company = {
   membership_status: string
 }
 
-type MemberProfile = {
+export type MemberProfile = {
   career_axis: string[] | null
   decision_axis: string | null
   future_vision: string | null
@@ -22,7 +22,7 @@ type MemberProfile = {
   values_text: string | null
 }
 
-type Student = {
+export type Student = {
   attributes: string[] | null
   catch_copy: string
   desired_industries: string[] | null
@@ -32,16 +32,9 @@ type Student = {
   id: string
   initials: string
   location: string | null
+  profile_image_url: string | null
   profile_summary: string | null
   student_member_profiles: MemberProfile | MemberProfile[] | null
-}
-
-function normalizeProfile(profile: Student['student_member_profiles']) {
-  if (Array.isArray(profile)) {
-    return profile[0] || null
-  }
-
-  return profile
 }
 
 type MembersStudentsPageProps = {
@@ -131,6 +124,7 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
         faculty,
         grade,
         location,
+        profile_image_url,
         attributes,
         desired_industries,
         catch_copy,
@@ -147,6 +141,7 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
       `,
     )
     .eq('publication_status', 'published')
+    .order('id', { ascending: true })
     .returns<Student[]>()
 
   return (
@@ -206,84 +201,7 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
           </div>
         ) : null}
 
-        <div className="student-grid">
-          {students?.map((student) => {
-            const profile = normalizeProfile(student.student_member_profiles)
-            return (
-              <article className="student-card" key={student.id}>
-                <div className="student-card-top">
-                  <div>
-                    <p>{student.faculty} / {student.grade}</p>
-                    <h2>{profile?.real_name || student.display_name}</h2>
-                    <span>{student.location || '地域未設定'}</span>
-                  </div>
-                  <strong>{student.initials}</strong>
-                </div>
-
-                <p className="catch-copy">{student.catch_copy}</p>
-
-                <div className="tag-row">
-                  {student.desired_industries?.map((industry) => (
-                    <span key={industry}>{industry}</span>
-                  ))}
-                  {student.attributes?.map((attribute) => (
-                    <span key={attribute}>{attribute}</span>
-                  ))}
-                </div>
-
-                <dl>
-                  <div>
-                    <dt>価値観</dt>
-                    <dd>{profile?.values_text || '未登録'}</dd>
-                  </div>
-                  <div>
-                    <dt>意思決定の軸</dt>
-                    <dd>{profile?.decision_axis || '未登録'}</dd>
-                  </div>
-                  <div>
-                    <dt>志望理由</dt>
-                    <dd>{profile?.motivation_detail || '未登録'}</dd>
-                  </div>
-                  <div>
-                    <dt>将来像</dt>
-                    <dd>{profile?.future_vision || '未登録'}</dd>
-                  </div>
-                </dl>
-
-                <div className="request-strip">
-                  <span>{profile?.meeting_preference || '面談希望未設定'}</span>
-                </div>
-
-                <form action={createInterviewRequest} className="request-form">
-                  <input name="studentId" type="hidden" value={student.id} />
-                  <label>
-                    <span>リクエスト理由</span>
-                    <textarea
-                      name="requestReason"
-                      placeholder="例: 価値観や志望理由が自社の営業職と合いそうなため"
-                      required
-                    />
-                  </label>
-                  <div className="request-form-row">
-                    <label>
-                      <span>希望形式</span>
-                      <select name="preferredMethod" required>
-                        <option value="online">オンライン面談</option>
-                        <option value="offline">対面面談</option>
-                        <option value="consult">運営に相談して決める</option>
-                      </select>
-                    </label>
-                    <label>
-                      <span>希望時期</span>
-                      <input name="preferredSchedule" placeholder="例: 5月中旬以降" />
-                    </label>
-                  </div>
-                  <button type="submit">面談リクエストを送信</button>
-                </form>
-              </article>
-            )
-          })}
-        </div>
+        <StudentList students={students || []} />
       </section>
     </main>
   )
