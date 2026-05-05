@@ -20,8 +20,7 @@ export default async function AdminDashboardPage() {
       <section className="admin-panel">
         <h1>管理画面の設定が未完了です</h1>
         <p>
-          `NEXT_PUBLIC_SUPABASE_URL`、`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`、
-          `SUPABASE_SECRET_KEY` または `SUPABASE_SERVICE_ROLE_KEY` を設定してください。
+          `NEXT_PUBLIC_SUPABASE_URL` と `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` を設定してください。
         </p>
       </section>
     )

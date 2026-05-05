@@ -15,6 +15,7 @@ const statusMessages: Record<string, string> = {
   error: '企業情報を更新できませんでした。',
   invite_error: '招待メールを再送できませんでした。',
   invite_sent: '招待メールを再送しました。',
+  service_key_missing: '招待メールの再送には Vercel の SUPABASE_SERVICE_ROLE_KEY 設定が必要です。',
   updated: '企業情報を更新しました。',
 }
 

@@ -9,6 +9,7 @@ const statusMessages: Record<string, string> = {
   company_error: '企業情報を作成できませんでした。',
   duplicate: 'このメールアドレスの企業はすでに登録されています。',
   invite_error: '招待メールを送信できませんでした。',
+  service_key_missing: '企業招待メールの送信には Vercel の SUPABASE_SERVICE_ROLE_KEY 設定が必要です。',
 }
 
 export default async function NewCompanyPage({ searchParams }: NewCompanyPageProps) {

@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 
 export type AdminUser = {
@@ -11,13 +10,12 @@ export type AdminUser = {
 
 export async function getAdminContext() {
   const supabase = await createClient()
-  const adminClient = createAdminClient()
 
-  if (!supabase || !adminClient) {
+  if (!supabase) {
     return {
-      adminClient,
+      adminClient: null,
       adminUser: null,
-      isConfigured: Boolean(supabase && adminClient),
+      isConfigured: false,
       user: null,
     }
   }
@@ -27,21 +25,21 @@ export async function getAdminContext() {
 
   if (!user) {
     return {
-      adminClient,
+      adminClient: supabase,
       adminUser: null,
       isConfigured: true,
       user: null,
     }
   }
 
-  const { data: adminUser } = await adminClient
+  const { data: adminUser } = await supabase
     .from('admin_users')
     .select('id, auth_user_id, display_name, role')
     .eq('auth_user_id', user.id)
     .maybeSingle<AdminUser>()
 
   return {
-    adminClient,
+    adminClient: supabase,
     adminUser: adminUser || null,
     isConfigured: true,
     user,
@@ -86,14 +84,4 @@ export function getAdminRedirectUrl() {
     : `https://${siteUrl}`
 
   return `${normalizedUrl}/login?next=/members/students`
-}
-
-export function requireAdminClient() {
-  const adminClient = createAdminClient()
-
-  if (!adminClient) {
-    throw new Error('Supabase admin env is not configured.')
-  }
-
-  return adminClient
 }

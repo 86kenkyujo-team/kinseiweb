@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { getAdminRedirectUrl, requireAdmin } from '@/lib/admin/auth'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 function textValue(formData: FormData, key: string) {
   const value = String(formData.get(key) || '').trim()
@@ -21,6 +22,7 @@ function requiredText(formData: FormData, key: string) {
 
 export async function createCompany(formData: FormData) {
   const { adminClient, adminUser } = await requireAdmin()
+  const serviceClient = createAdminClient()
   const companyName = requiredText(formData, 'companyName')
   const contactName = requiredText(formData, 'contactName')
   const contactEmail = requiredText(formData, 'contactEmail').toLowerCase()
@@ -42,7 +44,11 @@ export async function createCompany(formData: FormData) {
     redirect('/admin/companies/new?status=duplicate')
   }
 
-  const { data: inviteData, error: inviteError } = await adminClient.auth.admin.inviteUserByEmail(
+  if (!serviceClient) {
+    redirect('/admin/companies/new?status=service_key_missing')
+  }
+
+  const { data: inviteData, error: inviteError } = await serviceClient.auth.admin.inviteUserByEmail(
     contactEmail,
     {
       data: {
@@ -156,10 +162,15 @@ export async function updateCompany(formData: FormData) {
 
 export async function resendCompanyInvite(formData: FormData) {
   const { adminClient, adminUser } = await requireAdmin()
+  const serviceClient = createAdminClient()
   const companyId = requiredText(formData, 'companyId')
   const contactEmail = requiredText(formData, 'contactEmail').toLowerCase()
 
-  const { error } = await adminClient.auth.admin.inviteUserByEmail(contactEmail, {
+  if (!serviceClient) {
+    redirect(`/admin/companies/${companyId}?status=service_key_missing`)
+  }
+
+  const { error } = await serviceClient.auth.admin.inviteUserByEmail(contactEmail, {
     redirectTo: getAdminRedirectUrl(),
   })
 
