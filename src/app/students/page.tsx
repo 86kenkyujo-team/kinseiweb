@@ -88,29 +88,41 @@ export default async function StudentsPage() {
       <section className="students-hero">
         <div>
           <p>Student Database</p>
-          <h1>気になる学生を、会いたい学生へ。</h1>
+          <h1>
+            気になる学生を、<br />
+            会いたい学生へ。
+          </h1>
           <span>
             公開情報では、学生ごとのショート動画・出身・属性・志望業界を確認できます。
           </span>
         </div>
         <div className="hero-stat">
-          <strong>{previewStudents.length}</strong>
+          <strong>
+            {previewStudents.length}
+            <span>名</span>
+          </strong>
           <span>先出し公開中</span>
         </div>
       </section>
 
       <section className="students-intro">
         <div>
+          <span className="intro-icon intro-icon-video" aria-hidden="true" />
           <strong>動画で雰囲気を見る</strong>
           <span>縦型のショート動画ブロックで、学生ごとの人柄や熱量を確認できます。</span>
+          <i aria-hidden="true" />
         </div>
         <div>
+          <span className="intro-icon intro-icon-bars" aria-hidden="true" />
           <strong>属性で比較する</strong>
           <span>学部、学年、出身、志望業界、活動タグから採用接点を探せます。</span>
+          <i aria-hidden="true" />
         </div>
         <div>
+          <span className="intro-icon intro-icon-lock" aria-hidden="true" />
           <strong>深掘りは会員限定</strong>
           <span>価値観や意思決定の軸、面談リクエストは企業会員DBで確認できます。</span>
+          <i aria-hidden="true" />
         </div>
       </section>
 
