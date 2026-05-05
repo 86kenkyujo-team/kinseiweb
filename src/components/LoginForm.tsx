@@ -2,12 +2,17 @@
 
 import { FormEvent, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { initializeSessionLifetime } from '@/lib/auth/sessionLifetime'
 import { createClient } from '@/lib/supabase/client'
 
 export function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const nextPath = searchParams.get('next') || '/members/students'
+  const requestedNextPath = searchParams.get('next')
+  const nextPath =
+    requestedNextPath?.startsWith('/') && !requestedNextPath.startsWith('//')
+      ? requestedNextPath
+      : '/members/students'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -20,7 +25,7 @@ export function LoginForm() {
 
     try {
       const supabase = createClient()
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
@@ -30,8 +35,13 @@ export function LoginForm() {
         return
       }
 
-      router.push(nextPath)
-      router.refresh()
+      const userId = data.user?.id
+
+      if (userId) {
+        initializeSessionLifetime(userId)
+      }
+
+      router.replace(nextPath)
     } catch {
       setError('ログイン設定がまだ完了していません。運営側の設定を確認してください。')
     } finally {

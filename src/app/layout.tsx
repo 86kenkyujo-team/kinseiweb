@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { AuthSessionManager } from '@/components/AuthSessionManager'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        <AuthSessionManager />
+        {children}
+      </body>
     </html>
   )
 }
