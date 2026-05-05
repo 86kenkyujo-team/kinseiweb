@@ -34,6 +34,7 @@ const videoThemes = [
 ]
 
 const PUBLIC_PREVIEW_COUNT = 3
+const MARUBAYASHI_PROFILE_IMAGE_URL = '/assets/students/marubayashi-yuto.png'
 
 function getPrimaryIndustry(student: PublicStudent) {
   return student.desired_industries?.[0] || '志望業界'
@@ -41,6 +42,12 @@ function getPrimaryIndustry(student: PublicStudent) {
 
 function getVideoTheme(index: number) {
   return videoThemes[index % videoThemes.length]
+}
+
+function getProfileImageStyle(profileImageUrl: string | null) {
+  return profileImageUrl === MARUBAYASHI_PROFILE_IMAGE_URL
+    ? { objectPosition: '50% 28%' }
+    : undefined
 }
 
 export default async function StudentsPage() {
@@ -155,7 +162,11 @@ export default async function StudentsPage() {
               <div className="student-public-profile">
                 <div className="student-public-face">
                   {student.profile_image_url ? (
-                    <img src={student.profile_image_url} alt="" />
+                    <img
+                      src={student.profile_image_url}
+                      alt=""
+                      style={getProfileImageStyle(student.profile_image_url)}
+                    />
                   ) : (
                     <span>{student.initials}</span>
                   )}

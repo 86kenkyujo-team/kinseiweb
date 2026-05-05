@@ -18,6 +18,7 @@ const VIDEO_THEMES = [
   'member-video-orange',
   'member-video-teal',
 ]
+const MARUBAYASHI_PROFILE_IMAGE_URL = '/assets/students/marubayashi-yuto.png'
 
 function normalizeProfile(profile: Student['student_member_profiles']): MemberProfile | null {
   if (Array.isArray(profile)) {
@@ -25,6 +26,12 @@ function normalizeProfile(profile: Student['student_member_profiles']): MemberPr
   }
 
   return profile
+}
+
+function getProfileImageStyle(profileImageUrl: string | null) {
+  return profileImageUrl === MARUBAYASHI_PROFILE_IMAGE_URL
+    ? { objectPosition: '50% 28%' }
+    : undefined
 }
 
 type StudentListProps = {
@@ -53,7 +60,11 @@ export function StudentList({ students }: StudentListProps) {
               <div className="student-card-top">
                 <div className="student-face" aria-hidden="true">
                   {student.profile_image_url ? (
-                    <img src={student.profile_image_url} alt="" />
+                    <img
+                      src={student.profile_image_url}
+                      alt=""
+                      style={getProfileImageStyle(student.profile_image_url)}
+                    />
                   ) : (
                     <span>{student.initials}</span>
                   )}
