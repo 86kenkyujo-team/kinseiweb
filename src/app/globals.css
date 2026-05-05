@@ -37,3 +37,88 @@ select {
   background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
   background-size: 20px 20px;
 }
+
+.student-db-header {
+  align-items: center;
+  background: rgba(3, 14, 39, 0.78);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(180, 211, 255, 0.18);
+  display: flex;
+  justify-content: space-between;
+  min-height: 76px;
+  padding: 16px clamp(20px, 4vw, 56px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.student-db-brand {
+  align-items: center;
+  color: white;
+  display: inline-flex;
+  font-size: 22px;
+  font-weight: 900;
+  gap: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.student-db-brand span {
+  align-items: center;
+  background: linear-gradient(135deg, #147cff, #0bd3ff);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(20, 124, 255, 0.32);
+  color: white;
+  display: inline-flex;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.student-db-header nav {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: flex-end;
+}
+
+.student-db-header nav a {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.student-db-header nav a[aria-current='page'] {
+  color: white;
+}
+
+.student-db-login-link,
+.student-db-header .logout-button {
+  align-items: center;
+  background: #e6b422;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(230, 180, 34, 0.24);
+  color: #061331;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+}
+
+@media (max-width: 780px) {
+  .student-db-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .student-db-header nav {
+    justify-content: flex-start;
+  }
+}

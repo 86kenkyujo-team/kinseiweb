@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
 import { createClient } from '@/lib/supabase/server'
 import './styles.css'
 
@@ -80,19 +81,7 @@ export default async function StudentsPage() {
 
   return (
     <main className="public-students-page">
-      <header className="public-header">
-        <Link className="public-brand" href="/index.html">
-          <span>K</span>
-          近世 KINSEI
-        </Link>
-        <nav>
-          <Link href="/index.html#about">僕たちの価値</Link>
-          <Link href="/index.html#vision">提供価値</Link>
-          <Link aria-current="page" href="/students">学生DB</Link>
-          <Link href="/sponsor.html">協賛企業</Link>
-          <Link className="contact-link" href="/index.html#contact">お問い合わせ</Link>
-        </nav>
-      </header>
+      <StudentDatabaseHeader active="public" />
 
       <section className="students-hero">
         <div>

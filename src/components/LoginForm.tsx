@@ -55,7 +55,7 @@ export function LoginForm() {
         <p className="eyebrow">Company Member Login</p>
         <h1>企業会員ログイン</h1>
         <p className="lead">
-          運営から発行された企業アカウントでログインしてください。
+          招待メールで設定したメールアドレスとパスワードでログインしてください。
         </p>
       </div>
 

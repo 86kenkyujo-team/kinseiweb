@@ -1,19 +1,19 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { LoginForm } from '@/components/LoginForm'
+import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
 import { getSupabaseBrowserEnv } from '@/lib/supabase/config'
 import './styles.css'
+
+export const dynamic = 'force-dynamic'
 
 export default function LoginPage() {
   const { isConfigured } = getSupabaseBrowserEnv()
 
   return (
     <main className="login-page">
+      <StudentDatabaseHeader active="login" />
       <section className="login-hero">
-        <Link className="brand" href="/index.html">
-          <span>K</span>
-          近世 KINSEI
-        </Link>
         <div>
           <p className="eyebrow">Student Database</p>
           <h2>詳細情報は、契約中の企業会員だけに。</h2>

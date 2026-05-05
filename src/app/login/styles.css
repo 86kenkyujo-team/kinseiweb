@@ -9,13 +9,16 @@
   grid-template-columns: minmax(0, 0.95fr) minmax(420px, 0.72fr);
 }
 
+.login-page .student-db-header {
+  grid-column: 1 / -1;
+}
+
 .login-hero {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 76px);
   flex-direction: column;
-  gap: clamp(92px, 16vh, 152px);
   justify-content: flex-start;
-  padding: 40px clamp(28px, 5vw, 72px);
+  padding: clamp(72px, 11vh, 132px) clamp(28px, 5vw, 72px);
   background:
     linear-gradient(90deg, rgba(1, 10, 31, 0.86) 0%, rgba(2, 14, 45, 0.76) 52%, rgba(0, 54, 137, 0.48) 100%),
     url('/assets/images/student-database-hero-bg.png') center / cover no-repeat,
@@ -41,28 +44,6 @@
 
 .login-hero > div {
   max-width: 760px;
-}
-
-.brand {
-  align-items: center;
-  color: white;
-  display: inline-flex;
-  gap: 12px;
-  font-size: 24px;
-  font-weight: 900;
-  text-decoration: none;
-}
-
-.brand span {
-  align-items: center;
-  background: linear-gradient(135deg, #147cff, #0bd3ff);
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(20, 124, 255, 0.32);
-  color: white;
-  display: inline-flex;
-  height: 40px;
-  justify-content: center;
-  width: 40px;
 }
 
 .login-hero h2 {

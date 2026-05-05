@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { LogoutButton } from '@/components/LogoutButton'
+import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
 import { createClient } from '@/lib/supabase/server'
 import { StudentList } from './StudentList'
 import './styles.css'
@@ -150,17 +150,7 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
 
   return (
     <main className="members-page">
-      <header className="members-header">
-        <Link className="members-brand" href="/index.html">
-          <span>K</span>
-          近世 KINSEI
-        </Link>
-        <nav>
-          <Link href="/students.html">公開DB</Link>
-          <Link href="/members/students">企業会員DB</Link>
-          <LogoutButton />
-        </nav>
-      </header>
+      <StudentDatabaseHeader active="members" />
 
       <section className="members-hero">
         <div>

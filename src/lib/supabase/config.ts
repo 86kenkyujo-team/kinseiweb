@@ -8,3 +8,16 @@ export function getSupabaseBrowserEnv() {
     url,
   }
 }
+
+export function getSupabaseAdminEnv() {
+  const { url } = getSupabaseBrowserEnv()
+  const secretKey =
+    process.env.SUPABASE_SECRET_KEY ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+
+  return {
+    isConfigured: Boolean(url && secretKey),
+    secretKey,
+    url,
+  }
+}

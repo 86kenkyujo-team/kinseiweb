@@ -1,9 +1,13 @@
 import Link from 'next/link'
+import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
 import './styles.css'
+
+export const dynamic = 'force-dynamic'
 
 export default function MembershipInactivePage() {
   return (
     <main className="inactive-page">
+      <StudentDatabaseHeader active="members" />
       <section className="inactive-card">
         <p>Membership Status</p>
         <h1>会員状態の確認が必要です</h1>
