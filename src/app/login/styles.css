@@ -1,25 +1,51 @@
 .login-page {
+  background:
+    radial-gradient(circle at 82% 14%, rgba(24, 124, 255, 0.14), transparent 28%),
+    radial-gradient(#cfe3f7 1px, transparent 1px),
+    #f6f9fe;
+  background-size: auto, 18px 18px, auto;
   display: grid;
   min-height: 100vh;
   grid-template-columns: minmax(0, 0.95fr) minmax(420px, 0.72fr);
-  background: #f8fafc;
 }
 
 .login-hero {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  justify-content: space-between;
+  gap: clamp(92px, 16vh, 152px);
+  justify-content: flex-start;
   padding: 40px clamp(28px, 5vw, 72px);
   background:
-    linear-gradient(120deg, rgba(0, 91, 172, 0.92), rgba(26, 26, 26, 0.96)),
-    radial-gradient(#ffffff 1px, transparent 1px);
-  background-size: auto, 20px 20px;
+    linear-gradient(90deg, rgba(1, 10, 31, 0.86) 0%, rgba(2, 14, 45, 0.76) 52%, rgba(0, 54, 137, 0.48) 100%),
+    url('/assets/images/student-database-hero-bg.png') center / cover no-repeat,
+    #041333;
   color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-hero::before {
+  background:
+    radial-gradient(circle at 8% 3%, rgba(81, 171, 255, 0.44), transparent 22%),
+    radial-gradient(circle at 96% 4%, rgba(38, 181, 255, 0.5), transparent 18%);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.login-hero > * {
+  position: relative;
+}
+
+.login-hero > div {
+  max-width: 760px;
 }
 
 .brand {
   align-items: center;
+  color: white;
   display: inline-flex;
   gap: 12px;
   font-size: 24px;
@@ -29,9 +55,10 @@
 
 .brand span {
   align-items: center;
-  background: white;
+  background: linear-gradient(135deg, #147cff, #0bd3ff);
   border-radius: 8px;
-  color: #005bac;
+  box-shadow: 0 10px 30px rgba(20, 124, 255, 0.32);
+  color: white;
   display: inline-flex;
   height: 40px;
   justify-content: center;
@@ -40,14 +67,17 @@
 
 .login-hero h2 {
   font-size: clamp(34px, 5vw, 64px);
+  font-weight: 1000;
   line-height: 1.12;
-  margin: 12px 0 20px;
+  margin: 34px 0 20px;
   max-width: 720px;
+  text-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
 }
 
 .login-hero p {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.86);
   font-size: 17px;
+  font-weight: 800;
   line-height: 1.9;
   max-width: 620px;
 }
@@ -60,10 +90,11 @@
 }
 
 .login-card {
-  background: white;
-  border: 1px solid #e5e7eb;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.96));
+  border: 1px solid #dbe7f5;
   border-radius: 8px;
-  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 24px 70px rgba(15, 49, 92, 0.12);
   display: grid;
   gap: 20px;
   max-width: 440px;
@@ -73,11 +104,20 @@
 
 .eyebrow {
   color: #e6b422;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   margin: 0;
   text-transform: uppercase;
+}
+
+.login-hero .eyebrow::after {
+  background: linear-gradient(90deg, #32a4ff, transparent);
+  content: '';
+  display: block;
+  height: 3px;
+  margin-top: 18px;
+  width: 58px;
 }
 
 .login-card h1 {
@@ -124,6 +164,7 @@
   background: #005bac;
   border: 0;
   border-radius: 8px;
+  box-shadow: 0 14px 30px rgba(0, 91, 172, 0.18);
   color: white;
   cursor: pointer;
   display: inline-flex;
