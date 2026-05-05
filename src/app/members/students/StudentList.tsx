@@ -67,7 +67,19 @@ export function StudentList({ students }: StudentListProps) {
               </div>
 
               <div className={`member-short-video ${videoTheme}`}>
-                {student.profile_image_url ? <img src={student.profile_image_url} alt="" /> : null}
+                {student.video_url ? (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={student.profile_image_url || undefined}
+                    preload="metadata"
+                    src={student.video_url}
+                  />
+                ) : student.profile_image_url ? (
+                  <img src={student.profile_image_url} alt="" />
+                ) : null}
                 <div className="member-video-scrim" />
                 <div className="member-video-label">ショート動画</div>
                 <div className="member-video-play">

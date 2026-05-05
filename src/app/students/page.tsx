@@ -17,6 +17,7 @@ type PublicStudent = {
   profile_image_url: string | null
   profile_summary: string | null
   tiktok_url: string | null
+  video_url: string | null
 }
 
 const videoThemes = [
@@ -57,6 +58,7 @@ export default async function StudentsPage() {
             location,
             profile_image_url,
             tiktok_url,
+            video_url,
             attributes,
             desired_industries,
             catch_copy,
@@ -167,7 +169,19 @@ export default async function StudentsPage() {
               </div>
 
               <div className={`short-video-frame ${getVideoTheme(index)}`}>
-                {student.profile_image_url ? <img src={student.profile_image_url} alt="" /> : null}
+                {student.video_url ? (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={student.profile_image_url || undefined}
+                    preload="metadata"
+                    src={student.video_url}
+                  />
+                ) : student.profile_image_url ? (
+                  <img src={student.profile_image_url} alt="" />
+                ) : null}
                 <div className="video-scrim" />
                 <div className="video-label">ショート動画</div>
                 <div className="video-play">

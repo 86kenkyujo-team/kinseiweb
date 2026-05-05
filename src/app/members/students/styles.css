@@ -275,15 +275,23 @@
   position: relative;
 }
 
-.member-short-video > img {
+.member-short-video > img,
+.member-short-video > video {
   filter: saturate(0.92);
   height: 100%;
   inset: 0;
   object-fit: cover;
-  opacity: 0.42;
   position: absolute;
   transform: scale(1.06);
   width: 100%;
+}
+
+.member-short-video > img {
+  opacity: 0.42;
+}
+
+.member-short-video > video {
+  opacity: 0.72;
 }
 
 .member-video-scrim {
