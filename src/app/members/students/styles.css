@@ -170,8 +170,8 @@
 
 .student-grid {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .student-card,
@@ -186,7 +186,8 @@
 .student-card {
   align-content: start;
   display: grid;
-  gap: 18px;
+  gap: 18px 20px;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
   padding: 22px;
 }
 
@@ -194,6 +195,7 @@
   align-items: center;
   display: grid;
   gap: 16px;
+  grid-column: 1 / -1;
   grid-template-columns: 76px minmax(0, 1fr) auto;
   min-height: 82px;
 }
@@ -258,6 +260,7 @@
   color: #111827;
   font-size: 17px;
   font-weight: 900;
+  grid-column: 2;
   line-height: 1.7;
   margin: 0;
 }
@@ -271,6 +274,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 360px;
+  max-height: 430px;
   overflow: hidden;
   position: relative;
 }
@@ -391,6 +395,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  grid-column: 2;
   min-height: 32px;
 }
 
@@ -411,6 +416,8 @@
 .student-card dl {
   display: grid;
   gap: 12px;
+  grid-column: 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
 }
 
@@ -436,6 +443,7 @@
 
 .deep-dive-area {
   display: grid;
+  grid-column: 1 / -1;
   gap: 14px;
 }
 
@@ -444,12 +452,14 @@
   border-radius: 8px;
   display: grid;
   gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 16px;
 }
 
 .deep-dive-layer h3 {
   color: #111827;
   font-size: 18px;
+  grid-column: 1 / -1;
   margin: 0;
 }
 
@@ -470,6 +480,8 @@
 
 .deep-dive-group dl {
   gap: 8px;
+  grid-column: auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .deep-dive-group dl div {
@@ -489,6 +501,7 @@
   border-top: 1px solid #e5e7eb;
   display: flex;
   gap: 12px;
+  grid-column: 1 / -1;
   justify-content: space-between;
   padding-top: 16px;
 }
@@ -502,6 +515,7 @@
   border-top: 1px solid #e5e7eb;
   display: grid;
   gap: 12px;
+  grid-column: 1 / -1;
   padding-top: 16px;
 }
 
@@ -679,6 +693,30 @@
   }
 
   .student-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-card {
+    grid-template-columns: 1fr;
+  }
+
+  .catch-copy,
+  .tag-row,
+  .student-card dl,
+  .member-short-video,
+  .deep-dive-area,
+  .request-strip,
+  .request-form {
+    grid-column: 1;
+  }
+
+  .member-short-video {
+    max-height: none;
+  }
+
+  .deep-dive-layer,
+  .student-card dl,
+  .deep-dive-group dl {
     grid-template-columns: 1fr;
   }
 
