@@ -162,7 +162,7 @@ export const studentQuestionLayers: StudentQuestionLayer[] = [
   },
 ]
 
-const allQuestionFields = studentQuestionLayers.flatMap((layer) =>
+export const allStudentQuestionFields = studentQuestionLayers.flatMap((layer) =>
   layer.groups.flatMap((group) => group.fields),
 )
 
@@ -199,7 +199,7 @@ export function getDeepDiveList(answers: Record<string, string | string[]>, id: 
 }
 
 export function buildDeepDiveAnswersFromForm(formData: FormData) {
-  return allQuestionFields.reduce<Record<string, string | string[]>>((answers, field) => {
+  return allStudentQuestionFields.reduce<Record<string, string | string[]>>((answers, field) => {
     if (field.choices) {
       const values = formData
         .getAll(field.id)
@@ -221,4 +221,10 @@ export function buildDeepDiveAnswersFromForm(formData: FormData) {
 
     return answers
   }, {})
+}
+
+export function countDeepDiveAnswers(value: unknown) {
+  const answers = normalizeDeepDiveAnswers(value)
+
+  return allStudentQuestionFields.filter((field) => getDeepDiveList(answers, field.id).length > 0).length
 }
