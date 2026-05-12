@@ -179,15 +179,20 @@ export function StudentList({ students }: StudentListProps) {
                       return (
                         <div className="deep-dive-group" key={group.title}>
                           <h4>{group.title}</h4>
-                          <dl>
-                            {group.fields.map((field) => (
-                              <div key={field.id}>
-                                <dt>{field.label}</dt>
-                                <dd>{hasFieldValue(deepDiveAnswers, field.id) ? getDeepDiveText(deepDiveAnswers, field.id) : '未登録'}</dd>
-                              </div>
-                            ))}
-                          </dl>
-                          {!hasAnswers ? <p>この項目群は未登録です。</p> : null}
+                          {hasAnswers ? (
+                            <dl>
+                              {group.fields
+                                .filter((field) => hasFieldValue(deepDiveAnswers, field.id))
+                                .map((field) => (
+                                  <div key={field.id}>
+                                    <dt>{field.label}</dt>
+                                    <dd>{getDeepDiveText(deepDiveAnswers, field.id)}</dd>
+                                  </div>
+                                ))}
+                            </dl>
+                          ) : (
+                            <p>未登録</p>
+                          )}
                         </div>
                       )
                     })}
