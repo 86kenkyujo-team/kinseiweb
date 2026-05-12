@@ -113,18 +113,21 @@ export function StudentList({ students }: StudentListProps) {
                 </div>
               </div>
 
-              <p className="catch-copy">{student.catch_copy}</p>
+              <div className="student-card-side">
+                <span className="student-side-label">学生サマリー</span>
+                <p className="catch-copy">{student.catch_copy}</p>
 
-              <div className="tag-row">
-                {getDeepDiveList(deepDiveAnswers, 'personality_tags').map((tag) => (
-                  <span className="personality-tag" key={tag}>{tag}</span>
-                ))}
-                {student.desired_industries?.map((industry) => (
-                  <span key={industry}>{industry}</span>
-                ))}
-                {student.attributes?.map((attribute) => (
-                  <span key={attribute}>{attribute}</span>
-                ))}
+                <div className="tag-row">
+                  {getDeepDiveList(deepDiveAnswers, 'personality_tags').map((tag) => (
+                    <span className="personality-tag" key={tag}>{tag}</span>
+                  ))}
+                  {student.desired_industries?.map((industry) => (
+                    <span key={industry}>{industry}</span>
+                  ))}
+                  {student.attributes?.map((attribute) => (
+                    <span key={attribute}>{attribute}</span>
+                  ))}
+                </div>
               </div>
 
               <dl>

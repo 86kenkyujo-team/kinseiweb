@@ -257,11 +257,32 @@
   padding: 0 12px;
 }
 
+.student-card-side {
+  align-self: stretch;
+  background:
+    linear-gradient(180deg, #f8fbff, #ffffff);
+  border: 1px solid #e7eef7;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  grid-column: 2;
+  grid-template-rows: auto auto 1fr;
+  min-width: 0;
+  padding: 18px;
+}
+
+.student-side-label {
+  color: #005bac;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .catch-copy {
   color: #111827;
   font-size: 17px;
   font-weight: 900;
-  grid-column: 2;
   line-height: 1.7;
   margin: 0;
 }
@@ -395,20 +416,27 @@
 }
 
 .tag-row {
+  align-content: flex-start;
+  align-items: flex-start;
+  align-self: start;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  grid-column: 2;
   min-height: 32px;
 }
 
 .tag-row span {
+  align-items: center;
   background: #f1f5f9;
   border-radius: 999px;
   color: #475569;
+  display: inline-flex;
   font-size: 12px;
   font-weight: 900;
+  line-height: 1.4;
+  max-width: 100%;
   padding: 6px 10px;
+  overflow-wrap: anywhere;
 }
 
 .tag-row .personality-tag {
@@ -706,7 +734,7 @@
   }
 
   .catch-copy,
-  .tag-row,
+  .student-card-side,
   .student-card dl,
   .member-short-video,
   .deep-dive-area,
