@@ -15,10 +15,12 @@ type Company = {
 export type MemberProfile = {
   career_axis: string[] | null
   decision_axis: string | null
+  deep_dive_answers: unknown
   future_vision: string | null
   meeting_preference: string | null
   motivation_detail: string | null
   real_name: string | null
+  thinking_style: string | null
   values_text: string | null
 }
 
@@ -137,10 +139,12 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
           real_name,
           values_text,
           career_axis,
+          deep_dive_answers,
           motivation_detail,
           decision_axis,
           future_vision,
-          meeting_preference
+          meeting_preference,
+          thinking_style
         )
       `,
     )

@@ -1,5 +1,11 @@
 import Link from 'next/link'
 import { createStudent, updateStudent } from './actions'
+import {
+  getDeepDiveList,
+  getDeepDiveText,
+  normalizeDeepDiveAnswers,
+  studentQuestionLayers,
+} from '@/lib/studentProfileQuestions'
 
 type MemberProfile = {
   career_axis?: string[] | null
@@ -47,16 +53,9 @@ function normalizeProfile(profile?: Student['student_member_profiles']) {
   return profile || null
 }
 
-function stringifyDeepDive(value: unknown) {
-  if (!value || (Array.isArray(value) && value.length === 0)) {
-    return ''
-  }
-
-  return JSON.stringify(value, null, 2)
-}
-
 export function StudentForm({ student }: StudentFormProps) {
   const profile = normalizeProfile(student?.student_member_profiles)
+  const deepDiveAnswers = normalizeDeepDiveAnswers(profile?.deep_dive_answers)
   const isEditing = Boolean(student?.id)
 
   return (
@@ -153,10 +152,54 @@ export function StudentForm({ student }: StudentFormProps) {
           面談希望条件
           <textarea name="meetingPreference" defaultValue={profile?.meeting_preference || ''} />
         </label>
-        <label className="full">
-          深掘り Q&A JSON
-          <textarea name="deepDiveAnswers" defaultValue={stringifyDeepDive(profile?.deep_dive_answers)} />
-        </label>
+        <div className="admin-form-section full">
+          <p>学生データベース質問項目</p>
+          <span>ログイン後の企業会員DBに表示される第1層〜第3層の回答です。</span>
+        </div>
+        {studentQuestionLayers.map((layer) => (
+          <fieldset className="admin-question-layer full" key={layer.title}>
+            <legend>{layer.title}</legend>
+            {layer.groups.map((group) => (
+              <div className="admin-question-group" key={group.title}>
+                <h2>{group.title}</h2>
+                <div className="admin-question-grid">
+                  {group.fields.map((field) => (
+                    <div className={field.multiline ? 'admin-question-field full' : 'admin-question-field'} key={field.id}>
+                      <span>{field.label}</span>
+                      {field.choices ? (
+                        <div className="admin-choice-grid">
+                          {field.choices.map((choice) => (
+                            <label key={choice}>
+                              <input
+                                defaultChecked={getDeepDiveList(deepDiveAnswers, field.id).includes(choice)}
+                                name={field.id}
+                                type="checkbox"
+                                value={choice}
+                              />
+                              {choice}
+                            </label>
+                          ))}
+                        </div>
+                      ) : field.multiline ? (
+                        <textarea
+                          maxLength={field.maxLength}
+                          name={field.id}
+                          defaultValue={getDeepDiveText(deepDiveAnswers, field.id)}
+                        />
+                      ) : (
+                        <input
+                          maxLength={field.maxLength}
+                          name={field.id}
+                          defaultValue={getDeepDiveText(deepDiveAnswers, field.id)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </fieldset>
+        ))}
         <label className="full">
           公開ステータス変更メモ
           <textarea name="publicationNote" />

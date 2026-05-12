@@ -3,6 +3,12 @@
 import { useMemo, useState } from 'react'
 import { createInterviewRequest } from './actions'
 import type { MemberProfile, Student } from './page'
+import {
+  getDeepDiveList,
+  getDeepDiveText,
+  normalizeDeepDiveAnswers,
+  studentQuestionLayers,
+} from '@/lib/studentProfileQuestions'
 
 const INITIAL_VISIBLE_COUNT = 6
 const LOAD_MORE_COUNT = 2
@@ -34,6 +40,10 @@ function getProfileImageStyle(profileImageUrl: string | null) {
     : undefined
 }
 
+function hasFieldValue(answers: Record<string, string | string[]>, fieldId: string) {
+  return getDeepDiveList(answers, fieldId).length > 0
+}
+
 type StudentListProps = {
   students: Student[]
 }
@@ -51,6 +61,7 @@ export function StudentList({ students }: StudentListProps) {
       <div className="student-grid">
         {visibleStudents.map((student) => {
           const profile = normalizeProfile(student.student_member_profiles)
+          const deepDiveAnswers = normalizeDeepDiveAnswers(profile?.deep_dive_answers)
           const displayName = profile?.real_name || student.display_name
           const studentIndex = students.findIndex((item) => item.id === student.id)
           const videoTheme = VIDEO_THEMES[Math.max(studentIndex, 0) % VIDEO_THEMES.length]
@@ -105,6 +116,9 @@ export function StudentList({ students }: StudentListProps) {
               <p className="catch-copy">{student.catch_copy}</p>
 
               <div className="tag-row">
+                {getDeepDiveList(deepDiveAnswers, 'personality_tags').map((tag) => (
+                  <span className="personality-tag" key={tag}>{tag}</span>
+                ))}
                 {student.desired_industries?.map((industry) => (
                   <span key={industry}>{industry}</span>
                 ))}
@@ -115,8 +129,31 @@ export function StudentList({ students }: StudentListProps) {
 
               <dl>
                 <div>
+                  <dt>基本情報</dt>
+                  <dd>
+                    年齢: {getDeepDiveText(deepDiveAnswers, 'age') || '未登録'} / MBTI:{' '}
+                    {getDeepDiveText(deepDiveAnswers, 'mbti') || '任意未登録'}
+                  </dd>
+                </div>
+                <div>
+                  <dt>今何を頑張ってる？</dt>
+                  <dd>{getDeepDiveText(deepDiveAnswers, 'current_focus') || '未登録'}</dd>
+                </div>
+                <div>
+                  <dt>将来やりたいこと</dt>
+                  <dd>{getDeepDiveText(deepDiveAnswers, 'future_goal_short') || '未登録'}</dd>
+                </div>
+                <div>
+                  <dt>合う会社</dt>
+                  <dd>{getDeepDiveText(deepDiveAnswers, 'company_fit') || '未登録'}</dd>
+                </div>
+                <div>
                   <dt>価値観</dt>
                   <dd>{profile?.values_text || '未登録'}</dd>
+                </div>
+                <div>
+                  <dt>思考スタイル</dt>
+                  <dd>{profile?.thinking_style || '未登録'}</dd>
                 </div>
                 <div>
                   <dt>意思決定の軸</dt>
@@ -131,6 +168,32 @@ export function StudentList({ students }: StudentListProps) {
                   <dd>{profile?.future_vision || '未登録'}</dd>
                 </div>
               </dl>
+
+              <div className="deep-dive-area">
+                {studentQuestionLayers.map((layer) => (
+                  <section className="deep-dive-layer" key={layer.title}>
+                    <h3>{layer.title}</h3>
+                    {layer.groups.map((group) => {
+                      const hasAnswers = group.fields.some((field) => hasFieldValue(deepDiveAnswers, field.id))
+
+                      return (
+                        <div className="deep-dive-group" key={group.title}>
+                          <h4>{group.title}</h4>
+                          <dl>
+                            {group.fields.map((field) => (
+                              <div key={field.id}>
+                                <dt>{field.label}</dt>
+                                <dd>{hasFieldValue(deepDiveAnswers, field.id) ? getDeepDiveText(deepDiveAnswers, field.id) : '未登録'}</dd>
+                              </div>
+                            ))}
+                          </dl>
+                          {!hasAnswers ? <p>この項目群は未登録です。</p> : null}
+                        </div>
+                      )
+                    })}
+                  </section>
+                ))}
+              </div>
 
               <div className="request-strip">
                 <span>{profile?.meeting_preference || '面談希望未設定'}</span>

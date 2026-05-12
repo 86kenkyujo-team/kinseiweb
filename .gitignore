@@ -4,4 +4,5 @@
 node_modules
 .next
 out
-.env.local
+.env*
+!.env.example

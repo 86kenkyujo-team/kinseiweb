@@ -403,6 +403,11 @@
   padding: 6px 10px;
 }
 
+.tag-row .personality-tag {
+  background: #eaf6ff;
+  color: #005bac;
+}
+
 .student-card dl {
   display: grid;
   gap: 12px;
@@ -426,6 +431,56 @@
 .student-card dd {
   color: #475569;
   line-height: 1.7;
+  margin: 0;
+}
+
+.deep-dive-area {
+  display: grid;
+  gap: 14px;
+}
+
+.deep-dive-layer {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.deep-dive-layer h3 {
+  color: #111827;
+  font-size: 18px;
+  margin: 0;
+}
+
+.deep-dive-group {
+  background: #fbfdff;
+  border: 1px solid #eef2f7;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.deep-dive-group h4 {
+  color: #005bac;
+  font-size: 14px;
+  margin: 0;
+}
+
+.deep-dive-group dl {
+  gap: 8px;
+}
+
+.deep-dive-group dl div {
+  background: white;
+  padding: 12px;
+}
+
+.deep-dive-group p {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 800;
   margin: 0;
 }
 

@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { requireAdmin } from '@/lib/admin/auth'
+import { buildDeepDiveAnswersFromForm } from '@/lib/studentProfileQuestions'
 
 function textValue(formData: FormData, key: string) {
   const value = String(formData.get(key) || '').trim()
@@ -32,24 +33,6 @@ function arrayValue(formData: FormData, key: string) {
     .filter(Boolean)
 }
 
-function jsonValue(formData: FormData, key: string) {
-  const value = textValue(formData, key)
-
-  if (!value) {
-    return []
-  }
-
-  try {
-    return JSON.parse(value)
-  } catch {
-    return value
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .map((answer) => ({ answer }))
-  }
-}
-
 function publicStudentPayload(formData: FormData) {
   return {
     attributes: arrayValue(formData, 'attributes'),
@@ -72,7 +55,7 @@ function memberProfilePayload(formData: FormData, studentId: string) {
   return {
     career_axis: arrayValue(formData, 'careerAxis'),
     decision_axis: textValue(formData, 'decisionAxis'),
-    deep_dive_answers: jsonValue(formData, 'deepDiveAnswers'),
+    deep_dive_answers: buildDeepDiveAnswersFromForm(formData),
     future_vision: textValue(formData, 'futureVision'),
     meeting_preference: textValue(formData, 'meetingPreference'),
     motivation_detail: textValue(formData, 'motivationDetail'),
