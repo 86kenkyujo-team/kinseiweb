@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KINSEI | 実績で戦うキャリアプラットフォーム</title>
+  <title>KINSEI TOP redesign visual comp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
@@ -33,8 +33,9 @@
     }
 
     .page {
-      width: 100%;
+      width: min(941px, 100%);
       min-height: 1672px;
+      margin: 0 auto;
       overflow: hidden;
       position: relative;
     }
@@ -68,7 +69,6 @@
       gap: 12px;
       font-weight: 900;
       letter-spacing: .08em;
-      text-decoration: none;
     }
 
     .brand-mark {
@@ -91,11 +91,6 @@
       font-size: 12px;
       font-weight: 800;
       flex: 1;
-    }
-
-    .nav a {
-      text-decoration: none;
-      white-space: nowrap;
     }
 
     .header-actions {
@@ -135,25 +130,8 @@
       z-index: 1;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -18px;
-      height: 190px;
-      background:
-        linear-gradient(90deg, rgba(190, 222, 252, .22) 0 2px, transparent 2px 82px),
-        linear-gradient(180deg, rgba(255,255,255,0), rgba(206, 230, 252, .38));
-      opacity: .55;
-      pointer-events: none;
-      z-index: 0;
-      -webkit-mask-image: linear-gradient(180deg, transparent, #000 25%, #000 72%, transparent);
-      mask-image: linear-gradient(180deg, transparent, #000 25%, #000 72%, transparent);
-    }
-
     .hero-copy {
-      width: 500px;
+      width: 455px;
       position: relative;
       z-index: 5;
     }
@@ -166,7 +144,7 @@
 
     h1 {
       margin: 0;
-      font-size: 52px;
+      font-size: 58px;
       line-height: 1.12;
       font-weight: 900;
       letter-spacing: 0;
@@ -183,56 +161,6 @@
       font-size: 15px;
       line-height: 2;
       font-weight: 700;
-      max-width: 360px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-top: 26px;
-    }
-
-    .btn.outline {
-      background: rgba(255,255,255,.66);
-      color: #1769e8;
-      border: 1px solid rgba(31, 101, 198, .42);
-      box-shadow: none;
-    }
-
-    .proof {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 22px;
-      color: #162844;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .proof-avatars {
-      display: flex;
-      align-items: center;
-    }
-
-    .proof-avatars img,
-    .proof-avatar {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 2px solid white;
-      box-shadow: 0 8px 18px rgba(20, 82, 154, .14);
-      object-fit: cover;
-      background: linear-gradient(135deg, #dcecff, #87baff);
-    }
-
-    .proof-avatars img + img,
-    .proof-avatar {
-      margin-left: -8px;
-    }
-
-    .nowrap {
-      white-space: nowrap;
     }
 
     .hero-visual {
@@ -243,21 +171,6 @@
       height: 405px;
     }
 
-    .hero-visual::after {
-      content: "";
-      position: absolute;
-      left: 4%;
-      right: -4%;
-      bottom: 56px;
-      height: 94px;
-      border-bottom: 2px solid rgba(66, 145, 255, .34);
-      border-radius: 50%;
-      transform: rotate(-8deg);
-      filter: drop-shadow(0 0 10px rgba(82, 157, 255, .38));
-      pointer-events: none;
-      z-index: 5;
-    }
-
     .orbit {
       position: absolute;
       inset: 12px 0 0 36px;
@@ -266,7 +179,6 @@
         radial-gradient(circle at 50% 50%, rgba(64, 159, 255, .18), transparent 35%),
         repeating-radial-gradient(circle at 50% 50%, rgba(116, 173, 238, .42) 0 1px, transparent 1px 66px);
       opacity: .85;
-      z-index: 1;
     }
 
     .big-k {
@@ -278,7 +190,6 @@
       color: rgba(23, 105, 232, .25);
       line-height: 1;
       text-shadow: 0 20px 55px rgba(23, 105, 232, .16);
-      z-index: 1;
     }
 
     .people {
@@ -287,77 +198,7 @@
       bottom: 4px;
       width: 350px;
       height: 318px;
-      filter: drop-shadow(0 28px 34px rgba(21, 45, 87, .22));
-      overflow: visible;
-      border-radius: 0;
-      background: transparent;
-      z-index: 3;
-    }
-
-    .people::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(226, 241, 255, .76), rgba(226, 241, 255, .34) 52%, rgba(255,255,255,.7)),
-        radial-gradient(circle at 50% 24%, rgba(72, 150, 255, .22), transparent 42%);
-      z-index: 2;
-      mix-blend-mode: screen;
-      -webkit-mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
-      mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
-      pointer-events: none;
-    }
-
-    .people-image {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 58%;
-      filter: saturate(.96) contrast(1.02) brightness(1.04);
-      mix-blend-mode: normal;
-      opacity: .98;
-      -webkit-mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
-      mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
-    }
-
-    .person-photo {
-      position: relative;
-      z-index: 1;
-      width: 142px;
-      height: 274px;
-      margin: 0;
-      overflow: hidden;
-      border-radius: 72px 72px 20px 20px;
-      border: 1px solid rgba(255,255,255,.42);
-      background: rgba(255,255,255,.4);
-      box-shadow: inset 0 0 0 1px rgba(23,105,232,.08);
-    }
-
-    .person-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(.88) contrast(.94) brightness(1.05);
-      mix-blend-mode: multiply;
-    }
-
-    .person-photo.katayama {
-      transform: translateY(10px) rotate(-2deg);
-    }
-
-    .person-photo.katayama img {
-      object-position: 84% 50%;
-    }
-
-    .person-photo.kitajima {
-      height: 292px;
-      transform: translateY(0) rotate(1deg);
-    }
-
-    .person-photo.kitajima img {
-      object-position: 93% 52%;
+      filter: drop-shadow(0 24px 34px rgba(21, 45, 87, .22));
     }
 
     .person {
@@ -428,15 +269,7 @@
       left: 4px;
       top: 168px;
       width: 178px;
-      height: 128px;
-      padding: 18px;
-    }
-
-    .score-card {
-      right: 10px;
-      top: 34px;
-      width: 144px;
-      height: 154px;
+      height: 94px;
       padding: 18px;
     }
 
@@ -465,32 +298,6 @@
       margin-bottom: 10px;
     }
 
-    .score-card b {
-      display: block;
-      color: #223857;
-      font-size: 10px;
-      line-height: 1.55;
-      margin-bottom: 8px;
-    }
-
-    .score {
-      display: flex;
-      align-items: baseline;
-      gap: 3px;
-      margin-bottom: 14px;
-      color: #1769e8;
-      font-weight: 900;
-    }
-
-    .score strong {
-      font-size: 28px;
-      line-height: 1;
-    }
-
-    .score span {
-      font-size: 11px;
-    }
-
     .growth {
       display: flex;
       align-items: end;
@@ -507,66 +314,6 @@
       height: 26px;
       border-bottom: 2px solid rgba(23, 105, 232, .35);
       background: linear-gradient(145deg, transparent 45%, rgba(23,105,232,.85) 46% 52%, transparent 53%);
-    }
-
-    .score-card .sparkline {
-      width: 96px;
-      height: 34px;
-    }
-
-    .donut-card {
-      right: -12px;
-      top: 242px;
-      width: 152px;
-      height: 92px;
-      padding: 16px;
-    }
-
-    .donut-card b {
-      display: block;
-      color: #223857;
-      font-size: 11px;
-      margin-bottom: 12px;
-    }
-
-    .donut-chart {
-      position: absolute;
-      left: 18px;
-      bottom: 14px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: conic-gradient(#1769e8 0 270deg, #dcecff 270deg 360deg);
-    }
-
-    .donut-chart::after {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border-radius: 50%;
-      background: white;
-    }
-
-    .donut-list {
-      position: absolute;
-      right: 18px;
-      bottom: 22px;
-      display: grid;
-      gap: 6px;
-      color: #4e6280;
-      font-size: 9px;
-      font-weight: 800;
-    }
-
-    .donut-list span::before {
-      content: "";
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      margin-right: 5px;
-      border-radius: 50%;
-      background: #1769e8;
-      vertical-align: 1px;
     }
 
     .skill-card .card-label,
@@ -598,24 +345,10 @@
       background: rgba(255,255,255,.94);
       box-shadow: 0 24px 45px rgba(33, 89, 161, .18);
       display: grid;
-      grid-template-columns: 1.15fr 1fr 1fr 140px;
+      grid-template-columns: 150px 180px 1fr 72px;
       gap: 8px;
       align-items: center;
       padding: 9px 10px;
-    }
-
-    .search-field {
-      display: grid;
-      align-content: center;
-      gap: 2px;
-    }
-
-    .search-field small {
-      display: block;
-      color: #9aa9be;
-      font-size: 10px;
-      font-weight: 800;
-      line-height: 1;
     }
 
     .search-cell,
@@ -649,15 +382,13 @@
       border-radius: 10px;
       background: linear-gradient(135deg, #2a7cff, #0961db);
       color: white;
-      cursor: pointer;
       font-weight: 900;
       font-size: 14px;
-      font-family: inherit;
     }
 
     .process-section {
-      margin-top: 34px;
-      padding: 1px 0 44px;
+      margin-top: 46px;
+      padding: 1px 0 62px;
       background:
         radial-gradient(circle at 50% 30%, rgba(189, 220, 255, .38), transparent 42%),
         linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(238,247,255,.68) 30%, rgba(255,255,255,0) 100%);
@@ -797,7 +528,6 @@
       font-weight: 800;
       display: block;
       font-size: 11px;
-      line-height: 1.25;
     }
 
     .metric strong {
@@ -807,16 +537,6 @@
       line-height: 1.1;
       margin-top: 4px;
       font-weight: 900;
-    }
-
-    .metric em {
-      display: block;
-      margin-top: 6px;
-      color: #2f76dd;
-      font-size: 10px;
-      font-style: normal;
-      font-weight: 900;
-      line-height: 1.2;
     }
 
     .switch {
@@ -914,7 +634,6 @@
     .feature b {
       display: block;
       font-size: 15px;
-      line-height: 1.45;
       margin-bottom: 12px;
     }
 
@@ -972,8 +691,7 @@
     }
 
     .center-cta {
-      display: flex;
-      margin: 28px auto 0;
+      margin: 24px auto 70px;
       width: 180px;
     }
 
@@ -992,20 +710,20 @@
 
     .logos {
       display: flex;
-      gap: 30px;
+      gap: 34px;
       align-items: center;
       color: #14213d;
-      opacity: .68;
+      opacity: .75;
       font-weight: 900;
-      font-size: 16px;
+      font-size: 17px;
     }
 
     .members {
-      margin: 44px 89px 0;
+      margin: 58px 89px 0;
       border: 1px solid #b8d6ff;
       border-radius: 16px;
-      background: rgba(248, 252, 255, .68);
-      box-shadow: 0 18px 42px rgba(18, 89, 193, .11);
+      background: rgba(248, 252, 255, .84);
+      box-shadow: var(--shadow);
       padding: 22px;
       text-align: center;
     }
@@ -1047,10 +765,8 @@
       width: 58px;
       height: 58px;
       border-radius: 50%;
+      background: linear-gradient(135deg, #f7c19d, #17304f 55%, #0d172d);
       margin: auto;
-      object-fit: cover;
-      object-position: center;
-      box-shadow: 0 10px 24px rgba(18, 89, 193, .18);
     }
 
     .member b {
@@ -1066,7 +782,7 @@
     }
 
     .final-cta {
-      margin: 36px 89px 18px;
+      margin: 24px 89px 18px;
       min-height: 138px;
       border-radius: 16px;
       background:
@@ -1134,312 +850,6 @@
       color: #bdd7ff;
       text-decoration: none;
       font-weight: 700;
-      display: block;
-    }
-
-    @media (min-width: 721px) {
-      .header {
-        height: 62px;
-        padding: 0 clamp(42px, 5vw, 72px);
-        gap: clamp(28px, 4vw, 64px);
-      }
-
-      .brand-mark {
-        width: 28px;
-        height: 28px;
-        border-radius: 7px;
-      }
-
-      .brand {
-        font-size: 20px;
-      }
-
-      .nav {
-        justify-content: center;
-        gap: clamp(28px, 4vw, 64px);
-        font-size: 12px;
-      }
-
-      .btn {
-        height: 44px;
-        min-width: 124px;
-        border-radius: 10px;
-        font-size: 14px;
-      }
-
-      .hero {
-        min-height: 560px;
-        padding: 76px clamp(42px, 5vw, 72px) 0;
-      }
-
-      .hero-copy {
-        width: min(52vw, 760px);
-        min-width: 680px;
-      }
-
-      .hero-kicker {
-        color: #1769e8;
-        font-size: 15px;
-        margin-bottom: 16px;
-      }
-
-      h1 {
-        font-size: clamp(48px, 4vw, 60px);
-        line-height: 1.22;
-      }
-
-      .hero-lead {
-        font-size: 15px;
-        line-height: 1.95;
-        margin-top: 28px;
-        max-width: 560px;
-      }
-
-      .hero-actions {
-        margin-top: 30px;
-      }
-
-      .proof {
-        margin-top: 24px;
-        font-size: 13px;
-      }
-
-      .proof-avatars img,
-      .proof-avatar {
-        width: 30px;
-        height: 30px;
-      }
-
-      .hero-visual {
-        right: clamp(34px, 4vw, 68px);
-        top: 58px;
-        width: clamp(620px, 51vw, 760px);
-        height: 500px;
-      }
-
-      .orbit {
-        inset: 10px 0 0 18px;
-      }
-
-      .big-k {
-        display: none;
-      }
-
-      .people {
-        right: clamp(128px, 14vw, 206px);
-        bottom: -20px;
-        width: clamp(460px, 39vw, 610px);
-        height: 496px;
-      }
-
-      .people::before {
-        display: none;
-      }
-
-      .people-image {
-        object-fit: cover;
-        object-position: center 42%;
-        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 78%, rgba(0,0,0,.55) 88%, transparent 100%);
-        mask-image: linear-gradient(180deg, #000 0%, #000 78%, rgba(0,0,0,.55) 88%, transparent 100%);
-      }
-
-      .project-card {
-        display: none;
-      }
-
-      .project-card b {
-        font-size: 11px;
-      }
-
-      .growth strong {
-        font-size: 20px;
-      }
-
-      .sparkline {
-        width: 70px;
-      }
-
-      .skill-card {
-        left: 118px;
-        top: 282px;
-        width: 206px;
-        height: 112px;
-        padding: 18px;
-        color: #10213f;
-        background: rgba(255, 255, 255, .55);
-        border-color: rgba(255,255,255,.4);
-      }
-
-      .skill-card b,
-      .skill-card span {
-        display: block;
-        max-width: calc(100% - 50px);
-        color: #10213f;
-        font-size: 13px;
-        line-height: 1.45;
-      }
-
-      .skill-card .card-label {
-        color: #1769e8;
-      }
-
-      .donut {
-        width: 42px;
-        height: 42px;
-      }
-
-      .score-card {
-        right: 34px;
-        top: 26px;
-        width: 166px;
-        height: 184px;
-        padding: 20px;
-      }
-
-      .score-card b {
-        font-size: 11px;
-      }
-
-      .score strong {
-        font-size: 34px;
-      }
-
-      .score-card .sparkline {
-        width: 114px;
-        height: 40px;
-      }
-
-      .donut-card {
-        right: -2px;
-        top: 322px;
-        width: 174px;
-        height: 108px;
-        padding: 18px;
-      }
-
-      .donut-chart {
-        width: 56px;
-        height: 56px;
-      }
-
-      .donut-list {
-        font-size: 10px;
-      }
-
-      .search-wrap {
-        width: min(1080px, calc(100% - 136px));
-        margin-top: -44px;
-      }
-
-      .search {
-        height: 86px;
-        grid-template-columns: 1.24fr 1fr 1fr 176px;
-        gap: 0;
-        padding: 14px;
-        border-radius: 15px;
-      }
-
-      .search-cell,
-      .search select,
-      .search input {
-        height: 58px;
-        border-radius: 0;
-        border: 0;
-        border-right: 1px solid #e5eef9;
-        font-size: 14px;
-        background: white;
-      }
-
-      .search button {
-        height: 58px;
-        border-radius: 12px;
-        font-size: 15px;
-      }
-
-      .chips {
-        font-size: 13px;
-        gap: 10px;
-      }
-
-      .chip {
-        padding: 6px 14px;
-      }
-
-      .metrics,
-      .switch,
-      .features,
-      .steps,
-      .members,
-      .final-cta {
-        width: min(1180px, calc(100% - 64px));
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .metrics {
-        width: min(1080px, calc(100% - 136px));
-        margin-top: 40px;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 22px;
-      }
-
-      .metric {
-        height: 128px;
-        grid-template-columns: 74px 1fr;
-        padding: 22px 24px;
-      }
-
-      .metric-icon {
-        width: 58px;
-        height: 58px;
-      }
-
-      .metric small {
-        font-size: 13px;
-      }
-
-      .metric strong {
-        font-size: 38px;
-      }
-
-      .metric em {
-        font-size: 11px;
-      }
-
-      .switch {
-        margin-top: 36px;
-      }
-
-      .features {
-        gap: 22px;
-      }
-
-      .process-section .section-title {
-        margin-top: 40px;
-      }
-
-      .feature {
-        min-height: 156px;
-        height: auto;
-      }
-
-      .steps {
-        grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr) 48px minmax(0, 1fr);
-      }
-
-      .partners {
-        width: 100%;
-      }
-
-      .logos {
-        gap: clamp(26px, 4vw, 64px);
-      }
-
-      .footer {
-        width: 100%;
-        padding-left: clamp(32px, 8vw, 144px);
-        padding-right: clamp(32px, 8vw, 144px);
-      }
     }
 
     @media (max-width: 720px) {
@@ -1455,37 +865,37 @@
 
       .header {
         height: auto;
-        padding: 18px 16px 0;
-        gap: 12px;
+        padding: 18px 20px 0;
+        gap: 14px;
         flex-wrap: wrap;
-        justify-content: space-between;
       }
 
       .brand {
-        flex: 0 0 auto;
+        flex: 1;
       }
 
       .nav {
-        display: none;
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 12px 0 4px;
+        scrollbar-width: none;
       }
 
       .header-actions {
         gap: 8px;
       }
 
-      .header-actions .btn.primary {
-        display: none;
-      }
-
       .btn {
-        height: 38px;
-        padding: 0 15px;
-        font-size: 13px;
+        height: 34px;
+        padding: 0 14px;
+        font-size: 12px;
       }
 
       .hero {
-        min-height: 800px;
-        padding: 48px 18px 0;
+        min-height: 628px;
+        padding: 44px 22px 0;
       }
 
       .hero-copy {
@@ -1493,41 +903,26 @@
       }
 
       .hero-kicker {
-        font-size: 18px;
-        margin-bottom: 14px;
+        font-size: 17px;
+        margin-bottom: 10px;
       }
 
       h1 {
-        font-size: clamp(41px, 11.2vw, 44px);
-        line-height: 1.13;
+        font-size: clamp(42px, 12vw, 54px);
+        line-height: 1.12;
       }
 
       .hero-lead {
-        font-size: 14px;
-        line-height: 2;
-        margin-top: 26px;
-      }
-
-      .hero-actions {
-        gap: 12px;
-        margin-top: 28px;
-      }
-
-      .hero-actions .btn {
-        min-width: 0;
-      }
-
-      .proof {
-        margin-top: 24px;
         font-size: 13px;
+        line-height: 1.9;
       }
 
       .hero-visual {
-        top: 558px;
+        top: 330px;
         left: 50%;
         right: auto;
-        width: min(360px, calc(100vw - 24px));
-        height: 250px;
+        width: min(352px, calc(100vw - 28px));
+        height: 274px;
         transform: translateX(-50%);
       }
 
@@ -1536,120 +931,60 @@
       }
 
       .big-k {
-        display: none;
+        right: 66px;
+        top: -50px;
+        font-size: 258px;
       }
 
       .people {
         right: 10px;
-        bottom: -2px;
-        width: 268px;
-        height: 252px;
+        width: 246px;
+        height: 222px;
       }
 
-      .people-image {
-        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,.72) 90%, transparent 100%);
-        mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,.72) 90%, transparent 100%);
+      .person {
+        width: 102px;
+        height: 190px;
       }
 
-      .person-photo {
-        width: 96px;
-        height: 188px;
-        border-radius: 52px 52px 16px 16px;
+      .person::before {
+        top: -28px;
+        left: 32px;
+        width: 50px;
+        height: 58px;
       }
 
-      .person-photo.kitajima {
-        height: 202px;
+      .person::after {
+        top: -38px;
+        left: 22px;
+        width: 72px;
+        height: 48px;
+      }
+
+      .person.two {
+        height: 205px;
       }
 
       .project-card {
-        display: none;
+        left: 0;
+        top: 112px;
+        width: 146px;
+        height: 78px;
+        padding: 12px;
       }
 
       .skill-card {
-        left: 2px;
-        top: 120px;
-        right: auto;
-        width: 150px;
-        min-height: 92px;
-        height: auto;
+        right: 0;
+        top: 158px;
+        width: 126px;
+        height: 76px;
         padding: 12px;
-        color: #10213f;
-        background: rgba(255,255,255,.62);
-      }
-
-      .score-card {
-        right: 0;
-        top: 0;
-        width: 138px;
-        height: 164px;
-        padding: 14px;
-      }
-
-      .score strong {
-        font-size: 24px;
-      }
-
-      .score-card .sparkline {
-        width: 82px;
-      }
-
-      .donut-card {
-        right: 0;
-        top: 174px;
-        width: 138px;
-        height: 86px;
-        padding: 13px;
-      }
-
-      .donut-chart {
-        left: 12px;
-        bottom: 12px;
-        width: 38px;
-        height: 38px;
-      }
-
-      .donut-chart::after {
-        inset: 10px;
-      }
-
-      .donut-list {
-        right: 12px;
-        bottom: 18px;
-        font-size: 8px;
-      }
-
-      .project-card b {
-        font-size: 10px;
-        line-height: 1.45;
-        margin-bottom: 8px;
-      }
-
-      .growth {
-        gap: 8px;
-      }
-
-      .growth strong {
-        font-size: 19px;
-      }
-
-      .sparkline {
-        width: 50px;
-        height: 22px;
-      }
-
-      .skill-card b,
-      .skill-card span {
-        display: block;
-        max-width: calc(100% - 28px);
-        font-size: 13px;
-        line-height: 1.45;
-        color: #10213f;
       }
 
       .donut {
-        width: 34px;
-        height: 34px;
-        right: 10px;
+        width: 36px;
+        height: 36px;
+        right: 12px;
       }
 
       .search-wrap {
@@ -1660,8 +995,7 @@
       .search {
         height: auto;
         grid-template-columns: 1fr;
-        gap: 7px;
-        padding: 9px;
+        padding: 10px;
       }
 
       .search-cell,
@@ -1670,12 +1004,6 @@
       .search button {
         width: 100%;
         justify-content: center;
-      }
-
-      .search-cell,
-      .search select,
-      .search input {
-        height: 36px;
       }
 
       .chips {
@@ -1689,13 +1017,13 @@
 
       .metrics {
         grid-template-columns: 1fr 1fr;
-        margin: 32px 20px 0;
-        gap: 14px;
+        margin: 24px 20px 0;
+        gap: 12px;
       }
 
       .metric {
-        height: 112px;
-        grid-template-columns: 40px minmax(0, 1fr);
+        height: 92px;
+        grid-template-columns: 46px 1fr;
         padding: 14px;
       }
 
@@ -1705,8 +1033,7 @@
       }
 
       .metric strong {
-        font-size: 24px;
-        white-space: nowrap;
+        font-size: 23px;
       }
 
       .switch {
@@ -1823,52 +1150,34 @@
 <body>
   <main class="page">
     <header class="header">
-      <a class="brand" href="index.html" aria-label="KINSEI トップ"><div class="brand-mark">K</div><span>KINSEI</span></a>
+      <div class="brand"><div class="brand-mark">K</div><span>KINSEI</span></div>
       <nav class="nav">
-        <a href="#features">サービス</a><a href="students.html">学生の方へ</a><a href="sponsor.html">企業の方へ</a><a href="students.html">実績・事例</a><a href="#members">メンバー</a><a href="#process">お役立ち情報</a>
+        <span>サービス</span><span>仕組み</span><span>実績・事例</span><span>メンバー</span><span>企業の方へ</span>
       </nav>
       <div class="header-actions">
-        <a class="btn ghost" href="/login">ログイン</a>
-        <a class="btn primary" href="students.html">無料で始める</a>
+        <a class="btn ghost" href="#">ログイン</a>
+        <a class="btn primary" href="#">無料で始める</a>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-copy">
-        <p class="hero-kicker">学生の挑戦が、企業の成長につながる。</p>
-        <h1>学びと実践で、<br><span class="blue">未来のキャリア</span>をつくる。</h1>
+        <p class="hero-kicker">学歴より、未来をつくる実績を。</p>
+        <h1><span class="blue">実績</span>で戦う。<br>次のキャリアへ。</h1>
         <p class="hero-lead">KINSEIは、学生の挑戦と実績を可視化し、<br>企業との最適な出会いをつくるキャリアプラットフォームです。</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="students.html">無料で始める</a>
-          <a class="btn outline" href="#process">サービス資料をダウンロード</a>
-        </div>
-        <div class="proof">
-          <div class="proof-avatars">
-            <img src="assets/images/katayama.jpeg" alt="">
-            <img src="assets/images/kitajima.jpeg" alt="">
-            <span class="proof-avatar"></span>
-            <span class="proof-avatar"></span>
-          </div>
-          <span>3,200人以上の学生が登録中！</span>
-        </div>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
         <div class="orbit"></div>
         <div class="big-k">K</div>
         <div class="people">
-          <img class="people-image" src="assets/images/hero-people-0518-cutout.png" alt="KINSEIの運営メンバー">
+          <div class="person one"><span class="lapel"></span></div>
+          <div class="person two"><span class="lapel"></span></div>
         </div>
         <div class="hero-card project-card">
           <div class="card-label">PROJECT</div>
           <b>SNS運用実績プロジェクト</b>
           <div class="growth"><strong>+215%</strong><div class="sparkline"></div></div>
-        </div>
-        <div class="hero-card score-card">
-          <div class="card-label">PROJECT</div>
-          <b>新規事業立ち上げ支援</b>
-          <div class="score"><strong>91</strong><span>/100</span></div>
-          <div class="sparkline"></div>
         </div>
         <div class="hero-card skill-card">
           <div class="card-label">SKILL</div>
@@ -1876,33 +1185,26 @@
           <span>レベル: 上級</span>
           <div class="donut"></div>
         </div>
-        <div class="hero-card donut-card">
-          <b>掲載プロジェクト数</b>
-          <div class="donut-chart"></div>
-          <div class="donut-list"><span>長期 16件</span><span>短期 8件</span></div>
-        </div>
       </div>
     </section>
 
     <section class="search-wrap">
       <div class="search">
-        <div class="search-cell search-field">キーワードで探す<small>例：マーケティング、データ分析</small></div>
+        <div class="search-cell">まずは探してみる</div>
         <select aria-label="スキル・分野を選択">
           <option>スキル・分野を選択</option>
         </select>
-        <select aria-label="条件を追加する">
-          <option>条件を追加する</option>
-        </select>
-        <button type="button" onclick="location.href='students.html'">検索する</button>
+        <input aria-label="キーワードで検索" placeholder="キーワードで検索">
+        <button>探す</button>
       </div>
-      <div class="chips"><span>人気のキーワード:</span><span class="chip">長期インターン</span><span class="chip">データ分析</span><span class="chip">SNS運用</span><span class="chip">PdM</span><span class="chip">マーケティング</span><span class="chip">エンジニア</span></div>
+      <div class="chips"><span>人気のキーワード</span><span class="chip">長期インターン</span><span class="chip">SNS運用</span><span class="chip">データ分析</span><span class="chip">PdM</span><span class="chip">マーケティング</span></div>
     </section>
 
     <section class="metrics">
-      <div class="metric"><div class="metric-icon people"></div><div><small>登録学生数</small><strong>3,200+人</strong><em>前年比 +48%</em></div></div>
-      <div class="metric"><div class="metric-icon building"></div><div><small>提携企業数</small><strong>350+社</strong><em>前年比 +36%</em></div></div>
-      <div class="metric"><div class="metric-icon clip"></div><div><small>掲載プロジェクト数</small><strong>1,250+件</strong><em>前年比 +57%</em></div></div>
-      <div class="metric"><div class="metric-icon handshake"></div><div><small>累計マッチング数</small><strong>680+人</strong><em>前年比 +41%</em></div></div>
+      <div class="metric"><div class="metric-icon people"></div><div><small>登録学生数</small><strong>300+人</strong></div></div>
+      <div class="metric"><div class="metric-icon building"></div><div><small>提携企業数</small><strong>50+社</strong></div></div>
+      <div class="metric"><div class="metric-icon clip"></div><div><small>掲載プロジェクト数</small><strong>120+件</strong></div></div>
+      <div class="metric"><div class="metric-icon handshake"></div><div><small>面談・採用接点</small><strong>680+人</strong></div></div>
     </section>
 
     <section class="switch">
@@ -1910,17 +1212,17 @@
       <div class="switch-tab"><b>企業の方へ</b><span>未来の即戦力と出会う</span></div>
     </section>
 
-    <section id="features">
+    <section>
       <div class="section-title"><small>KINSEIが選ばれる理由</small><h2>実績が、あなたの可能性になる。</h2></div>
       <div class="features">
         <article class="feature"><i>01</i><b>実績を見える化</b><p>プロジェクトや成果をポートフォリオとして蓄積し、評価される。</p></article>
         <article class="feature"><i>02</i><b>最適なマッチング</b><p>あなたの強みや志向に合う企業やプロジェクトを提案。</p></article>
-        <article class="feature"><i>03</i><b>成長を支援する<br>仕組み</b><p>メンタリングやコンテンツで実績づくりをサポート。</p></article>
-        <article class="feature"><i>04</i><b>信頼できる<br>ネットワーク</b><p>厳選された企業・人とつながり、キャリアの選択肢を広げる。</p></article>
+        <article class="feature"><i>03</i><b>成長を支援する仕組み</b><p>メンタリングやコンテンツで実績づくりをサポート。</p></article>
+        <article class="feature"><i>04</i><b>信頼できるネットワーク</b><p>厳選された企業・人とつながり、キャリアの選択肢を広げる。</p></article>
       </div>
     </section>
 
-    <section class="process-section" id="process">
+    <section class="process-section">
       <div class="section-title"><small>サービスの仕組み</small><h2>たった3ステップで、次の一歩へ</h2></div>
       <div class="steps">
         <article class="step"><i>01</i><div><b>プロフィール登録</b><p>学校やスキルだけでなく、あなたの想いや実績を登録。</p></div></article>
@@ -1929,35 +1231,35 @@
         <div class="arrow">→</div>
         <article class="step"><i>03</i><div><b>企業と出会う</b><p>あなたの実績を見た企業からスカウトやオファーが届く。</p></div></article>
       </div>
-      <a class="btn primary center-cta" href="students.html">無料で始める</a>
+      <a class="btn primary center-cta" href="#">無料で始める</a>
     </section>
 
     <section class="partners">
       <b>KINSEIは多くの企業にご利用いただいています</b>
-      <div class="logos"><span>SmartHR</span><span>Speee</span><span>UZABASE</span><span>Wantedly</span><span>CyberAgent</span><span>DMM.com</span><span>RakSul</span></div>
+      <div class="logos"><span>Partner A</span><span>Partner B</span><span>Partner C</span><span>Partner D</span><span>Partner E</span><span>Partner F</span></div>
     </section>
 
-    <section class="members" id="members">
+    <section class="members">
       <h2>運営メンバー</h2>
       <p>学生の挑戦を、誰よりも信じるメンバーです。</p>
       <div class="member-grid">
-        <article class="member"><img class="avatar" src="assets/images/katayama.jpeg" alt="片山 諒"><div><b>片山 諒</b><p>共同代表 / プロダクト責任者<br>学生時代に実績の重要性を体感。</p></div></article>
-        <article class="member"><img class="avatar" src="assets/images/kitajima.jpeg" alt="北嶋 元勝"><div><b>北嶋 元勝</b><p>共同代表 / マーケティング責任者<br>学生の可能性を広げる仕組みづくり。</p></div></article>
+        <article class="member"><div class="avatar"></div><div><b>片山 諒</b><p>共同代表 / プロダクト責任者<br>学生時代に実績の重要性を体感。</p></div></article>
+        <article class="member"><div class="avatar"></div><div><b>北嶋 元勝</b><p>共同代表 / マーケティング責任者<br>学生の可能性を広げる仕組みづくり。</p></div></article>
       </div>
     </section>
 
-    <section class="final-cta" id="contact">
+    <section class="final-cta">
       <h2>まずは無料で始めてみませんか？</h2>
       <p>登録はたったの1分。すべての機能を無料でご相談できます。</p>
-      <div class="cta-actions"><a href="https://lin.ee/" target="_blank" rel="noopener">LINEで相談する</a><a href="mailto:info@kinsei-career.jp">メールで問い合わせ</a></div>
+      <div class="cta-actions"><a href="#">LINEで相談する</a><a href="#">メールで問い合わせ</a></div>
     </section>
 
     <footer class="footer">
       <div><b>K KINSEI</b><p>学歴ではなく、実績で戦える社会へ。</p><p>学生と企業の新しい出会いをつくる。</p></div>
-      <div><b>サービス</b><a href="#process">サービスの仕組み</a><a href="students.html">実績・事例</a></div>
-      <div><b>企業の方へ</b><a href="sponsor.html">採用担当者向け</a><a href="sponsors_list.html">導入事例</a></div>
-      <div><b>会社情報</b><a href="#members">運営会社</a><a href="sponsor.html">プライバシー</a></div>
-      <div><b>お問い合わせ</b><a href="mailto:info@kinsei-career.jp">導入のご相談はこちら</a></div>
+      <div><b>サービス</b><a href="#">サービスの仕組み</a><a href="#">実績・事例</a></div>
+      <div><b>企業の方へ</b><a href="#">採用担当者向け</a><a href="#">導入事例</a></div>
+      <div><b>会社情報</b><a href="#">運営会社</a><a href="#">プライバシー</a></div>
+      <div><b>お問い合わせ</b><a href="#">導入のご相談はこちら</a></div>
     </footer>
   </main>
 </body>

@@ -1,786 +1,1964 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学歴じゃなく、実歴で戦え。</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Noto Sans JP"', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#005bac',
-                        secondary: '#0097e6',
-                        accent: '#e6b422',
-                        dark: '#1a1a1a',
-                        light: '#f8fafc',
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .text-stroke {
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-            color: transparent;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
-
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .bg-pattern {
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        .heading-underline::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, #005bac, #0097e6);
-            margin-top: 12px;
-            border-radius: 2px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .mobile-menu-active {
-            opacity: 1;
-            pointer-events: auto;
-            visibility: visible;
-        }
-
-        .mobile-menu-hidden {
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .animate-marquee {
-            animation: marquee 30s linear infinite;
-            width: max-content;
-        }
-
-        .netflix-style-heading {
-            color: #e50914;
-            display: inline-block;
-            font-weight: 900;
-            letter-spacing: 0.04em;
-            line-height: 1.15;
-            text-shadow:
-                0 1px 0 #7a0000,
-                0 2px 0 #640000,
-                0 6px 18px rgba(0, 0, 0, 0.55);
-            transform: scaleY(1.12);
-        }
-
-        .c-heading {
-    position: relative;
-    display: inline-block;
-    font-weight: 900;
-    line-height: 1.15;
-    letter-spacing: 0.04em;
-    color: #f8fdff;
-    font-style: normal;
-    transform: skewX(-6deg);
-    text-shadow:
-        0 0 4px rgba(255,255,255,0.45),
-        0 0 12px rgba(80, 220, 255, 0.16),
-        0 0 26px rgba(80, 220, 255, 0.10);
-}
-
-.c-heading::before {
-    content: "";
-    position: absolute;
-    left: 8%;
-    right: 8%;
-    bottom: -10px;
-    height: 14px;
-    border-radius: 9999px;
-    background: linear-gradient(
-        90deg,
-        rgba(0, 180, 255, 0) 0%,
-        rgba(70, 200, 255, 0.22) 18%,
-        rgba(130, 225, 255, 1) 50%,
-        rgba(70, 200, 255, 0.22) 82%,
-        rgba(0, 180, 255, 0) 100%
-    );
-    filter: blur(8px);
-    z-index: -1;
-}
-
-/* 矢印はいったん消す */
-.c-heading::after {
-    display: none;
-    content: none;
-}
-
-.c-heading-accent {
-    display: inline-block;
-    background: linear-gradient(90deg, #c7f0ff 0%, #70d1ff 50%, #3d8fff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    transform: skewX(-6deg);
-    text-shadow:
-        0 0 12px rgba(80, 200, 255, 0.22),
-        0 0 28px rgba(80, 200, 255, 0.14);
-}
-
-@media (max-width: 768px) {
-    .c-heading {
-        transform: skewX(-2.5eg);
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KINSEI | 実績で戦うキャリアプラットフォーム</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #101d36;
+      --muted: #536782;
+      --blue: #1769e8;
+      --blue-2: #4fb0ff;
+      --line: rgba(98, 151, 222, .2);
+      --glass: rgba(255, 255, 255, .68);
+      --shadow: 0 22px 50px rgba(18, 89, 193, .16);
     }
 
-    .c-heading-accent {
-        transform: skewX(-2.5deg);
+    * {
+      box-sizing: border-box;
     }
-}
-.jp-particle-sm {
-    display: inline-block;
-    font-size: 0.72em;
-    transform: translateY(-0.02em);
-    margin: 0 0.03em;
-}
-    </style>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 78% 7%, rgba(150, 197, 255, .78), rgba(233, 245, 255, .54) 28%, rgba(255, 255, 255, 0) 58%),
+        linear-gradient(135deg, #fbfdff 0%, #edf7ff 46%, #ffffff 100%);
+      color: var(--ink);
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 1672px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 600px;
+      background-image:
+        radial-gradient(circle at 7% 7%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 92% 13%, rgba(255,255,255,.92) 0 3px, transparent 4px),
+        radial-gradient(circle at 66% 6%, rgba(255,255,255,.9) 0 4px, transparent 5px),
+        radial-gradient(circle at 91% 35%, rgba(255,255,255,.92) 0 3px, transparent 4px);
+      pointer-events: none;
+    }
+
+    .header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 26px;
+      gap: 48px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 25px;
+      height: 25px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #2f83ff, #0d5bd6);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      letter-spacing: 0;
+      box-shadow: 0 10px 20px rgba(23, 105, 232, .28);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      font-size: 12px;
+      font-weight: 800;
+      flex: 1;
+    }
+
+    .nav a {
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 14px;
+    }
+
+    .btn {
+      height: 36px;
+      padding: 0 22px;
+      border-radius: 10px;
+      border: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .btn.ghost {
+      background: rgba(255, 255, 255, .88);
+      color: var(--blue);
+      box-shadow: var(--shadow);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #2a7cff, #0961db);
+      color: white;
+      box-shadow: 0 14px 30px rgba(16, 101, 224, .28);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 430px;
+      padding: 34px 88px 0;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -18px;
+      height: 190px;
+      background:
+        linear-gradient(90deg, rgba(190, 222, 252, .22) 0 2px, transparent 2px 82px),
+        linear-gradient(180deg, rgba(255,255,255,0), rgba(206, 230, 252, .38));
+      opacity: .55;
+      pointer-events: none;
+      z-index: 0;
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 25%, #000 72%, transparent);
+      mask-image: linear-gradient(180deg, transparent, #000 25%, #000 72%, transparent);
+    }
+
+    .hero-copy {
+      width: 500px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero-kicker {
+      margin: 0 0 12px;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 52px;
+      line-height: 1.12;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    h1 .blue {
+      color: var(--blue);
+      text-shadow: 0 8px 22px rgba(23, 105, 232, .2);
+    }
+
+    .hero-lead {
+      margin: 26px 0 0;
+      color: #314760;
+      font-size: 15px;
+      line-height: 2;
+      font-weight: 700;
+      max-width: 360px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .btn.outline {
+      background: rgba(255,255,255,.66);
+      color: #1769e8;
+      border: 1px solid rgba(31, 101, 198, .42);
+      box-shadow: none;
+    }
+
+    .proof {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      color: #162844;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .proof-avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .proof-avatars img,
+    .proof-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 8px 18px rgba(20, 82, 154, .14);
+      object-fit: cover;
+      background: linear-gradient(135deg, #dcecff, #87baff);
+    }
+
+    .proof-avatars img + img,
+    .proof-avatar {
+      margin-left: -8px;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .hero-visual {
+      position: absolute;
+      right: -6px;
+      top: 6px;
+      width: 540px;
+      height: 405px;
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      left: 4%;
+      right: -4%;
+      bottom: 56px;
+      height: 94px;
+      border-bottom: 2px solid rgba(66, 145, 255, .34);
+      border-radius: 50%;
+      transform: rotate(-8deg);
+      filter: drop-shadow(0 0 10px rgba(82, 157, 255, .38));
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 12px 0 0 36px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(64, 159, 255, .18), transparent 35%),
+        repeating-radial-gradient(circle at 50% 50%, rgba(116, 173, 238, .42) 0 1px, transparent 1px 66px);
+      opacity: .85;
+      z-index: 1;
+    }
+
+    .big-k {
+      position: absolute;
+      right: 72px;
+      top: -92px;
+      font-size: 398px;
+      font-weight: 900;
+      color: rgba(23, 105, 232, .25);
+      line-height: 1;
+      text-shadow: 0 20px 55px rgba(23, 105, 232, .16);
+      z-index: 1;
+    }
+
+    .people {
+      position: absolute;
+      right: 34px;
+      bottom: 4px;
+      width: 350px;
+      height: 318px;
+      filter: drop-shadow(0 28px 34px rgba(21, 45, 87, .22));
+      overflow: visible;
+      border-radius: 0;
+      background: transparent;
+      z-index: 3;
+    }
+
+    .people::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(226, 241, 255, .76), rgba(226, 241, 255, .34) 52%, rgba(255,255,255,.7)),
+        radial-gradient(circle at 50% 24%, rgba(72, 150, 255, .22), transparent 42%);
+      z-index: 2;
+      mix-blend-mode: screen;
+      -webkit-mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
+      mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
+      pointer-events: none;
+    }
+
+    .people-image {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 58%;
+      filter: saturate(.96) contrast(1.02) brightness(1.04);
+      mix-blend-mode: normal;
+      opacity: .98;
+      -webkit-mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
+      mask-image: radial-gradient(ellipse at 72% 76%, #000 0 44%, rgba(0,0,0,.72) 55%, transparent 74%);
+    }
+
+    .person-photo {
+      position: relative;
+      z-index: 1;
+      width: 142px;
+      height: 274px;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 72px 72px 20px 20px;
+      border: 1px solid rgba(255,255,255,.42);
+      background: rgba(255,255,255,.4);
+      box-shadow: inset 0 0 0 1px rgba(23,105,232,.08);
+    }
+
+    .person-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.88) contrast(.94) brightness(1.05);
+      mix-blend-mode: multiply;
+    }
+
+    .person-photo.katayama {
+      transform: translateY(10px) rotate(-2deg);
+    }
+
+    .person-photo.katayama img {
+      object-position: 84% 50%;
+    }
+
+    .person-photo.kitajima {
+      height: 292px;
+      transform: translateY(0) rotate(1deg);
+    }
+
+    .person-photo.kitajima img {
+      object-position: 93% 52%;
+    }
+
+    .person {
+      position: absolute;
+      bottom: 0;
+      width: 145px;
+      height: 262px;
+      border-radius: 72px 72px 18px 18px;
+      background: linear-gradient(180deg, #1b2b48, #111827);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .person::before {
+      content: "";
+      position: absolute;
+      top: -34px;
+      left: 42px;
+      width: 62px;
+      height: 72px;
+      border-radius: 50% 50% 46% 46%;
+      background: #e9bea0;
+    }
+
+    .person::after {
+      content: "";
+      position: absolute;
+      top: -48px;
+      left: 26px;
+      width: 92px;
+      height: 62px;
+      border-radius: 50% 50% 38% 38%;
+      background: #111827;
+      clip-path: polygon(0 72%, 12% 22%, 62% 0, 98% 24%, 100% 80%, 68% 64%, 34% 62%);
+    }
+
+    .person.one {
+      left: 16px;
+      transform: rotate(-2deg);
+      background: linear-gradient(180deg, #223451, #162139);
+    }
+
+    .person.two {
+      right: 28px;
+      height: 282px;
+    }
+
+    .person .lapel {
+      position: absolute;
+      inset: 76px 0 auto;
+      margin: auto;
+      width: 72px;
+      height: 120px;
+      background: linear-gradient(135deg, rgba(255,255,255,.12), transparent 60%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+
+    .hero-card {
+      position: absolute;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 170, 236, .42);
+      background: rgba(255, 255, 255, .62);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      z-index: 4;
+    }
+
+    .project-card {
+      left: 4px;
+      top: 168px;
+      width: 178px;
+      height: 128px;
+      padding: 18px;
+    }
+
+    .score-card {
+      right: 10px;
+      top: 34px;
+      width: 144px;
+      height: 154px;
+      padding: 18px;
+    }
+
+    .skill-card {
+      right: 0;
+      top: 226px;
+      width: 154px;
+      height: 92px;
+      padding: 18px;
+      color: white;
+      background: rgba(12, 39, 87, .52);
+      border-color: rgba(255,255,255,.34);
+    }
+
+    .card-label {
+      color: #1769e8;
+      font-size: 9px;
+      font-weight: 900;
+      margin-bottom: 9px;
+    }
+
+    .project-card b {
+      display: block;
+      font-size: 11px;
+      color: #223857;
+      margin-bottom: 10px;
+    }
+
+    .score-card b {
+      display: block;
+      color: #223857;
+      font-size: 10px;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .score {
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+      margin-bottom: 14px;
+      color: #1769e8;
+      font-weight: 900;
+    }
+
+    .score strong {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .score span {
+      font-size: 11px;
+    }
+
+    .growth {
+      display: flex;
+      align-items: end;
+      gap: 12px;
+    }
+
+    .growth strong {
+      color: #1769e8;
+      font-size: 20px;
+    }
+
+    .sparkline {
+      width: 70px;
+      height: 26px;
+      border-bottom: 2px solid rgba(23, 105, 232, .35);
+      background: linear-gradient(145deg, transparent 45%, rgba(23,105,232,.85) 46% 52%, transparent 53%);
+    }
+
+    .score-card .sparkline {
+      width: 96px;
+      height: 34px;
+    }
+
+    .donut-card {
+      right: -12px;
+      top: 242px;
+      width: 152px;
+      height: 92px;
+      padding: 16px;
+    }
+
+    .donut-card b {
+      display: block;
+      color: #223857;
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .donut-chart {
+      position: absolute;
+      left: 18px;
+      bottom: 14px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: conic-gradient(#1769e8 0 270deg, #dcecff 270deg 360deg);
+    }
+
+    .donut-chart::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .donut-list {
+      position: absolute;
+      right: 18px;
+      bottom: 22px;
+      display: grid;
+      gap: 6px;
+      color: #4e6280;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .donut-list span::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 5px;
+      border-radius: 50%;
+      background: #1769e8;
+      vertical-align: 1px;
+    }
+
+    .skill-card .card-label,
+    .skill-card b {
+      color: white;
+    }
+
+    .donut {
+      position: absolute;
+      right: 16px;
+      top: 28px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: conic-gradient(#fff 0 70deg, #65a8ff 70deg 360deg);
+      opacity: .9;
+    }
+
+    .search-wrap {
+      margin: -24px auto 0;
+      width: 764px;
+      position: relative;
+      z-index: 8;
+    }
+
+    .search {
+      height: 58px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 24px 45px rgba(33, 89, 161, .18);
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr 140px;
+      gap: 8px;
+      align-items: center;
+      padding: 9px 10px;
+    }
+
+    .search-field {
+      display: grid;
+      align-content: center;
+      gap: 2px;
+    }
+
+    .search-field small {
+      display: block;
+      color: #9aa9be;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .search-cell,
+    .search select,
+    .search input {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      border-radius: 10px;
+      color: #677891;
+      font-size: 12px;
+      font-weight: 800;
+      background: #f6faff;
+      border: 0;
+      font-family: inherit;
+      min-width: 0;
+    }
+
+    .search select,
+    .search input {
+      background: white;
+      border: 1px solid #edf3fb;
+      width: 100%;
+      outline: none;
+    }
+
+    .search button {
+      height: 40px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2a7cff, #0961db);
+      color: white;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .process-section {
+      margin-top: 34px;
+      padding: 1px 0 44px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(189, 220, 255, .38), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(238,247,255,.68) 30%, rgba(255,255,255,0) 100%);
+    }
+
+    .chips {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 18px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #61708b;
+    }
+
+    .chip {
+      border: 1px solid #9dccff;
+      color: #1769e8;
+      border-radius: 999px;
+      padding: 5px 12px;
+      background: rgba(255,255,255,.7);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 28px 89px 0;
+      position: relative;
+      z-index: 3;
+    }
+
+    .metric {
+      height: 90px;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid #dceafd;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      align-items: center;
+      padding: 16px 20px;
+    }
+
+    .metric-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      background: #e7f1ff;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-weight: 900;
+      position: relative;
+      font-size: 0;
+    }
+
+    .metric-icon::before,
+    .metric-icon::after {
+      content: "";
+      position: absolute;
+      background: var(--blue);
+      opacity: .9;
+    }
+
+    .metric-icon.people::before {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      top: 10px;
+      left: 14px;
+      box-shadow: -9px 5px 0 rgba(23, 105, 232, .52), 9px 5px 0 rgba(23, 105, 232, .52);
+    }
+
+    .metric-icon.people::after {
+      width: 29px;
+      height: 13px;
+      border-radius: 13px 13px 7px 7px;
+      left: 7px;
+      bottom: 8px;
+    }
+
+    .metric-icon.building::before {
+      width: 24px;
+      height: 28px;
+      left: 9px;
+      top: 7px;
+      border-radius: 4px;
+      background:
+        linear-gradient(var(--blue), var(--blue)) 6px 7px / 4px 4px no-repeat,
+        linear-gradient(var(--blue), var(--blue)) 14px 7px / 4px 4px no-repeat,
+        linear-gradient(var(--blue), var(--blue)) 6px 15px / 4px 4px no-repeat,
+        linear-gradient(var(--blue), var(--blue)) 14px 15px / 4px 4px no-repeat,
+        rgba(23,105,232,.18);
+      border: 2px solid var(--blue);
+    }
+
+    .metric-icon.clip::before {
+      width: 24px;
+      height: 29px;
+      left: 9px;
+      top: 7px;
+      border-radius: 5px;
+      border: 2px solid var(--blue);
+      background: transparent;
+    }
+
+    .metric-icon.clip::after {
+      width: 16px;
+      height: 3px;
+      left: 13px;
+      top: 16px;
+      box-shadow: 0 8px 0 var(--blue);
+    }
+
+    .metric-icon.handshake::before {
+      width: 28px;
+      height: 13px;
+      left: 7px;
+      top: 17px;
+      border-radius: 999px;
+      transform: rotate(-18deg);
+    }
+
+    .metric-icon.handshake::after {
+      width: 28px;
+      height: 13px;
+      right: 7px;
+      top: 17px;
+      border-radius: 999px;
+      transform: rotate(18deg);
+      opacity: .62;
+    }
+
+    .metric small {
+      color: var(--muted);
+      font-weight: 800;
+      display: block;
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--ink);
+      font-size: 28px;
+      line-height: 1.1;
+      margin-top: 4px;
+      font-weight: 900;
+    }
+
+    .metric em {
+      display: block;
+      margin-top: 6px;
+      color: #2f76dd;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .switch {
+      margin: 30px 90px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 58px;
+      border-radius: 13px;
+      overflow: visible;
+      position: relative;
+    }
+
+    .switch-tab {
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: #182a48;
+      background: #eaf2fb;
+      font-weight: 800;
+    }
+
+    .switch-tab:first-child {
+      border: 1.5px solid #1769e8;
+      background: rgba(255,255,255,.62);
+      color: #1769e8;
+      border-radius: 13px;
+      position: relative;
+    }
+
+    .switch-tab:first-child::after {
+      content: "";
+      position: absolute;
+      bottom: -9px;
+      width: 18px;
+      height: 18px;
+      background: #f8fcff;
+      border-right: 1.5px solid #1769e8;
+      border-bottom: 1.5px solid #1769e8;
+      transform: rotate(45deg);
+    }
+
+    .switch-tab b {
+      font-size: 16px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-top: 54px;
+    }
+
+    .section-title small {
+      display: block;
+      color: var(--blue);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 28px 84px 0;
+    }
+
+    .feature {
+      height: 130px;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid #dceafd;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .feature i,
+    .step i {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 15px;
+      background: #e7f1ff;
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .feature b {
+      display: block;
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: 220px 38px 220px 38px 220px;
+      align-items: center;
+      gap: 8px;
+      margin: 34px 96px 0;
+    }
+
+    .step {
+      height: 88px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid #dceafd;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .step i {
+      margin: 0;
+    }
+
+    .step b {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .arrow {
+      text-align: center;
+      color: #7aaaea;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .center-cta {
+      display: flex;
+      margin: 28px auto 0;
+      width: 180px;
+    }
+
+    .partners {
+      height: 140px;
+      background: rgba(255,255,255,.7);
+      display: grid;
+      place-items: center;
+      gap: 24px;
+    }
+
+    .partners b {
+      color: var(--blue);
+      font-size: 14px;
+    }
+
+    .logos {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      color: #14213d;
+      opacity: .68;
+      font-weight: 900;
+      font-size: 16px;
+    }
+
+    .members {
+      margin: 44px 89px 0;
+      border: 1px solid #b8d6ff;
+      border-radius: 16px;
+      background: rgba(248, 252, 255, .68);
+      box-shadow: 0 18px 42px rgba(18, 89, 193, .11);
+      padding: 22px;
+      text-align: center;
+    }
+
+    .members h2 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .members > p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .member {
+      height: 96px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid #dceafd;
+      box-shadow: 0 16px 32px rgba(18, 89, 193, .1);
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      align-items: center;
+      text-align: left;
+      padding: 14px;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      margin: auto;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 10px 24px rgba(18, 89, 193, .18);
+    }
+
+    .member b {
+      font-size: 16px;
+    }
+
+    .member p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    .final-cta {
+      margin: 36px 89px 18px;
+      min-height: 138px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 90% 100%, rgba(117, 219, 255, .42), transparent 31%),
+        linear-gradient(135deg, #0f63e8, #267dff 62%, #8b64ff);
+      color: white;
+      box-shadow: 0 24px 50px rgba(16, 101, 224, .28);
+      text-align: center;
+      padding: 25px 40px;
+    }
+
+    .final-cta h2 {
+      margin: 0 0 12px;
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .final-cta p {
+      margin: 0 0 18px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #e9f5ff;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .cta-actions a {
+      width: 225px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,.14);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .footer {
+      height: 154px;
+      background: linear-gradient(135deg, #05172f, #064698);
+      color: white;
+      display: grid;
+      grid-template-columns: 1.4fr repeat(4, 1fr);
+      gap: 28px;
+      padding: 28px 89px;
+      font-size: 12px;
+    }
+
+    .footer b {
+      display: block;
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+
+    .footer p,
+    .footer a {
+      margin: 0 0 9px;
+      color: #bdd7ff;
+      text-decoration: none;
+      font-weight: 700;
+      display: block;
+    }
+
+    @media (min-width: 721px) {
+      .header {
+        height: 62px;
+        padding: 0 clamp(42px, 5vw, 72px);
+        gap: clamp(28px, 4vw, 64px);
+      }
+
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+      }
+
+      .brand {
+        font-size: 20px;
+      }
+
+      .nav {
+        justify-content: center;
+        gap: clamp(28px, 4vw, 64px);
+        font-size: 12px;
+      }
+
+      .btn {
+        height: 44px;
+        min-width: 124px;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+
+      .hero {
+        min-height: 560px;
+        padding: 76px clamp(42px, 5vw, 72px) 0;
+      }
+
+      .hero-copy {
+        width: min(52vw, 760px);
+        min-width: 680px;
+      }
+
+      .hero-kicker {
+        color: #1769e8;
+        font-size: 15px;
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 4vw, 60px);
+        line-height: 1.22;
+      }
+
+      .hero-lead {
+        font-size: 15px;
+        line-height: 1.95;
+        margin-top: 28px;
+        max-width: 560px;
+      }
+
+      .hero-actions {
+        margin-top: 30px;
+      }
+
+      .proof {
+        margin-top: 24px;
+        font-size: 13px;
+      }
+
+      .proof-avatars img,
+      .proof-avatar {
+        width: 30px;
+        height: 30px;
+      }
+
+      .hero-visual {
+        right: clamp(34px, 4vw, 68px);
+        top: 58px;
+        width: clamp(620px, 51vw, 760px);
+        height: 500px;
+      }
+
+      .orbit {
+        inset: 10px 0 0 18px;
+      }
+
+      .big-k {
+        display: none;
+      }
+
+      .people {
+        right: clamp(128px, 14vw, 206px);
+        bottom: -20px;
+        width: clamp(460px, 39vw, 610px);
+        height: 496px;
+      }
+
+      .people::before {
+        display: none;
+      }
+
+      .people-image {
+        object-fit: cover;
+        object-position: center 42%;
+        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 78%, rgba(0,0,0,.55) 88%, transparent 100%);
+        mask-image: linear-gradient(180deg, #000 0%, #000 78%, rgba(0,0,0,.55) 88%, transparent 100%);
+      }
+
+      .project-card {
+        display: none;
+      }
+
+      .project-card b {
+        font-size: 11px;
+      }
+
+      .growth strong {
+        font-size: 20px;
+      }
+
+      .sparkline {
+        width: 70px;
+      }
+
+      .skill-card {
+        left: 118px;
+        top: 282px;
+        width: 206px;
+        height: 112px;
+        padding: 18px;
+        color: #10213f;
+        background: rgba(255, 255, 255, .55);
+        border-color: rgba(255,255,255,.4);
+      }
+
+      .skill-card b,
+      .skill-card span {
+        display: block;
+        max-width: calc(100% - 50px);
+        color: #10213f;
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .skill-card .card-label {
+        color: #1769e8;
+      }
+
+      .donut {
+        width: 42px;
+        height: 42px;
+      }
+
+      .score-card {
+        right: 34px;
+        top: 26px;
+        width: 166px;
+        height: 184px;
+        padding: 20px;
+      }
+
+      .score-card b {
+        font-size: 11px;
+      }
+
+      .score strong {
+        font-size: 34px;
+      }
+
+      .score-card .sparkline {
+        width: 114px;
+        height: 40px;
+      }
+
+      .donut-card {
+        right: -2px;
+        top: 322px;
+        width: 174px;
+        height: 108px;
+        padding: 18px;
+      }
+
+      .donut-chart {
+        width: 56px;
+        height: 56px;
+      }
+
+      .donut-list {
+        font-size: 10px;
+      }
+
+      .search-wrap {
+        width: min(1080px, calc(100% - 136px));
+        margin-top: -44px;
+      }
+
+      .search {
+        height: 86px;
+        grid-template-columns: 1.24fr 1fr 1fr 176px;
+        gap: 0;
+        padding: 14px;
+        border-radius: 15px;
+      }
+
+      .search-cell,
+      .search select,
+      .search input {
+        height: 58px;
+        border-radius: 0;
+        border: 0;
+        border-right: 1px solid #e5eef9;
+        font-size: 14px;
+        background: white;
+      }
+
+      .search button {
+        height: 58px;
+        border-radius: 12px;
+        font-size: 15px;
+      }
+
+      .chips {
+        font-size: 13px;
+        gap: 10px;
+      }
+
+      .chip {
+        padding: 6px 14px;
+      }
+
+      .metrics,
+      .switch,
+      .features,
+      .steps,
+      .members,
+      .final-cta {
+        width: min(1180px, calc(100% - 64px));
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .metrics {
+        width: min(1080px, calc(100% - 136px));
+        margin-top: 40px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .metric {
+        height: 128px;
+        grid-template-columns: 74px 1fr;
+        padding: 22px 24px;
+      }
+
+      .metric-icon {
+        width: 58px;
+        height: 58px;
+      }
+
+      .metric small {
+        font-size: 13px;
+      }
+
+      .metric strong {
+        font-size: 38px;
+      }
+
+      .metric em {
+        font-size: 11px;
+      }
+
+      .switch {
+        margin-top: 36px;
+      }
+
+      .features {
+        gap: 22px;
+      }
+
+      .process-section .section-title {
+        margin-top: 40px;
+      }
+
+      .feature {
+        min-height: 156px;
+        height: auto;
+      }
+
+      .steps {
+        grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr) 48px minmax(0, 1fr);
+      }
+
+      .partners {
+        width: 100%;
+      }
+
+      .logos {
+        gap: clamp(26px, 4vw, 64px);
+      }
+
+      .footer {
+        width: 100%;
+        padding-left: clamp(32px, 8vw, 144px);
+        padding-right: clamp(32px, 8vw, 144px);
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        background:
+          radial-gradient(circle at 84% 10%, rgba(150, 197, 255, .68), rgba(233, 245, 255, .5) 32%, rgba(255, 255, 255, 0) 62%),
+          linear-gradient(135deg, #fbfdff 0%, #edf7ff 48%, #ffffff 100%);
+      }
+
+      .page {
+        min-height: auto;
+      }
+
+      .header {
+        height: auto;
+        padding: 18px 16px 0;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .brand {
+        flex: 0 0 auto;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-actions {
+        gap: 8px;
+      }
+
+      .header-actions .btn.primary {
+        display: none;
+      }
+
+      .btn {
+        height: 38px;
+        padding: 0 15px;
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: 800px;
+        padding: 48px 18px 0;
+      }
+
+      .hero-copy {
+        width: 100%;
+      }
+
+      .hero-kicker {
+        font-size: 18px;
+        margin-bottom: 14px;
+      }
+
+      h1 {
+        font-size: clamp(41px, 11.2vw, 44px);
+        line-height: 1.13;
+      }
+
+      .hero-lead {
+        font-size: 14px;
+        line-height: 2;
+        margin-top: 26px;
+      }
+
+      .hero-actions {
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .hero-actions .btn {
+        min-width: 0;
+      }
+
+      .proof {
+        margin-top: 24px;
+        font-size: 13px;
+      }
+
+      .hero-visual {
+        top: 558px;
+        left: 50%;
+        right: auto;
+        width: min(360px, calc(100vw - 24px));
+        height: 250px;
+        transform: translateX(-50%);
+      }
+
+      .orbit {
+        inset: 0;
+      }
+
+      .big-k {
+        display: none;
+      }
+
+      .people {
+        right: 10px;
+        bottom: -2px;
+        width: 268px;
+        height: 252px;
+      }
+
+      .people-image {
+        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,.72) 90%, transparent 100%);
+        mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,.72) 90%, transparent 100%);
+      }
+
+      .person-photo {
+        width: 96px;
+        height: 188px;
+        border-radius: 52px 52px 16px 16px;
+      }
+
+      .person-photo.kitajima {
+        height: 202px;
+      }
+
+      .project-card {
+        display: none;
+      }
+
+      .skill-card {
+        left: 2px;
+        top: 120px;
+        right: auto;
+        width: 150px;
+        min-height: 92px;
+        height: auto;
+        padding: 12px;
+        color: #10213f;
+        background: rgba(255,255,255,.62);
+      }
+
+      .score-card {
+        right: 0;
+        top: 0;
+        width: 138px;
+        height: 164px;
+        padding: 14px;
+      }
+
+      .score strong {
+        font-size: 24px;
+      }
+
+      .score-card .sparkline {
+        width: 82px;
+      }
+
+      .donut-card {
+        right: 0;
+        top: 174px;
+        width: 138px;
+        height: 86px;
+        padding: 13px;
+      }
+
+      .donut-chart {
+        left: 12px;
+        bottom: 12px;
+        width: 38px;
+        height: 38px;
+      }
+
+      .donut-chart::after {
+        inset: 10px;
+      }
+
+      .donut-list {
+        right: 12px;
+        bottom: 18px;
+        font-size: 8px;
+      }
+
+      .project-card b {
+        font-size: 10px;
+        line-height: 1.45;
+        margin-bottom: 8px;
+      }
+
+      .growth {
+        gap: 8px;
+      }
+
+      .growth strong {
+        font-size: 19px;
+      }
+
+      .sparkline {
+        width: 50px;
+        height: 22px;
+      }
+
+      .skill-card b,
+      .skill-card span {
+        display: block;
+        max-width: calc(100% - 28px);
+        font-size: 13px;
+        line-height: 1.45;
+        color: #10213f;
+      }
+
+      .donut {
+        width: 34px;
+        height: 34px;
+        right: 10px;
+      }
+
+      .search-wrap {
+        width: auto;
+        margin: 18px 20px 0;
+      }
+
+      .search {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 7px;
+        padding: 9px;
+      }
+
+      .search-cell,
+      .search select,
+      .search input,
+      .search button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .search-cell,
+      .search select,
+      .search input {
+        height: 36px;
+      }
+
+      .chips {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chips > span:first-child {
+        width: 100%;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr 1fr;
+        margin: 32px 20px 0;
+        gap: 14px;
+      }
+
+      .metric {
+        height: 112px;
+        grid-template-columns: 40px minmax(0, 1fr);
+        padding: 14px;
+      }
+
+      .metric-icon {
+        width: 38px;
+        height: 38px;
+      }
+
+      .metric strong {
+        font-size: 24px;
+        white-space: nowrap;
+      }
+
+      .switch {
+        margin: 24px 20px 0;
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 10px;
+      }
+
+      .switch-tab {
+        min-height: 58px;
+        border-radius: 13px;
+      }
+
+      .switch-tab:first-child::after {
+        display: none;
+      }
+
+      .section-title {
+        margin: 44px 20px 0;
+      }
+
+      .section-title h2 {
+        font-size: 23px;
+        line-height: 1.45;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        margin: 24px 20px 0;
+      }
+
+      .feature {
+        height: auto;
+        min-height: 118px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        margin: 26px 20px 0;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+        font-size: 24px;
+      }
+
+      .center-cta {
+        margin-bottom: 46px;
+      }
+
+      .process-section {
+        margin-top: 38px;
+        padding-bottom: 48px;
+      }
+
+      .partners {
+        height: auto;
+        padding: 30px 20px;
+        text-align: center;
+      }
+
+      .logos {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px 26px;
+        font-size: 15px;
+      }
+
+      .members {
+        margin: 42px 20px 0;
+      }
+
+      .member-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .member {
+        height: auto;
+        min-height: 96px;
+      }
+
+      .final-cta {
+        margin: 24px 20px 18px;
+        padding: 24px 18px;
+      }
+
+      .final-cta h2 {
+        font-size: 23px;
+        line-height: 1.35;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-actions a {
+        width: min(100%, 290px);
+      }
+
+      .footer {
+        height: auto;
+        grid-template-columns: 1fr 1fr;
+        padding: 28px 22px;
+      }
+
+      .footer > div:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
 </head>
-<body class="bg-light text-gray-800 antialiased relative">
-    <div class="fixed top-[-10%] left-[-5%] w-[40vw] h-[40vw] rounded-full bg-primary opacity-5 blur-[100px] -z-10"></div>
-    <div class="fixed bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-secondary opacity-5 blur-[120px] -z-10"></div>
-
-    <header id="header" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 text-white bg-gradient-to-b from-black/50 to-transparent">
-        <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary font-bold text-xl shadow-lg">K</div>
-                <span class="logo-text text-2xl font-black tracking-wider transition-colors duration-300">近世 KINSEI</span>
-            </a>
-
-            <nav class="hidden md:flex gap-8 items-center font-medium">
-                <a href="#about" class="nav-link hover:text-accent transition">僕たちの価値</a>
-                <a href="#vision" class="nav-link hover:text-accent transition">提供価値</a>
-                <a href="#sponsors" class="nav-link hover:text-accent transition">協賛企業</a>
-                <a href="#service" class="nav-link hover:text-accent transition">事業内容</a>
-                <a href="#team" class="nav-link hover:text-accent transition">メンバー</a>
-                <a href="students.html" class="nav-link border-2 border-secondary text-secondary bg-white/95 px-5 py-2 rounded-full font-bold shadow-lg shadow-secondary/20 hover:bg-secondary hover:text-white transition">学生データベース</a>
-                <a href="#contact" class="bg-accent text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:scale-105 transition transform">
-                    お問い合わせ
-                </a>
-            </nav>
-
-            <button class="md:hidden text-current p-2 focus:outline-none" id="mobile-menu-btn" aria-label="メニューを開く">
-                <i data-lucide="menu" class="w-8 h-8 transition-transform duration-300" id="menu-icon"></i>
-            </button>
-        </div>
-
-        <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 mobile-menu-hidden transition-all duration-300 flex flex-col items-center justify-center gap-8 text-xl font-bold">
-            <a href="#about" class="mobile-nav-link text-dark hover:text-primary transition">僕たちの価値</a>
-            <a href="#vision" class="mobile-nav-link text-dark hover:text-primary transition">提供価値</a>
-            <a href="#sponsors" class="mobile-nav-link text-dark hover:text-primary transition">協賛企業</a>
-            <a href="#service" class="mobile-nav-link text-dark hover:text-primary transition">事業内容</a>
-            <a href="#team" class="mobile-nav-link text-dark hover:text-primary transition">メンバー</a>
-            <a href="students.html" class="mobile-nav-link border-2 border-secondary text-secondary px-8 py-3 rounded-full shadow-lg shadow-secondary/20">学生データベース</a>
-            <a href="#contact" class="mobile-nav-link bg-accent text-white px-10 py-4 rounded-full shadow-lg mt-4">お問い合わせ</a>
-        </div>
+<body>
+  <main class="page">
+    <header class="header">
+      <a class="brand" href="index.html" aria-label="KINSEI トップ"><div class="brand-mark">K</div><span>KINSEI</span></a>
+      <nav class="nav">
+        <a href="#features">サービス</a><a href="students.html">学生の方へ</a><a href="sponsor.html">企業の方へ</a><a href="students.html">実績・事例</a><a href="#members">メンバー</a><a href="#process">お役立ち情報</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn ghost" href="/login">ログイン</a>
+        <a class="btn primary" href="students.html">無料で始める</a>
+      </div>
     </header>
 
-    <section class="relative pt-24 pb-40 md:pt-40 md:pb-60 overflow-hidden bg-dark">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-dark/80 z-10"></div>
-            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop" alt="Students collaborating" class="w-full h-full object-cover opacity-60" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%220%200%20100%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%231a1a1a%22%2F%3E%3C%2Fsvg%3E'">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="hero-kicker">学生の挑戦が、企業の成長につながる。</p>
+        <h1>学びと実践で、<br><span class="blue">未来のキャリア</span>をつくる。</h1>
+        <p class="hero-lead">KINSEIは、学生の挑戦と実績を可視化し、<br>企業との最適な出会いをつくるキャリアプラットフォームです。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="students.html">無料で始める</a>
+          <a class="btn outline" href="#process">サービス資料をダウンロード</a>
         </div>
-
-        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center w-full mt-6 md:mt-0">
-            <div class="text-white text-center w-full mb-16">
-                <h2 class="text-accent font-bold tracking-widest mb-4 inline-block px-4 py-1.5 bg-accent/20 rounded-full text-sm">人生のホワイト企業を選ぶ</h2>
-                <h1 class="text-[3.25rem] sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[1.05] mb-20">
-                    <span class="block whitespace-nowrap">学歴ではなく</span>
-                    <span class="block whitespace-nowrap">実歴で<span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-blue-300">戦え</span></span>
-                </h1>
-                <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-16 leading-relaxed font-medium max-w-3xl mx-auto">
-                    <span class="hidden md:inline">
-                        ”なんとなく”で決める就活を終わらせる。
-                    </span>
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#contact" class="bg-gradient-to-r from-primary to-secondary text-white text-center px-10 py-4 rounded-full font-bold text-lg shadow-[0_10px_20px_rgba(0,90,171,0.4)] hover:shadow-[0_15px_30px_rgba(0,90,171,0.6)] hover:-translate-y-1 transition transform flex items-center justify-center gap-2">
-                        話を聞いてみる
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#about" class="bg-white/10 backdrop-blur-sm border border-white/30 text-white text-center px-10 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition flex items-center justify-center">
-                        僕たちの想い
-                    </a>
-                </div>
-            </div>
-
-            <div class="relative animate-float w-full max-w-[92vw] md:max-w-5xl mx-auto">
-                <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full blur-3xl opacity-20 -z-10"></div>
-
-                <div class="grid md:grid-cols-5 gap-4 md:gap-6 w-full">
-                    <div class="md:col-span-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-5 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col justify-center">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/30 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                        <div class="flex justify-between items-start mb-6 sm:mb-8">
-                            <div>
-                                <h3 class="text-white text-xl sm:text-3xl font-black tracking-wide">KINSEI NETWORK</h3>
-                            </div>
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 flex items-center justify-center shadow-inner shrink-0">
-                                <i data-lucide="activity" class="text-white w-5 h-5 sm:w-6 sm:h-6"></i>
-                            </div>
-                        </div>
-                        <div class="grid sm:grid-cols-2 gap-3 sm:gap-4 relative z-10">
-                            <div class="bg-black/30 backdrop-blur-sm rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-white/10 hover:bg-black/40 transition cursor-default gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="bg-secondary/30 p-2 rounded-xl">
-                                        <i data-lucide="users" class="text-secondary w-4 h-4 sm:w-5 sm:h-5"></i>
-                                    </div>
-                                    <span class="text-gray-300 text-sm font-bold">登録学生システム</span>
-                                </div>
-                                <span class="text-white font-black text-[1.7rem] sm:text-3xl">300<span class="text-sm sm:text-base text-gray-400 ml-1 font-normal">名+</span></span>
-                            </div>
-                            <div class="bg-black/30 backdrop-blur-sm rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-white/10 hover:bg-black/40 transition cursor-default gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="bg-accent/30 p-2 rounded-xl">
-                                        <i data-lucide="building" class="text-accent w-4 h-4 sm:w-5 sm:h-5"></i>
-                                    </div>
-                                    <span class="text-gray-300 text-sm font-bold">参画企業</span>
-                                </div>
-                                <span class="text-white font-black text-[1.7rem] sm:text-3xl">50<span class="text-sm sm:text-base text-gray-400 ml-1 font-normal">社+</span></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="md:col-span-2 flex flex-col gap-4 md:gap-6 justify-between">
-                        <div class="flex-1 bg-gradient-to-br from-primary/90 to-secondary/80 backdrop-blur-md border border-white/20 rounded-3xl p-5 sm:p-6 shadow-xl transform hover:-translate-y-1 transition duration-300 relative overflow-hidden flex flex-col justify-center">
-                            <div class="absolute -right-2 -bottom-2 opacity-10">
-                                <i data-lucide="trending-down" class="w-20 h-20 sm:w-24 sm:h-24 text-white"></i>
-                            </div>
-                            <div class="flex items-center gap-3 sm:gap-4 mb-2">
-                                <i data-lucide="briefcase" class="text-white w-6 h-6 sm:w-7 sm:h-7 opacity-90"></i>
-                                <p class="text-blue-100 text-sm font-bold">採用課題</p>
-                            </div>
-                            <p class="text-white font-black text-xl sm:text-2xl mt-1">育成採用はこちら</p>
-                        </div>
-                        <div class="flex-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-5 sm:p-6 shadow-xl transform hover:-translate-y-1 transition duration-300 relative overflow-hidden flex flex-col justify-center">
-                            <div class="absolute -right-4 -bottom-4 opacity-20">
-                                <i data-lucide="award" class="w-20 h-20 sm:w-24 sm:h-24 text-accent"></i>
-                            </div>
-                            <div class="flex items-center gap-3 sm:gap-4 mb-2">
-                                <i data-lucide="graduation-cap" class="text-accent w-6 h-6 sm:w-7 sm:h-7"></i>
-                                <p class="text-gray-300 text-sm font-bold">実務経験</p>
-                            </div>
-                            <p class="text-white font-black text-xl sm:text-2xl mt-1">就活無双への第一歩はこちら</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="proof">
+          <div class="proof-avatars">
+            <img src="assets/images/katayama.jpeg" alt="">
+            <img src="assets/images/kitajima.jpeg" alt="">
+            <span class="proof-avatar"></span>
+            <span class="proof-avatar"></span>
+          </div>
+          <span>3,200人以上の学生が登録中！</span>
         </div>
+      </div>
 
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-            <svg class="relative block w-full h-[50px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,121.3,201.2,115.8,241.6,112.7,281.4,105.7,321.39,56.44Z" class="fill-light"></path>
-            </svg>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="big-k">K</div>
+        <div class="people">
+          <img class="people-image" src="assets/images/hero-people-0518-cutout.png" alt="KINSEIの運営メンバー">
         </div>
+        <div class="hero-card project-card">
+          <div class="card-label">PROJECT</div>
+          <b>SNS運用実績プロジェクト</b>
+          <div class="growth"><strong>+215%</strong><div class="sparkline"></div></div>
+        </div>
+        <div class="hero-card score-card">
+          <div class="card-label">PROJECT</div>
+          <b>新規事業立ち上げ支援</b>
+          <div class="score"><strong>91</strong><span>/100</span></div>
+          <div class="sparkline"></div>
+        </div>
+        <div class="hero-card skill-card">
+          <div class="card-label">SKILL</div>
+          <b>データ分析</b>
+          <span>レベル: 上級</span>
+          <div class="donut"></div>
+        </div>
+        <div class="hero-card donut-card">
+          <b>掲載プロジェクト数</b>
+          <div class="donut-chart"></div>
+          <div class="donut-list"><span>長期 16件</span><span>短期 8件</span></div>
+        </div>
+      </div>
     </section>
 
-    <section id="about" class="py-24 bg-light relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] md:h-[500px]">
-                    <img src="assets/images/kinsei-origin.jpeg" alt="大学の風景" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent"></div>
-                </div>
-
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-black text-dark mb-6 relative inline-block">
-                        KINSEIの由来
-                        <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary mt-3 rounded-full"></div>
-                    </h2>
-                    <p class="text-xl md:text-2xl font-bold text-primary mb-8 leading-relaxed">
-                        「世の中」を、近畿大学から変えていく。
-                    </p>
-                    <p class="text-gray-600 text-lg leading-loose">
-                        近畿大学を起点に、"なんとなく就活"を終わらせる。<br><br>
-                        学生が企業を選び、企業が本当に欲しい人材と出会う。<br>
-                        その接点をつくることで、日本の採用のあり方を変えていく。
-                    </p>
-                </div>
-            </div>
-        </div>
+    <section class="search-wrap">
+      <div class="search">
+        <div class="search-cell search-field">キーワードで探す<small>例：マーケティング、データ分析</small></div>
+        <select aria-label="スキル・分野を選択">
+          <option>スキル・分野を選択</option>
+        </select>
+        <select aria-label="条件を追加する">
+          <option>条件を追加する</option>
+        </select>
+        <button type="button" onclick="location.href='students.html'">検索する</button>
+      </div>
+      <div class="chips"><span>人気のキーワード:</span><span class="chip">長期インターン</span><span class="chip">データ分析</span><span class="chip">SNS運用</span><span class="chip">PdM</span><span class="chip">マーケティング</span><span class="chip">エンジニア</span></div>
     </section>
 
-    <section id="vision" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-secondary font-bold tracking-wider uppercase text-sm">Value</span>
-                <h2 class="text-3xl md:text-5xl font-black text-dark mt-2 heading-underline mx-auto">全ステークホルダーが循環的に価値を得る</h2>
-                <p class="text-gray-500 mt-6 max-w-2xl mx-auto">学生に実務機会を、企業に育成された人材との出会いを。<br>
-                人材の育成から採用までをつなぐ仕組みを構築します。</p>
-            </div>
-
-            <div class="mb-12">
-                <div class="bg-primary/5 rounded-3xl p-8 md:p-12 border border-primary/20 hover:shadow-2xl transition relative overflow-hidden group">
-                    <div class="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full group-hover:scale-150 transition duration-700 ease-out z-0"></div>
-                    <div class="relative z-10 flex flex-col md:flex-row gap-8 items-center">
-                        <div class="shrink-0 w-20 h-20 bg-primary text-white rounded-2xl flex items-center justify-center shadow-lg">
-                            <i data-lucide="graduation-cap" class="w-10 h-10"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl md:text-3xl font-black text-primary mb-4 border-b border-primary/20 pb-4">To K: 近畿大学への貢献（基盤）</h3>
-                            <p class="text-lg text-gray-700 mb-4 font-bold">近大を、“実力で評価される大学”へ。</p>
-                            <ul class="space-y-3 text-gray-600">
-                                <li class="flex gap-3">
-                                    <i data-lucide="check-circle-2" class="text-primary w-6 h-6 shrink-0 mt-0.5"></i>
-                                    <span><b>実務経験を持つ学生の輩出</b><br>“実力で評価される人材”を当たり前に</span>
-                                </li>
-                                <li class="flex gap-3">
-                                    <i data-lucide="check-circle-2" class="text-primary w-6 h-6 shrink-0 mt-0.5"></i>
-                                    <span><b>ブランド価値の向上</b><br>「成長できる大学」としての認知を確立</span>
-                                </li>
-                                <li class="flex gap-3">
-                                    <i data-lucide="check-circle-2" class="text-primary w-6 h-6 shrink-0 mt-0.5"></i>
-                                    <span><b>志望動機の変化</b><br>偏差値ではなく“成長環境”で選ばれる大学へ</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-sky-50/50 rounded-2xl p-8 border border-sky-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute -right-6 -top-6 w-24 h-24 bg-sky-100 rounded-full group-hover:scale-150 transition duration-500 ease-out z-0"></div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-secondary text-white rounded-xl flex items-center justify-center mb-6 shadow-lg">
-                            <i data-lucide="user" class="w-6 h-6 md:w-7 md:h-7"></i>
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold text-dark mb-4 border-b border-gray-200 pb-2">To C: 学生への価値</h3>
-                        <p class="text-lg text-gray-700 mb-4 font-bold">“なんとなく就活”を終わらせる。</p>
-                        <ul class="space-y-4 text-gray-600">
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>思考・価値観の言語化</b><br>自分の軸でキャリアを選べる状態へ</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>実務経験による成長</b><br>在学中に社会で通用する力を獲得</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>市場価値の可視化</b><br>成果ベースで自分の価値を証明</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="bg-amber-50/50 rounded-2xl p-8 border border-amber-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute -right-6 -top-6 w-24 h-24 bg-amber-100 rounded-full group-hover:scale-150 transition duration-500 ease-out z-0"></div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-accent text-white rounded-xl flex items-center justify-center mb-6 shadow-lg">
-                            <i data-lucide="building" class="w-6 h-6 md:w-7 md:h-7"></i>
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold text-dark mb-4 border-b border-gray-200 pb-2">To B: 企業への価値</h3>
-                        <p class="text-lg text-gray-700 mb-4 font-bold">“辞めない人材”に出会える。</p>
-                        <ul class="space-y-4 text-gray-600">
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-accent w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>思考・価値観の事前把握</b><br>面接では見えない“本質”が見える</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-accent w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>ミスマッチ採用の削減</b><br>事前のマインドセットプログラムにより、入社後のギャップを最小化</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-accent w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>志望度の向上</b><br>接点設計により、企業理解が深まる</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute -right-6 -top-6 w-24 h-24 bg-gray-200 rounded-full group-hover:scale-150 transition duration-500 ease-out z-0"></div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-dark text-white rounded-xl flex items-center justify-center mb-6 shadow-lg">
-                            <i data-lucide="globe" class="w-6 h-6 md:w-7 md:h-7"></i>
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold text-dark mb-4 border-b border-gray-200 pb-2">To S: 社会へ</h3>
-                        <p class="text-lg text-gray-700 mb-4 font-bold">“選択できる人材”が当たり前の社会へ。</p>
-                        <ul class="space-y-4 text-gray-600">
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-dark w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>人材の最適配置</b><br>能力と意思でマッチする社会へ</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-dark w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>主体的なキャリア選択</b><br>“なんとなく就職”をなくす</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <i data-lucide="check-circle-2" class="text-dark w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span><b>次世代人材の創出</b><br>考え、動ける人材を増やす</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="metrics">
+      <div class="metric"><div class="metric-icon people"></div><div><small>登録学生数</small><strong>3,200+人</strong><em>前年比 +48%</em></div></div>
+      <div class="metric"><div class="metric-icon building"></div><div><small>提携企業数</small><strong>350+社</strong><em>前年比 +36%</em></div></div>
+      <div class="metric"><div class="metric-icon clip"></div><div><small>掲載プロジェクト数</small><strong>1,250+件</strong><em>前年比 +57%</em></div></div>
+      <div class="metric"><div class="metric-icon handshake"></div><div><small>累計マッチング数</small><strong>680+人</strong><em>前年比 +41%</em></div></div>
     </section>
 
-    <section id="sponsors" class="scroll-mt-28 py-16 bg-white overflow-hidden border-t border-gray-100 relative">
-        <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
-            <span class="text-secondary font-bold tracking-wider uppercase text-sm">Sponsors</span>
-            <h2 class="mt-2">
-                <a href="sponsors_list.html" class="inline-block text-2xl md:text-3xl font-black text-dark hover:text-primary transition">
-                    協賛企業
-                </a>
-            </h2>
-        </div>
-
-        <div class="w-full relative py-4">
-            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent z-10"></div>
-            <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent z-10"></div>
-
-            <div class="flex animate-marquee gap-8 items-center px-4">
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-                <div class="w-48 h-20 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 font-bold shrink-0 shadow-sm hover:shadow-md transition">Company Logo</div>
-            </div>
-        </div>
+    <section class="switch">
+      <div class="switch-tab"><b>学生の方へ</b><span>実績をつくり、可能性を広げる</span></div>
+      <div class="switch-tab"><b>企業の方へ</b><span>未来の即戦力と出会う</span></div>
     </section>
 
-    <section id="service" class="py-24 bg-dark text-white relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/20 to-transparent skew-x-12 transform origin-top-right"></div>
-
-    <div class="max-w-7xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-            <span class="text-accent font-bold tracking-wider uppercase text-sm">Service</span>
-            <h2 class="text-3xl md:text-5xl font-black mt-2 heading-underline mx-auto">サービス設計</h2>
-            <p class="text-[#FAF7F0]/90 mt-6 max-w-2xl mx-auto">“就活前から採用まで”を一気通貫で変える。<br>学生の意思決定を変え、企業の採用の質を変える。</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 relative">
-            <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent transform -translate-y-1/2 z-0 opacity-50"></div>
-
-            <div class="bg-[#2a2a2a] p-8 rounded-2xl relative z-10 border border-gray-700 hover:border-primary transition transform hover:-translate-y-2">
-                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center font-black text-xl border-4 border-dark">01</div>
-                <h3 class="text-2xl font-bold mt-4 mb-4 text-center">マインドセット教育</h3>
-                <p class="text-[#FAF7F0]/85 text-sm mb-6 text-center">“なんとなく就活”をなくす</p>
-                <ul class="space-y-3 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-secondary"></div>就活の本質理解（目的の再定義）</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-secondary"></div>思考／価値観の言語化</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-secondary"></div>キャリアのゴール設計</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-secondary"></div>行動基準の確立</li>
-                </ul>
-            </div>
-
-            <div class="bg-[#2a2a2a] p-8 rounded-2xl relative z-10 border border-gray-700 hover:border-secondary transition transform hover:-translate-y-2 mt-8 md:mt-0">
-                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-secondary rounded-full flex items-center justify-center font-black text-xl border-4 border-dark">02</div>
-                <h3 class="text-2xl font-bold mt-4 mb-4 text-center">学生の可視化<br>（SNS / コンテンツ）</h3>
-                <p class="text-[#FAF7F0]/85 text-sm mb-6 text-center">“人となり”が見える状態をつくる</p>
-                <ul class="space-y-3 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary"></div>インタビュー動画 「近大キャリア図鑑」</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary"></div>プロフィール／価値の言語化</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary"></div>発信による認知形成</li>
-                </ul>
-            </div>
-
-            <div class="bg-[#2a2a2a] p-8 rounded-2xl relative z-10 border border-gray-700 hover:border-accent transition transform hover:-translate-y-2 mt-8 md:mt-0">
-                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center font-black text-xl border-4 border-dark">03</div>
-                <h3 class="text-2xl font-bold mt-4 mb-4 text-center">採用マッチング（人材紹介）</h3>
-                <p class="text-[#FAF7F0]/85 text-sm mb-6 text-center">“辞めない採用”を実現する</p>
-                <ul class="space-y-3 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-white"></div>思考・価値観ベースのマッチング</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-white"></div>企業との直接接点</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-white"></div>納得度の高い意思決定</li>
-                    <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-white"></div>ミスマッチと早期離職を防ぐ</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="mt-20 bg-white/5 backdrop-blur-sm rounded-3xl p-6 md:p-10 border border-white/10">
-            <h3 class="mb-10 text-center relative overflow-visible py-2">
-                <span class="c-heading text-4xl md:text-5xl">
-                    就活<span class="jp-particle-sm">の</span>構造<span class="jp-particle-sm">を</span><span class="c-heading-accent">大きく変える</span>
-                </span>
-            </h3>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse min-w-[600px]">
-                    <thead>
-                        <tr class="border-b border-gray-600">
-                            <th class="p-4 text-[#FAF7F0]/80 font-normal">項目</th>
-                            <th class="p-4 font-bold">従来の就活</th>
-                            <th class="p-4 font-black text-accent text-lg bg-accent/10 rounded-t-xl">近世</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm md:text-base">
-                        <tr class="border-b border-gray-700/50">
-                            <td class="p-4 text-[#FAF7F0]/80">意思決定</td>
-                            <td class="p-4">なんとなく・雰囲気</td>
-                            <td class="p-4 text-accent font-bold bg-accent/5">言語化された意思</td>
-                        </tr>
-                        <tr class="border-b border-gray-700/50">
-                            <td class="p-4 text-[#FAF7F0]/80">判断軸</td>
-                            <td class="p-4">知名度・条件</td>
-                            <td class="p-4 text-accent font-bold bg-accent/5">思考・価値観・納得度</td>
-                        </tr>
-                        <tr class="border-b border-gray-700/50">
-                            <td class="p-4 text-[#FAF7F0]/80">行動</td>
-                            <td class="p-4 text-gray-300">とりあえずエントリー</td>
-                            <td class="p-4 text-accent font-bold bg-accent/5">意図を持った選択</td>
-                        </tr>
-                        <tr class="border-b border-gray-700/50">
-                            <td class="p-4 text-[#FAF7F0]/80">情報</td>
-                            <td class="p-4 text-gray-300">表面的(HP・説明会)</td>
-                            <td class="p-4 text-accent font-bold bg-accent/5">内面(思考・価値観)</td>
-                        </tr>
-                        <tr class="border-b border-gray-700/50">
-                            <td class="p-4 text-[#FAF7F0]/80">マッチング</td>
-                            <td class="p-4 text-gray-300">偶然</td>
-                            <td class="p-4 text-accent font-bold bg-accent/5">必然</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 text-[#FAF7F0]/80">結果</td>
-                            <td class="p-4">早期離職が起きる</td>
-                            <td class="p-4 text-accent font-bold bg-accent/5 rounded-b-xl">納得して働き続ける</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <section class="py-12 bg-gradient-to-r from-accent to-yellow-600">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-2xl md:text-4xl font-black text-white mb-4 drop-shadow-md">企業様向け スポンサー・導入プラン</h2>
-            <p class="text-white/90 mb-8 font-medium">
-                月額1万円からの応援企業枠や、学生を直接派遣する導入プランをご用意。<br class="hidden md:block">
-                近大生へのPR、そして次世代の採用スキームを共に創りませんか？
-            </p>
-            <a href="sponsor.html" class="inline-flex items-center gap-2 bg-dark text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-black transition transform hover:-translate-y-1 shadow-xl">
-                企業紹介特別ページ（プラン詳細）を見る
-                <i data-lucide="external-link" class="w-5 h-5"></i>
-            </a>
-        </div>
+    <section id="features">
+      <div class="section-title"><small>KINSEIが選ばれる理由</small><h2>実績が、あなたの可能性になる。</h2></div>
+      <div class="features">
+        <article class="feature"><i>01</i><b>実績を見える化</b><p>プロジェクトや成果をポートフォリオとして蓄積し、評価される。</p></article>
+        <article class="feature"><i>02</i><b>最適なマッチング</b><p>あなたの強みや志向に合う企業やプロジェクトを提案。</p></article>
+        <article class="feature"><i>03</i><b>成長を支援する<br>仕組み</b><p>メンタリングやコンテンツで実績づくりをサポート。</p></article>
+        <article class="feature"><i>04</i><b>信頼できる<br>ネットワーク</b><p>厳選された企業・人とつながり、キャリアの選択肢を広げる。</p></article>
+      </div>
     </section>
 
-    <section id="team" class="py-24 bg-light relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm">Team</span>
-                <h2 class="text-3xl md:text-5xl font-black text-dark mt-2 heading-underline mx-auto">運営メンバー</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-10xl mx-auto">
-                <div class="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-gray-100 flex flex-col md:flex-row gap-8 items-center hover:shadow-xl transition">
-                    <div class="w-40 h-40 md:w-52 md:h-52 shrink-0 rounded-full overflow-hidden border-4 border-primary/20 shadow-inner">
-                        <img src="assets/images/katayama.jpeg" alt="代表 片山 諒" class="w-full h-full object-cover">
-                    </div>
-                    <div class="text-center md:text-left">
-                        <span class="text-primary text-sm font-bold mb-2 block">代表</span>
-                        <h3 class="text-3xl font-black text-dark mb-4">片山 諒</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">
-                            現役の近畿大学サッカー部所属。<br>
-
-                            高校卒業後、ソーシャルビジネスへの関心から農業領域に参入。
-                            生産者の想いや背景が消費者に価値として届いていない課題に向き合い、SNS運用代行と農業を掛け合わせた事業を展開。<br>
-
-                            その後、SNS事業を起点に様々な業界でプロデュース・ディレクションを手がける。
-
-                            「人は環境と選択で変わる」という確信のもと、
-                            現在は人材領域において、個人の可能性を最大化する“人生のプロデュース”を行っている。
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-gray-100 flex flex-col md:flex-row gap-8 items-center hover:shadow-xl transition">
-                    <div class="w-40 h-40 md:w-52 md:h-52 shrink-0 rounded-full overflow-hidden border-4 border-secondary/20 shadow-inner">
-                        <img src="assets/images/kitajima2.jpeg" alt="北嶋 元勝" class="w-full h-full object-cover">
-                    </div>
-                    <div class="text-center md:text-left">
-                        <span class="text-secondary text-sm font-bold mb-2 block">営業</span>
-                        <h3 class="text-3xl font-black text-dark mb-4">北嶋 元勝</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            サッカー歴13年。<br>
-                            中学時代に大阪1位、高校では関西リーグ優勝・インターハイ大阪3位、大学でも新人戦関西3位を経験し、常に競争環境で成果を追求してきた。<br>
-                            
-                            その後、通信営業において初月から社内MVPを獲得し、入社後5ヶ月連続で売上1位を記録。toB営業も経験し、再現性のある営業力を強みに活動する。<br>
-
-                            現在はオーダースーツ事業を展開し、開始6ヶ月で100着を達成するなど、成果に徹底してこだわり続けている。
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="process-section" id="process">
+      <div class="section-title"><small>サービスの仕組み</small><h2>たった3ステップで、次の一歩へ</h2></div>
+      <div class="steps">
+        <article class="step"><i>01</i><div><b>プロフィール登録</b><p>学校やスキルだけでなく、あなたの想いや実績を登録。</p></div></article>
+        <div class="arrow">→</div>
+        <article class="step"><i>02</i><div><b>実績をつくる</b><p>プロジェクトやコンテンツに取り組み、成果を積み上げる。</p></div></article>
+        <div class="arrow">→</div>
+        <article class="step"><i>03</i><div><b>企業と出会う</b><p>あなたの実績を見た企業からスカウトやオファーが届く。</p></div></article>
+      </div>
+      <a class="btn primary center-cta" href="students.html">無料で始める</a>
     </section>
 
-    <section id="contact" class="py-24 relative overflow-hidden bg-primary">
-        <div class="absolute inset-0 bg-pattern opacity-10"></div>
-        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center text-white">
-            <h2 class="text-3xl md:text-5xl font-black mb-6">お問い合わせ</h2>
-            <p class="mb-10 text-blue-100">
-                スポンサーに関するご相談、サービス導入についてのご質問など、お気軽にお問い合わせください。
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <a href="#" class="bg-[#06C755] hover:bg-[#05b34c] transition transform hover:-translate-y-2 rounded-2xl p-8 flex flex-col items-center justify-center shadow-2xl group">
-                    <div class="bg-white text-[#06C755] p-4 rounded-full mb-4 group-hover:scale-110 transition">
-                        <i data-lucide="message-circle" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">LINEで相談する</h3>
-                    <p class="text-white/80 text-sm">最短即日でご返信いたします</p>
-                </a>
-
-                <a href="#" class="bg-white text-dark hover:bg-gray-50 transition transform hover:-translate-y-2 rounded-2xl p-8 flex flex-col items-center justify-center shadow-2xl group">
-                    <div class="bg-primary text-white p-4 rounded-full mb-4 group-hover:scale-110 transition">
-                        <i data-lucide="mail" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">フォームから送る</h3>
-                    <p class="text-gray-500 text-sm">詳細な資料請求もこちらから</p>
-                </a>
-            </div>
-        </div>
+    <section class="partners">
+      <b>KINSEIは多くの企業にご利用いただいています</b>
+      <div class="logos"><span>SmartHR</span><span>Speee</span><span>UZABASE</span><span>Wantedly</span><span>CyberAgent</span><span>DMM.com</span><span>RakSul</span></div>
     </section>
 
-    <footer class="bg-dark text-gray-400 py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-            <div class="col-span-1 md:col-span-2">
-                <a href="index.html" class="flex items-center gap-2 mb-4 text-white">
-                    <div class="w-8 h-8 bg-white/10 rounded flex items-center justify-center text-primary font-bold">K</div>
-                    <span class="text-xl font-black tracking-wider">近世 KINSEI</span>
-                </a>
-                <p class="text-sm leading-relaxed mb-4">
-                    次世代の産学共創OSを構築し、価値創出力で評価される社会へ。<br>
-                    近大から、日本をおもしろく。
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:text-white transition"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="hover:text-white transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                </div>
-            </div>
+    <section class="members" id="members">
+      <h2>運営メンバー</h2>
+      <p>学生の挑戦を、誰よりも信じるメンバーです。</p>
+      <div class="member-grid">
+        <article class="member"><img class="avatar" src="assets/images/katayama.jpeg" alt="片山 諒"><div><b>片山 諒</b><p>共同代表 / プロダクト責任者<br>学生時代に実績の重要性を体感。</p></div></article>
+        <article class="member"><img class="avatar" src="assets/images/kitajima.jpeg" alt="北嶋 元勝"><div><b>北嶋 元勝</b><p>共同代表 / マーケティング責任者<br>学生の可能性を広げる仕組みづくり。</p></div></article>
+      </div>
+    </section>
 
-            <div>
-                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">コンテンツ</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#about" class="hover:text-primary transition">僕たちの価値</a></li>
-                    <li><a href="#vision" class="hover:text-primary transition">提供価値</a></li>
-                    <li><a href="students.html" class="hover:text-primary transition">学生データベース</a></li>
-                    <li><a href="#service" class="hover:text-primary transition">事業内容</a></li>
-                    <li><a href="#team" class="hover:text-primary transition">メンバー紹介</a></li>
-                </ul>
-            </div>
+    <section class="final-cta" id="contact">
+      <h2>まずは無料で始めてみませんか？</h2>
+      <p>登録はたったの1分。すべての機能を無料でご相談できます。</p>
+      <div class="cta-actions"><a href="https://lin.ee/" target="_blank" rel="noopener">LINEで相談する</a><a href="mailto:info@kinsei-career.jp">メールで問い合わせ</a></div>
+    </section>
 
-            <div>
-                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">企業様へ</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="students.html" class="hover:text-accent transition">学生DBを見る</a></li>
-                    <li><a href="sponsor.html" class="hover:text-accent transition flex items-center gap-1">協賛・導入プラン <i data-lucide="external-link" class="w-3 h-3"></i></a></li>
-                    <li><a href="#contact" class="hover:text-primary transition">お問い合わせ</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="text-center text-sm mt-12 pt-8 border-t border-gray-800">
-            &copy; 2026 KINSEI. All Rights Reserved.
-        </div>
+    <footer class="footer">
+      <div><b>K KINSEI</b><p>学歴ではなく、実績で戦える社会へ。</p><p>学生と企業の新しい出会いをつくる。</p></div>
+      <div><b>サービス</b><a href="#process">サービスの仕組み</a><a href="students.html">実績・事例</a></div>
+      <div><b>企業の方へ</b><a href="sponsor.html">採用担当者向け</a><a href="sponsors_list.html">導入事例</a></div>
+      <div><b>会社情報</b><a href="#members">運営会社</a><a href="sponsor.html">プライバシー</a></div>
+      <div><b>お問い合わせ</b><a href="mailto:info@kinsei-career.jp">導入のご相談はこちら</a></div>
     </footer>
-
-    <script>
-        lucide.createIcons();
-
-        const header = document.getElementById('header');
-        const logoText = document.querySelector('.logo-text');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('bg-white/95', 'shadow-md', 'text-gray-800');
-                header.classList.remove('text-white', 'bg-gradient-to-b', 'from-black/50', 'to-transparent');
-                logoText.classList.add('text-primary');
-            } else {
-                header.classList.remove('bg-white/95', 'shadow-md', 'text-gray-800');
-                header.classList.add('text-white', 'bg-gradient-to-b', 'from-black/50', 'to-transparent');
-                logoText.classList.remove('text-primary');
-            }
-        });
-
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        let isMenuOpen = false;
-
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
-            mobileMenu.classList.toggle('mobile-menu-hidden', !isMenuOpen);
-            mobileMenu.classList.toggle('mobile-menu-active', isMenuOpen);
-            menuIcon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
-            lucide.createIcons();
-        }
-
-        mobileMenuBtn.addEventListener('click', toggleMenu);
-
-        mobileNavLinks.forEach((link) => {
-            link.addEventListener('click', () => {
-                if (isMenuOpen) {
-                    toggleMenu();
-                }
-            });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener('click', function(event) {
-                event.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') {
-                    return;
-                }
-
-                const target = document.querySelector(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
+  </main>
 </body>
 </html>
