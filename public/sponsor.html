@@ -31,9 +31,152 @@
     </script>
 
     <style>
+        :root {
+            --kinsei-ink: #101d36;
+            --kinsei-blue: #1769e8;
+            --kinsei-shadow: 0 22px 50px rgba(18, 89, 193, .16);
+        }
+
         body {
             font-family: 'Noto Sans JP', sans-serif;
             overflow-x: hidden;
+        }
+
+        .ks-header {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 50;
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            padding: 0 26px;
+            background: rgba(255, 255, 255, .86);
+            border-bottom: 1px solid rgba(98, 151, 222, .18);
+            box-shadow: 0 18px 45px rgba(18, 89, 193, .12);
+            backdrop-filter: blur(18px);
+            color: var(--kinsei-ink);
+        }
+
+        .ks-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--kinsei-ink);
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .ks-brand-mark {
+            width: 25px;
+            height: 25px;
+            border-radius: 7px;
+            background: linear-gradient(135deg, #2f83ff, #0d5bd6);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            letter-spacing: 0;
+            box-shadow: 0 10px 20px rgba(23, 105, 232, .28);
+        }
+
+        .ks-nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 12px;
+            font-weight: 800;
+            flex: 1;
+        }
+
+        .ks-nav a {
+            color: var(--kinsei-ink);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color .2s ease;
+        }
+
+        .ks-nav a:hover,
+        .ks-nav a.is-active {
+            color: var(--kinsei-blue);
+        }
+
+        .ks-nav a.is-active {
+            font-weight: 900;
+        }
+
+        .ks-actions {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .ks-btn {
+            height: 36px;
+            padding: 0 22px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--kinsei-ink);
+            font-weight: 900;
+            font-size: 13px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .ks-btn.ghost {
+            background: rgba(255, 255, 255, .9);
+            color: var(--kinsei-blue);
+            box-shadow: var(--kinsei-shadow);
+        }
+
+        .ks-btn.primary {
+            background: linear-gradient(135deg, #2a7cff, #0961db);
+            color: white;
+            box-shadow: 0 14px 30px rgba(16, 101, 224, .28);
+        }
+
+        .ks-menu-btn {
+            display: none;
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .9);
+            color: var(--kinsei-blue);
+            box-shadow: 0 12px 26px rgba(18, 89, 193, .14);
+            place-items: center;
+        }
+
+        .ks-mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            background: rgba(255, 255, 255, .96);
+            backdrop-filter: blur(18px);
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .ks-mobile-menu a {
+            color: var(--kinsei-ink);
+            text-decoration: none;
+        }
+
+        .ks-mobile-menu a.is-active {
+            color: var(--kinsei-blue);
+        }
+
+        .ks-mobile-menu .ks-btn {
+            min-width: 180px;
         }
 
         .bg-pattern {
@@ -64,44 +207,89 @@
             pointer-events: none;
             visibility: hidden;
         }
+
+        @media (max-width: 1100px) {
+            .ks-header {
+                gap: 28px;
+            }
+
+            .ks-nav {
+                gap: 20px;
+            }
+
+            .ks-actions {
+                gap: 10px;
+            }
+
+            .ks-btn {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .ks-nav {
+                display: none;
+            }
+
+            .ks-header {
+                justify-content: space-between;
+            }
+
+            .ks-menu-btn {
+                display: grid;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .ks-header {
+                min-height: 66px;
+                padding: 14px 16px;
+                gap: 10px;
+            }
+
+            .ks-actions .primary {
+                display: none;
+            }
+
+            .ks-btn {
+                height: 38px;
+                padding: 0 14px;
+                font-size: 12px;
+            }
+        }
     </style>
 
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-light text-gray-800 antialiased relative">
 
-    <header id="header" class="fixed w-full z-50 py-4 px-6 md:px-12 bg-white/95 shadow-md text-gray-800 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">K</div>
-                <span class="logo-text text-2xl font-black tracking-wider text-primary">近世 KINSEI</span>
-            </a>
-
-            <nav class="hidden md:flex gap-8 items-center font-medium">
-                <a href="index.html#about" class="hover:text-primary transition">僕たちの価値</a>
-                <a href="index.html#vision" class="hover:text-primary transition">提供価値</a>
-                <a href="sponsor.html" class="text-primary font-bold">協賛企業</a>
-                <a href="index.html#service" class="hover:text-primary transition">事業内容</a>
-                <a href="index.html#team" class="hover:text-primary transition">メンバー</a>
-                <a href="students.html" class="hover:text-primary transition font-bold">学生データベース</a>
-                <a href="index.html#contact" class="bg-accent text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:scale-105 transition transform">
-                    お問い合わせ
-                </a>
-            </nav>
-
-            <button class="md:hidden text-current p-2 focus:outline-none" id="mobile-menu-btn" aria-label="メニューを開く">
-                <i data-lucide="menu" class="w-8 h-8 transition-transform duration-300" id="menu-icon"></i>
+    <header id="header" class="ks-header">
+        <a class="ks-brand" href="index.html" aria-label="KINSEI トップ"><div class="ks-brand-mark">K</div><span>KINSEI</span></a>
+        <nav class="ks-nav" aria-label="グローバルナビゲーション">
+            <a href="index.html#features">サービス</a>
+            <a href="index.html#process">仕組み</a>
+            <a href="index.html#cases">実績・事例</a>
+            <a href="sponsors_list.html">協賛企業</a>
+            <a class="is-active" href="sponsor.html" aria-current="page">企業の方へ</a>
+            <a href="index.html#members">メンバー</a>
+        </nav>
+        <div class="ks-actions">
+            <a class="ks-btn ghost" href="members-students-demo.html">企業会員DB</a>
+            <a class="ks-btn primary" href="students.html">学生DBを見る</a>
+            <button class="ks-menu-btn" id="mobile-menu-btn" type="button" aria-label="メニューを開く">
+                <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 mobile-menu-hidden transition-all duration-300 flex flex-col items-center justify-center gap-8 text-xl font-bold">
-            <a href="index.html#about" class="mobile-nav-link text-dark hover:text-primary transition">僕たちの価値</a>
-            <a href="index.html#vision" class="mobile-nav-link text-dark hover:text-primary transition">提供価値</a>
-            <a href="sponsor.html" class="mobile-nav-link text-primary transition">協賛企業</a>
-            <a href="index.html#service" class="mobile-nav-link text-dark hover:text-primary transition">事業内容</a>
-            <a href="index.html#team" class="mobile-nav-link text-dark hover:text-primary transition">メンバー</a>
-            <a href="students.html" class="mobile-nav-link text-dark hover:text-primary transition">学生データベース</a>
-            <a href="index.html#contact" class="mobile-nav-link bg-accent text-white px-10 py-4 rounded-full shadow-lg mt-4">お問い合わせ</a>
+        <div id="mobile-menu" class="ks-mobile-menu mobile-menu-hidden transition-all duration-300">
+            <a class="mobile-nav-link" href="index.html#features">サービス</a>
+            <a class="mobile-nav-link" href="index.html#process">仕組み</a>
+            <a class="mobile-nav-link" href="index.html#cases">実績・事例</a>
+            <a class="mobile-nav-link" href="sponsors_list.html">協賛企業</a>
+            <a class="mobile-nav-link is-active" href="sponsor.html" aria-current="page">企業の方へ</a>
+            <a class="mobile-nav-link" href="index.html#members">メンバー</a>
+            <a class="mobile-nav-link ks-btn ghost" href="members-students-demo.html">企業会員DB</a>
+            <a class="mobile-nav-link ks-btn primary" href="students.html">学生DBを見る</a>
         </div>
     </header>
 
@@ -250,11 +438,11 @@
             <div>
                 <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">コンテンツ</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="index.html#about" class="hover:text-primary transition">僕たちの価値</a></li>
-                    <li><a href="index.html#vision" class="hover:text-primary transition">提供価値</a></li>
-                    <li><a href="students.html" class="hover:text-primary transition">学生データベース</a></li>
-                    <li><a href="index.html#service" class="hover:text-primary transition">事業内容</a></li>
-                    <li><a href="index.html#team" class="hover:text-primary transition">メンバー紹介</a></li>
+                    <li><a href="index.html#features" class="hover:text-primary transition">サービス概要</a></li>
+                    <li><a href="index.html#process" class="hover:text-primary transition">利用の流れ</a></li>
+                    <li><a href="index.html#cases" class="hover:text-primary transition">実績・事例</a></li>
+                    <li><a href="students.html" class="hover:text-primary transition">学生DB</a></li>
+                    <li><a href="index.html#members" class="hover:text-primary transition">メンバー紹介</a></li>
                 </ul>
             </div>
 
@@ -262,7 +450,9 @@
                 <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">企業様へ</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="students.html" class="hover:text-primary transition">学生DBを見る</a></li>
-                    <li><a href="sponsor.html" class="text-primary transition flex items-center gap-1">協賛・導入プラン</a></li>
+                    <li><a href="sponsor.html" class="text-primary transition flex items-center gap-1">企業向け導入プラン</a></li>
+                    <li><a href="sponsors_list.html" class="hover:text-primary transition">協賛企業一覧</a></li>
+                    <li><a href="members-students-demo.html" class="hover:text-primary transition">企業会員DB</a></li>
                     <li><a href="index.html#contact" class="hover:text-primary transition">お問い合わせ</a></li>
                 </ul>
             </div>

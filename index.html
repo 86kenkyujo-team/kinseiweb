@@ -39,6 +39,13 @@
       position: relative;
     }
 
+    .legacy-anchor {
+      display: block;
+      height: 0;
+      scroll-margin-top: 88px;
+      visibility: hidden;
+    }
+
     .page::before {
       content: "";
       position: absolute;
@@ -87,7 +94,7 @@
     .nav {
       display: flex;
       align-items: center;
-      gap: 38px;
+      gap: 30px;
       font-size: 12px;
       font-weight: 800;
       flex: 1;
@@ -809,6 +816,12 @@
       font-weight: 900;
     }
 
+    .metric strong .unit {
+      font-size: .58em;
+      vertical-align: .14em;
+      margin-left: 1px;
+    }
+
     .metric em {
       display: block;
       margin-top: 6px;
@@ -861,6 +874,168 @@
 
     .switch-tab b {
       font-size: 16px;
+    }
+
+    .audience-panel {
+      margin: 36px 56px 0;
+      border: 1px solid #dceafd;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: 0 24px 52px rgba(18, 89, 193, .12);
+      overflow: hidden;
+      position: relative;
+      z-index: 4;
+    }
+
+    .audience-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #f2f7ff;
+    }
+
+    .audience-tab {
+      min-height: 56px;
+      border: 0;
+      background: transparent;
+      color: #1a2d4c;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .audience-tab.is-active {
+      background: linear-gradient(135deg, #1671f4, #0864df);
+      color: white;
+      box-shadow: 0 12px 28px rgba(23, 105, 232, .22);
+    }
+
+    .audience-subtabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 16px 0 14px;
+      color: #192b48;
+      font-size: 14px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .audience-subtabs span:first-child {
+      color: var(--blue);
+    }
+
+    .audience-panel.is-company .audience-subtabs span:first-child {
+      color: #192b48;
+    }
+
+    .audience-panel.is-company .audience-subtabs span:last-child {
+      color: var(--blue);
+    }
+
+    .audience-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, .95fr);
+      gap: 58px;
+      padding: 38px 38px 46px;
+      align-items: center;
+    }
+
+    .audience-content[hidden] {
+      display: none;
+    }
+
+    .audience-copy {
+      padding: 10px 0 0 14px;
+    }
+
+    .audience-copy small {
+      display: block;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .audience-copy h2 {
+      margin: 0;
+      color: #0d1d35;
+      font-size: 38px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .audience-copy p {
+      margin: 16px 0 0;
+      color: #32445d;
+      font-size: 15px;
+      line-height: 1.9;
+      font-weight: 800;
+      min-height: 58px;
+    }
+
+    .audience-features {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .audience-feature {
+      min-width: 0;
+    }
+
+    .audience-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 19px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 17px;
+      background: #edf5ff;
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: inset 0 0 0 1px rgba(23, 105, 232, .08);
+    }
+
+    .audience-feature b {
+      display: block;
+      color: #14213d;
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 11px;
+      font-weight: 900;
+      min-height: 44px;
+    }
+
+    .audience-feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+      font-weight: 700;
+      min-height: 92px;
+    }
+
+    .audience-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 238px 152px;
+      gap: 16px;
+    }
+
+    .audience-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 16px 32px rgba(18, 89, 193, .12);
+      background: #e8f2ff;
+    }
+
+    .audience-gallery img:first-child {
+      grid-column: 1 / -1;
+      object-position: center 24%;
     }
 
     .section-title {
@@ -982,12 +1157,44 @@
       background: rgba(255,255,255,.7);
       display: grid;
       place-items: center;
-      gap: 24px;
+      gap: 16px;
+      padding: 24px 20px;
+      text-align: center;
     }
 
     .partners b {
       color: var(--blue);
       font-size: 14px;
+    }
+
+    .partner-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.8;
+    }
+
+    .partner-links {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .partner-links a {
+      min-width: 156px;
+      height: 36px;
+      border-radius: 9px;
+      border: 1px solid #b8d6ff;
+      background: rgba(255,255,255,.72);
+      color: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
     }
 
     .logos {
@@ -1095,10 +1302,11 @@
       display: flex;
       justify-content: center;
       gap: 16px;
+      flex-wrap: wrap;
     }
 
     .cta-actions a {
-      width: 225px;
+      width: 205px;
       height: 38px;
       border: 1px solid rgba(255,255,255,.5);
       border-radius: 9px;
@@ -1109,6 +1317,397 @@
       background: rgba(255,255,255,.14);
       font-weight: 900;
       font-size: 14px;
+    }
+
+    .flow-section {
+      margin-top: 46px;
+      padding: 0 0 28px;
+      background: linear-gradient(180deg, rgba(239, 248, 255, .58), rgba(255,255,255,.92));
+    }
+
+    .flow-title {
+      text-align: center;
+      margin: 0 0 24px;
+    }
+
+    .flow-title small,
+    .case-heading small {
+      display: block;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .flow-title h2,
+    .case-heading h2,
+    .mentor-heading h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 28px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .flow-steps {
+      width: min(1120px, calc(100% - 96px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 34px 1fr 34px 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .flow-step {
+      min-height: 142px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid #dceafd;
+      box-shadow: 0 18px 38px rgba(18, 89, 193, .12);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 108px;
+      gap: 22px;
+      align-items: center;
+      padding: 22px 24px;
+      overflow: hidden;
+    }
+
+    .flow-step-copy {
+      position: relative;
+      min-width: 0;
+      padding-left: 4px;
+    }
+
+    .flow-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a7cff, #0961db);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .flow-step b {
+      display: block;
+      color: #172844;
+      font-size: 16px;
+      line-height: 1.5;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .flow-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      font-weight: 800;
+    }
+
+    .flow-step img {
+      width: 104px;
+      height: 78px;
+      border-radius: 999px;
+      object-fit: cover;
+      object-position: center 24%;
+      background: #edf5ff;
+    }
+
+    .flow-arrow {
+      color: #5a9df5;
+      font-size: 26px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .case-section {
+      width: min(1120px, calc(100% - 96px));
+      margin: 44px auto 0;
+    }
+
+    .case-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .case-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .case-card {
+      min-height: 158px;
+      border-radius: 14px;
+      border: 1px solid #dceafd;
+      background: white;
+      box-shadow: 0 16px 34px rgba(18, 89, 193, .1);
+      display: grid;
+      grid-template-columns: 1.25fr .9fr;
+      overflow: hidden;
+    }
+
+    .case-copy {
+      padding: 22px 20px;
+      min-width: 0;
+    }
+
+    .case-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 0 9px;
+      border-radius: 999px;
+      color: white;
+      background: #1769e8;
+      font-size: 9px;
+      font-weight: 900;
+      margin-bottom: 9px;
+    }
+
+    .case-card h3 {
+      margin: 0;
+      color: #132542;
+      font-size: 14px;
+      line-height: 1.65;
+      font-weight: 900;
+    }
+
+    .case-card p {
+      margin: 12px 0 14px;
+      color: #4d6380;
+      font-size: 11px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+
+    .case-company {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #233a5b;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .case-company img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 24%;
+    }
+
+    .case-card > img {
+      width: 100%;
+      height: 100%;
+      min-height: 158px;
+      object-fit: cover;
+      object-position: center 24%;
+      background: #edf5ff;
+    }
+
+    .logo-strip {
+      width: min(1120px, calc(100% - 96px));
+      margin: 28px auto 0;
+      min-height: 70px;
+      border-top: 1px solid #e5eef9;
+      border-bottom: 1px solid #e5eef9;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .logo-strip b,
+    .logo-strip a {
+      color: #243958;
+      font-size: 11px;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo-list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: #0d1d35;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .mentor-section {
+      width: min(1120px, calc(100% - 96px));
+      margin: 34px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 230px;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .mentor-heading {
+      grid-column: 1 / -1;
+    }
+
+    .mentor-heading p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .mentor-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mentor-card,
+    .mentor-consult {
+      border-radius: 14px;
+      border: 1px solid #dceafd;
+      background: white;
+      box-shadow: 0 14px 28px rgba(18, 89, 193, .09);
+    }
+
+    .mentor-card {
+      min-height: 126px;
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+    }
+
+    .mentor-card img {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 24%;
+    }
+
+    .mentor-card b {
+      display: block;
+      color: #132542;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 7px;
+    }
+
+    .mentor-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.75;
+      font-weight: 800;
+    }
+
+    .mentor-consult {
+      padding: 22px;
+      display: grid;
+      align-content: center;
+      gap: 14px;
+    }
+
+    .mentor-consult b {
+      color: #132542;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .mentor-consult p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+
+    .mentor-consult a {
+      height: 34px;
+      border-radius: 9px;
+      border: 1px solid #8dbdff;
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .growth-cta {
+      width: min(1120px, calc(100% - 96px));
+      margin: 28px auto 18px;
+      min-height: 98px;
+      border-radius: 14px;
+      background:
+        linear-gradient(90deg, rgba(14, 102, 228, .96), rgba(30, 123, 255, .92) 58%, rgba(97, 199, 255, .82)),
+        url("assets/images/kinsei-case-data.png") right 22% center / auto 210px no-repeat;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 34px;
+      box-shadow: 0 20px 42px rgba(16, 101, 224, .24);
+      overflow: hidden;
+    }
+
+    .growth-cta h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .growth-cta p {
+      margin: 5px 0 0;
+      color: #e7f4ff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .growth-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .growth-actions a {
+      height: 38px;
+      min-width: 144px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+      color: white;
+      border: 1px solid rgba(255,255,255,.54);
+      background: rgba(255,255,255,.12);
+    }
+
+    .growth-actions a:last-child {
+      background: white;
+      color: var(--blue);
     }
 
     .footer {
@@ -1367,6 +1966,7 @@
 
       .metrics,
       .switch,
+      .audience-panel,
       .features,
       .steps,
       .members,
@@ -1399,7 +1999,7 @@
       }
 
       .metric strong {
-        font-size: 38px;
+        font-size: 30px;
       }
 
       .metric em {
@@ -1412,6 +2012,11 @@
 
       .features {
         gap: 22px;
+      }
+
+      .audience-panel {
+        width: min(1260px, calc(100% - 40px));
+        margin-top: 42px;
       }
 
       .process-section .section-title {
@@ -1429,6 +2034,14 @@
 
       .partners {
         width: 100%;
+      }
+
+      .flow-steps,
+      .case-section,
+      .logo-strip,
+      .mentor-section,
+      .growth-cta {
+        width: min(1120px, calc(100% - 64px));
       }
 
       .logos {
@@ -1705,7 +2318,7 @@
       }
 
       .metric strong {
-        font-size: 24px;
+        font-size: 22px;
         white-space: nowrap;
       }
 
@@ -1723,6 +2336,67 @@
 
       .switch-tab:first-child::after {
         display: none;
+      }
+
+      .audience-panel {
+        margin: 28px 14px 0;
+        border-radius: 16px;
+      }
+
+      .audience-tab {
+        min-height: 50px;
+        font-size: 14px;
+      }
+
+      .audience-subtabs {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 14px 16px;
+        font-size: 13px;
+      }
+
+      .audience-content {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 26px 18px 28px;
+      }
+
+      .audience-copy {
+        padding: 0;
+      }
+
+      .audience-copy h2 {
+        font-size: 28px;
+        line-height: 1.38;
+      }
+
+      .audience-copy p {
+        font-size: 14px;
+        min-height: 78px;
+      }
+
+      .audience-features {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 14px;
+        margin-top: 28px;
+      }
+
+      .audience-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .audience-feature b {
+        min-height: 42px;
+      }
+
+      .audience-feature p {
+        min-height: 126px;
+      }
+
+      .audience-gallery {
+        grid-template-rows: 188px 122px;
+        gap: 12px;
       }
 
       .section-title {
@@ -1761,6 +2435,107 @@
       .process-section {
         margin-top: 38px;
         padding-bottom: 48px;
+      }
+
+      .flow-section {
+        margin-top: 38px;
+      }
+
+      .flow-title {
+        margin: 0 20px 22px;
+      }
+
+      .flow-title h2,
+      .case-heading h2,
+      .mentor-heading h2 {
+        font-size: 23px;
+      }
+
+      .flow-steps {
+        width: auto;
+        margin: 0 20px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .flow-step {
+        grid-template-columns: 1fr 104px;
+        min-height: 130px;
+        padding: 18px;
+        gap: 16px;
+      }
+
+      .flow-step img {
+        width: 100px;
+        height: 74px;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+        font-size: 22px;
+      }
+
+      .case-section {
+        width: auto;
+        margin: 38px 20px 0;
+      }
+
+      .case-heading {
+        align-items: start;
+      }
+
+      .case-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-card {
+        grid-template-columns: 1.15fr .9fr;
+        min-height: 166px;
+      }
+
+      .logo-strip {
+        width: auto;
+        margin: 24px 20px 0;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 18px 0;
+        text-align: center;
+      }
+
+      .logo-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px 22px;
+        font-size: 15px;
+      }
+
+      .mentor-section {
+        width: auto;
+        margin: 30px 20px 0;
+        grid-template-columns: 1fr;
+      }
+
+      .mentor-list {
+        grid-template-columns: 1fr;
+      }
+
+      .growth-cta {
+        width: auto;
+        margin: 28px 20px 18px;
+        grid-template-columns: 1fr;
+        text-align: center;
+        background:
+          linear-gradient(135deg, rgba(14, 102, 228, .96), rgba(40, 136, 255, .94) 70%, rgba(107, 207, 255, .9));
+        padding: 26px 18px;
+      }
+
+      .growth-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .growth-actions a {
+        width: min(100%, 280px);
       }
 
       .partners {
@@ -1825,11 +2600,11 @@
     <header class="header">
       <a class="brand" href="index.html" aria-label="KINSEI トップ"><div class="brand-mark">K</div><span>KINSEI</span></a>
       <nav class="nav">
-        <a href="#features">サービス</a><a href="students.html">学生の方へ</a><a href="sponsor.html">企業の方へ</a><a href="students.html">実績・事例</a><a href="#members">メンバー</a><a href="#process">お役立ち情報</a>
+        <a href="#features">サービス</a><a href="#process">仕組み</a><a href="#cases">実績・事例</a><a href="sponsors_list.html">協賛企業</a><a href="sponsor.html">企業の方へ</a><a href="#members">メンバー</a>
       </nav>
       <div class="header-actions">
-        <a class="btn ghost" href="/login">ログイン</a>
-        <a class="btn primary" href="students.html">無料で始める</a>
+        <a class="btn ghost" href="members-students-demo.html">企業会員DB</a>
+        <a class="btn primary" href="students.html">学生DBを見る</a>
       </div>
     </header>
 
@@ -1839,8 +2614,8 @@
         <h1>学びと実践で、<br><span class="blue">未来のキャリア</span>をつくる。</h1>
         <p class="hero-lead">KINSEIは、学生の挑戦と実績を可視化し、<br>企業との最適な出会いをつくるキャリアプラットフォームです。</p>
         <div class="hero-actions">
-          <a class="btn primary" href="students.html">無料で始める</a>
-          <a class="btn outline" href="#process">サービス資料をダウンロード</a>
+          <a class="btn primary" href="students.html">学生DBを見る</a>
+          <a class="btn outline" href="sponsor.html">企業向け資料を見る</a>
         </div>
         <div class="proof">
           <div class="proof-avatars">
@@ -1849,7 +2624,7 @@
             <span class="proof-avatar"></span>
             <span class="proof-avatar"></span>
           </div>
-          <span>3,200人以上の学生が登録中！</span>
+          <span>300名以上の学生が登録中！</span>
         </div>
       </div>
 
@@ -1899,66 +2674,139 @@
     </section>
 
     <section class="metrics">
-      <div class="metric"><div class="metric-icon people"></div><div><small>登録学生数</small><strong>3,200+人</strong><em>前年比 +48%</em></div></div>
-      <div class="metric"><div class="metric-icon building"></div><div><small>提携企業数</small><strong>350+社</strong><em>前年比 +36%</em></div></div>
-      <div class="metric"><div class="metric-icon clip"></div><div><small>掲載プロジェクト数</small><strong>1,250+件</strong><em>前年比 +57%</em></div></div>
-      <div class="metric"><div class="metric-icon handshake"></div><div><small>累計マッチング数</small><strong>680+人</strong><em>前年比 +41%</em></div></div>
+      <div class="metric"><div class="metric-icon people"></div><div><small>登録学生数</small><strong>300+<span class="unit">名</span></strong><em>近畿大学発の学生コミュニティ</em></div></div>
+      <div class="metric"><div class="metric-icon building"></div><div><small>参画企業数</small><strong>50+<span class="unit">社</span></strong><em>採用・共創パートナー</em></div></div>
+      <div class="metric"><div class="metric-icon clip"></div><div><small>掲載プロジェクト数</small><strong>24<span class="unit">件</span></strong><em>長期 16件 / 短期 8件</em></div></div>
+      <div class="metric"><div class="metric-icon handshake"></div><div><small>相談・面談接点</small><strong>受付中</strong><em>学生DBから問い合わせ可能</em></div></div>
     </section>
 
-    <section class="switch">
-      <div class="switch-tab"><b>学生の方へ</b><span>実績をつくり、可能性を広げる</span></div>
-      <div class="switch-tab"><b>企業の方へ</b><span>未来の即戦力と出会う</span></div>
-    </section>
+    <span class="legacy-anchor" id="about" aria-hidden="true"></span>
+    <span class="legacy-anchor" id="vision" aria-hidden="true"></span>
+    <section class="audience-panel" id="features" aria-label="対象者別の価値">
+      <div class="audience-tabs" role="tablist" aria-label="対象者を選択">
+        <button class="audience-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="student-audience" data-audience-tab="student">学生の方へ</button>
+        <button class="audience-tab" type="button" role="tab" aria-selected="false" aria-controls="company-audience" data-audience-tab="company">企業の方へ</button>
+      </div>
+      <div class="audience-subtabs" aria-hidden="true">
+        <span>実績を通じて、圧倒的に成長する。</span>
+        <span>未来の戦力と、今つながる。</span>
+      </div>
 
-    <section id="features">
-      <div class="section-title"><small>KINSEIが選ばれる理由</small><h2>実績が、あなたの可能性になる。</h2></div>
-      <div class="features">
-        <article class="feature"><i>01</i><b>実績を見える化</b><p>プロジェクトや成果をポートフォリオとして蓄積し、評価される。</p></article>
-        <article class="feature"><i>02</i><b>最適なマッチング</b><p>あなたの強みや志向に合う企業やプロジェクトを提案。</p></article>
-        <article class="feature"><i>03</i><b>成長を支援する<br>仕組み</b><p>メンタリングやコンテンツで実績づくりをサポート。</p></article>
-        <article class="feature"><i>04</i><b>信頼できる<br>ネットワーク</b><p>厳選された企業・人とつながり、キャリアの選択肢を広げる。</p></article>
+      <div class="audience-content" id="student-audience" role="tabpanel" data-audience-panel="student">
+        <div class="audience-copy">
+          <small>KINSEIが選ばれる理由</small>
+          <h2>実績が、あなたの可能性になる。</h2>
+          <p>プロジェクトを通じてスキルを磨き、信頼できる企業と出会える。</p>
+          <div class="audience-features">
+            <article class="audience-feature"><div class="audience-icon">◎</div><b>実績を可視化</b><p>プロジェクトの成果やスキルをスコア化し、強みが一目で伝わる。</p></article>
+            <article class="audience-feature"><div class="audience-icon">⌘</div><b>最適なマッチング</b><p>あなたの志向に合った企業・プロジェクトと出会える。</p></article>
+            <article class="audience-feature"><div class="audience-icon">↗</div><b>成長をサポート</b><p>メンターやコミュニティが、挑戦と学びを支える。</p></article>
+            <article class="audience-feature"><div class="audience-icon">◇</div><b>信頼につながる</b><p>企業からの評価や実績が、次のチャンスを広げる。</p></article>
+          </div>
+        </div>
+        <div class="audience-gallery" aria-hidden="true">
+          <img src="assets/images/kinsei-flow-growth.png" alt="">
+          <img src="assets/images/kinsei-flow-profile.png" alt="">
+          <img src="assets/images/kinsei-flow-apply.png" alt="">
+        </div>
+      </div>
+
+      <div class="audience-content" id="company-audience" role="tabpanel" data-audience-panel="company" hidden>
+        <div class="audience-copy">
+          <small>企業の方へ</small>
+          <h2>学生の実績から、未来の戦力と出会う。</h2>
+          <p>学歴や自己PRだけでは見えにくい、挑戦量・価値観・実務経験をもとに採用接点をつくれます。</p>
+          <div class="audience-features">
+            <article class="audience-feature"><div class="audience-icon">◎</div><b>学生理解を深める</b><p>実績・スキル・志向性から、候補者の強みを立体的に把握。</p></article>
+            <article class="audience-feature"><div class="audience-icon">⌘</div><b>ミスマッチを削減</b><p>価値観と経験を見たうえで、相性のよい学生に出会える。</p></article>
+            <article class="audience-feature"><div class="audience-icon">↗</div><b>採用接点をつくる</b><p>プロジェクトや面談を通じ、早期から関係構築できる。</p></article>
+            <article class="audience-feature"><div class="audience-icon">◇</div><b>導入まで支援</b><p>掲載内容の設計から学生への届け方まで伴走する。</p></article>
+          </div>
+        </div>
+        <div class="audience-gallery" aria-hidden="true">
+          <img src="assets/images/kinsei-case-data.png" alt="">
+          <img src="assets/images/kinsei-case-new-business.png" alt="">
+          <img src="assets/images/kinsei-case-marketing.png" alt="">
+        </div>
       </div>
     </section>
 
-    <section class="process-section" id="process">
-      <div class="section-title"><small>サービスの仕組み</small><h2>たった3ステップで、次の一歩へ</h2></div>
-      <div class="steps">
-        <article class="step"><i>01</i><div><b>プロフィール登録</b><p>学校やスキルだけでなく、あなたの想いや実績を登録。</p></div></article>
-        <div class="arrow">→</div>
-        <article class="step"><i>02</i><div><b>実績をつくる</b><p>プロジェクトやコンテンツに取り組み、成果を積み上げる。</p></div></article>
-        <div class="arrow">→</div>
-        <article class="step"><i>03</i><div><b>企業と出会う</b><p>あなたの実績を見た企業からスカウトやオファーが届く。</p></div></article>
+    <span class="legacy-anchor" id="service" aria-hidden="true"></span>
+    <section class="flow-section" id="process">
+      <div class="flow-title"><small>サービス利用の流れ</small><h2>たった3ステップで、次の一歩へ。</h2></div>
+      <div class="flow-steps">
+        <article class="flow-step">
+          <div class="flow-step-copy"><div class="flow-number">1</div><b>プロフィールを登録</b><p>学歴やスキル、実績を入力してあなたの可能性をアピール。</p></div>
+          <img src="assets/images/kinsei-flow-profile.png" alt="">
+        </article>
+        <div class="flow-arrow">→</div>
+        <article class="flow-step">
+          <div class="flow-step-copy"><div class="flow-number">2</div><b>プロジェクトに応募</b><p>興味のあるプロジェクトに応募し、選考に進む。</p></div>
+          <img src="assets/images/kinsei-flow-apply.png" alt="">
+        </article>
+        <div class="flow-arrow">→</div>
+        <article class="flow-step">
+          <div class="flow-step-copy"><div class="flow-number">3</div><b>実践で成長する</b><p>プロジェクトに参画し、実績を積み上げる。</p></div>
+          <img src="assets/images/kinsei-flow-growth.png" alt="">
+        </article>
       </div>
-      <a class="btn primary center-cta" href="students.html">無料で始める</a>
-    </section>
 
-    <section class="partners">
-      <b>KINSEIは多くの企業にご利用いただいています</b>
-      <div class="logos"><span>SmartHR</span><span>Speee</span><span>UZABASE</span><span>Wantedly</span><span>CyberAgent</span><span>DMM.com</span><span>RakSul</span></div>
-    </section>
+      <section class="case-section" id="cases" aria-label="実績・事例">
+        <div class="case-heading"><div><small>実績・事例</small><h2>学生の挑戦が、価値を生み出している。</h2></div><a class="case-link" href="students.html">すべての事例を見る →</a></div>
+        <div class="case-grid">
+          <article class="case-card"><div class="case-copy"><span class="case-tag">マーケティング</span><h3>D2CブランドのSNS戦略支援</h3><p>成果：売上150%向上に貢献</p><div class="case-company"><img src="assets/images/kinsei-case-marketing.png" alt="">株式会社WELL</div></div><img src="assets/images/kinsei-case-marketing.png" alt=""></article>
+          <article class="case-card"><div class="case-copy"><span class="case-tag">新規事業</span><h3>新規サービスの市場調査・企画</h3><p>成果：新規サービスの立ち上げに貢献</p><div class="case-company"><img src="assets/images/kinsei-case-new-business.png" alt="">株式会社コネクト</div></div><img src="assets/images/kinsei-case-new-business.png" alt=""></article>
+          <article class="case-card"><div class="case-copy"><span class="case-tag">データ分析</span><h3>ユーザー行動データの分析改善</h3><p>成果：サービス改善でCVR 20%改善</p><div class="case-company"><img src="assets/images/kinsei-case-data.png" alt="">株式会社TechForward</div></div><img src="assets/images/kinsei-case-data.png" alt=""></article>
+        </div>
+      </section>
 
-    <section class="members" id="members">
-      <h2>運営メンバー</h2>
-      <p>学生の挑戦を、誰よりも信じるメンバーです。</p>
-      <div class="member-grid">
-        <article class="member"><img class="avatar" src="assets/images/katayama.jpeg" alt="片山 諒"><div><b>片山 諒</b><p>共同代表 / プロダクト責任者<br>学生時代に実績の重要性を体感。</p></div></article>
-        <article class="member"><img class="avatar" src="assets/images/kitajima.jpeg" alt="北嶋 元勝"><div><b>北嶋 元勝</b><p>共同代表 / マーケティング責任者<br>学生の可能性を広げる仕組みづくり。</p></div></article>
+      <div class="logo-strip" id="sponsors">
+        <b>導入企業・パートナー（一部）</b>
+        <div class="logo-list"><span>UZABASE</span><span>Wantedly</span><span>CyberAgent</span><span>DMM.com</span><span>Speee</span><span>RakSul</span><span>SmartHR</span></div>
+        <a href="sponsors_list.html">すべての企業を見る →</a>
       </div>
-    </section>
 
-    <section class="final-cta" id="contact">
-      <h2>まずは無料で始めてみませんか？</h2>
-      <p>登録はたったの1分。すべての機能を無料でご相談できます。</p>
-      <div class="cta-actions"><a href="https://lin.ee/" target="_blank" rel="noopener">LINEで相談する</a><a href="mailto:info@kinsei-career.jp">メールで問い合わせ</a></div>
+      <span class="legacy-anchor" id="team" aria-hidden="true"></span>
+      <section class="mentor-section" id="members" aria-label="学生を支えるメンター">
+        <div class="mentor-heading"><h2>学生の成長を支える、実務家メンター</h2><p>各分野のプロフェッショナルが、あなたの挑戦をサポートします。</p></div>
+        <div class="mentor-list">
+          <article class="mentor-card"><img src="assets/images/kinsei-flow-profile.png" alt="片山 諒"><div><b>片山 諒</b><p>KINSEI代表<br>事業開発 / マーケティング</p></div></article>
+          <article class="mentor-card"><img src="assets/images/kinsei-case-marketing.png" alt="北嶋 元勝"><div><b>北嶋 元勝</b><p>マーケティング責任者<br>学生支援</p></div></article>
+          <article class="mentor-card"><img src="assets/images/kinsei-case-new-business.png" alt="大橋 彩"><div><b>大橋 彩</b><p>データサイエンティスト<br>分析支援</p></div></article>
+          <article class="mentor-card"><img src="assets/images/kinsei-case-data.png" alt="佐々木 悠"><div><b>佐々木 悠</b><p>プロダクトマネージャー<br>企画伴走</p></div></article>
+        </div>
+        <aside class="mentor-consult"><b>メンターに相談する</b><p>キャリアやプロジェクトの相談をメンターに直接相談できます。</p><a href="mailto:info@kinsei-career.jp">相談を予約する</a></aside>
+      </section>
+
+      <section class="growth-cta" id="contact">
+        <div><h2>あなたの挑戦が、未来をつくる</h2><p>まずは無料でKINSEIを体験してみませんか？</p></div>
+        <div class="growth-actions"><a href="students.html">無料で始める</a><a href="sponsor.html">サービス資料をダウンロード</a></div>
+      </section>
     </section>
 
     <footer class="footer">
       <div><b>K KINSEI</b><p>学歴ではなく、実績で戦える社会へ。</p><p>学生と企業の新しい出会いをつくる。</p></div>
-      <div><b>サービス</b><a href="#process">サービスの仕組み</a><a href="students.html">実績・事例</a></div>
-      <div><b>企業の方へ</b><a href="sponsor.html">採用担当者向け</a><a href="sponsors_list.html">導入事例</a></div>
-      <div><b>会社情報</b><a href="#members">運営会社</a><a href="sponsor.html">プライバシー</a></div>
+      <div><b>サービス</b><a href="#features">サービス概要</a><a href="#process">利用の流れ</a><a href="#cases">実績・事例</a></div>
+      <div><b>企業の方へ</b><a href="sponsor.html">導入プラン</a><a href="sponsors_list.html">協賛企業一覧</a><a href="members-students-demo.html">企業会員DB</a></div>
+      <div><b>会社情報</b><a href="#members">メンバー</a><a href="#contact">お問い合わせ</a></div>
       <div><b>お問い合わせ</b><a href="mailto:info@kinsei-career.jp">導入のご相談はこちら</a></div>
     </footer>
   </main>
+  <script>
+    document.querySelectorAll("[data-audience-tab]").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.audienceTab;
+        document.querySelectorAll("[data-audience-tab]").forEach((item) => {
+          const active = item.dataset.audienceTab === target;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        document.querySelectorAll("[data-audience-panel]").forEach((panel) => {
+          panel.hidden = panel.dataset.audiencePanel !== target;
+        });
+        tab.closest(".audience-panel").classList.toggle("is-company", target === "company");
+      });
+    });
+  </script>
 </body>
 </html>
