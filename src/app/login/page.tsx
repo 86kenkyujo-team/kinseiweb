@@ -36,7 +36,7 @@ export default function LoginPage() {
               `.env.local` に `NEXT_PUBLIC_SUPABASE_URL` と
               `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` を設定するとログインできます。
             </p>
-            <Link className="secondary-link" href="/students.html">
+            <Link className="secondary-link" href="/students">
               公開DBへ戻る
             </Link>
           </div>
