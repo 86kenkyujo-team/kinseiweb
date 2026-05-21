@@ -10,6 +10,7 @@ export async function StudentDatabaseHeader({ active }: StudentDatabaseHeaderPro
   const supabase = await createClient()
   const { data } = supabase ? await supabase.auth.getUser() : { data: { user: null } }
   const isLoggedIn = Boolean(data.user)
+  const memberDatabaseHref = isLoggedIn ? '/members/students' : '/login?next=/members/students'
 
   return (
     <header className="student-db-header">
@@ -18,25 +19,24 @@ export async function StudentDatabaseHeader({ active }: StudentDatabaseHeaderPro
         近世 KINSEI
       </Link>
       <nav aria-label="学生データベース">
-        <Link href="/index.html">TOP</Link>
+        <Link href="/index.html#features">サービス</Link>
+        <Link href="/index.html#process">仕組み</Link>
+        <Link href="/index.html#cases">実績・事例</Link>
+        <Link href="/sponsors_list.html">協賛企業</Link>
+        <Link href="/sponsor.html">企業の方へ</Link>
+        <Link href="/index.html#members">メンバー</Link>
         <Link aria-current={active === 'public' ? 'page' : undefined} href="/students">
-          公開DB
+          学生DBを見る
         </Link>
-        <Link aria-current={active === 'members' ? 'page' : undefined} href="/members/students">
+        <Link
+          aria-current={active === 'members' || active === 'login' ? 'page' : undefined}
+          className="student-db-login-link"
+          href={memberDatabaseHref}
+        >
           企業会員DB
         </Link>
         <Link href="/index.html#contact">お問い合わせ</Link>
-        {isLoggedIn ? (
-          <LogoutButton />
-        ) : (
-          <Link
-            aria-current={active === 'login' ? 'page' : undefined}
-            className="student-db-login-link"
-            href="/login?next=/members/students"
-          >
-            ログイン
-          </Link>
-        )}
+        {isLoggedIn ? <LogoutButton /> : null}
       </nav>
     </header>
   )

@@ -17,7 +17,7 @@ export default function MembershipInactivePage() {
         </span>
         <div>
           <Link href="/index.html#contact">お問い合わせへ</Link>
-          <Link href="/students.html">公開DBを見る</Link>
+          <Link href="/students">公開DBを見る</Link>
         </div>
       </section>
     </main>

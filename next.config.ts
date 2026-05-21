@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/members-students-demo.html',
-        destination: '/login',
+        destination: '/login?next=/members/students',
         permanent: false,
       },
       {
