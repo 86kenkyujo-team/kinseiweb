@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { requireAdmin } from '@/lib/admin/auth'
 import { createCompany } from '../actions'
 
 type NewCompanyPageProps = {
@@ -13,6 +14,8 @@ const statusMessages: Record<string, string> = {
 }
 
 export default async function NewCompanyPage({ searchParams }: NewCompanyPageProps) {
+  await requireAdmin()
+
   const params = await searchParams
   const message = params?.status ? statusMessages[params.status] : null
 
