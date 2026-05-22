@@ -4,6 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KINSEI | 実績で戦うキャリアプラットフォーム</title>
+  <meta name="description" content="KINSEIは、学生の挑戦と実績を可視化し、企業との最適な出会いをつくるキャリアプラットフォームです。学生DB、企業向けプラン、協賛企業情報を掲載しています。">
+  <link rel="canonical" href="https://kinseiweb-murex.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="KINSEI">
+  <meta property="og:title" content="KINSEI | 実績で戦うキャリアプラットフォーム">
+  <meta property="og:description" content="学生の挑戦と実績を可視化し、企業との最適な出会いをつくるキャリアプラットフォーム。">
+  <meta property="og:url" content="https://kinseiweb-murex.vercel.app/">
+  <meta property="og:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KINSEI | 実績で戦うキャリアプラットフォーム">
+  <meta name="twitter:description" content="学生の挑戦と実績を可視化し、企業との最適な出会いをつくるキャリアプラットフォーム。">
+  <meta name="twitter:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
@@ -108,6 +121,73 @@
     .header-actions {
       display: flex;
       gap: 14px;
+    }
+
+    .menu-toggle {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(23, 105, 232, .20);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .86);
+      box-shadow: 0 12px 26px rgba(44, 111, 210, .14);
+      color: var(--blue);
+      display: none;
+      place-items: center;
+      gap: 4px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .mobile-menu-panel {
+      overflow: hidden;
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-menu a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 10px;
+      color: #172947;
+      background: rgba(255, 255, 255, .62);
+      border: 1px solid rgba(101, 153, 221, .16);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .mobile-menu a.is-cta {
+      color: white;
+      background: linear-gradient(135deg, #2b7fff, #0962de);
+      border-color: transparent;
+      justify-content: center;
+      box-shadow: 0 12px 24px rgba(13, 98, 222, .20);
     }
 
     .btn {
@@ -2075,6 +2155,7 @@
       }
 
       .brand {
+        order: 0;
         flex: 0 0 auto;
       }
 
@@ -2083,7 +2164,38 @@
       }
 
       .header-actions {
+        order: 1;
         gap: 8px;
+      }
+
+      .menu-toggle {
+        order: 2;
+        display: inline-grid;
+      }
+
+      .mobile-menu {
+        order: 3;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        transition: grid-template-rows .22s ease, opacity .2s ease, visibility .2s ease;
+      }
+
+      .header.is-menu-open .mobile-menu {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu-panel {
+        padding: 0;
+        transition: padding .22s ease;
+      }
+
+      .header.is-menu-open .mobile-menu-panel {
+        padding: 8px 0 2px;
       }
 
       .header-actions .btn.primary {
@@ -2598,13 +2710,29 @@
 <body>
   <main class="page">
     <header class="header">
-      <a class="brand" href="/index.html" aria-label="KINSEI トップ"><div class="brand-mark">K</div><span>KINSEI</span></a>
+      <a class="brand" href="/" aria-label="KINSEI トップ"><div class="brand-mark">K</div><span>KINSEI</span></a>
       <nav class="nav">
-        <a href="/index.html#features">サービス</a><a href="/index.html#process">仕組み</a><a href="/index.html#cases">実績・事例</a><a href="/sponsors_list.html">協賛企業</a><a href="/sponsor.html">企業の方へ</a><a href="/index.html#members">メンバー</a>
+        <a href="/#features">サービス</a><a href="/#process">仕組み</a><a href="/#cases">実績・事例</a><a href="/sponsors_list.html">協賛企業</a><a href="/sponsor.html">企業の方へ</a><a href="/#members">メンバー</a>
       </nav>
       <div class="header-actions">
         <a class="btn ghost" href="/login?next=/members/students">企業会員DB</a>
         <a class="btn primary" href="/students">学生DBを見る</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-panel">
+          <a href="/#features">サービス</a>
+          <a href="/#process">仕組み</a>
+          <a href="/#cases">実績・事例</a>
+          <a href="/sponsors_list.html">協賛企業</a>
+          <a href="/sponsor.html">企業の方へ</a>
+          <a href="/#members">メンバー</a>
+          <a class="is-cta" href="/students">学生DBを見る</a>
+        </div>
       </div>
     </header>
 
@@ -2786,13 +2914,40 @@
 
     <footer class="footer">
       <div><b>K KINSEI</b><p>学歴ではなく、実績で戦える社会へ。</p><p>学生と企業の新しい出会いをつくる。</p></div>
-      <div><b>サービス</b><a href="/index.html#features">サービス概要</a><a href="/index.html#process">利用の流れ</a><a href="/index.html#cases">実績・事例</a></div>
+      <div><b>サービス</b><a href="/#features">サービス概要</a><a href="/#process">利用の流れ</a><a href="/#cases">実績・事例</a></div>
       <div><b>企業の方へ</b><a href="/sponsor.html">導入プラン</a><a href="/sponsors_list.html">協賛企業一覧</a><a href="/login?next=/members/students">企業会員DB</a></div>
-      <div><b>会社情報</b><a href="/index.html#members">メンバー</a><a href="/index.html#contact">お問い合わせ</a></div>
+      <div><b>会社情報</b><a href="/#members">メンバー</a><a href="/#contact">お問い合わせ</a></div>
       <div><b>お問い合わせ</b><a href="mailto:info@kinsei-career.jp">導入のご相談はこちら</a></div>
     </footer>
   </main>
   <script>
+    (() => {
+      const header = document.querySelector(".header");
+      const button = document.querySelector(".menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+
+      if (!header || !button || !menu) return;
+
+      const setMenuState = (open) => {
+        header.classList.toggle("is-menu-open", open);
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+        button.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+        menu.setAttribute("aria-hidden", open ? "false" : "true");
+      };
+
+      button.addEventListener("click", () => {
+        setMenuState(button.getAttribute("aria-expanded") !== "true");
+      });
+
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenuState(false));
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 720) setMenuState(false);
+      });
+    })();
+
     document.querySelectorAll("[data-audience-tab]").forEach((tab) => {
       tab.addEventListener("click", () => {
         const target = tab.dataset.audienceTab;
