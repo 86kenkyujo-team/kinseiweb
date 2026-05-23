@@ -1042,6 +1042,273 @@
         text-align: left;
       }
     }
+
+    .hero {
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 4px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(23, 105, 232, .32), rgba(88, 196, 255, .58), transparent);
+      transform: translateX(-18%);
+      animation: sponsor-scan 5.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy > * {
+      animation: sponsor-copy-in .78s cubic-bezier(.2, .82, .2, 1) both;
+    }
+
+    .hero h1 {
+      animation-delay: .08s;
+    }
+
+    .hero-lead {
+      animation-delay: .16s;
+    }
+
+    .hero-visual.image-visual::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(23, 105, 232, .2);
+      box-shadow:
+        0 0 0 24px rgba(88, 196, 255, .07),
+        0 0 42px rgba(23, 105, 232, .16);
+      animation: sponsor-orbit-pulse 5.2s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .hero-image {
+      animation: sponsor-hero-float 7.2s ease-in-out infinite;
+    }
+
+    .sponsor-band::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -22%;
+      width: 34%;
+      background:
+        linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent),
+        linear-gradient(180deg, transparent, rgba(88, 196, 255, .12), transparent);
+      transform: skewX(-18deg);
+      opacity: .52;
+      pointer-events: none;
+      animation: band-light-pass 9s ease-in-out infinite;
+    }
+
+    .carousel-window {
+      position: relative;
+    }
+
+    .carousel-window::before,
+    .carousel-window::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 3;
+      width: min(120px, 12vw);
+      pointer-events: none;
+    }
+
+    .carousel-window::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(246, 251, 255, .96), transparent);
+    }
+
+    .carousel-window::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(246, 251, 255, .96), transparent);
+    }
+
+    .sponsor-card {
+      --lift: 0px;
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      position: relative;
+      overflow: hidden;
+      transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(var(--lift));
+      will-change: transform;
+    }
+
+    .sponsor-card::after {
+      content: "";
+      position: absolute;
+      inset: -40% auto -40% -52%;
+      width: 46%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.72), transparent);
+      transform: rotate(18deg);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sponsor-card:hover {
+      --lift: -5px;
+      transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(var(--lift));
+    }
+
+    .sponsor-card:hover::after {
+      opacity: .74;
+      animation: sponsor-card-sheen 1.1s ease both;
+    }
+
+    .dot {
+      transition: width .24s ease, border-radius .24s ease, background .24s ease;
+    }
+
+    .dot.is-active {
+      width: 18px;
+      border-radius: 999px;
+    }
+
+    .cta-city span {
+      animation: city-pulse 3.4s ease-in-out infinite;
+      animation-delay: calc(var(--city-delay, 0) * .22s);
+    }
+
+    .cta-city span:nth-child(2) {
+      --city-delay: 1;
+    }
+
+    .cta-city span:nth-child(3) {
+      --city-delay: 2;
+    }
+
+    .motion-reveal {
+      opacity: 0;
+      transform: translateY(26px) scale(.985);
+      filter: blur(10px);
+      transition:
+        opacity .72s ease,
+        transform .72s cubic-bezier(.2, .82, .2, 1),
+        filter .72s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform, filter;
+    }
+
+    .motion-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    @keyframes sponsor-copy-in {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes sponsor-scan {
+      0%,
+      100% {
+        transform: translateX(-18%);
+        opacity: .28;
+      }
+
+      50% {
+        transform: translateX(18%);
+        opacity: .9;
+      }
+    }
+
+    @keyframes sponsor-orbit-pulse {
+      0%,
+      100% {
+        transform: scale(.96) rotate(0deg);
+        opacity: .58;
+      }
+
+      50% {
+        transform: scale(1.04) rotate(12deg);
+        opacity: .96;
+      }
+    }
+
+    @keyframes sponsor-hero-float {
+      0%,
+      100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    @keyframes band-light-pass {
+      0%,
+      22% {
+        transform: translateX(0) skewX(-18deg);
+      }
+
+      55%,
+      100% {
+        transform: translateX(430%) skewX(-18deg);
+      }
+    }
+
+    @keyframes sponsor-card-sheen {
+      from {
+        transform: translateX(0) rotate(18deg);
+      }
+
+      to {
+        transform: translateX(340%) rotate(18deg);
+      }
+    }
+
+    @keyframes city-pulse {
+      0%,
+      100% {
+        transform: scaleY(1);
+        opacity: .72;
+      }
+
+      50% {
+        transform: scaleY(1.12);
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .card-track,
+      .hero-image,
+      .motion-reveal {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1307,6 +1574,75 @@
       track.append(originalSet, clonedSet);
       track.dataset.marqueeReady = "true";
     });
+
+    (() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealTargets = [
+        ".hero",
+        ".band-head",
+        ".carousel",
+        ".join-cta",
+        ".footer"
+      ];
+      const elements = revealTargets.flatMap((selector) => Array.from(document.querySelectorAll(selector)));
+
+      elements.forEach((element, index) => {
+        element.classList.add("motion-reveal");
+        element.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 80}ms`);
+      });
+
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        elements.forEach((element) => element.classList.add("is-visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+
+      elements.forEach((element) => observer.observe(element));
+    })();
+
+    (() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion || !window.matchMedia("(pointer: fine)").matches) return;
+
+      document.querySelectorAll(".sponsor-card").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - .5;
+          const y = (event.clientY - rect.top) / rect.height - .5;
+          card.style.setProperty("--tilt-x", `${(x * 5).toFixed(2)}deg`);
+          card.style.setProperty("--tilt-y", `${(-y * 5).toFixed(2)}deg`);
+        });
+
+        card.addEventListener("pointerleave", () => {
+          card.style.setProperty("--tilt-x", "0deg");
+          card.style.setProperty("--tilt-y", "0deg");
+        });
+      });
+    })();
+
+    (() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) return;
+
+      document.querySelectorAll(".dots").forEach((dots, bandIndex) => {
+        const items = Array.from(dots.querySelectorAll(".dot"));
+        if (!items.length) return;
+        let active = 0;
+
+        window.setInterval(() => {
+          items[active].classList.remove("is-active");
+          active = (active + 1) % items.length;
+          items[active].classList.add("is-active");
+        }, 1800 + bandIndex * 260);
+      });
+    })();
   </script>
 </body>
 </html>

@@ -110,6 +110,15 @@ Avoid heavy beige, brown, purple-dominant gradients, and dark hero sections for 
 - Metrics become two columns or one column depending on available width.
 - No text should overlap decorative rings, people images, or cards.
 
+## Motion Rules
+
+- Use motion to express data, matching, and student growth rather than pure decoration.
+- Prefer soft fade-in, slight lift, and subtle parallax over abrupt or bouncy movement.
+- Hero visuals may float, pulse, or orbit slowly, but primary copy and CTA must remain stable and readable.
+- Metrics can count up once when entering the viewport.
+- Sponsor carousels should feel active and premium, with gentle continuous movement and hover pause.
+- Respect `prefers-reduced-motion` by removing non-essential animation and keeping all content visible.
+
 ## Do
 
 - Make the product feel active, data-backed, and human.
