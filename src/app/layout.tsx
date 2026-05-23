@@ -3,8 +3,23 @@ import { AuthSessionManager } from '@/components/AuthSessionManager'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: '近世 KINSEI',
-  description: '近世 KINSEI 公式サイト',
+  metadataBase: new URL('https://kinseiweb-murex.vercel.app'),
+  title: {
+    default: '近世 KINSEI',
+    template: '%s | 近世 KINSEI',
+  },
+  description:
+    'KINSEIは、学生の挑戦と実績を可視化し、企業との最適な出会いをつくるキャリアプラットフォームです。',
+  openGraph: {
+    siteName: 'KINSEI',
+    locale: 'ja_JP',
+    type: 'website',
+    images: ['/assets/images/hero-people-0518.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/assets/images/hero-people-0518.png'],
+  },
 }
 
 export default function RootLayout({

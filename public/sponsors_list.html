@@ -1,453 +1,1312 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>協賛企業一覧 | 近世 KINSEI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>協賛企業一覧 | 近世 KINSEI</title>
+  <meta name="description" content="KINSEIの協賛企業一覧。近畿大学から日本をおもしろくするビジョンに共感し、学生の挑戦を支えるパートナー企業を紹介します。">
+  <link rel="canonical" href="https://kinseiweb-murex.vercel.app/sponsors_list.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="KINSEI">
+  <meta property="og:title" content="協賛企業一覧 | 近世 KINSEI">
+  <meta property="og:description" content="KINSEIのビジョンに共感し、学生の挑戦を支えるパートナー企業を紹介します。">
+  <meta property="og:url" content="https://kinseiweb-murex.vercel.app/sponsors_list.html">
+  <meta property="og:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="協賛企業一覧 | 近世 KINSEI">
+  <meta name="twitter:description" content="KINSEIのビジョンに共感し、学生の挑戦を支えるパートナー企業を紹介します。">
+  <meta name="twitter:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d203d;
+      --ink-2: #172947;
+      --muted: #526882;
+      --blue: #1769e8;
+      --blue-2: #3f9dff;
+      --pale: #eef7ff;
+      --line: rgba(94, 150, 220, .18);
+      --shadow: 0 18px 42px rgba(20, 92, 190, .13);
+      --content: min(790px, calc(100vw - 96px));
+      --rail: min(1040px, calc(100vw - 72px));
+    }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    * {
+      box-sizing: border-box;
+    }
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Noto Sans JP"', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#005bac',
-                        secondary: '#0097e6',
-                        accent: '#e6b422',
-                        dark: '#1a1a1a',
-                        light: '#f8fafc',
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'marquee': 'marquee 30s linear infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        marquee: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 78% 10%, rgba(151, 204, 255, .7), rgba(230, 244, 255, .55) 31%, rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #fbfdff 0%, #edf7ff 48%, #ffffff 100%);
+      font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: 0;
+    }
 
-    <style>
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            overflow-x: hidden;
-        }
+    a {
+      color: inherit;
+    }
 
-        .bg-pattern {
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
+    .page {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
 
-        .delay-100 { animation-delay: 100ms; opacity: 0; }
-        .delay-200 { animation-delay: 200ms; opacity: 0; }
-        .delay-300 { animation-delay: 300ms; opacity: 0; }
-        .delay-400 { animation-delay: 400ms; opacity: 0; }
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 520px;
+      background-image:
+        radial-gradient(circle at 60% 14%, rgba(255,255,255,.98) 0 4px, transparent 5px),
+        radial-gradient(circle at 58% 34%, rgba(255,255,255,.92) 0 3px, transparent 4px),
+        radial-gradient(circle at 91% 17%, rgba(255,255,255,.9) 0 2px, transparent 3px);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .mobile-menu-active {
-            opacity: 1;
-            pointer-events: auto;
-            visibility: visible;
-        }
+    .header {
+      position: relative;
+      z-index: 5;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      padding: 0 43px;
+    }
 
-        .mobile-menu-hidden {
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-        }
-    </style>
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      color: #0d56d8;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    .brand-mark,
+    .hero-mark {
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      letter-spacing: 0;
+      background: linear-gradient(135deg, #2f84ff, #075dd8);
+      box-shadow: 0 12px 24px rgba(23, 105, 232, .26);
+    }
+
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      font-size: 17px;
+    }
+
+    .nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      min-width: 0;
+      font-size: 11px;
+      font-weight: 900;
+      color: #221070;
+    }
+
+    .nav a {
+      position: relative;
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 64px;
+    }
+
+    .nav a.is-active {
+      color: var(--blue);
+    }
+
+    .nav a.is-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 14px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--blue);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-toggle {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(23, 105, 232, .20);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .78);
+      box-shadow: 0 12px 26px rgba(44, 111, 210, .14);
+      color: var(--blue);
+      display: none;
+      place-items: center;
+      gap: 4px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .mobile-menu-panel {
+      overflow: hidden;
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-menu a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 10px;
+      color: #172947;
+      background: rgba(255, 255, 255, .58);
+      border: 1px solid rgba(101, 153, 221, .16);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .mobile-menu a.is-active {
+      color: var(--blue);
+      background: rgba(255, 255, 255, .9);
+      border-color: rgba(23, 105, 232, .28);
+    }
+
+    .btn {
+      min-height: 34px;
+      padding: 0 18px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .btn.ghost {
+      color: var(--blue);
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 12px 26px rgba(44, 111, 210, .14);
+    }
+
+    .btn.primary {
+      color: white;
+      background: linear-gradient(135deg, #2b7fff, #0962de);
+      box-shadow: 0 14px 28px rgba(13, 98, 222, .28);
+    }
+
+    .btn.outline {
+      color: var(--blue);
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(23, 105, 232, .72);
+      box-shadow: none;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 312px;
+    }
+
+    .hero-inner {
+      width: var(--content);
+      min-height: 312px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      align-items: center;
+      gap: 42px;
+      padding: 10px 0 22px;
+    }
+
+    .hero-copy {
+      padding-top: 0;
+      transform: translateY(-8px);
+    }
+
+    .hero-kicker {
+      margin: 0 0 13px;
+      color: #14284c;
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 900;
+    }
+
+    .hero-kicker span {
+      color: var(--blue);
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: #0c223f;
+      font-size: clamp(39px, 5vw, 53px);
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .hero-lead {
+      max-width: 458px;
+      margin: 18px 0 0;
+      color: #253f5c;
+      font-size: 14px;
+      line-height: 1.9;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 278px;
+      transform: translateY(-10px);
+    }
+
+    .hero-visual.image-visual {
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .hero-visual.image-visual::before {
+      content: "";
+      position: absolute;
+      inset: 8px -6px -12px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.38), rgba(218, 239, 255, .22) 44%, transparent 72%),
+        radial-gradient(circle at 50% 55%, rgba(23, 105, 232, .10), transparent 58%);
+      filter: blur(10px);
+      z-index: -1;
+    }
+
+    .hero-image {
+      width: min(420px, 100%);
+      max-width: none;
+      display: block;
+      mix-blend-mode: normal;
+      opacity: .98;
+      filter: saturate(1.08) contrast(1.02) drop-shadow(0 24px 36px rgba(31, 94, 184, .10));
+    }
+
+    .sponsor-list {
+      position: relative;
+      z-index: 2;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.38), rgba(238,247,255,.88) 42%, rgba(255,255,255,.96));
+    }
+
+    .sponsor-band {
+      position: relative;
+      min-height: 430px;
+      padding: 58px 0 58px;
+      border-top: 1px solid rgba(100, 149, 208, .18);
+      overflow: hidden;
+    }
+
+    .sponsor-band.enterprise {
+      min-height: 488px;
+      padding-top: 64px;
+    }
+
+    .sponsor-band.light {
+      min-height: 342px;
+    }
+
+    .sponsor-band.featured {
+      min-height: 420px;
+      padding-top: 56px;
+      padding-bottom: 54px;
+    }
+
+    .band-head {
+      width: var(--rail);
+      margin: 0 auto 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .band-title {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .band-title h2 {
+      margin: 0;
+      color: #122646;
+      font-size: 31px;
+      line-height: 1.25;
+      font-weight: 900;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .band-title p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .see-all {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel {
+      position: relative;
+    }
+
+    .carousel-window {
+      width: 100vw;
+      overflow: hidden;
+      padding: 0 0 2px;
+    }
+
+    .card-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      --track-start: calc((100vw - var(--rail)) / 2 - var(--peek, 116px));
+      transform: translateX(var(--track-start));
+      animation: sponsor-flow var(--duration, 32s) linear infinite;
+      will-change: transform;
+    }
+
+    .card-track:hover {
+      animation-play-state: paused;
+    }
+
+    .track-set {
+      display: flex;
+      gap: var(--gap, 18px);
+      padding-right: var(--gap, 18px);
+    }
+
+    @keyframes sponsor-flow {
+      from {
+        transform: translateX(var(--track-start));
+      }
+
+      to {
+        transform: translateX(calc(var(--track-start) - 50%));
+      }
+    }
+
+    .enterprise .card-track {
+      --gap: 24px;
+      --peek: 210px;
+      --duration: 38s;
+    }
+
+    .ambassador .card-track,
+    .featured .card-track {
+      --gap: 22px;
+      --peek: 190px;
+      --duration: 40s;
+    }
+
+    .light .card-track {
+      --gap: 15px;
+      --peek: 0px;
+      --track-start: calc((100vw - var(--rail)) / 2);
+      --duration: 30s;
+    }
+
+    .sponsor-card {
+      flex: 0 0 auto;
+      display: grid;
+      align-content: start;
+      text-decoration: none;
+      border: 1px solid #dbeaff;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 15px 31px rgba(20, 92, 190, .09);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .sponsor-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(20, 92, 190, .15);
+    }
+
+    .sponsor-card.enterprise-card {
+      width: 250px;
+      height: 238px;
+      border-radius: 13px;
+      padding: 27px 26px 22px;
+      gap: 23px;
+    }
+
+    .sponsor-card.medium-card {
+      width: 220px;
+      height: 202px;
+      border-radius: 12px;
+      padding: 24px 22px 19px;
+      gap: 20px;
+    }
+
+    .sponsor-card.light-card {
+      width: 132px;
+      height: 118px;
+      border-radius: 8px;
+      padding: 17px 13px 12px;
+      gap: 13px;
+    }
+
+    .logo-box {
+      display: grid;
+      place-items: center;
+      color: #8b9bb2;
+      border-radius: 5px;
+      background:
+        linear-gradient(145deg, rgba(242,247,252,.98), rgba(224, 238, 253, .84));
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .enterprise-card .logo-box {
+      height: 135px;
+      font-size: 14px;
+    }
+
+    .medium-card .logo-box {
+      height: 112px;
+      font-size: 12px;
+    }
+
+    .light-card .logo-box {
+      height: 58px;
+      font-size: 9px;
+      border-radius: 4px;
+    }
+
+    .sponsor-card b {
+      display: block;
+      min-width: 0;
+      color: #122646;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .medium-card b {
+      font-size: 13px;
+    }
+
+    .light-card b {
+      font-size: 10px;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      z-index: 4;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 12px 25px rgba(31, 98, 190, .16);
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 700;
+      transform: translateY(-50%);
+    }
+
+    .arrow.left {
+      left: calc((100vw - var(--rail)) / 2 - 22px);
+    }
+
+    .arrow.right {
+      right: calc((100vw - var(--rail)) / 2 - 22px);
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #d2dbe4;
+    }
+
+    .dot.is-active {
+      background: var(--blue);
+    }
+
+    .join-cta {
+      width: var(--content);
+      min-height: 94px;
+      margin: -16px auto 16px;
+      display: grid;
+      grid-template-columns: 62px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 22px 15px 18px;
+      border: 1px solid rgba(23, 105, 232, .42);
+      border-radius: 13px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.86), rgba(233, 245, 255, .76)),
+        radial-gradient(circle at 11% 88%, rgba(73, 153, 255, .17), transparent 34%);
+      box-shadow: 0 16px 34px rgba(20, 92, 190, .12);
+    }
+
+    .cta-city {
+      position: relative;
+      height: 64px;
+      opacity: .42;
+    }
+
+    .cta-city span {
+      position: absolute;
+      bottom: 0;
+      border-radius: 7px 7px 0 0;
+      background: linear-gradient(180deg, #b8d9ff, #dcecff);
+    }
+
+    .cta-city span:nth-child(1) {
+      left: 9px;
+      width: 25px;
+      height: 37px;
+    }
+
+    .cta-city span:nth-child(2) {
+      left: 31px;
+      width: 29px;
+      height: 55px;
+    }
+
+    .cta-city span:nth-child(3) {
+      left: 57px;
+      width: 33px;
+      height: 31px;
+    }
+
+    .join-cta h2 {
+      margin: 0;
+      color: #102441;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .join-cta p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+      font-weight: 800;
+    }
+
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cta-actions .btn {
+      min-width: 132px;
+      height: 40px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 2;
+      height: 172px;
+      padding: 25px 56px 36px;
+      display: grid;
+      grid-template-columns: 1.45fr .72fr .72fr .82fr .72fr .9fr;
+      gap: 26px;
+      background:
+        radial-gradient(circle at 92% 30%, rgba(19, 122, 245, .65), transparent 35%),
+        linear-gradient(135deg, #061b3d 0%, #092b62 72%, #065ec5 100%);
+      color: rgba(255,255,255,.74);
+    }
+
+    .footer b {
+      display: block;
+      margin-bottom: 11px;
+      color: white;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 900;
+      letter-spacing: .03em;
+    }
+
+    .footer p,
+    .footer a {
+      display: block;
+      margin: 0 0 9px;
+      color: rgba(255,255,255,.74);
+      text-decoration: none;
+      font-size: 11px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+
+    .copyright {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 14px;
+      margin: 0;
+      text-align: center;
+      color: rgba(255,255,255,.68);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 880px) {
+      :root {
+        --content: min(790px, calc(100vw - 40px));
+        --rail: var(--content);
+      }
+
+      .header {
+        height: auto;
+        min-height: 66px;
+        padding: 14px 20px;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        order: 0;
+        flex: 1;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-actions {
+        order: 2;
+        width: min(350px, calc(100vw - 40px));
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
+      }
+
+      .header-actions .btn {
+        padding: 0 12px;
+        font-size: 11px;
+      }
+
+      .menu-toggle {
+        order: 1;
+        display: inline-grid;
+      }
+
+      .mobile-menu {
+        order: 3;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        transition: grid-template-rows .22s ease, opacity .2s ease, visibility .2s ease;
+      }
+
+      .header.is-menu-open .mobile-menu {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu-panel {
+        padding: 0;
+        transition: padding .22s ease;
+      }
+
+      .header.is-menu-open .mobile-menu-panel {
+        padding: 8px 0 2px;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 28px 0 30px;
+      }
+
+      .hero-copy {
+        padding-top: 0;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 8.8vw, 40px);
+      }
+
+      .hero-lead {
+        max-width: none;
+      }
+
+      .hero-visual {
+        height: 240px;
+        width: min(330px, 100%);
+        margin: 0 auto;
+      }
+
+      .sponsor-band,
+      .sponsor-band.enterprise,
+      .sponsor-band.featured,
+      .sponsor-band.light {
+        min-height: auto;
+        padding: 26px 0;
+      }
+
+      .band-head {
+        text-align: left;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .band-title {
+        justify-content: start;
+        width: 100%;
+      }
+
+      .band-title h2 {
+        font-size: 19px;
+      }
+
+      .see-all {
+        position: static;
+        transform: none;
+      }
+
+      .carousel-window {
+        width: var(--content);
+        margin: 0 auto;
+        overflow-x: auto;
+        padding: 0 0 8px;
+        scrollbar-width: none;
+      }
+
+      .carousel-window::-webkit-scrollbar {
+        display: none;
+      }
+
+      .card-track,
+      .enterprise .card-track,
+      .ambassador .card-track,
+      .featured .card-track,
+      .light .card-track {
+        animation: none;
+        transform: none;
+      }
+
+      .track-set {
+        padding-right: 0;
+      }
+
+      .track-set[aria-hidden="true"] {
+        display: none;
+      }
+
+      .arrow {
+        display: none;
+      }
+
+      .sponsor-card.enterprise-card {
+        width: 168px;
+        height: 150px;
+        border-radius: 10px;
+        padding: 17px 16px 13px;
+        gap: 14px;
+      }
+
+      .sponsor-card.medium-card {
+        width: 143px;
+        height: 126px;
+        border-radius: 9px;
+        padding: 16px 14px 12px;
+        gap: 11px;
+      }
+
+      .sponsor-card.light-card {
+        width: 80px;
+        height: 75px;
+        border-radius: 6px;
+        padding: 11px 9px 8px;
+        gap: 8px;
+      }
+
+      .enterprise-card .logo-box {
+        height: 84px;
+        font-size: 12px;
+      }
+
+      .medium-card .logo-box {
+        height: 69px;
+        font-size: 10px;
+      }
+
+      .light-card .logo-box {
+        height: 34px;
+        font-size: 8px;
+      }
+
+      .sponsor-card b {
+        font-size: 12px;
+      }
+
+      .medium-card b {
+        font-size: 10px;
+      }
+
+      .light-card b {
+        font-size: 8px;
+      }
+
+      .join-cta {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 24px 18px;
+      }
+
+      .join-cta h2 {
+        white-space: normal;
+      }
+
+      .cta-city {
+        width: 96px;
+        margin: 0 auto;
+      }
+
+      .cta-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .footer {
+        height: auto;
+        grid-template-columns: 1fr 1fr;
+        padding: 28px 22px 24px;
+      }
+
+      .footer > div:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --content: min(350px, calc(100vw - 40px));
+        --rail: var(--content);
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: start;
+      }
+
+      .brand {
+        justify-self: start;
+      }
+
+      .header-actions {
+        grid-column: 1 / -1;
+        width: min(350px, calc(100vw - 40px));
+      }
+
+      .mobile-menu {
+        grid-column: 1 / -1;
+      }
+
+      .header-actions .btn {
+        min-width: 0;
+        padding: 0 8px;
+      }
+
+      .sponsor-card.is-peek {
+        display: none;
+      }
+
+      .hero-inner {
+        padding-top: 22px;
+      }
+
+      .band-head {
+        display: grid;
+        gap: 12px;
+      }
+
+      .see-all {
+        margin-left: 0;
+      }
+
+      .sponsor-card.enterprise-card {
+        width: 164px;
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .copyright {
+        position: static;
+        grid-column: 1 / -1;
+        margin-top: 8px;
+        text-align: left;
+      }
+    }
+  </style>
 </head>
-<body class="bg-light text-gray-800 antialiased relative">
-
-    <header id="header" class="fixed w-full z-50 py-4 px-6 md:px-12 bg-white/95 shadow-md text-gray-800 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
-            <a href="/index.html" class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">K</div>
-                <span class="logo-text text-2xl font-black tracking-wider text-primary">近世 KINSEI</span>
-            </a>
-
-            <nav class="hidden md:flex gap-5 items-center font-medium text-sm">
-                <a href="/index.html#features" class="hover:text-primary transition">サービス</a>
-                <a href="/index.html#process" class="hover:text-primary transition">仕組み</a>
-                <a href="/index.html#cases" class="hover:text-primary transition">実績・事例</a>
-                <a href="/sponsors_list.html" class="text-primary font-bold">協賛企業</a>
-                <a href="/sponsor.html" class="hover:text-primary transition">企業の方へ</a>
-                <a href="/index.html#members" class="hover:text-primary transition">メンバー</a>
-                <a href="/students" class="hover:text-primary transition font-bold">学生DB</a>
-                <a href="/index.html#contact" class="bg-accent text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:scale-105 transition transform">
-                    お問い合わせ
-                </a>
-            </nav>
-
-            <button class="md:hidden text-current p-2 focus:outline-none" id="mobile-menu-btn" aria-label="メニューを開く">
-                <i data-lucide="menu" class="w-8 h-8 transition-transform duration-300" id="menu-icon"></i>
-            </button>
+<body>
+  <main class="page">
+    <header class="header">
+      <a class="brand" href="/" aria-label="KINSEI トップ">
+        <span class="brand-mark">K</span>
+        <span>KINSEI</span>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="/#features">サービス</a>
+        <a href="/#process">仕組み</a>
+        <a href="/#cases">実績・事例</a>
+        <a class="is-active" href="/sponsors_list.html" aria-current="page">協賛企業</a>
+        <a href="/sponsor.html">企業の方へ</a>
+        <a href="/#members">メンバー</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn ghost" href="/login?next=/members/students">企業会員DB</a>
+        <a class="btn primary" href="/students">学生DBを見る</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-panel">
+          <a href="/#features">サービス</a>
+          <a href="/#process">仕組み</a>
+          <a href="/#cases">実績・事例</a>
+          <a class="is-active" href="/sponsors_list.html" aria-current="page">協賛企業</a>
+          <a href="/sponsor.html">企業の方へ</a>
+          <a href="/#members">メンバー</a>
         </div>
-
-        <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 mobile-menu-hidden transition-all duration-300 flex flex-col items-center justify-center gap-8 text-xl font-bold">
-            <a href="/index.html#features" class="mobile-nav-link text-dark hover:text-primary transition">サービス</a>
-            <a href="/index.html#process" class="mobile-nav-link text-dark hover:text-primary transition">仕組み</a>
-            <a href="/index.html#cases" class="mobile-nav-link text-dark hover:text-primary transition">実績・事例</a>
-            <a href="/sponsors_list.html" class="mobile-nav-link text-primary transition">協賛企業</a>
-            <a href="/sponsor.html" class="mobile-nav-link text-dark hover:text-primary transition">企業の方へ</a>
-            <a href="/index.html#members" class="mobile-nav-link text-dark hover:text-primary transition">メンバー</a>
-            <a href="/students" class="mobile-nav-link text-dark hover:text-primary transition">学生DB</a>
-            <a href="/index.html#contact" class="mobile-nav-link bg-accent text-white px-10 py-4 rounded-full shadow-lg mt-4">お問い合わせ</a>
-        </div>
+      </div>
     </header>
 
-    <section class="pt-40 pb-16 bg-dark text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-dark z-10"></div>
-        <div class="max-w-7xl mx-auto px-6 relative z-20 text-center">
-            <span class="text-accent font-bold tracking-wider uppercase text-sm mb-2 block">Our Sponsors</span>
-            <h1 class="text-4xl md:text-5xl font-black mb-6">協賛企業一覧</h1>
-            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-                近畿大学から日本をおもしろくする。<br>
-                私たちのビジョンに共感し、共に歩んでくださるパートナー企業様をご紹介します。
-            </p>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="hero-kicker">ともに、<span>未来のキャリアをつくる。</span></p>
+          <h1 id="page-title">協賛企業一覧</h1>
+          <p class="hero-lead">近畿大学から日本を、そして世界をおもしろくする。<br>私たちのビジョンに共感し、学生の挑戦を支えてくださるパートナー企業様をご紹介します。</p>
         </div>
+
+        <div class="hero-visual image-visual" aria-hidden="true">
+          <img class="hero-image" src="/assets/images/sponsors-orbit-hero-transparent.png" alt="">
+        </div>
+      </div>
     </section>
 
-    <section class="py-20 bg-pattern relative overflow-hidden">
-        <div class="w-full relative z-10">
-            <div class="mb-24 animate-fade-in-up delay-100">
-                <div class="text-center mb-10 px-6">
-                    <h2 class="text-4xl font-black text-dark inline-block relative">
-                        大手企業
-                        <div class="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-accent to-yellow-300 rounded-full"></div>
-                    </h2>
-                    <p class="text-gray-500 mt-6 font-medium">業界を牽引し、共に新しい価値を創出するプレミアムパートナー</p>
-                </div>
-
-                <div class="relative w-full overflow-hidden py-4">
-                    <div class="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-light to-transparent z-10 pointer-events-none"></div>
-                    <div class="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-light to-transparent z-10 pointer-events-none"></div>
-
-                    <div class="flex w-max animate-marquee hover:[animation-play-state:paused] gap-10 px-4">
-                        <div class="flex gap-10">
-                            <a href="/sponsor.html" class="w-96 shrink-0 group block bg-white rounded-2xl p-10 shadow-lg border-2 border-transparent hover:border-accent/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-2xl">Enterprise Logo</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-dark text-center group-hover:text-accent transition-colors">大手株式会社A</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-96 shrink-0 group block bg-white rounded-2xl p-10 shadow-lg border-2 border-transparent hover:border-accent/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-2xl">Enterprise Logo</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-dark text-center group-hover:text-accent transition-colors">大手株式会社B</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-96 shrink-0 group block bg-white rounded-2xl p-10 shadow-lg border-2 border-transparent hover:border-accent/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-2xl">Enterprise Logo</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-dark text-center group-hover:text-accent transition-colors">大手株式会社C</h3>
-                            </a>
-                        </div>
-                        <div class="flex gap-10">
-                            <a href="/sponsor.html" class="w-96 shrink-0 group block bg-white rounded-2xl p-10 shadow-lg border-2 border-transparent hover:border-accent/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-2xl">Enterprise Logo</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-dark text-center group-hover:text-accent transition-colors">大手株式会社A</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-96 shrink-0 group block bg-white rounded-2xl p-10 shadow-lg border-2 border-transparent hover:border-accent/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-2xl">Enterprise Logo</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-dark text-center group-hover:text-accent transition-colors">大手株式会社B</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-96 shrink-0 group block bg-white rounded-2xl p-10 shadow-lg border-2 border-transparent hover:border-accent/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-2xl">Enterprise Logo</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-dark text-center group-hover:text-accent transition-colors">大手株式会社C</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <section class="sponsor-list" aria-label="協賛企業カテゴリ">
+      <article class="sponsor-band enterprise">
+        <div class="band-head">
+          <div class="band-title">
+            <div>
+              <h2>大手企業</h2>
+              <p>業界を牽引し、共に新しい価値を創出するプレミアムパートナー</p>
             </div>
-
-            <div class="mb-24 animate-fade-in-up delay-200">
-                <div class="text-center mb-10 px-6">
-                    <h2 class="text-3xl font-black text-dark inline-block relative">
-                        アンバサダー導入企業
-                        <div class="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-primary to-blue-300 rounded-full"></div>
-                    </h2>
-                    <p class="text-gray-500 mt-6 font-medium">学生を直接派遣し、実務で共創するパートナー</p>
-                </div>
-
-                <div class="relative w-full overflow-hidden py-4">
-                    <div class="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-light to-transparent z-10 pointer-events-none"></div>
-                    <div class="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-light to-transparent z-10 pointer-events-none"></div>
-
-                    <div class="flex w-max animate-marquee hover:[animation-play-state:paused] gap-8 px-4">
-                        <div class="flex gap-8">
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company A</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社A</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company B</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社B</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company C</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社C</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company D</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社D</h3>
-                            </a>
-                        </div>
-                        <div class="flex gap-8">
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company A</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社A</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company B</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社B</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company C</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社C</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-80 shrink-0 group block bg-white rounded-2xl p-8 shadow-md border-2 border-transparent hover:border-primary/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <div class="aspect-video bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50/50 transition-colors">
-                                    <span class="text-gray-400 font-bold text-xl">Company D</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-dark text-center group-hover:text-primary transition-colors">株式会社D</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-24 animate-fade-in-up delay-300">
-                <div class="text-center mb-10 px-6">
-                    <h2 class="text-2xl font-black text-dark inline-block relative">
-                        応援企業 <span class="text-lg text-gray-500 font-bold ml-2">特設ページ掲載プラン</span>
-                        <div class="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-secondary to-sky-300 rounded-full"></div>
-                    </h2>
-                </div>
-
-                <div class="relative w-full overflow-hidden py-4">
-                    <div class="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-light to-transparent z-10 pointer-events-none"></div>
-                    <div class="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-light to-transparent z-10 pointer-events-none"></div>
-
-                    <div class="flex w-max animate-marquee hover:[animation-play-state:paused] gap-6 px-4">
-                        <div class="flex gap-6">
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo E</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo F</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo G</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo H</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo I</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                        </div>
-                        <div class="flex gap-6">
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo E</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo F</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo G</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo H</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                            <a href="/sponsor.html" class="w-64 shrink-0 group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                <div class="aspect-[4/3] bg-gray-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-sky-50/50 transition-colors">
-                                    <span class="text-gray-400 font-medium text-sm">Logo I</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-dark text-center group-hover:text-secondary transition-colors">〇〇株式会社</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="animate-fade-in-up delay-400">
-                <div class="text-center mb-10 px-6">
-                    <h2 class="text-xl font-black text-dark inline-block relative">
-                        応援企業 <span class="text-base text-gray-500 font-bold ml-2">ライトプラン</span>
-                        <div class="absolute -bottom-3 left-0 w-full h-[2px] bg-gray-300 rounded-full"></div>
-                    </h2>
-                </div>
-
-                <div class="relative w-full overflow-hidden py-4">
-                    <div class="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-light to-transparent z-10 pointer-events-none"></div>
-                    <div class="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-light to-transparent z-10 pointer-events-none"></div>
-
-                    <div class="flex w-max animate-marquee hover:[animation-play-state:paused] gap-4 px-4">
-                        <div class="flex gap-4">
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo J</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo K</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo L</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo M</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo N</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo O</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo P</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo Q</span></div></div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo J</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo K</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo L</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo M</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo N</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo O</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo P</span></div></div>
-                            <div class="w-32 shrink-0 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"><div class="aspect-square bg-gray-50 rounded flex items-center justify-center"><span class="text-gray-400 text-xs font-medium">Logo Q</span></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
         </div>
+
+        <div class="carousel" aria-label="大手企業リスト">
+          <button class="arrow left" type="button" aria-label="前へ">‹</button>
+          <div class="carousel-window">
+            <div class="card-track">
+              <a class="sponsor-card enterprise-card is-peek" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>大手株式会社X</b></a>
+              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>大手株式会社A</b></a>
+              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>大手株式会社B</b></a>
+              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>大手株式会社C</b></a>
+              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>大手株式会社D</b></a>
+              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>大手株式会社E</b></a>
+            </div>
+          </div>
+          <button class="arrow right" type="button" aria-label="次へ">›</button>
+        </div>
+        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </article>
+
+      <article class="sponsor-band ambassador">
+        <div class="band-head">
+          <div class="band-title">
+            <div>
+              <h2>アンバサダー導入企業</h2>
+              <p>学生を直接派遣し、実務で共創するパートナー</p>
+            </div>
+          </div>
+          <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
+        </div>
+
+        <div class="carousel" aria-label="アンバサダー導入企業リスト">
+          <button class="arrow left" type="button" aria-label="前へ">‹</button>
+          <div class="carousel-window">
+            <div class="card-track">
+              <a class="sponsor-card medium-card is-peek" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>株式会社X</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>株式会社A</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>株式会社B</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>株式会社C</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>株式会社D</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>株式会社E</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>株式会社F</b></a>
+            </div>
+          </div>
+          <button class="arrow right" type="button" aria-label="次へ">›</button>
+        </div>
+        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </article>
+
+      <article class="sponsor-band featured">
+        <div class="band-head">
+          <div class="band-title">
+            <div>
+              <h2>応援企業（情報ページ掲載プラン）</h2>
+              <p>学生の挑戦を情報発信で応援するパートナー</p>
+            </div>
+          </div>
+          <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
+        </div>
+
+        <div class="carousel" aria-label="情報ページ掲載プラン企業リスト">
+          <button class="arrow left" type="button" aria-label="前へ">‹</button>
+          <div class="carousel-window">
+            <div class="card-track">
+              <a class="sponsor-card medium-card is-peek" href="/sponsor.html"><span class="logo-box">Logo</span><b>掲載予定</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>○○株式会社</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>△△株式会社</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>□□株式会社</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>××株式会社</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社○○</b></a>
+              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社△△</b></a>
+            </div>
+          </div>
+          <button class="arrow right" type="button" aria-label="次へ">›</button>
+        </div>
+        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </article>
+
+      <article class="sponsor-band light">
+        <div class="band-head">
+          <div class="band-title">
+            <div>
+              <h2>応援企業（ライトプラン）</h2>
+              <p>未来を担う学生を、気軽に応援するパートナー</p>
+            </div>
+          </div>
+          <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
+        </div>
+
+        <div class="carousel" aria-label="ライトプラン企業リスト">
+          <button class="arrow left" type="button" aria-label="前へ">‹</button>
+          <div class="carousel-window">
+            <div class="card-track">
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社A</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社B</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社C</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社D</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社E</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社F</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社G</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社H</b></a>
+              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>株式会社I</b></a>
+            </div>
+          </div>
+          <button class="arrow right" type="button" aria-label="次へ">›</button>
+        </div>
+        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </article>
+
+      <section class="join-cta" aria-label="企業向けお問い合わせ">
+        <div class="cta-city" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <h2>あなたの企業も、学生の未来を共につくりませんか？</h2>
+          <p>協賛・連携についてのご相談や資料請求はこちらから。</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn outline" href="/sponsor.html">資料をダウンロード&nbsp;↓</a>
+          <a class="btn primary" href="mailto:info@kinsei-career.jp">お問い合わせ&nbsp;→</a>
+        </div>
+      </section>
     </section>
 
-    <footer class="bg-dark text-gray-400 py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-            <div class="col-span-1 md:col-span-2">
-                <a href="/index.html" class="flex items-center gap-2 mb-4 text-white">
-                    <div class="w-8 h-8 bg-white/10 rounded flex items-center justify-center text-primary font-bold">K</div>
-                    <span class="text-xl font-black tracking-wider">近世 KINSEI</span>
-                </a>
-                <p class="text-sm leading-relaxed mb-4">
-                    次世代の産学共創OSを構築し、価値創出力で評価される社会へ。<br>
-                    近大から、日本をおもしろく。
-                </p>
-            </div>
-
-            <div>
-                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">コンテンツ</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/index.html#features" class="hover:text-primary transition">サービス概要</a></li>
-                    <li><a href="/index.html#process" class="hover:text-primary transition">利用の流れ</a></li>
-                    <li><a href="/index.html#cases" class="hover:text-primary transition">実績・事例</a></li>
-                    <li><a href="/students" class="hover:text-primary transition">学生DB</a></li>
-                    <li><a href="/index.html#members" class="hover:text-primary transition">メンバー紹介</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">企業様へ</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/students" class="hover:text-primary transition">学生DBを見る</a></li>
-                    <li><a href="/sponsor.html" class="hover:text-primary transition">企業向け導入プラン</a></li>
-                    <li><a href="/sponsors_list.html" class="text-primary transition">協賛企業一覧</a></li>
-                    <li><a href="/login?next=/members/students" class="hover:text-primary transition">企業会員DB</a></li>
-                    <li><a href="/index.html#contact" class="hover:text-primary transition">お問い合わせ</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="text-center text-sm mt-12 pt-8 border-t border-gray-800">
-            &copy; 2026 KINSEI. All Rights Reserved.
-        </div>
+    <footer class="footer">
+      <div>
+        <b>KINSEI</b>
+        <p>学びと実践で、未来の可能性をひらく。</p>
+        <p>学生と企業の新しい出会いをつくる、キャリアプラットフォーム。</p>
+      </div>
+      <div>
+        <b>サービス</b>
+        <a href="/#features">サービス概要</a>
+        <a href="/#process">利用の流れ</a>
+        <a href="/#cases">実績・事例</a>
+      </div>
+      <div>
+        <b>仕組み</b>
+        <a href="/#process">仕組みについて</a>
+        <a href="/sponsor.html">サポート体制</a>
+      </div>
+      <div>
+        <b>企業の方へ</b>
+        <a href="/sponsor.html">導入プラン</a>
+        <a href="/sponsors_list.html">協賛企業一覧</a>
+        <a href="/login?next=/members/students">企業会員DB</a>
+      </div>
+      <div>
+        <b>メンバー</b>
+        <a href="/students">学生DBを見る</a>
+        <a href="/#members">メンバー紹介</a>
+      </div>
+      <div>
+        <b>お問い合わせ</b>
+        <a href="mailto:info@kinsei-career.jp">導入のご相談はこちら</a>
+        <a href="/#contact">よくあるご質問</a>
+      </div>
+      <div class="copyright">© 2026 KINSEI. All Rights Reserved.</div>
     </footer>
+  </main>
+  <script>
+    (() => {
+      const header = document.querySelector(".header");
+      const button = document.querySelector(".menu-toggle");
+      const menu = document.getElementById("mobile-menu");
 
-    <script>
-        lucide.createIcons();
+      if (!header || !button || !menu) return;
 
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        let isMenuOpen = false;
+      const setMenuState = (open) => {
+        header.classList.toggle("is-menu-open", open);
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+        button.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+        menu.setAttribute("aria-hidden", open ? "false" : "true");
+      };
 
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('mobile-menu-hidden');
-                mobileMenu.classList.add('mobile-menu-active');
-                menuIcon.setAttribute('data-lucide', 'x');
-            } else {
-                mobileMenu.classList.remove('mobile-menu-active');
-                mobileMenu.classList.add('mobile-menu-hidden');
-                menuIcon.setAttribute('data-lucide', 'menu');
-            }
-            lucide.createIcons();
-        }
+      button.addEventListener("click", () => {
+        setMenuState(button.getAttribute("aria-expanded") !== "true");
+      });
 
-        mobileMenuBtn.addEventListener('click', toggleMenu);
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenuState(false));
+      });
 
-        mobileNavLinks.forEach((link) => {
-            link.addEventListener('click', () => {
-                if (isMenuOpen) {
-                    toggleMenu();
-                }
-            });
-        });
-    </script>
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 880) setMenuState(false);
+      });
+    })();
+
+    document.querySelectorAll(".card-track").forEach((track) => {
+      if (track.dataset.marqueeReady === "true") return;
+      const cards = Array.from(track.children);
+      if (!cards.length || cards[0].classList.contains("track-set")) return;
+
+      const originalSet = document.createElement("div");
+      originalSet.className = "track-set";
+      cards.forEach((card) => originalSet.appendChild(card));
+
+      const clonedSet = originalSet.cloneNode(true);
+      clonedSet.setAttribute("aria-hidden", "true");
+      clonedSet.querySelectorAll("a, button").forEach((element) => {
+        element.setAttribute("tabindex", "-1");
+      });
+
+      track.append(originalSet, clonedSet);
+      track.dataset.marqueeReady = "true";
+    });
+  </script>
 </body>
 </html>
