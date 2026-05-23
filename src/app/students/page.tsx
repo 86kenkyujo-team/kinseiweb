@@ -1,7 +1,31 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
 import { createClient } from '@/lib/supabase/server'
 import './styles.css'
+
+export const metadata: Metadata = {
+  title: '学生データベース',
+  description:
+    'KINSEIの学生データベース。学生の動画・属性・志望業界を公開し、企業会員向けに詳細プロフィールや面談リクエスト導線を提供します。',
+  alternates: {
+    canonical: '/students',
+  },
+  openGraph: {
+    title: '学生データベース | 近世 KINSEI',
+    description:
+      '学生の動画・属性・志望業界から、企業が会いたい学生を見つけるためのKINSEI学生データベース。',
+    url: '/students',
+    images: ['/assets/images/student-database-hero-bg.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '学生データベース | 近世 KINSEI',
+    description:
+      '学生の動画・属性・志望業界から、企業が会いたい学生を見つけるためのKINSEI学生データベース。',
+    images: ['/assets/images/student-database-hero-bg.png'],
+  },
+}
 
 export const dynamic = 'force-dynamic'
 

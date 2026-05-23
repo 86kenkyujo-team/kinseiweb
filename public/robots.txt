@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /login
+Disallow: /members/
+Disallow: /membership-inactive
+
+Sitemap: https://kinseiweb-murex.vercel.app/sitemap.xml
