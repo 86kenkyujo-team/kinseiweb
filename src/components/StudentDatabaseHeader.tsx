@@ -19,6 +19,7 @@ export async function StudentDatabaseHeader({ active }: StudentDatabaseHeaderPro
         近世 KINSEI
       </Link>
       <nav aria-label="学生データベース">
+        <Link href="/">TOP</Link>
         <Link href="/index.html#features">サービス</Link>
         <Link href="/index.html#process">仕組み</Link>
         <Link href="/index.html#cases">実績・事例</Link>
