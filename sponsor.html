@@ -527,6 +527,7 @@
     }
 
     .db-panel {
+      position: relative;
       width: min(794px, calc(100vw - 76px));
       height: 216px;
       margin: 72px auto 0;
@@ -539,6 +540,7 @@
       border-radius: 18px;
       background: rgba(255,255,255,.9);
       box-shadow: 0 22px 52px rgba(18, 89, 193, .12);
+      overflow: hidden;
     }
 
     .db-icon {
@@ -663,6 +665,238 @@
       color: rgba(255,255,255,.72);
       font-size: 14px;
       font-weight: 700;
+    }
+
+    .hero-copy > * {
+      animation: hero-copy-in .82s cubic-bezier(.2, .82, .2, 1) both;
+    }
+
+    .hero-copy h1 {
+      animation-delay: .08s;
+    }
+
+    .hero-lead {
+      animation-delay: .16s;
+    }
+
+    .sponsor-hero::before {
+      animation: hero-rings-drift 12s ease-in-out infinite;
+    }
+
+    .sponsor-hero::after {
+      animation: hero-orb-drift 10s ease-in-out infinite;
+    }
+
+    .plan-card {
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      transform: perspective(920px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x));
+      transform-style: preserve-3d;
+      will-change: transform, opacity, translate, scale, filter;
+    }
+
+    .plan-card::before,
+    .db-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        linear-gradient(115deg, transparent 0 37%, rgba(255,255,255,.52) 48%, transparent 59%),
+        radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 28%), rgba(68, 151, 255, .12), transparent 30%);
+      opacity: 0;
+      transform: translateX(-38%);
+      transition: opacity .24s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .plan-card > *,
+    .db-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .plan-card.is-visible::before,
+    .db-panel.is-visible::before {
+      animation: surface-sheen 4.8s ease-in-out infinite;
+      opacity: .75;
+    }
+
+    .plan-card:hover {
+      box-shadow: 0 26px 58px rgba(18, 89, 193, .14);
+    }
+
+    .plan-card.recommended:hover {
+      box-shadow: 0 30px 70px rgba(23, 105, 232, .24);
+    }
+
+    .plan-icon,
+    .db-icon {
+      transition: transform .42s cubic-bezier(.2, .82, .2, 1), box-shadow .42s ease;
+    }
+
+    .plan-card:hover .plan-icon,
+    .db-panel:hover .db-icon {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 16px 28px rgba(23, 105, 232, .14);
+    }
+
+    .recommend-badge {
+      animation: badge-pulse 3.4s ease-in-out infinite;
+    }
+
+    .plan-button.primary,
+    .db-link {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-button.primary::after,
+    .db-link::after {
+      content: "";
+      position: absolute;
+      inset: -50% auto -50% -42%;
+      width: 38%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.48), transparent);
+      transform: rotate(18deg);
+      animation: button-sheen 4.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .motion-reveal {
+      opacity: 0;
+      translate: 0 26px;
+      scale: .985;
+      filter: blur(10px);
+      transition:
+        opacity .72s ease,
+        translate .72s cubic-bezier(.2, .82, .2, 1),
+        scale .72s cubic-bezier(.2, .82, .2, 1),
+        filter .72s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .motion-reveal.is-visible {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+      filter: blur(0);
+    }
+
+    .price.is-counting strong {
+      color: var(--blue);
+      text-shadow: 0 8px 20px rgba(23, 105, 232, .16);
+    }
+
+    .footer-links li {
+      opacity: 0;
+      translate: 0 8px;
+      transition: opacity .46s ease, translate .46s ease;
+      transition-delay: var(--link-delay, 0ms);
+    }
+
+    .footer.is-visible .footer-links li {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    @keyframes hero-copy-in {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes hero-rings-drift {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+        opacity: .62;
+      }
+
+      50% {
+        transform: translate3d(18px, 10px, 0) rotate(10deg);
+        opacity: .86;
+      }
+    }
+
+    @keyframes hero-orb-drift {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(-26px, 12px, 0) scale(1.04);
+      }
+    }
+
+    @keyframes surface-sheen {
+      0%,
+      30% {
+        transform: translateX(-58%);
+      }
+
+      62%,
+      100% {
+        transform: translateX(58%);
+      }
+    }
+
+    @keyframes badge-pulse {
+      0%,
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 12px 24px rgba(23, 105, 232, .24);
+      }
+
+      50% {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 32px rgba(23, 105, 232, .34);
+      }
+    }
+
+    @keyframes button-sheen {
+      0%,
+      38% {
+        transform: translateX(0) rotate(18deg);
+      }
+
+      64%,
+      100% {
+        transform: translateX(420%) rotate(18deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .motion-reveal,
+      .footer-links li {
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+        filter: none;
+      }
+
+      .plan-card {
+        transform: none;
+      }
     }
 
     @media (max-width: 1080px) {
@@ -1035,6 +1269,102 @@
 
       window.addEventListener("resize", () => {
         if (window.innerWidth > 860) setMenuState(false);
+      });
+    })();
+
+    (() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealTargets = [
+        ".plans-grid .plan-card",
+        ".db-panel",
+        ".footer"
+      ];
+      const elements = revealTargets.flatMap((selector) => Array.from(document.querySelectorAll(selector)));
+
+      document.querySelectorAll(".footer-links li").forEach((item, index) => {
+        item.style.setProperty("--link-delay", `${index * 42}ms`);
+      });
+
+      const animatePrice = (price) => {
+        if (price.dataset.counted === "true") return;
+        const strong = price.querySelector("strong");
+        if (!strong) return;
+
+        const target = Number(strong.textContent.trim());
+        if (!Number.isFinite(target)) return;
+
+        price.dataset.counted = "true";
+        price.classList.add("is-counting");
+
+        const start = performance.now();
+        const duration = reduceMotion ? 0 : 950;
+        const initial = target > 10 ? Math.max(0, target - 18) : 0;
+
+        const tick = (now) => {
+          const progress = duration ? Math.min((now - start) / duration, 1) : 1;
+          const eased = 1 - Math.pow(1 - progress, 3);
+          strong.textContent = Math.round(initial + (target - initial) * eased);
+
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            strong.textContent = target;
+            window.setTimeout(() => price.classList.remove("is-counting"), 220);
+          }
+        };
+
+        strong.textContent = initial;
+        requestAnimationFrame(tick);
+      };
+
+      elements.forEach((element, index) => {
+        element.classList.add("motion-reveal");
+        element.style.setProperty("--reveal-delay", `${Math.min(index, 5) * 90}ms`);
+      });
+
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        elements.forEach((element) => {
+          element.classList.add("is-visible");
+          element.querySelectorAll?.(".price").forEach(animatePrice);
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add("is-visible");
+          entry.target.querySelectorAll?.(".price").forEach(animatePrice);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+
+      elements.forEach((element) => observer.observe(element));
+    })();
+
+    (() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion || !window.matchMedia("(pointer: fine)").matches) return;
+
+      document.querySelectorAll(".plan-card, .db-panel").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - .5;
+          const y = (event.clientY - rect.top) / rect.height - .5;
+
+          card.style.setProperty("--tilt-x", `${(x * 4.5).toFixed(2)}deg`);
+          card.style.setProperty("--tilt-y", `${(-y * 4.5).toFixed(2)}deg`);
+          card.style.setProperty("--glow-x", `${((x + .5) * 100).toFixed(1)}%`);
+          card.style.setProperty("--glow-y", `${((y + .5) * 100).toFixed(1)}%`);
+        });
+
+        card.addEventListener("pointerleave", () => {
+          card.style.setProperty("--tilt-x", "0deg");
+          card.style.setProperty("--tilt-y", "0deg");
+          card.style.setProperty("--glow-x", "50%");
+          card.style.setProperty("--glow-y", "28%");
+        });
       });
     })();
   </script>
