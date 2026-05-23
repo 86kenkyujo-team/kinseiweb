@@ -1,512 +1,1042 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スポンサー料金プラン | 近世 KINSEI</title>
-    <meta name="description" content="KINSEIのスポンサー料金プラン。近大生を応援する月額プランから、学生データベース閲覧や実務プロジェクト導入まで相談できます。">
-    <link rel="canonical" href="https://kinseiweb-murex.vercel.app/sponsor.html">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="ja_JP">
-    <meta property="og:site_name" content="KINSEI">
-    <meta property="og:title" content="スポンサー料金プラン | 近世 KINSEI">
-    <meta property="og:description" content="近大生を応援し、学生データベースや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
-    <meta property="og:url" content="https://kinseiweb-murex.vercel.app/sponsor.html">
-    <meta property="og:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="スポンサー料金プラン | 近世 KINSEI">
-    <meta name="twitter:description" content="近大生を応援し、学生データベースや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
-    <meta name="twitter:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スポンサー料金プラン | 近世 KINSEI</title>
+  <meta name="description" content="KINSEIのスポンサー料金プラン。近大生を応援する月額プランから、学生データベース閲覧や実務プロジェクト導入まで相談できます。">
+  <link rel="canonical" href="https://kinseiweb-murex.vercel.app/sponsor.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="KINSEI">
+  <meta property="og:title" content="スポンサー料金プラン | 近世 KINSEI">
+  <meta property="og:description" content="近大生を応援し、学生データベースや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
+  <meta property="og:url" content="https://kinseiweb-murex.vercel.app/sponsor.html">
+  <meta property="og:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="スポンサー料金プラン | 近世 KINSEI">
+  <meta name="twitter:description" content="近大生を応援し、学生データベースや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
+  <meta name="twitter:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d203d;
+      --muted: #5f7190;
+      --blue: #1769e8;
+      --blue-dark: #075dce;
+      --blue-soft: #eaf4ff;
+      --line: rgba(62, 122, 220, .18);
+      --shadow: 0 22px 52px rgba(18, 89, 193, .12);
+      --content: min(1188px, calc(100vw - 76px));
+    }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    * {
+      box-sizing: border-box;
+    }
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Noto Sans JP"', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#005bac',
-                        secondary: '#0097e6',
-                        accent: '#e6b422',
-                        dark: '#1a1a1a',
-                        light: '#f8fafc',
-                    }
-                }
-            }
-        }
-    </script>
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f8fcff;
+      font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
 
-    <style>
-        :root {
-            --kinsei-ink: #101d36;
-            --kinsei-blue: #1769e8;
-            --kinsei-shadow: 0 22px 50px rgba(18, 89, 193, .16);
-        }
+    a {
+      color: inherit;
+    }
 
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            overflow-x: hidden;
-        }
+    .page {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(219, 239, 255, .7), transparent 32%),
+        linear-gradient(180deg, #fbfdff 0%, #f6fbff 58%, #ffffff 100%);
+    }
 
-        .ks-header {
-            position: fixed;
-            inset: 0 0 auto;
-            z-index: 50;
-            min-height: 64px;
-            display: flex;
-            align-items: center;
-            gap: 48px;
-            padding: 0 26px;
-            background: rgba(255, 255, 255, .86);
-            border-bottom: 1px solid rgba(98, 151, 222, .18);
-            box-shadow: 0 18px 45px rgba(18, 89, 193, .12);
-            backdrop-filter: blur(18px);
-            color: var(--kinsei-ink);
-        }
+    .ks-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      gap: clamp(28px, 4vw, 58px);
+      padding: 0 26px;
+      background: rgba(255,255,255,.82);
+      border-bottom: 1px solid rgba(98, 151, 222, .16);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 36px rgba(18, 89, 193, .08);
+    }
 
-        .ks-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--kinsei-ink);
-            font-weight: 900;
-            letter-spacing: .08em;
-            text-decoration: none;
-            white-space: nowrap;
-        }
+    .ks-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: #081c3d;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
 
-        .ks-brand-mark {
-            width: 25px;
-            height: 25px;
-            border-radius: 7px;
-            background: linear-gradient(135deg, #2f83ff, #0d5bd6);
-            color: white;
-            display: grid;
-            place-items: center;
-            font-weight: 900;
-            letter-spacing: 0;
-            box-shadow: 0 10px 20px rgba(23, 105, 232, .28);
-        }
+    .ks-brand-mark,
+    .footer-mark {
+      display: grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #2f83ff, #0d5bd6);
+      color: white;
+      font-weight: 900;
+      letter-spacing: 0;
+      box-shadow: 0 10px 20px rgba(23, 105, 232, .24);
+    }
 
-        .ks-nav {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            font-size: 12px;
-            font-weight: 800;
-            flex: 1;
-        }
+    .ks-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(26px, 3.2vw, 48px);
+      flex: 1;
+      min-width: 0;
+      color: #081c3d;
+      font-size: 13px;
+      font-weight: 900;
+    }
 
-        .ks-nav a {
-            color: var(--kinsei-ink);
-            text-decoration: none;
-            white-space: nowrap;
-            transition: color .2s ease;
-        }
+    .ks-nav a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      height: 76px;
+      color: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+    }
 
-        .ks-nav a:hover,
-        .ks-nav a.is-active {
-            color: var(--kinsei-blue);
-        }
+    .ks-nav a.is-active {
+      color: var(--blue);
+    }
 
-        .ks-nav a.is-active {
-            font-weight: 900;
-        }
+    .ks-nav a.is-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 16px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--blue);
+    }
 
-        .ks-actions {
-            display: flex;
-            gap: 14px;
-            align-items: center;
-        }
+    .ks-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-        .ks-btn {
-            height: 36px;
-            padding: 0 22px;
-            border-radius: 10px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--kinsei-ink);
-            font-weight: 900;
-            font-size: 13px;
-            text-decoration: none;
-            white-space: nowrap;
-        }
+    .ks-btn {
+      min-width: 132px;
+      height: 43px;
+      padding: 0 22px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      color: var(--blue);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 14px 30px rgba(18, 89, 193, .12);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
 
-        .ks-btn.ghost {
-            background: rgba(255, 255, 255, .9);
-            color: var(--kinsei-blue);
-            box-shadow: var(--kinsei-shadow);
-        }
+    .ks-btn.primary {
+      color: white;
+      background: linear-gradient(135deg, #2a7cff, #0961db);
+      box-shadow: 0 14px 30px rgba(16, 101, 224, .25);
+    }
 
-        .ks-btn.primary {
-            background: linear-gradient(135deg, #2a7cff, #0961db);
-            color: white;
-            box-shadow: 0 14px 30px rgba(16, 101, 224, .28);
-        }
+    .ks-menu-btn {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(23, 105, 232, .2);
+      border-radius: 12px;
+      background: rgba(255,255,255,.9);
+      color: var(--blue);
+      box-shadow: 0 12px 26px rgba(44, 111, 210, .14);
+      place-items: center;
+      gap: 4px;
+      padding: 10px;
+      cursor: pointer;
+    }
 
-        .ks-menu-btn {
-            display: none;
-            width: 38px;
-            height: 38px;
-            border: 0;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, .9);
-            color: var(--kinsei-blue);
-            box-shadow: 0 12px 26px rgba(18, 89, 193, .14);
-            place-items: center;
-        }
+    .ks-menu-btn span {
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .2s ease, opacity .2s ease;
+    }
 
-        .ks-mobile-menu {
-            position: fixed;
-            inset: 0;
-            z-index: 40;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-            background: rgba(255, 255, 255, .96);
-            backdrop-filter: blur(18px);
-            font-size: 18px;
-            font-weight: 900;
-        }
+    .ks-header.is-menu-open .ks-menu-btn span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
 
-        .ks-mobile-menu a {
-            color: var(--kinsei-ink);
-            text-decoration: none;
-        }
+    .ks-header.is-menu-open .ks-menu-btn span:nth-child(2) {
+      opacity: 0;
+    }
 
-        .ks-mobile-menu a.is-active {
-            color: var(--kinsei-blue);
-        }
+    .ks-header.is-menu-open .ks-menu-btn span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
 
-        .ks-mobile-menu .ks-btn {
-            min-width: 180px;
-        }
+    .ks-mobile-menu {
+      display: none;
+    }
 
-        .bg-pattern {
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
+    .sponsor-hero {
+      position: relative;
+      min-height: 372px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      text-align: center;
+      background:
+        radial-gradient(circle at 26% 78%, rgba(255,255,255,.7), transparent 34%),
+        radial-gradient(circle at 82% 26%, rgba(186, 222, 255, .6), transparent 36%),
+        linear-gradient(135deg, #edf7ff 0%, #dcebff 52%, #cfe8ff 100%);
+    }
 
-        .heading-underline::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, #005bac, #0097e6);
-            margin-top: 12px;
-            border-radius: 2px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .sponsor-hero::before {
+      content: "";
+      position: absolute;
+      left: -132px;
+      top: 34px;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle, rgba(255,255,255,.62) 0 1px, transparent 1px 7px);
+      opacity: .7;
+      pointer-events: none;
+    }
 
-        .mobile-menu-active {
-            opacity: 1;
-            pointer-events: auto;
-            visibility: visible;
-        }
+    .sponsor-hero::after {
+      content: "";
+      position: absolute;
+      left: 104px;
+      top: 54px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.18);
+      pointer-events: none;
+    }
 
-        .mobile-menu-hidden {
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-        }
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      width: min(760px, calc(100vw - 40px));
+      margin-top: -4px;
+    }
 
-        @media (max-width: 1100px) {
-            .ks-header {
-                gap: 28px;
-            }
+    .hero-kicker {
+      display: block;
+      margin: 0 0 18px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
 
-            .ks-nav {
-                gap: 20px;
-            }
+    h1 {
+      margin: 0;
+      color: #071c3d;
+      font-size: clamp(38px, 4.2vw, 54px);
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
 
-            .ks-actions {
-                gap: 10px;
-            }
+    .hero-lead {
+      margin: 24px auto 0;
+      color: #4f607b;
+      font-size: 16px;
+      line-height: 2;
+      font-weight: 700;
+    }
 
-            .ks-btn {
-                padding: 0 16px;
-            }
-        }
+    .plans-section {
+      position: relative;
+      padding: 80px 0 60px;
+      background:
+        radial-gradient(circle at 19% 46%, rgba(198, 225, 255, .32), transparent 28%),
+        radial-gradient(circle at 84% 32%, rgba(218, 239, 255, .55), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.96) 0%, #f7fbff 100%);
+    }
 
-        @media (max-width: 860px) {
-            .ks-nav {
-                display: none;
-            }
+    .plans-grid {
+      width: var(--content);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
 
-            .ks-header {
-                justify-content: space-between;
-            }
+    .plan-card {
+      position: relative;
+      min-height: 650px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 18px 42px rgba(18, 89, 193, .08);
+      display: flex;
+      flex-direction: column;
+      overflow: visible;
+    }
 
-            .ks-menu-btn {
-                display: grid;
-            }
-        }
+    .plan-card.recommended {
+      border: 2px solid var(--blue);
+      box-shadow: 0 24px 60px rgba(23, 105, 232, .18);
+    }
 
-        @media (max-width: 720px) {
-            .ks-header {
-                min-height: 66px;
-                padding: 14px 16px;
-                gap: 10px;
-            }
+    .recommend-badge {
+      position: absolute;
+      top: -16px;
+      right: 12px;
+      min-width: 112px;
+      height: 32px;
+      padding: 0 15px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background: linear-gradient(135deg, #1671f4, #075fd9);
+      box-shadow: 0 12px 24px rgba(23, 105, 232, .24);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
 
-            .ks-actions .primary {
-                display: none;
-            }
+    .plan-head {
+      min-height: 350px;
+      padding: 38px 24px 30px;
+      border-bottom: 1px solid #e3edf8;
+      text-align: center;
+      display: grid;
+      justify-items: center;
+      align-content: start;
+    }
 
-            .ks-btn {
-                height: 38px;
-                padding: 0 14px;
-                font-size: 12px;
-            }
-        }
-    </style>
+    .plan-icon,
+    .db-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      background: linear-gradient(135deg, #edf5ff, #e1eeff);
+    }
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    .plan-icon svg,
+    .db-icon svg {
+      width: 34px;
+      height: 34px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .plan-card h2 {
+      margin: 30px 0 0;
+      color: #0e2344;
+      font-size: 23px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+
+    .plan-summary {
+      margin: 12px 0 0;
+      color: #7a8aa4;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+
+    .price {
+      margin-top: 31px;
+      color: #0e2344;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .price strong {
+      color: inherit;
+      font-size: 42px;
+      letter-spacing: 0;
+    }
+
+    .recommended .price strong {
+      color: var(--blue);
+      font-size: 44px;
+    }
+
+    .price .yen {
+      margin-left: 2px;
+      font-size: 23px;
+    }
+
+    .price .month {
+      color: #7f8fa6;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .price.consult {
+      margin-top: 38px;
+      font-size: 27px;
+    }
+
+    .term {
+      margin: 26px 0 0;
+      color: #8b9ab0;
+      font-size: 12px;
+      line-height: 1.7;
+      font-weight: 900;
+    }
+
+    .plan-body {
+      flex: 1;
+      padding: 34px 24px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-list {
+      flex: 1;
+      display: grid;
+      align-content: start;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .feature-list li {
+      display: grid;
+      grid-template-columns: 18px minmax(0, 1fr);
+      gap: 12px;
+      color: #203551;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 900;
+    }
+
+    .check {
+      color: var(--blue);
+      font-size: 17px;
+      line-height: 1.45;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .check.circle {
+      width: 14px;
+      height: 14px;
+      margin-top: 4px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      font-size: 0;
+      position: relative;
+    }
+
+    .check.circle::after {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 2px;
+      width: 4px;
+      height: 7px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    .feature-list small {
+      display: block;
+      color: #7d8ca3;
+      font-size: 12px;
+      line-height: 1.65;
+      font-weight: 800;
+    }
+
+    .feature-highlight {
+      display: inline;
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: var(--blue);
+      background: #e3f0ff;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .plan-button {
+      width: 100%;
+      min-height: 55px;
+      margin-top: 34px;
+      border-radius: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #0c2445;
+      background: #edf4fc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .plan-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(18, 89, 193, .12);
+      background: #e4eefb;
+    }
+
+    .plan-button.primary {
+      color: white;
+      background: linear-gradient(135deg, #0d6be8, #045ac8);
+      box-shadow: 0 14px 28px rgba(13, 98, 222, .25);
+    }
+
+    .db-panel {
+      width: min(794px, calc(100vw - 76px));
+      height: 216px;
+      margin: 72px auto 0;
+      padding: 30px 46px;
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr);
+      align-items: center;
+      gap: 34px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 22px 52px rgba(18, 89, 193, .12);
+    }
+
+    .db-icon {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+    }
+
+    .db-panel > div:last-child {
+      min-width: 0;
+    }
+
+    .db-panel h2 {
+      margin: 0;
+      color: #0f2443;
+      font-size: 22px;
+      line-height: 1.4;
+      font-weight: 900;
+    }
+
+    .db-panel p {
+      margin: 10px 0 14px;
+      color: #5f7190;
+      font-size: 14px;
+      line-height: 1.85;
+      font-weight: 800;
+    }
+
+    .db-link {
+      min-width: 280px;
+      height: 44px;
+      padding: 0 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: white;
+      background: linear-gradient(135deg, #1671f4, #075fd9);
+      box-shadow: 0 14px 28px rgba(23, 105, 232, .22);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .footer {
+      height: 394px;
+      padding: 42px 0 26px;
+      color: rgba(255,255,255,.78);
+      background:
+        radial-gradient(circle at 82% 16%, rgba(25, 108, 228, .46), transparent 36%),
+        radial-gradient(circle at 16% 94%, rgba(13, 105, 232, .3), transparent 34%),
+        linear-gradient(135deg, #061b3d 0%, #082b64 70%, #064da8 100%);
+    }
+
+    .footer-inner {
+      width: min(1100px, calc(100vw - 110px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(180px, .8fr) minmax(220px, .9fr);
+      gap: 70px;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .footer-mark {
+      width: 29px;
+      height: 29px;
+      border-radius: 7px;
+    }
+
+    .footer-copy {
+      margin: 28px 0 0;
+      max-width: 315px;
+      font-size: 15px;
+      line-height: 2;
+      font-weight: 700;
+    }
+
+    .footer h3 {
+      margin: 0 0 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.24);
+      color: white;
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 900;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,.78);
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .footer-links a.is-active {
+      color: #4ca3ff;
+    }
+
+    .copyright {
+      margin: 74px 0 0;
+      text-align: center;
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 1080px) {
+      :root {
+        --content: min(850px, calc(100vw - 44px));
+      }
+
+      .ks-header {
+        gap: 22px;
+      }
+
+      .ks-nav {
+        gap: 20px;
+      }
+
+      .ks-actions .ks-btn {
+        min-width: 116px;
+        padding: 0 16px;
+      }
+
+      .plans-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .ks-header {
+        height: auto;
+        min-height: 70px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 14px 20px;
+        gap: 12px;
+      }
+
+      .ks-nav {
+        display: none;
+      }
+
+      .ks-actions {
+        gap: 8px;
+      }
+
+      .ks-menu-btn {
+        display: inline-grid;
+      }
+
+      .ks-mobile-menu {
+        order: 3;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        transition: grid-template-rows .22s ease, opacity .2s ease, visibility .2s ease;
+      }
+
+      .ks-header.is-menu-open .ks-mobile-menu {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .ks-mobile-panel {
+        overflow: hidden;
+        display: grid;
+        gap: 8px;
+      }
+
+      .ks-mobile-menu a {
+        min-height: 44px;
+        padding: 0 14px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        color: #172947;
+        background: rgba(255,255,255,.62);
+        border: 1px solid rgba(101, 153, 221, .16);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .ks-mobile-menu a.is-active {
+        color: var(--blue);
+      }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --content: min(390px, calc(100vw - 32px));
+      }
+
+      .ks-actions .primary {
+        display: none;
+      }
+
+      .ks-btn {
+        min-width: 112px;
+        height: 38px;
+        padding: 0 14px;
+        font-size: 12px;
+      }
+
+      .sponsor-hero {
+        min-height: 328px;
+      }
+
+      .hero-copy {
+        padding: 0 2px;
+      }
+
+      .hero-kicker {
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+
+      h1 {
+        font-size: clamp(31px, 8.3vw, 36px);
+      }
+
+      .hero-lead {
+        font-size: 14px;
+        line-height: 1.9;
+      }
+
+      .plans-section {
+        padding: 46px 0 68px;
+      }
+
+      .plans-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .plan-card {
+        min-height: 0;
+      }
+
+      .plan-head {
+        min-height: 300px;
+        padding: 30px 22px 26px;
+      }
+
+      .plan-body {
+        padding: 26px 22px 28px;
+      }
+
+      .db-panel {
+        width: min(390px, calc(100vw - 32px));
+        height: auto;
+        margin-top: 42px;
+        padding: 28px 22px;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 18px;
+      }
+
+      .db-link {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .footer {
+        min-height: 0;
+        padding: 42px 0 28px;
+      }
+
+      .footer-inner {
+        width: min(390px, calc(100vw - 40px));
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .footer-copy {
+        margin-top: 20px;
+      }
+
+      .copyright {
+        margin-top: 42px;
+      }
+    }
+  </style>
 </head>
-<body class="bg-light text-gray-800 antialiased relative">
-
-    <header id="header" class="ks-header">
-        <a class="ks-brand" href="/" aria-label="KINSEI トップ"><div class="ks-brand-mark">K</div><span>KINSEI</span></a>
-        <nav class="ks-nav" aria-label="グローバルナビゲーション">
-            <a href="/#features">サービス</a>
-            <a href="/#process">仕組み</a>
-            <a href="/#cases">実績・事例</a>
-            <a href="/sponsors_list.html">協賛企業</a>
-            <a class="is-active" href="/sponsor.html" aria-current="page">企業の方へ</a>
-            <a href="/#members">メンバー</a>
-        </nav>
-        <div class="ks-actions">
-            <a class="ks-btn ghost" href="/login?next=/members/students">企業会員DB</a>
-            <a class="ks-btn primary" href="/students">学生DBを見る</a>
-            <button class="ks-menu-btn" id="mobile-menu-btn" type="button" aria-label="メニューを開く">
-                <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
-            </button>
+<body>
+  <main class="page">
+    <header class="ks-header">
+      <a class="ks-brand" href="/" aria-label="KINSEI トップ"><span class="ks-brand-mark">K</span><span>KINSEI</span></a>
+      <nav class="ks-nav" aria-label="グローバルナビゲーション">
+        <a href="/#features">サービス</a>
+        <a href="/#process">仕組み</a>
+        <a href="/#cases">実績・事例</a>
+        <a href="/sponsors_list.html">協賛企業</a>
+        <a class="is-active" href="/sponsor.html" aria-current="page">企業の方へ</a>
+        <a href="/#members">メンバー</a>
+      </nav>
+      <div class="ks-actions">
+        <a class="ks-btn" href="/login?next=/members/students">企業会員DB</a>
+        <a class="ks-btn primary" href="/students">学生DBを見る</a>
+        <button class="ks-menu-btn" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+      <div class="ks-mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="ks-mobile-panel">
+          <a href="/#features">サービス</a>
+          <a href="/#process">仕組み</a>
+          <a href="/#cases">実績・事例</a>
+          <a href="/sponsors_list.html">協賛企業</a>
+          <a class="is-active" href="/sponsor.html" aria-current="page">企業の方へ</a>
+          <a href="/#members">メンバー</a>
+          <a href="/students">学生DBを見る</a>
         </div>
-
-        <div id="mobile-menu" class="ks-mobile-menu mobile-menu-hidden transition-all duration-300">
-            <a class="mobile-nav-link" href="/#features">サービス</a>
-            <a class="mobile-nav-link" href="/#process">仕組み</a>
-            <a class="mobile-nav-link" href="/#cases">実績・事例</a>
-            <a class="mobile-nav-link" href="/sponsors_list.html">協賛企業</a>
-            <a class="mobile-nav-link is-active" href="/sponsor.html" aria-current="page">企業の方へ</a>
-            <a class="mobile-nav-link" href="/#members">メンバー</a>
-            <a class="mobile-nav-link ks-btn ghost" href="/login?next=/members/students">企業会員DB</a>
-            <a class="mobile-nav-link ks-btn primary" href="/students">学生DBを見る</a>
-        </div>
+      </div>
     </header>
 
-    <section class="pt-40 pb-16 bg-dark text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-dark z-10"></div>
-        <div class="max-w-7xl mx-auto px-6 relative z-20 text-center">
-            <span class="text-accent font-bold tracking-wider uppercase text-sm mb-2 block">Plans & Pricing</span>
-            <h1 class="text-4xl md:text-5xl font-black mb-6">スポンサー料金プラン</h1>
-            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-                次世代の採用スキームを共に創りませんか。<br>
-                月額1万円からの応援枠や、学生を直接派遣する導入プランをご用意しています。
-            </p>
-        </div>
+    <section class="sponsor-hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="hero-kicker">SPONSORSHIP PLANS</p>
+        <h1 id="page-title">スポンサー料金プラン</h1>
+        <p class="hero-lead">次世代の採用スキームを共に創りませんか。<br>月額1万円からの応援枠や、学生を直接派遣する導入プランをご用意しています。</p>
+      </div>
     </section>
 
-    <section class="py-24 bg-pattern relative">
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid md:grid-cols-3 gap-8 items-stretch">
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-200 h-full flex flex-col hover:shadow-xl transition">
-                    <div class="p-8 pb-0 text-center border-b border-gray-100 pb-8">
-                        <div class="w-16 h-16 bg-gray-50 text-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="megaphone" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-2xl font-black text-dark mb-2">応援企業枠</h3>
-                        <p class="text-gray-500 text-sm mb-6">近大生を応援するライトプラン</p>
-                        <div class="text-4xl font-black text-dark mb-1">
-                            1<span class="text-xl text-gray-500 font-medium">万円</span><span class="text-base text-gray-400 font-normal"> / 月</span>
-                        </div>
-                        <p class="text-sm font-bold text-gray-400">契約期間: 12カ月 (自動更新)</p>
-                    </div>
-                    <div class="p-8 flex-1 flex flex-col">
-                        <ul class="space-y-5 mb-8 flex-1">
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span class="text-gray-700 font-medium">前提: 近大生を応援</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span class="text-gray-700 font-medium">宣伝広告<br><span class="text-sm text-gray-500">3.5万人のポテンシャル層への露出</span></span>
-                            </li>
-                        </ul>
-                        <a href="/#contact" class="w-full block text-center bg-gray-100 text-dark py-4 rounded-xl font-bold hover:bg-gray-200 transition mt-auto">
-                            このプランに申し込む
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-200 h-full flex flex-col hover:shadow-xl transition">
-                    <div class="p-8 pb-0 text-center border-b border-gray-100 pb-8 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-bl-full -z-10"></div>
-                        <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="pen-tool" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-2xl font-black text-dark mb-2">応援企業枠</h3>
-                        <p class="text-gray-500 text-sm mb-6">記事投稿でより深くアピール</p>
-                        <div class="text-4xl font-black text-dark mb-1">
-                            3<span class="text-xl text-gray-500 font-medium">万円</span><span class="text-base text-gray-400 font-normal"> / 月</span>
-                        </div>
-                        <p class="text-sm font-bold text-gray-400">契約期間: 12カ月 (自動更新)</p>
-                    </div>
-                    <div class="p-8 flex-1 flex flex-col">
-                        <ul class="space-y-5 mb-8 flex-1">
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span class="text-gray-700 font-medium">前提: 近大生を応援</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span class="text-gray-700 font-medium">宣伝広告<br><span class="text-sm text-gray-500">3.5万人のポテンシャル層への露出</span></span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="text-secondary w-5 h-5 shrink-0 mt-0.5"></i>
-                                <span class="text-gray-700 font-medium bg-secondary/10 px-2 py-0.5 rounded text-secondary font-bold">特設ページによる記事投稿権</span>
-                            </li>
-                        </ul>
-                        <a href="/#contact" class="w-full block text-center bg-gray-100 text-dark py-4 rounded-xl font-bold hover:bg-gray-200 transition mt-auto">
-                            このプランに申し込む
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-b from-primary to-blue-900 rounded-3xl p-1 shadow-2xl relative flex flex-col h-full hover:scale-[1.02] transition-transform duration-300">
-                    <div class="absolute -top-4 right-4 md:right-6 bg-accent text-dark text-sm font-bold px-4 py-1 rounded-full shadow-lg z-10">
-                        Recommend
-                    </div>
-                    <div class="bg-white rounded-[23px] h-full flex flex-col overflow-hidden relative z-0">
-                        <div class="p-8 pb-0 text-center border-b border-gray-100 pb-8 bg-blue-50/50">
-                            <div class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                <i data-lucide="briefcase" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-2xl font-black text-dark mb-2">導入企業枠</h3>
-                            <p class="text-gray-500 text-sm mb-6">学生を直接派遣し、実務で共創する</p>
-                            <div class="text-4xl font-black text-primary mb-1">
-                                45<span class="text-xl text-gray-500 font-medium">万円</span>
-                            </div>
-                            <p class="text-sm font-bold text-gray-400">契約期間: 3ヵ月 (自動更新)</p>
-                        </div>
-                        <div class="p-8 flex-1 flex flex-col">
-                            <ul class="space-y-5 mb-8 flex-1">
-                                <li class="flex items-start gap-3">
-                                    <i data-lucide="check-circle-2" class="text-primary w-6 h-6 shrink-0"></i>
-                                    <span class="text-gray-700 font-medium">実学教育の環境提供</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i data-lucide="check-circle-2" class="text-primary w-6 h-6 shrink-0"></i>
-                                    <span class="text-gray-700 font-medium">学生派遣・PR/採用イベントの実施</span>
-                                </li>
-                            </ul>
-                            <a href="/#contact" class="w-full block text-center bg-primary text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition mt-auto">
-                                導入を相談する
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <section class="plans-section" aria-label="スポンサー料金プラン">
+      <div class="plans-grid">
+        <article class="plan-card">
+          <div class="plan-head">
+            <div class="plan-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3Z"></path><path d="M11.6 16.2c.4 1.6.9 2.9 1.7 4.1"></path><path d="M6 14v5a1 1 0 0 0 1 1h2"></path></svg>
             </div>
+            <h2>応援企業枠</h2>
+            <p class="plan-summary">近大生を応援するライトプラン</p>
+            <p class="price"><strong>1</strong><span class="yen">万円</span><span class="month"> / 月</span></p>
+            <p class="term">契約期間：12カ月 (自動更新)</p>
+          </div>
+          <div class="plan-body">
+            <ul class="feature-list">
+              <li><span class="check">✓</span><span>前提：近大生を応援</span></li>
+              <li><span class="check">✓</span><span>宣伝広告<small>3.5万人のポテンシャル層への露出</small></span></li>
+            </ul>
+            <a class="plan-button" href="mailto:info@kinsei-career.jp?subject=応援企業枠への申し込み">このプランに申し込む</a>
+          </div>
+        </article>
+
+        <article class="plan-card">
+          <div class="plan-head">
+            <div class="plan-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7-3-3Z"></path><path d="m18 13-7.5-7.5L5 4l1.5 5.5L14 17"></path><path d="m2 2 7.6 7.6"></path><path d="m7 5 3 3"></path></svg>
+            </div>
+            <h2>応援企業枠</h2>
+            <p class="plan-summary">記事投稿でより深くアピール</p>
+            <p class="price"><strong>3</strong><span class="yen">万円</span><span class="month"> / 月</span></p>
+            <p class="term">契約期間：12カ月 (自動更新)</p>
+          </div>
+          <div class="plan-body">
+            <ul class="feature-list">
+              <li><span class="check">✓</span><span>前提：近大生を応援</span></li>
+              <li><span class="check">✓</span><span>宣伝広告<small>3.5万人のポテンシャル層への露出</small></span></li>
+              <li><span class="check">✓</span><span><span class="feature-highlight">特設ページによる記事投稿権</span></span></li>
+            </ul>
+            <a class="plan-button" href="mailto:info@kinsei-career.jp?subject=記事投稿つき応援企業枠への申し込み">このプランに申し込む</a>
+          </div>
+        </article>
+
+        <article class="plan-card recommended">
+          <span class="recommend-badge">Recommend</span>
+          <div class="plan-head">
+            <div class="plan-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"></path><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"></path><path d="M8 7v13"></path><path d="M16 7v13"></path></svg>
+            </div>
+            <h2>導入企業枠</h2>
+            <p class="plan-summary">学生を直接派遣し、実務で共創する</p>
+            <p class="price"><strong>45</strong><span class="yen">万円</span></p>
+            <p class="term">契約期間：3カ月 (自動更新)</p>
+          </div>
+          <div class="plan-body">
+            <ul class="feature-list">
+              <li><span class="check circle"></span><span>実学教育の環境提供</span></li>
+              <li><span class="check circle"></span><span>学生派遣・PR/採用イベントの実施</span></li>
+            </ul>
+            <a class="plan-button primary" href="mailto:info@kinsei-career.jp?subject=導入企業枠の相談">導入を相談する</a>
+          </div>
+        </article>
+
+        <article class="plan-card">
+          <div class="plan-head">
+            <div class="plan-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m6 3 12 0 4 6-10 12L2 9l4-6Z"></path><path d="M2 9h20"></path><path d="m12 3-2 6 2 12 2-12-2-6Z"></path></svg>
+            </div>
+            <h2>カスタムプラン</h2>
+            <p class="plan-summary">貴社の目的に合わせたご提案</p>
+            <p class="price consult">要相談</p>
+            <p class="term">契約期間：要相談</p>
+          </div>
+          <div class="plan-body">
+            <ul class="feature-list">
+              <li><span class="check">✓</span><span>目的に応じた柔軟なプラン設計</span></li>
+              <li><span class="check">✓</span><span>専任担当によるサポート</span></li>
+            </ul>
+            <a class="plan-button" href="mailto:info@kinsei-career.jp?subject=カスタムプランの問い合わせ">お問い合わせ</a>
+          </div>
+        </article>
+      </div>
+
+      <aside class="db-panel" aria-label="学生データベース閲覧の案内">
+        <div class="db-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><ellipse cx="9" cy="5" rx="6" ry="3"></ellipse><path d="M3 5v10c0 1.7 2.7 3 6 3 1.2 0 2.4-.2 3.3-.5"></path><path d="M3 10c0 1.7 2.7 3 6 3 1 0 1.9-.1 2.8-.4"></path><path d="M14 12h6v8h-6z"></path><path d="M16 15h2"></path><path d="M16 18h2"></path></svg>
         </div>
+        <div>
+          <h2>学生データベースの閲覧もご相談いただけます</h2>
+          <p>学生の動画・志望業界・深掘りプロフィールを活用した採用接点づくりを、貴社の目的に合わせてご提案いたします。まずは公開プレビューをご覧ください。</p>
+          <a class="db-link" href="/students">学生DBプレビューを見る <span aria-hidden="true">→</span></a>
+        </div>
+      </aside>
     </section>
 
-    <section class="py-16 bg-white border-t border-gray-100">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-2xl font-bold mb-4">学生データベースの閲覧もご相談いただけます</h2>
-            <p class="text-gray-500 mb-8">
-                学生の動画・志望業界・深掘りプロフィールを活用した採用接点づくりを、貴社の目的に合わせてご提案いたします。<br>
-                まずは公開プレビューをご覧ください。
-            </p>
-            <a href="/students" class="inline-flex items-center gap-2 bg-dark text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-black transition shadow-lg hover:shadow-xl">
-                学生DBプレビューを見る
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-            </a>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <a class="footer-brand" href="/"><span class="footer-mark">K</span><span>KINSEI</span></a>
+          <p class="footer-copy">次世代の産学共創の場を構築し、価値創出力で評価される社会へ。<br>近大から、日本をおもしろく。</p>
         </div>
-    </section>
-
-    <footer class="bg-dark text-gray-400 py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-            <div class="col-span-1 md:col-span-2">
-                <a href="/" class="flex items-center gap-2 mb-4 text-white">
-                    <div class="w-8 h-8 bg-white/10 rounded flex items-center justify-center text-primary font-bold">K</div>
-                    <span class="text-xl font-black tracking-wider">近世 KINSEI</span>
-                </a>
-                <p class="text-sm leading-relaxed mb-4">
-                    次世代の産学共創OSを構築し、価値創出力で評価される社会へ。<br>
-                    近大から、日本をおもしろく。
-                </p>
-            </div>
-
-            <div>
-                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">コンテンツ</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/#features" class="hover:text-primary transition">サービス概要</a></li>
-                    <li><a href="/#process" class="hover:text-primary transition">利用の流れ</a></li>
-                    <li><a href="/#cases" class="hover:text-primary transition">実績・事例</a></li>
-                    <li><a href="/students" class="hover:text-primary transition">学生DB</a></li>
-                    <li><a href="/#members" class="hover:text-primary transition">メンバー紹介</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">企業様へ</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/students" class="hover:text-primary transition">学生DBを見る</a></li>
-                    <li><a href="/sponsor.html" class="text-primary transition flex items-center gap-1">企業向け導入プラン</a></li>
-                    <li><a href="/sponsors_list.html" class="hover:text-primary transition">協賛企業一覧</a></li>
-                    <li><a href="/login?next=/members/students" class="hover:text-primary transition">企業会員DB</a></li>
-                    <li><a href="/#contact" class="hover:text-primary transition">お問い合わせ</a></li>
-                </ul>
-            </div>
+        <div>
+          <h3>コンテンツ</h3>
+          <ul class="footer-links">
+            <li><a href="/#features">サービス概要</a></li>
+            <li><a href="/#process">利用の流れ</a></li>
+            <li><a href="/#cases">実績・事例</a></li>
+            <li><a href="/students">学生DB</a></li>
+            <li><a href="/#members">メンバー紹介</a></li>
+          </ul>
         </div>
-        <div class="text-center text-sm mt-12 pt-8 border-t border-gray-800">
-            &copy; 2026 KINSEI. All Rights Reserved.
+        <div>
+          <h3>企業様へ</h3>
+          <ul class="footer-links">
+            <li><a href="/students">学生DBを見る</a></li>
+            <li><a class="is-active" href="/sponsor.html">企業向け導入プラン</a></li>
+            <li><a href="/sponsors_list.html">協賛企業一覧</a></li>
+            <li><a href="/login?next=/members/students">企業会員DB</a></li>
+            <li><a href="mailto:info@kinsei-career.jp">お問い合わせ</a></li>
+          </ul>
         </div>
+      </div>
+      <p class="copyright">© 2026 KINSEI. All Rights Reserved.</p>
     </footer>
+  </main>
 
-    <script>
-        lucide.createIcons();
+  <script>
+    (() => {
+      const header = document.querySelector(".ks-header");
+      const button = document.querySelector(".ks-menu-btn");
+      const menu = document.getElementById("mobile-menu");
 
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        let isMenuOpen = false;
+      if (!header || !button || !menu) return;
 
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('mobile-menu-hidden');
-                mobileMenu.classList.add('mobile-menu-active');
-                menuIcon.setAttribute('data-lucide', 'x');
-            } else {
-                mobileMenu.classList.remove('mobile-menu-active');
-                mobileMenu.classList.add('mobile-menu-hidden');
-                menuIcon.setAttribute('data-lucide', 'menu');
-            }
-            lucide.createIcons();
-        }
+      const setMenuState = (open) => {
+        header.classList.toggle("is-menu-open", open);
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+        button.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+        menu.setAttribute("aria-hidden", open ? "false" : "true");
+      };
 
-        mobileMenuBtn.addEventListener('click', toggleMenu);
+      button.addEventListener("click", () => {
+        setMenuState(button.getAttribute("aria-expanded") !== "true");
+      });
 
-        mobileNavLinks.forEach((link) => {
-            link.addEventListener('click', () => {
-                if (isMenuOpen) {
-                    toggleMenu();
-                }
-            });
-        });
-    </script>
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenuState(false));
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 860) setMenuState(false);
+      });
+    })();
+  </script>
 </body>
 </html>
