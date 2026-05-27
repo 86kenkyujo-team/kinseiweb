@@ -165,6 +165,14 @@
   text-shadow: 0 18px 38px rgba(92, 159, 224, 0.14);
 }
 
+.students-hero h1 span {
+  color: inherit;
+  display: block;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
 .students-hero span {
   color: #536a89;
   font-size: clamp(16px, 1.6vw, 22px);
@@ -655,19 +663,18 @@
     flex-wrap: wrap;
   }
 
-  .students-hero,
-  .students-intro {
+  .students-hero {
     grid-template-columns: 1fr;
   }
 
   .students-hero {
     gap: 30px;
     min-height: auto;
-    padding: 64px clamp(28px, 7vw, 54px) 88px;
+    padding: 64px clamp(28px, 7vw, 54px) 36px;
   }
 
   .students-hero h1 {
-    font-size: clamp(42px, 7vw, 58px);
+    font-size: clamp(36px, 8.2vw, 58px);
     margin: 28px 0 20px;
   }
 
@@ -685,16 +692,24 @@
   .hero-stat > span {
     font-size: 20px;
   }
+
+  .students-intro {
+    display: none;
+  }
+
+  .public-students-section {
+    padding-top: 20px;
+  }
 }
 
 @media (max-width: 520px) {
   .students-hero {
     min-height: auto;
-    padding: 56px 28px 78px;
+    padding: 56px 28px 24px;
   }
 
   .students-hero h1 {
-    font-size: clamp(38px, 10.5vw, 44px);
+    font-size: clamp(31px, 9.1vw, 44px);
     line-height: 1.16;
     margin: 26px 0 20px;
   }
@@ -720,10 +735,6 @@
   .short-video-frame {
     aspect-ratio: 4 / 5;
     min-height: 360px;
-  }
-
-  .students-intro {
-    margin-top: -44px;
   }
 
   .student-public-profile {

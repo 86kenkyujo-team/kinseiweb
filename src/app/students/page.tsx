@@ -111,8 +111,8 @@ export default async function StudentsPage() {
         <div>
           <p>Student Database</p>
           <h1>
-            気になる学生を、<br />
-            会いたい学生へ。
+            <span>気になる学生を</span>
+            <span>会いたい学生へ</span>
           </h1>
           <span>
             公開情報では、学生ごとのショート動画・出身・属性・志望業界を確認できます。
