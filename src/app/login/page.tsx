@@ -15,10 +15,15 @@ export default function LoginPage() {
       <StudentDatabaseHeader active="login" />
       <section className="login-hero">
         <div>
-          <p className="eyebrow">Student Database</p>
-          <h2>詳細情報は、契約中の企業会員だけに。</h2>
+          <p className="eyebrow">Company Member Access</p>
+          <h2>
+            学生の実績を
+            <br />
+            採用判断に変える。
+          </h2>
           <p>
-            価値観、志望理由の深掘り、意思決定の軸、将来像、面談リクエストを安全に扱うためのログイン画面です。
+            価値観、キャリア軸、志望理由の深掘り、面談リクエストまで。
+            企業会員向けの学生データベースで、次に会うべき学生を見つけられます。
           </p>
         </div>
       </section>
