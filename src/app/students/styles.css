@@ -1,10 +1,35 @@
 .public-students-page {
   background:
-    radial-gradient(circle at 16% 14%, rgba(0, 91, 172, 0.1), transparent 28%),
-    radial-gradient(#cfe3f7 1px, transparent 1px),
-    #f6f9fe;
-  background-size: auto, 18px 18px, auto;
+    linear-gradient(180deg, rgba(247, 252, 255, 0.94) 0%, rgba(238, 247, 255, 0.9) 42%, #ffffff 100%),
+    #f7fbff;
+  color: #0f1f3a;
   min-height: 100vh;
+}
+
+.public-students-page .student-db-header {
+  background: rgba(255, 255, 255, 0.74);
+  border-bottom: 1px solid rgba(62, 122, 220, 0.16);
+  box-shadow: 0 14px 44px rgba(32, 105, 178, 0.08);
+}
+
+.public-students-page .student-db-brand,
+.public-students-page .student-db-header nav a {
+  color: #0f1f3a;
+}
+
+.public-students-page .student-db-header nav a {
+  color: rgba(15, 31, 58, 0.7);
+}
+
+.public-students-page .student-db-header nav a[aria-current='page'] {
+  color: #1769e8;
+}
+
+.public-students-page .student-db-login-link,
+.public-students-page .student-db-header .logout-button {
+  background: linear-gradient(135deg, #1769e8, #58c4ff);
+  box-shadow: 0 16px 34px rgba(23, 105, 232, 0.2);
+  color: white;
 }
 
 .public-header {
@@ -70,10 +95,11 @@
 
 .students-hero {
   background:
-    linear-gradient(90deg, rgba(1, 10, 31, 0.84) 0%, rgba(2, 14, 45, 0.76) 47%, rgba(0, 54, 137, 0.48) 100%),
-    url('/assets/images/student-database-hero-bg.png') center / cover no-repeat,
-    #041333;
-  color: white;
+    linear-gradient(90deg, rgba(247, 252, 255, 0.9) 0%, rgba(247, 252, 255, 0.7) 45%, rgba(226, 244, 255, 0.18) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.36), rgba(230, 245, 255, 0.16)),
+    url('/assets/images/student-database-hero-wave.png') center / cover no-repeat,
+    #eef7ff;
+  color: #0f1f3a;
   display: grid;
   gap: 28px;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 390px);
@@ -94,33 +120,31 @@
 
 .students-hero::before {
   background:
-    radial-gradient(circle at 8% 4%, rgba(81, 171, 255, 0.44), transparent 22%),
-    radial-gradient(circle at 95% 2%, rgba(38, 181, 255, 0.5), transparent 18%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 56%, rgba(247, 251, 255, 0.74) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.52) 34%, rgba(255, 255, 255, 0) 72%);
   inset: 0;
 }
 
 .students-hero::after {
-  background: #f6f9fe;
+  background: linear-gradient(180deg, rgba(247, 251, 255, 0), #f7fbff);
   bottom: -42px;
-  height: 88px;
-  left: -4%;
-  right: -4%;
-  transform: rotate(2deg);
-  transform-origin: left bottom;
+  height: 156px;
+  left: 0;
+  right: 0;
 }
 
 .students-hero p,
 .section-title p {
-  color: #e6b422;
+  color: #1769e8;
   font-size: 14px;
   font-weight: 900;
-  letter-spacing: 0.18em;
+  letter-spacing: 0;
   margin: 0;
   text-transform: uppercase;
 }
 
 .students-hero p::after {
-  background: linear-gradient(90deg, #32a4ff, transparent);
+  background: linear-gradient(90deg, #1769e8, rgba(88, 196, 255, 0));
   content: '';
   display: block;
   height: 3px;
@@ -134,11 +158,11 @@
   line-height: 1.18;
   margin: 34px 0 26px;
   max-width: 840px;
-  text-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+  text-shadow: 0 18px 38px rgba(92, 159, 224, 0.14);
 }
 
 .students-hero span {
-  color: rgba(255, 255, 255, 0.86);
+  color: #536a89;
   font-size: clamp(16px, 1.6vw, 22px);
   font-weight: 800;
   line-height: 1.8;
@@ -147,14 +171,14 @@
 .hero-stat {
   align-self: center;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(120, 178, 255, 0.1)),
-    rgba(13, 42, 94, 0.34);
-  border: 1px solid rgba(203, 226, 255, 0.68);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(237, 247, 255, 0.5)),
+    rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(90, 153, 228, 0.24);
   border-radius: 16px;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
-    0 0 32px rgba(37, 128, 255, 0.35),
-    0 28px 80px rgba(0, 0, 0, 0.22);
+    0 1px 0 rgba(255, 255, 255, 0.92) inset,
+    0 22px 70px rgba(51, 128, 216, 0.16);
   min-height: 282px;
   padding: 46px 28px;
   position: relative;
@@ -163,8 +187,8 @@
 
 .hero-stat::before {
   background:
-    linear-gradient(90deg, transparent, rgba(67, 184, 255, 0.58) 38%, white 50%, rgba(67, 184, 255, 0.58) 62%, transparent),
-    radial-gradient(ellipse at center, rgba(64, 184, 255, 0.28), transparent 64%);
+    linear-gradient(90deg, transparent, rgba(88, 196, 255, 0.58) 38%, white 50%, rgba(23, 105, 232, 0.46) 62%, transparent),
+    linear-gradient(180deg, rgba(88, 196, 255, 0.18), transparent);
   content: '';
   height: 12px;
   left: 18%;
@@ -176,6 +200,7 @@
 
 .hero-stat strong {
   align-items: baseline;
+  color: #0b3f9f;
   display: flex;
   font-size: clamp(72px, 8vw, 112px);
   gap: 0.04em;
@@ -184,7 +209,7 @@
   line-height: 1;
   margin-bottom: 34px;
   position: relative;
-  text-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 12px 26px rgba(23, 105, 232, 0.12);
 }
 
 .hero-stat strong span {
@@ -193,9 +218,10 @@
 }
 
 .hero-stat > span {
+  color: #536a89;
   display: block;
   font-size: 22px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   position: relative;
 }
 
@@ -213,24 +239,25 @@
 
 .students-intro div {
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.96));
-  border: 1px solid #dbe7f5;
+    linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(243, 250, 255, 0.78));
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(90, 153, 228, 0.18);
   border-radius: 8px;
-  box-shadow: 0 20px 55px rgba(15, 49, 92, 0.11);
+  box-shadow: 0 22px 58px rgba(51, 128, 216, 0.11);
   min-height: 214px;
   padding: 32px 36px 28px;
   position: relative;
 }
 
 .students-intro strong {
-  color: #07183b;
+  color: #0f1f3a;
   display: block;
   font-size: clamp(20px, 2vw, 28px);
   margin: 12px 0 20px;
 }
 
 .students-intro strong::after {
-  background: #0c74ff;
+  background: #1769e8;
   content: '';
   display: block;
   height: 3px;
@@ -239,7 +266,7 @@
 }
 
 .students-intro span {
-  color: #526584;
+  color: #5f7190;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.8;
@@ -247,9 +274,9 @@
 
 .intro-icon {
   align-items: center;
-  background: #eef6ff;
+  background: linear-gradient(145deg, #ffffff, #e8f5ff);
   border-radius: 999px;
-  box-shadow: 0 10px 28px rgba(0, 91, 172, 0.12);
+  box-shadow: 0 12px 32px rgba(23, 105, 232, 0.12);
   display: inline-flex;
   height: 64px;
   justify-content: center;
@@ -305,8 +332,8 @@
 }
 
 .students-intro i {
-  border-right: 3px solid #0c74ff;
-  border-top: 3px solid #0c74ff;
+  border-right: 3px solid #1769e8;
+  border-top: 3px solid #1769e8;
   bottom: 34px;
   height: 16px;
   position: absolute;
@@ -324,14 +351,14 @@
 }
 
 .section-title h2 {
-  color: #1a1a1a;
+  color: #0f1f3a;
   font-size: clamp(30px, 4vw, 44px);
   line-height: 1.2;
   margin: 8px 0 10px;
 }
 
 .section-title span {
-  color: #64748b;
+  color: #5f7190;
 }
 
 .public-student-grid {
@@ -342,10 +369,10 @@
 
 .public-student-card,
 .public-notice {
-  background: white;
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(62, 122, 220, 0.14);
   border-radius: 8px;
-  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 18px 46px rgba(23, 105, 232, 0.08);
 }
 
 .public-student-card {
@@ -362,7 +389,7 @@
 }
 
 .student-public-face {
-  background: #eef2f7;
+  background: #eef6ff;
   border-radius: 8px;
   height: 58px;
   overflow: hidden;
@@ -387,22 +414,22 @@
 
 .student-public-profile p,
 .student-public-profile span {
-  color: #64748b;
+  color: #5f7190;
   font-size: 13px;
   margin: 0;
 }
 
 .student-public-profile h3 {
-  color: #1a1a1a;
+  color: #0f1f3a;
   font-size: 24px;
   line-height: 1.25;
   margin: 4px 0;
 }
 
 .student-public-profile > strong {
-  background: #eef6ff;
+  background: #edf7ff;
   border-radius: 999px;
-  color: #005bac;
+  color: #0b3f9f;
   font-size: 12px;
   padding: 7px 10px;
   white-space: nowrap;
@@ -539,7 +566,7 @@
 }
 
 .public-catch {
-  color: #111827;
+  color: #0f1f3a;
   font-size: 17px;
   font-weight: 900;
   line-height: 1.7;
@@ -553,16 +580,16 @@
 }
 
 .public-tag-row span {
-  background: #f1f5f9;
+  background: #eff7ff;
   border-radius: 999px;
-  color: #475569;
+  color: #40607f;
   font-size: 12px;
   font-weight: 900;
   padding: 6px 10px;
 }
 
 .public-summary {
-  color: #64748b;
+  color: #5f7190;
   font-size: 14px;
   line-height: 1.8;
   margin: 0;
@@ -570,7 +597,7 @@
 
 .public-card-actions {
   align-items: center;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid rgba(62, 122, 220, 0.14);
   display: flex;
   gap: 10px;
   justify-content: space-between;
@@ -584,12 +611,12 @@
 }
 
 .public-card-actions a {
-  color: #005bac;
+  color: #1769e8;
   text-decoration: none;
 }
 
 .public-card-actions a:last-child {
-  background: #1a1a1a;
+  background: linear-gradient(135deg, #0b3f9f, #1769e8);
   border-radius: 999px;
   color: white;
   padding: 9px 12px;
@@ -635,6 +662,38 @@
 }
 
 @media (max-width: 520px) {
+  .students-hero {
+    min-height: auto;
+    padding: 72px 28px 92px;
+  }
+
+  .students-hero h1 {
+    font-size: clamp(42px, 12vw, 54px);
+    margin: 28px 0 22px;
+  }
+
+  .students-hero span {
+    font-size: 15px;
+  }
+
+  .hero-stat {
+    min-height: 220px;
+    padding: 34px 22px;
+  }
+
+  .hero-stat strong {
+    font-size: 78px;
+    margin-bottom: 24px;
+  }
+
+  .hero-stat > span {
+    font-size: 18px;
+  }
+
+  .students-intro {
+    margin-top: -44px;
+  }
+
   .student-public-profile {
     grid-template-columns: 52px minmax(0, 1fr);
   }
