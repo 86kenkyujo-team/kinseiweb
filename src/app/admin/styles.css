@@ -219,6 +219,42 @@
   padding: 6px 10px;
 }
 
+@media (max-width: 760px) {
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 18px;
+  }
+
+  .admin-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-nav a {
+    flex: 0 0 auto;
+    font-size: 13px;
+    padding: 8px 11px;
+  }
+
+  .admin-main {
+    padding: 26px 18px 52px;
+  }
+
+  .admin-table {
+    min-width: 760px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 11px;
+  }
+}
+
 .status-pill.blocked {
   background: #fff1ed;
   color: #b44424;
@@ -385,7 +421,6 @@
 }
 
 @media (max-width: 760px) {
-  .admin-header,
   .admin-page-title {
     display: grid;
   }

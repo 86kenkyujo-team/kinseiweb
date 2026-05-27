@@ -514,91 +514,91 @@
     .project-card {
       left: 4px;
       top: 168px;
-      width: 178px;
-      height: 128px;
-      padding: 18px;
+      width: 152px;
+      height: 108px;
+      padding: 14px;
     }
 
     .score-card {
       right: 10px;
       top: 34px;
-      width: 144px;
-      height: 154px;
-      padding: 18px;
+      width: 124px;
+      height: 132px;
+      padding: 14px;
     }
 
     .skill-card {
       right: 0;
       top: 226px;
-      width: 154px;
-      height: 92px;
-      padding: 18px;
-      color: white;
-      background: rgba(12, 39, 87, .52);
-      border-color: rgba(255,255,255,.34);
+      width: 132px;
+      height: 78px;
+      padding: 13px;
+      color: #10213f;
+      background: rgba(255, 255, 255, .68);
+      border-color: rgba(118, 170, 236, .42);
     }
 
     .card-label {
       color: #1769e8;
-      font-size: 9px;
+      font-size: 8px;
       font-weight: 900;
-      margin-bottom: 9px;
+      margin-bottom: 7px;
     }
 
     .project-card b {
       display: block;
-      font-size: 11px;
+      font-size: 10px;
       color: #223857;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .score-card b {
       display: block;
       color: #223857;
-      font-size: 10px;
-      line-height: 1.55;
-      margin-bottom: 8px;
+      font-size: 9px;
+      line-height: 1.45;
+      margin-bottom: 6px;
     }
 
     .score {
       display: flex;
       align-items: baseline;
       gap: 3px;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       color: #1769e8;
       font-weight: 900;
     }
 
     .score strong {
-      font-size: 28px;
+      font-size: 24px;
       line-height: 1;
     }
 
     .score span {
-      font-size: 11px;
+      font-size: 9px;
     }
 
     .growth {
       display: flex;
       align-items: end;
-      gap: 12px;
+      gap: 8px;
     }
 
     .growth strong {
       color: #1769e8;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .sparkline {
-      width: 70px;
-      height: 26px;
+      width: 56px;
+      height: 20px;
       border-bottom: 2px solid rgba(23, 105, 232, .35);
       background: linear-gradient(145deg, transparent 45%, rgba(23,105,232,.85) 46% 52%, transparent 53%);
     }
 
     .score-card .sparkline {
-      width: 96px;
-      height: 34px;
+      width: 76px;
+      height: 26px;
     }
 
     .donut-card {
@@ -656,19 +656,26 @@
       vertical-align: 1px;
     }
 
-    .skill-card .card-label,
+    .skill-card .card-label {
+      color: #1769e8;
+    }
+
     .skill-card b {
-      color: white;
+      color: #10213f;
+    }
+
+    .skill-card span {
+      color: #36516f;
     }
 
     .donut {
       position: absolute;
-      right: 16px;
-      top: 28px;
-      width: 46px;
-      height: 46px;
+      right: 12px;
+      top: 24px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: conic-gradient(#fff 0 70deg, #65a8ff 70deg 360deg);
+      background: conic-gradient(#1769e8 0 70deg, #dcecff 70deg 360deg);
       opacity: .9;
     }
 
@@ -691,10 +698,19 @@
       padding: 9px 10px;
     }
 
-    .search-field {
-      display: grid;
-      align-content: center;
-      gap: 2px;
+    .search-cell.search-field {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+    }
+
+    .search-label {
+      color: #233a5b;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
     }
 
     .search-field small {
@@ -702,7 +718,8 @@
       color: #9aa9be;
       font-size: 10px;
       font-weight: 800;
-      line-height: 1;
+      line-height: 1.25;
+      white-space: nowrap;
     }
 
     .search-cell,
@@ -1604,33 +1621,114 @@
 
     .logo-strip {
       width: min(1120px, calc(100% - 96px));
-      margin: 28px auto 0;
-      min-height: 70px;
-      border-top: 1px solid #e5eef9;
-      border-bottom: 1px solid #e5eef9;
+      margin: 34px auto 0;
+      scroll-margin-top: 92px;
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: minmax(190px, .58fr) minmax(0, 1fr) auto;
       align-items: center;
-      gap: 26px;
+      gap: 24px;
     }
 
-    .logo-strip b,
+    .logo-heading b {
+      display: block;
+      color: #0d1d35;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 900;
+    }
+
+    .logo-heading p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+      font-weight: 800;
+    }
+
     .logo-strip a {
       color: #243958;
       font-size: 11px;
       font-weight: 900;
       text-decoration: none;
       white-space: nowrap;
+      min-width: max-content;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .logo-list {
+      min-width: 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      color: #0d1d35;
-      font-size: 16px;
+      overflow-x: auto;
+      padding: 14px 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+    }
+
+    .logo-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .logo-track,
+    .logo-set {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .logo-track {
+      min-width: max-content;
+    }
+
+    .logo-list span {
+      flex: 0 0 auto;
+      min-width: 126px;
+      display: inline-grid;
+      grid-template-columns: 32px auto;
+      grid-template-rows: auto auto;
+      align-items: center;
+      column-gap: 9px;
+      color: #5f7190;
+      font-size: 14px;
       font-weight: 900;
+      line-height: 1.35;
+      text-align: left;
+      scroll-snap-align: start;
+      opacity: .78;
+    }
+
+    .logo-list i {
+      grid-row: 1 / 3;
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1769e8, #58c4ff);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    .logo-list small {
+      display: block;
+      color: #8b9ab1;
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .logo-list b {
+      display: block;
+      color: #2c3d57;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.1;
     }
 
     .mentor-section {
@@ -1941,9 +2039,9 @@
       .skill-card {
         left: 118px;
         top: 282px;
-        width: 206px;
-        height: 112px;
-        padding: 18px;
+        width: 170px;
+        height: 92px;
+        padding: 14px;
         color: #10213f;
         background: rgba(255, 255, 255, .55);
         border-color: rgba(255,255,255,.4);
@@ -1952,9 +2050,9 @@
       .skill-card b,
       .skill-card span {
         display: block;
-        max-width: calc(100% - 50px);
+        max-width: calc(100% - 42px);
         color: #10213f;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.45;
       }
 
@@ -1963,16 +2061,16 @@
       }
 
       .donut {
-        width: 42px;
-        height: 42px;
+        width: 34px;
+        height: 34px;
       }
 
       .score-card {
         right: 34px;
         top: 26px;
-        width: 166px;
-        height: 184px;
-        padding: 20px;
+        width: 136px;
+        height: 148px;
+        padding: 16px;
       }
 
       .score-card b {
@@ -1980,12 +2078,12 @@
       }
 
       .score strong {
-        font-size: 34px;
+        font-size: 28px;
       }
 
       .score-card .sparkline {
-        width: 114px;
-        height: 40px;
+        width: 86px;
+        height: 30px;
       }
 
       .donut-card {
@@ -2223,7 +2321,7 @@
       }
 
       h1 {
-        font-size: clamp(41px, 11.2vw, 44px);
+        font-size: clamp(38px, 10.4vw, 42px);
         line-height: 1.13;
       }
 
@@ -2248,11 +2346,11 @@
       }
 
       .hero-visual {
-        top: 558px;
+        top: 500px;
         left: 50%;
         right: auto;
         width: min(360px, calc(100vw - 24px));
-        height: 250px;
+        height: 306px;
         transform: translateX(-50%);
       }
 
@@ -2265,13 +2363,14 @@
       }
 
       .people {
-        right: 10px;
-        bottom: -2px;
-        width: 268px;
-        height: 252px;
+        right: 0;
+        bottom: -4px;
+        width: min(292px, calc(100vw - 72px));
+        height: 316px;
       }
 
       .people-image {
+        object-position: center 38%;
         -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,.72) 90%, transparent 100%);
         mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,.72) 90%, transparent 100%);
       }
@@ -2291,39 +2390,36 @@
       }
 
       .skill-card {
-        left: 2px;
-        top: 120px;
+        left: 8px;
+        top: 192px;
         right: auto;
-        width: 150px;
-        min-height: 92px;
+        width: clamp(96px, 28vw, 112px);
+        min-height: 64px;
         height: auto;
-        padding: 12px;
+        padding: 8px 9px;
         color: #10213f;
         background: rgba(255,255,255,.62);
       }
 
       .score-card {
-        right: 0;
-        top: 0;
-        width: 138px;
-        height: 164px;
-        padding: 14px;
+        right: 8px;
+        top: 116px;
+        width: clamp(82px, 24vw, 94px);
+        height: 82px;
+        padding: 8px;
       }
 
       .score strong {
-        font-size: 24px;
+        font-size: 16px;
       }
 
       .score-card .sparkline {
-        width: 82px;
+        width: 42px;
+        height: 12px;
       }
 
       .donut-card {
-        right: 0;
-        top: 174px;
-        width: 138px;
-        height: 86px;
-        padding: 13px;
+        display: none;
       }
 
       .donut-chart {
@@ -2344,9 +2440,9 @@
       }
 
       .project-card b {
-        font-size: 10px;
-        line-height: 1.45;
-        margin-bottom: 8px;
+        font-size: 9px;
+        line-height: 1.4;
+        margin-bottom: 6px;
       }
 
       .growth {
@@ -2354,27 +2450,28 @@
       }
 
       .growth strong {
-        font-size: 19px;
+        font-size: 16px;
       }
 
       .sparkline {
-        width: 50px;
-        height: 22px;
+        width: 42px;
+        height: 18px;
       }
 
       .skill-card b,
       .skill-card span {
         display: block;
-        max-width: calc(100% - 28px);
-        font-size: 13px;
+        max-width: calc(100% - 22px);
+        font-size: 10px;
         line-height: 1.45;
         color: #10213f;
       }
 
       .donut {
-        width: 34px;
-        height: 34px;
-        right: 10px;
+        width: 22px;
+        height: 22px;
+        right: 7px;
+        top: 32px;
       }
 
       .search-wrap {
@@ -2403,25 +2500,55 @@
         height: 36px;
       }
 
-      .chips {
-        flex-wrap: wrap;
-        gap: 8px;
+      .search-cell.search-field {
+        justify-content: flex-start;
+        gap: 16px;
+        height: auto;
+        min-height: 40px;
+        padding: 10px 14px;
       }
 
-      .chips > span:first-child {
-        width: 100%;
+      .search-label {
+        flex: 0 0 auto;
+      }
+
+      .search-field small {
+        min-width: 0;
+      }
+
+      .search select {
+        text-align: center;
+        text-align-last: center;
+      }
+
+      .chips {
+        display: none;
       }
 
       .metrics {
-        grid-template-columns: 1fr 1fr;
-        margin: 32px 20px 0;
-        gap: 14px;
+        grid-template-columns: 1fr;
+        margin: 24px 20px 0;
+        gap: 10px;
       }
 
       .metric {
-        height: 112px;
-        grid-template-columns: 40px minmax(0, 1fr);
-        padding: 14px;
+        height: auto;
+        min-height: 74px;
+        grid-template-columns: 42px minmax(0, 1fr);
+        column-gap: 14px;
+        padding: 12px 18px;
+      }
+
+      .metric > div:last-child {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        column-gap: 12px;
+        row-gap: 2px;
+      }
+
+      .metric small {
+        flex: 0 0 100%;
       }
 
       .metric-icon {
@@ -2430,8 +2557,21 @@
       }
 
       .metric strong {
-        font-size: 22px;
+        font-size: 21px;
         white-space: nowrap;
+      }
+
+      .metric:nth-child(4) strong {
+        color: #0b3f9f;
+        font-size: 16px;
+        letter-spacing: 0;
+      }
+
+      .metric em {
+        font-size: 10.5px;
+        line-height: 1.5;
+        max-width: none;
+        margin-top: 0;
       }
 
       .switch {
@@ -2451,7 +2591,7 @@
       }
 
       .audience-panel {
-        margin: 28px 14px 0;
+        margin: 24px 14px 0;
         border-radius: 16px;
       }
 
@@ -2461,54 +2601,81 @@
       }
 
       .audience-subtabs {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 14px 16px;
-        font-size: 13px;
+        display: none;
       }
 
       .audience-content {
         grid-template-columns: 1fr;
-        gap: 28px;
-        padding: 26px 18px 28px;
+        gap: 18px;
+        padding: 22px 0 22px;
       }
 
       .audience-copy {
-        padding: 0;
+        padding: 0 18px;
       }
 
       .audience-copy h2 {
-        font-size: 28px;
+        font-size: 25px;
         line-height: 1.38;
       }
 
       .audience-copy p {
-        font-size: 14px;
-        min-height: 78px;
+        display: none;
       }
 
       .audience-features {
-        grid-template-columns: 1fr 1fr;
-        gap: 18px 14px;
-        margin-top: 28px;
+        display: flex;
+        gap: 12px;
+        margin: 18px -18px 0 0;
+        overflow-x: auto;
+        padding: 0 18px 6px 0;
+        scroll-snap-type: x proximity;
+        scroll-padding-left: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .audience-feature {
+        flex: 0 0 74%;
+        scroll-snap-align: start;
+        border: 1px solid #dceafd;
+        border-radius: 14px;
+        background: rgba(255,255,255,.92);
+        box-shadow: 0 14px 28px rgba(18, 89, 193, .08);
+        padding: 16px;
       }
 
       .audience-icon {
-        width: 48px;
-        height: 48px;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        margin-bottom: 12px;
       }
 
       .audience-feature b {
-        min-height: 42px;
+        min-height: 0;
+        margin-bottom: 8px;
       }
 
       .audience-feature p {
-        min-height: 126px;
+        display: block;
+        min-height: 0;
+        font-size: 12px;
+        line-height: 1.65;
       }
 
       .audience-gallery {
-        grid-template-rows: 188px 122px;
-        gap: 12px;
+        display: block;
+        padding: 0 18px;
+      }
+
+      .audience-gallery img {
+        height: 178px;
+        border-radius: 14px;
+        object-position: center 44%;
+      }
+
+      .audience-gallery img:not(:first-child) {
+        display: none;
       }
 
       .section-title {
@@ -2563,6 +2730,10 @@
         font-size: 23px;
       }
 
+      .mobile-line {
+        display: block;
+      }
+
       .flow-steps {
         width: auto;
         margin: 0 20px;
@@ -2593,7 +2764,13 @@
       }
 
       .case-heading {
-        align-items: start;
+        display: block;
+        margin-bottom: 18px;
+      }
+
+      .case-link {
+        display: inline-flex;
+        margin-top: 10px;
       }
 
       .case-grid {
@@ -2607,18 +2784,54 @@
 
       .logo-strip {
         width: auto;
-        margin: 24px 20px 0;
+        min-height: 188px;
+        margin: 34px 20px 0;
         grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 18px 0;
-        text-align: center;
+        align-content: center;
+        gap: 16px;
+        padding: 0;
+        text-align: left;
       }
 
       .logo-list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 14px 22px;
-        font-size: 15px;
+        height: 96px;
+        margin: 0 -20px;
+        overflow: hidden;
+        padding: 20px 0;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 42px, #000 calc(100% - 42px), transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0, #000 42px, #000 calc(100% - 42px), transparent 100%);
+      }
+
+      .logo-track {
+        gap: 28px;
+        transform: translateX(-50%);
+        animation: logo-marquee-mobile 18s linear infinite;
+        will-change: transform;
+      }
+
+      .logo-set {
+        gap: 28px;
+      }
+
+      .logo-list span {
+        min-width: 136px;
+        grid-template-columns: 36px auto;
+        opacity: .86;
+      }
+
+      .logo-list i {
+        width: 36px;
+        height: 36px;
+        border-radius: 14px;
+      }
+
+      .logo-list small {
+        font-size: 9px;
+      }
+
+      .logo-strip a {
+        width: max-content;
+        color: #1769e8;
       }
 
       .mentor-section {
@@ -2629,6 +2842,16 @@
 
       .mentor-list {
         grid-template-columns: 1fr;
+      }
+
+      .mentor-card {
+        min-height: 104px;
+      }
+
+      .mentor-card img {
+        width: 62px;
+        height: 62px;
+        object-position: center;
       }
 
       .growth-cta {
@@ -2703,6 +2926,156 @@
 
       .footer > div:first-child {
         grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 721px) and (max-width: 1080px) {
+      .header {
+        height: auto;
+        padding: 16px 42px 0;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-actions {
+        margin-left: auto;
+      }
+
+      .menu-toggle {
+        display: inline-grid;
+      }
+
+      .mobile-menu {
+        order: 3;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        transition: grid-template-rows .22s ease, opacity .2s ease, visibility .2s ease;
+      }
+
+      .header.is-menu-open .mobile-menu {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .header.is-menu-open .mobile-menu-panel {
+        padding: 8px 0 2px;
+      }
+
+      .hero {
+        min-height: 930px;
+        padding: 70px 42px 0;
+      }
+
+      .hero-copy {
+        width: min(100%, 700px);
+        min-width: 0;
+      }
+
+      h1 {
+        font-size: clamp(42px, 6.2vw, 54px);
+      }
+
+      .hero-lead {
+        max-width: 620px;
+      }
+
+      .hero-visual {
+        top: 500px;
+        left: 50%;
+        right: auto;
+        width: min(620px, calc(100vw - 80px));
+        height: 380px;
+        transform: translateX(-50%);
+      }
+
+      .people {
+        right: 76px;
+        bottom: -4px;
+        width: min(460px, 64vw);
+        height: 380px;
+      }
+
+      .score-card {
+        right: 24px;
+        top: 36px;
+        width: 126px;
+        height: 126px;
+        padding: 14px;
+      }
+
+      .score strong {
+        font-size: 25px;
+      }
+
+      .score-card .sparkline {
+        width: 74px;
+      }
+
+      .skill-card {
+        left: 28px;
+        top: 252px;
+        width: 158px;
+        min-height: 82px;
+      }
+
+      .donut-card {
+        display: block;
+        right: 4px;
+        top: 260px;
+        width: 150px;
+        height: 88px;
+      }
+
+      .search-wrap {
+        width: min(700px, calc(100% - 84px));
+        margin-top: 0;
+      }
+
+      .search {
+        height: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        padding: 12px;
+      }
+
+      .search-cell,
+      .search select,
+      .search input,
+      .search button {
+        height: 52px;
+        border: 0;
+        border-radius: 10px;
+        justify-content: center;
+        min-width: 0;
+      }
+
+      .search button {
+        grid-column: 1 / -1;
+      }
+
+      .chips {
+        justify-content: center;
+      }
+
+      .metrics {
+        width: min(700px, calc(100% - 84px));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .metric {
+        height: auto;
+        min-height: 126px;
+        grid-template-columns: 64px minmax(0, 1fr);
       }
     }
 
@@ -3017,6 +3390,16 @@
       }
     }
 
+    @keyframes logo-marquee-mobile {
+      from {
+        transform: translateX(-50%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -3123,12 +3506,22 @@
 
     <section class="search-wrap">
       <div class="search">
-        <div class="search-cell search-field">キーワードで探す<small>例：マーケティング、データ分析</small></div>
+        <div class="search-cell search-field"><span class="search-label">キーワードで探す</span><small>例：マーケティング、データ分析</small></div>
         <select aria-label="スキル・分野を選択">
-          <option>スキル・分野を選択</option>
+          <option value="">スキル・分野を選択</option>
+          <option value="marketing">マーケティング</option>
+          <option value="data">データ分析</option>
+          <option value="sns">SNS運用</option>
+          <option value="engineer">エンジニア</option>
+          <option value="business">新規事業</option>
         </select>
         <select aria-label="条件を追加する">
-          <option>条件を追加する</option>
+          <option value="">条件を追加する</option>
+          <option value="long-intern">長期インターン</option>
+          <option value="short-project">短期プロジェクト</option>
+          <option value="remote">リモート可</option>
+          <option value="kansai">関西エリア</option>
+          <option value="open-interview">面談受付中</option>
         </select>
         <button type="button" onclick="location.href='/students'">検索する</button>
       </div>
@@ -3157,7 +3550,7 @@
       <div class="audience-content" id="student-audience" role="tabpanel" data-audience-panel="student">
         <div class="audience-copy">
           <small>KINSEIが選ばれる理由</small>
-          <h2>実績が、あなたの可能性になる。</h2>
+          <h2>実績があなたの可能性に</h2>
           <p>プロジェクトを通じてスキルを磨き、信頼できる企業と出会える。</p>
           <div class="audience-features">
             <article class="audience-feature"><div class="audience-icon">◎</div><b>実績を可視化</b><p>プロジェクトの成果やスキルをスコア化し、強みが一目で伝わる。</p></article>
@@ -3167,8 +3560,8 @@
           </div>
         </div>
         <div class="audience-gallery" aria-hidden="true">
-          <img src="assets/images/kinsei-flow-growth.png" alt="">
           <img src="assets/images/kinsei-flow-profile.png" alt="">
+          <img src="assets/images/kinsei-flow-growth.png" alt="">
           <img src="assets/images/kinsei-flow-apply.png" alt="">
         </div>
       </div>
@@ -3186,7 +3579,7 @@
           </div>
         </div>
         <div class="audience-gallery" aria-hidden="true">
-          <img src="assets/images/kinsei-case-data.png" alt="">
+          <img src="assets/images/kinsei-flow-profile.png" alt="">
           <img src="assets/images/kinsei-case-new-business.png" alt="">
           <img src="assets/images/kinsei-case-marketing.png" alt="">
         </div>
@@ -3195,7 +3588,7 @@
 
     <span class="legacy-anchor" id="service" aria-hidden="true"></span>
     <section class="flow-section" id="process">
-      <div class="flow-title"><small>サービス利用の流れ</small><h2>たった3ステップで、次の一歩へ。</h2></div>
+      <div class="flow-title"><small>サービス利用の流れ</small><h2><span class="mobile-line">たった3ステップで、</span>次の一歩へ。</h2></div>
       <div class="flow-steps">
         <article class="flow-step">
           <div class="flow-step-copy"><div class="flow-number">1</div><b>プロフィールを登録</b><p>学歴やスキル、実績を入力してあなたの可能性をアピール。</p></div>
@@ -3214,7 +3607,7 @@
       </div>
 
       <section class="case-section" id="cases" aria-label="実績・事例">
-        <div class="case-heading"><div><small>実績・事例</small><h2>学生の挑戦が、価値を生み出している。</h2></div><a class="case-link" href="/students">すべての事例を見る →</a></div>
+        <div class="case-heading"><div><small>実績・事例</small><h2>学生の挑戦が価値を生み出す</h2></div><a class="case-link" href="/students">すべての事例を見る →</a></div>
         <div class="case-grid">
           <article class="case-card"><div class="case-copy"><span class="case-tag">マーケティング</span><h3>D2CブランドのSNS戦略支援</h3><p>成果：売上150%向上に貢献</p><div class="case-company"><img src="assets/images/kinsei-case-marketing.png" alt="">⚪︎⚪︎⚪︎</div></div><img src="assets/images/kinsei-case-marketing.png" alt=""></article>
           <article class="case-card"><div class="case-copy"><span class="case-tag">新規事業</span><h3>新規サービスの市場調査・企画</h3><p>成果：新規サービスの立ち上げに貢献</p><div class="case-company"><img src="assets/images/kinsei-case-new-business.png" alt="">⚪︎⚪︎⚪︎</div></div><img src="assets/images/kinsei-case-new-business.png" alt=""></article>
@@ -3223,17 +3616,26 @@
       </section>
 
       <div class="logo-strip" id="sponsors">
-        <b>導入企業・パートナー（一部）</b>
-        <div class="logo-list"><span>⚪︎⚪︎⚪︎</span><span>⚪︎⚪︎⚪︎</span><span>⚪︎⚪︎⚪︎</span><span>⚪︎⚪︎⚪︎</span><span>⚪︎⚪︎⚪︎</span><span>⚪︎⚪︎⚪︎</span><span>⚪︎⚪︎⚪︎</span></div>
+        <div class="logo-heading"><b>導入企業・パートナー</b><p>協賛・実務プロジェクトの連携先ロゴを掲載予定です。</p></div>
+        <div class="logo-list" aria-label="導入企業・パートナーのロゴ一覧">
+          <div class="logo-track">
+            <div class="logo-set">
+              <span><i aria-hidden="true">K</i><b>PARTNER</b><small>LOGO 01</small></span><span><i aria-hidden="true">C</i><b>COMPANY</b><small>LOGO 02</small></span><span><i aria-hidden="true">P</i><b>PROJECT</b><small>LOGO 03</small></span><span><i aria-hidden="true">L</i><b>LOCAL</b><small>LOGO 04</small></span><span><i aria-hidden="true">N</i><b>NEXT</b><small>LOGO 05</small></span><span><i aria-hidden="true">S</i><b>SUPPORT</b><small>LOGO 06</small></span>
+            </div>
+            <div class="logo-set" aria-hidden="true">
+              <span><i aria-hidden="true">K</i><b>PARTNER</b><small>LOGO 01</small></span><span><i aria-hidden="true">C</i><b>COMPANY</b><small>LOGO 02</small></span><span><i aria-hidden="true">P</i><b>PROJECT</b><small>LOGO 03</small></span><span><i aria-hidden="true">L</i><b>LOCAL</b><small>LOGO 04</small></span><span><i aria-hidden="true">N</i><b>NEXT</b><small>LOGO 05</small></span><span><i aria-hidden="true">S</i><b>SUPPORT</b><small>LOGO 06</small></span>
+            </div>
+          </div>
+        </div>
         <a href="/sponsors_list.html">すべての企業を見る →</a>
       </div>
 
       <span class="legacy-anchor" id="team" aria-hidden="true"></span>
       <section class="mentor-section" id="members" aria-label="学生を支えるメンター">
-        <div class="mentor-heading"><h2>学生の成長を支える、実務家メンター</h2><p>各分野のプロフェッショナルが、あなたの挑戦をサポートします。</p></div>
+        <div class="mentor-heading"><h2><span class="mobile-line">学生の成長を支える、</span>実業家メンター</h2><p>各分野のプロフェッショナルが、あなたの挑戦をサポートします。</p></div>
         <div class="mentor-list">
-          <article class="mentor-card"><img src="assets/images/kinsei-flow-profile.png" alt="片山 諒"><div><b>片山 諒</b><p>KINSEI代表<br>事業開発 / マーケティング</p></div></article>
-          <article class="mentor-card"><img src="assets/images/kinsei-case-marketing.png" alt="北嶋 元勝"><div><b>北嶋 元勝</b><p>マーケティング責任者<br>学生支援</p></div></article>
+          <article class="mentor-card"><img src="assets/images/katayama.jpeg" alt="片山 諒"><div><b>片山 諒</b><p>KINSEI代表<br>事業開発 / マーケティング</p></div></article>
+          <article class="mentor-card"><img src="assets/images/kitajima2.jpeg" alt="北嶋 元勝"><div><b>北嶋 元勝</b><p>マーケティング責任者<br>学生支援</p></div></article>
           <article class="mentor-card"><img src="assets/images/kinsei-case-new-business.png" alt="大橋 彩"><div><b>大橋 彩</b><p>データサイエンティスト<br>分析支援</p></div></article>
           <article class="mentor-card"><img src="assets/images/kinsei-case-data.png" alt="佐々木 悠"><div><b>佐々木 悠</b><p>プロダクトマネージャー<br>企画伴走</p></div></article>
         </div>

@@ -111,14 +111,65 @@ select {
   padding: 0 14px;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 960px) {
   .student-db-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 14px;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 20px;
   }
 
   .student-db-header nav {
-    justify-content: flex-start;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    justify-content: stretch;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .student-db-header nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .student-db-header nav a,
+  .student-db-header .logout-button {
+    align-items: center;
+    background: rgba(23, 105, 232, 0.08);
+    border-radius: 8px;
+    display: none;
+    flex: 0 0 auto;
+    justify-content: center;
+    min-width: 106px;
+    min-height: 38px;
+    padding: 0 8px;
+    text-align: center;
+  }
+
+  .student-db-header nav a[href='/'],
+  .student-db-header nav a[aria-current='page'],
+  .student-db-header nav a.student-db-login-link,
+  .student-db-header nav a[href='/index.html#contact'],
+  .student-db-header .logout-button {
+    display: inline-flex;
+  }
+
+  .student-db-brand {
+    font-size: 20px;
+  }
+
+  .student-db-brand span {
+    height: 36px;
+    width: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-db-header nav a[href='/index.html#contact'] {
+    display: none;
   }
 }
