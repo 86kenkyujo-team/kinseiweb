@@ -1135,6 +1135,22 @@
       object-position: center 24%;
     }
 
+    @media (min-width: 769px) {
+      #student-audience .audience-gallery {
+        display: block;
+      }
+
+      #student-audience .audience-gallery img:first-child {
+        display: block;
+        height: auto;
+        object-position: center center;
+      }
+
+      #student-audience .audience-gallery img:not(:first-child) {
+        display: none;
+      }
+    }
+
     .section-title {
       text-align: center;
       margin-top: 54px;
