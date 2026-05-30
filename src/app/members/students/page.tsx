@@ -159,7 +159,7 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
       <section className="members-hero">
         <div>
           <p>Company Member Database</p>
-          <h1>学生一覧</h1>
+          <h1>学生フィード</h1>
           <span>
             {company.company_name} の会員ステータス:
             <strong>{company.membership_status}</strong>
@@ -168,7 +168,7 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
         <div className="metric-grid">
           <div>
             <strong>{students?.length || 0}</strong>
-            <span>閲覧可能学生</span>
+            <span>フィード掲載学生</span>
           </div>
         </div>
       </section>
