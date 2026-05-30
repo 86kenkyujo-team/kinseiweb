@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { createInterviewRequest } from './actions'
 import type { MemberProfile, Student } from './page'
 import {
@@ -265,6 +265,86 @@ type StudentListProps = {
 
 export function StudentList({ students }: StudentListProps) {
   const feedRef = useRef<HTMLDivElement>(null)
+  const audioEnabledRef = useRef(false)
+  const [audioEnabled, setAudioEnabled] = useState(false)
+
+  const syncReelVideos = useCallback((shouldEnableAudio = audioEnabledRef.current) => {
+    const feed = feedRef.current
+    const scrollContainer = feed?.closest<HTMLElement>('.members-page')
+
+    if (!feed || !scrollContainer) {
+      return
+    }
+
+    const reels = Array.from(feed.querySelectorAll<HTMLElement>('.student-reel'))
+
+    if (reels.length === 0) {
+      return
+    }
+
+    const activeIndex = getActiveReelIndex(reels, scrollContainer)
+
+    reels.forEach((reel, index) => {
+      const video = reel.querySelector<HTMLVideoElement>('video[data-reel-video]')
+
+      if (!video) {
+        return
+      }
+
+      const isActive = index === activeIndex
+
+      video.muted = !shouldEnableAudio || !isActive
+      video.volume = shouldEnableAudio && isActive ? 1 : 0
+
+      if (isActive) {
+        void video.play().catch(() => undefined)
+        return
+      }
+
+      video.pause()
+    })
+  }, [])
+
+  const handleAudioToggle = () => {
+    const nextAudioEnabled = !audioEnabled
+
+    audioEnabledRef.current = nextAudioEnabled
+    setAudioEnabled(nextAudioEnabled)
+    syncReelVideos(nextAudioEnabled)
+  }
+
+  useEffect(() => {
+    audioEnabledRef.current = audioEnabled
+    syncReelVideos(audioEnabled)
+  }, [audioEnabled, syncReelVideos])
+
+  useEffect(() => {
+    const feed = feedRef.current
+    const scrollContainer = feed?.closest<HTMLElement>('.members-page')
+
+    if (!feed || !scrollContainer) {
+      return
+    }
+
+    let animationFrame = 0
+
+    const scheduleVideoSync = () => {
+      window.cancelAnimationFrame(animationFrame)
+      animationFrame = window.requestAnimationFrame(() => {
+        syncReelVideos()
+      })
+    }
+
+    syncReelVideos(false)
+    scrollContainer.addEventListener('scroll', scheduleVideoSync, { passive: true })
+    window.addEventListener('resize', scheduleVideoSync)
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame)
+      scrollContainer.removeEventListener('scroll', scheduleVideoSync)
+      window.removeEventListener('resize', scheduleVideoSync)
+    }
+  }, [students.length, syncReelVideos])
 
   useEffect(() => {
     const feed = feedRef.current
@@ -342,6 +422,11 @@ export function StudentList({ students }: StudentListProps) {
           const videoTheme = VIDEO_THEMES[index % VIDEO_THEMES.length]
           const age = getDeepDiveText(deepDiveAnswers, 'age') || '未登録'
           const mbti = getDeepDiveText(deepDiveAnswers, 'mbti') || '任意未登録'
+          const mobileCaptionDetail = (
+            student.profile_summary
+            || profile?.values_text
+            || `${getPrimaryIndustry(student)}領域に関心があり、これからの挑戦や価値観を動画で伝えています。`
+          )
 
           return (
             <article className="student-reel" id={`student-${student.id}`} key={student.id}>
@@ -379,6 +464,7 @@ export function StudentList({ students }: StudentListProps) {
                   {student.video_url ? (
                     <video
                       autoPlay
+                      data-reel-video
                       loop
                       muted
                       playsInline
@@ -394,14 +480,31 @@ export function StudentList({ students }: StudentListProps) {
                       style={getProfileImageStyle(student.profile_image_url)}
                     />
                   ) : null}
+                  {student.video_url ? (
+                    <button
+                      aria-pressed={audioEnabled}
+                      className="reel-audio-button"
+                      onClick={handleAudioToggle}
+                      type="button"
+                    >
+                      {audioEnabled ? '音声オン' : '音声オフ'}
+                    </button>
+                  ) : null}
                 </div>
               </div>
 
               <details className="mobile-student-details">
                 <summary>
                   <span className="mobile-reel-copy">
-                    <strong>{displayName}</strong>
-                    <span>{student.catch_copy}</span>
+                    <span className="mobile-reel-name">
+                      <span className="mobile-name-label">名前</span>
+                      <strong>{displayName}</strong>
+                    </span>
+                    <span className="mobile-reel-caption">{student.catch_copy}</span>
+                    <span className="mobile-reel-meta">
+                      {student.faculty} / {student.grade} ・ {student.location || '地域未設定'} ・ {getPrimaryIndustry(student)}
+                    </span>
+                    <span className="mobile-reel-summary">{mobileCaptionDetail}</span>
                   </span>
                   <span className="mobile-detail-button-label">学生の詳細</span>
                 </summary>
