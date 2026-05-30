@@ -382,6 +382,7 @@
 
 .public-student-card {
   display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
   overflow: hidden;
 }
 
@@ -567,6 +568,7 @@
 .public-student-body {
   display: grid;
   gap: 14px;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   padding: 18px;
 }
 
