@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KINSEI | 実績で戦うキャリアプラットフォーム</title>
-  <meta name="description" content="KINSEIは、学生の挑戦と実績を可視化し、企業との最適な出会いをつくるキャリアプラットフォームです。学生DB、企業向けプラン、協賛企業情報を掲載しています。">
+  <meta name="description" content="KINSEIは、学生の挑戦と実績を可視化し、企業との最適な出会いをつくるキャリアプラットフォームです。学生プロフィール、企業向けプラン、協賛企業情報を掲載しています。">
   <link rel="canonical" href="https://kinseiweb-murex.vercel.app/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
@@ -73,11 +73,11 @@
     }
 
     .header {
-      height: 64px;
+      height: 88px;
       display: flex;
       align-items: center;
-      padding: 0 26px;
-      gap: 48px;
+      padding: 0 46px;
+      gap: 52px;
       position: relative;
       z-index: 10;
     }
@@ -85,16 +85,17 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
+      font-size: 28px;
       font-weight: 900;
       letter-spacing: .08em;
       text-decoration: none;
     }
 
     .brand-mark {
-      width: 25px;
-      height: 25px;
-      border-radius: 7px;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       background: linear-gradient(135deg, #2f83ff, #0d5bd6);
       color: white;
       display: grid;
@@ -107,8 +108,8 @@
     .nav {
       display: flex;
       align-items: center;
-      gap: 30px;
-      font-size: 12px;
+      gap: 48px;
+      font-size: 19px;
       font-weight: 800;
       flex: 1;
     }
@@ -120,7 +121,13 @@
 
     .header-actions {
       display: flex;
-      gap: 14px;
+      gap: 12px;
+    }
+
+    .header-actions .btn {
+      height: 44px;
+      padding: 0 20px;
+      font-size: 15px;
     }
 
     .menu-toggle {
@@ -180,6 +187,7 @@
       text-decoration: none;
       font-size: 13px;
       font-weight: 900;
+      white-space: nowrap;
     }
 
     .mobile-menu a.is-cta {
@@ -188,6 +196,10 @@
       border-color: transparent;
       justify-content: center;
       box-shadow: 0 12px 24px rgba(13, 98, 222, .20);
+    }
+
+    .responsive-label {
+      display: none;
     }
 
     .btn {
@@ -201,6 +213,7 @@
       font-weight: 900;
       font-size: 13px;
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .btn.ghost {
@@ -2281,7 +2294,7 @@
 
       .header {
         height: auto;
-        padding: 18px 16px 0;
+        padding: 12px 16px 0;
         gap: 12px;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -2290,6 +2303,14 @@
       .brand {
         order: 0;
         flex: 0 0 auto;
+        font-size: 18px;
+        gap: 10px;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
       }
 
       .nav {
@@ -2297,12 +2318,11 @@
       }
 
       .header-actions {
-        order: 1;
-        gap: 8px;
+        display: none;
       }
 
       .menu-toggle {
-        order: 2;
+        order: 1;
         display: inline-grid;
       }
 
@@ -2342,8 +2362,8 @@
       }
 
       .hero {
-        min-height: 800px;
-        padding: 48px 18px 0;
+        min-height: 680px;
+        padding: 14px 18px 0;
       }
 
       .hero-copy {
@@ -2351,8 +2371,7 @@
       }
 
       .hero-kicker {
-        font-size: 18px;
-        margin-bottom: 14px;
+        display: none;
       }
 
       h1 {
@@ -2367,12 +2386,25 @@
       }
 
       .hero-actions {
-        gap: 12px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
         margin-top: 28px;
       }
 
       .hero-actions .btn {
+        height: 42px;
         min-width: 0;
+        padding: 0 10px;
+        width: 100%;
+      }
+
+      .desktop-label {
+        display: none;
+      }
+
+      .responsive-label {
+        display: inline;
       }
 
       .proof {
@@ -2381,7 +2413,7 @@
       }
 
       .hero-visual {
-        top: 500px;
+        top: 340px;
         left: 50%;
         right: auto;
         width: min(360px, calc(100vw - 24px));
@@ -2390,10 +2422,16 @@
       }
 
       .orbit {
-        inset: 0;
+        display: none;
       }
 
       .big-k {
+        display: none;
+      }
+
+      .hero-visual::after,
+      .hero-card,
+      .people::before {
         display: none;
       }
 
@@ -2402,6 +2440,7 @@
         bottom: -4px;
         width: min(292px, calc(100vw - 72px));
         height: 316px;
+        filter: none;
       }
 
       .people-image {
@@ -2992,11 +3031,20 @@
       }
 
       .header-actions {
-        margin-left: auto;
+        display: none;
       }
 
       .menu-toggle {
+        margin-left: auto;
         display: inline-grid;
+      }
+
+      .desktop-label {
+        display: none;
+      }
+
+      .responsive-label {
+        display: inline;
       }
 
       .mobile-menu {
@@ -3020,8 +3068,12 @@
       }
 
       .hero {
-        min-height: 930px;
-        padding: 70px 42px 0;
+        min-height: 740px;
+        padding: 30px 42px 0;
+      }
+
+      .hero-kicker {
+        display: none;
       }
 
       .hero-copy {
@@ -3046,7 +3098,7 @@
       }
 
       .hero-visual {
-        top: 500px;
+        top: 350px;
         left: 50%;
         right: auto;
         width: min(620px, calc(100vw - 80px));
@@ -3054,11 +3106,19 @@
         transform: translateX(-50%);
       }
 
+      .orbit,
+      .hero-visual::after,
+      .hero-card,
+      .people::before {
+        display: none;
+      }
+
       .people {
         right: 76px;
         bottom: -4px;
         width: min(460px, 64vw);
         height: 380px;
+        filter: none;
       }
 
       .score-card {
@@ -3085,7 +3145,7 @@
       }
 
       .donut-card {
-        display: block;
+        display: none;
         right: 4px;
         top: 260px;
         width: 150px;
@@ -3485,11 +3545,11 @@
     <header class="header">
       <a class="brand" href="/" aria-label="KINSEI トップ"><div class="brand-mark">K</div><span>KINSEI</span></a>
       <nav class="nav">
-        <a href="/">TOP</a><a href="/#features">サービス</a><a href="/#process">仕組み</a><a href="/#cases">実績・事例</a><a href="/sponsors_list.html">協賛企業</a><a href="/sponsor.html">企業の方へ</a><a href="/#members">メンバー</a>
+        <a href="/">TOP</a><a href="/#cases">実績・事例</a><a href="/sponsors_list.html">協賛企業</a><a href="/sponsor.html">企業の方へ</a><a href="/#members">メンバー</a>
       </nav>
       <div class="header-actions">
-        <a class="btn ghost" href="/login?next=/members/students">企業会員DB</a>
-        <a class="btn primary" href="/students">学生DBを見る</a>
+        <a class="btn ghost" href="/login?next=/members/students">ログイン</a>
+        <a class="btn primary" href="/students">公開中の学生プロフィールを見る</a>
       </div>
       <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false">
         <span></span>
@@ -3499,13 +3559,12 @@
       <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
         <div class="mobile-menu-panel">
           <a href="/">TOP</a>
-          <a href="/#features">サービス</a>
-          <a href="/#process">仕組み</a>
           <a href="/#cases">実績・事例</a>
           <a href="/sponsors_list.html">協賛企業</a>
           <a href="/sponsor.html">企業の方へ</a>
           <a href="/#members">メンバー</a>
-          <a class="is-cta" href="/students">学生DBを見る</a>
+          <a class="is-cta" href="/login?next=/members/students">ログイン</a>
+          <a class="is-cta" href="/students">公開中の学生</a>
         </div>
       </div>
     </header>
@@ -3516,8 +3575,8 @@
         <h1>学びと実践で、<br><span class="blue">未来のキャリア</span>をつくる。</h1>
         <p class="hero-lead">KINSEIは、学生の挑戦と実績を可視化し、<br>企業との最適な出会いをつくるキャリアプラットフォームです。</p>
         <div class="hero-actions">
-          <a class="btn primary" href="/students">学生DBを見る</a>
-          <a class="btn outline" href="/sponsor.html">企業向け資料を見る</a>
+          <a class="btn primary" href="/students"><span class="desktop-label">公開中の学生プロフィールを見る</span><span class="responsive-label">公開中の学生</span></a>
+          <a class="btn outline" href="/sponsor.html"><span class="desktop-label">企業向け資料を見る</span><span class="responsive-label">企業向け資料</span></a>
         </div>
         <div class="proof">
           <div class="proof-avatars">
@@ -3589,7 +3648,7 @@
       <div class="metric"><div class="metric-icon people"></div><div><small>登録学生数</small><strong>300+<span class="unit">名</span></strong><em>近畿大学発の学生コミュニティ</em></div></div>
       <div class="metric"><div class="metric-icon building"></div><div><small>参画企業数</small><strong>50+<span class="unit">社</span></strong><em>採用・共創パートナー</em></div></div>
       <div class="metric"><div class="metric-icon clip"></div><div><small>掲載プロジェクト数</small><strong>24<span class="unit">件</span></strong><em>長期 16件 / 短期 8件</em></div></div>
-      <div class="metric"><div class="metric-icon handshake"></div><div><small>相談・面談接点</small><strong>受付中</strong><em>学生DBから問い合わせ可能</em></div></div>
+      <div class="metric"><div class="metric-icon handshake"></div><div><small>相談・面談接点</small><strong>受付中</strong><em>学生プロフィールから問い合わせ可能</em></div></div>
     </section>
 
     <span class="legacy-anchor" id="about" aria-hidden="true"></span>
@@ -3704,7 +3763,7 @@
     <footer class="footer">
       <div><b>K KINSEI</b><p>学歴ではなく、実績で戦える社会へ。</p><p>学生と企業の新しい出会いをつくる。</p></div>
       <div><b>サービス</b><a href="/#features">サービス概要</a><a href="/#process">利用の流れ</a><a href="/#cases">実績・事例</a></div>
-      <div><b>企業の方へ</b><a href="/sponsor.html">導入プラン</a><a href="/sponsors_list.html">協賛企業一覧</a><a href="/login?next=/members/students">企業会員DB</a></div>
+      <div><b>企業の方へ</b><a href="/sponsor.html">導入プラン</a><a href="/sponsors_list.html">協賛企業一覧</a><a href="/login?next=/members/students">会員限定の学生詳細を見る</a></div>
       <div><b>会社情報</b><a href="/#members">メンバー</a><a href="/#contact">お問い合わせ</a></div>
       <div><b>お問い合わせ</b><a href="mailto:info@kinsei-career.jp">導入のご相談はこちら</a></div>
     </footer>

@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>スポンサー料金プラン | 近世 KINSEI</title>
-  <meta name="description" content="KINSEIのスポンサー料金プラン。近大生を応援する月額プランから、学生データベース閲覧や実務プロジェクト導入まで相談できます。">
+  <meta name="description" content="KINSEIのスポンサー料金プラン。近大生を応援する月額プランから、学生プロフィール閲覧や実務プロジェクト導入まで相談できます。">
   <link rel="canonical" href="https://kinseiweb-murex.vercel.app/sponsor.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:site_name" content="KINSEI">
   <meta property="og:title" content="スポンサー料金プラン | 近世 KINSEI">
-  <meta property="og:description" content="近大生を応援し、学生データベースや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
+  <meta property="og:description" content="近大生を応援し、学生プロフィールや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
   <meta property="og:url" content="https://kinseiweb-murex.vercel.app/sponsor.html">
   <meta property="og:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="スポンサー料金プラン | 近世 KINSEI">
-  <meta name="twitter:description" content="近大生を応援し、学生データベースや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
+  <meta name="twitter:description" content="近大生を応援し、学生プロフィールや実務プロジェクトを通じて未来の人材と出会うKINSEIの企業向けプラン。">
   <meta name="twitter:image" content="https://kinseiweb-murex.vercel.app/assets/images/hero-people-0518.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,11 +64,11 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      height: 76px;
+      height: 86px;
       display: flex;
       align-items: center;
-      gap: clamp(28px, 4vw, 58px);
-      padding: 0 26px;
+      gap: clamp(32px, 4.4vw, 64px);
+      padding: 0 34px;
       background: rgba(255,255,255,.82);
       border-bottom: 1px solid rgba(98, 151, 222, .16);
       backdrop-filter: blur(18px);
@@ -78,10 +78,10 @@
     .ks-brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 13px;
       color: #081c3d;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 900;
       letter-spacing: .08em;
       white-space: nowrap;
@@ -91,8 +91,8 @@
     .footer-mark {
       display: grid;
       place-items: center;
-      width: 31px;
-      height: 31px;
+      width: 35px;
+      height: 35px;
       border-radius: 8px;
       background: linear-gradient(135deg, #2f83ff, #0d5bd6);
       color: white;
@@ -105,11 +105,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: clamp(26px, 3.2vw, 48px);
+      gap: clamp(28px, 3.4vw, 52px);
       flex: 1;
       min-width: 0;
       color: #081c3d;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 900;
     }
 
@@ -117,7 +117,7 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      height: 76px;
+      height: 86px;
       color: inherit;
       text-decoration: none;
       white-space: nowrap;
@@ -141,14 +141,14 @@
     .ks-actions {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .ks-btn {
-      min-width: 132px;
-      height: 43px;
-      padding: 0 22px;
-      border-radius: 12px;
+      min-width: 0;
+      height: 42px;
+      padding: 0 18px;
+      border-radius: 10px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -584,6 +584,7 @@
       text-decoration: none;
       font-size: 15px;
       font-weight: 900;
+      white-space: nowrap;
     }
 
     .footer {
@@ -913,8 +914,9 @@
       }
 
       .ks-actions .ks-btn {
-        min-width: 116px;
-        padding: 0 16px;
+        min-width: 0;
+        padding: 0 14px;
+        font-size: 13px;
       }
 
       .plans-grid {
@@ -978,6 +980,7 @@
         text-decoration: none;
         font-size: 13px;
         font-weight: 900;
+        white-space: nowrap;
       }
 
       .ks-mobile-menu a.is-active {
@@ -1088,28 +1091,24 @@
       <a class="ks-brand" href="/" aria-label="KINSEI トップ"><span class="ks-brand-mark">K</span><span>KINSEI</span></a>
       <nav class="ks-nav" aria-label="グローバルナビゲーション">
         <a href="/">TOP</a>
-        <a href="/#features">サービス</a>
-        <a href="/#process">仕組み</a>
         <a href="/#cases">実績・事例</a>
         <a href="/sponsors_list.html">協賛企業</a>
         <a class="is-active" href="/sponsor.html" aria-current="page">企業の方へ</a>
         <a href="/#members">メンバー</a>
       </nav>
       <div class="ks-actions">
-        <a class="ks-btn" href="/login?next=/members/students">企業会員DB</a>
-        <a class="ks-btn primary" href="/students">学生DBを見る</a>
+        <a class="ks-btn" href="/login?next=/members/students">ログイン</a>
+        <a class="ks-btn primary" href="/students">公開中の学生プロフィールを見る</a>
         <button class="ks-menu-btn" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
       <div class="ks-mobile-menu" id="mobile-menu" aria-hidden="true">
         <div class="ks-mobile-panel">
           <a href="/">TOP</a>
-          <a href="/#features">サービス</a>
-          <a href="/#process">仕組み</a>
           <a href="/#cases">実績・事例</a>
           <a href="/sponsors_list.html">協賛企業</a>
           <a class="is-active" href="/sponsor.html" aria-current="page">企業の方へ</a>
           <a href="/#members">メンバー</a>
-          <a href="/students">学生DBを見る</a>
+          <a href="/students">公開中の学生プロフィールを見る</a>
         </div>
       </div>
     </header>
@@ -1203,14 +1202,14 @@
         </article>
       </div>
 
-      <aside class="db-panel" aria-label="学生データベース閲覧の案内">
+      <aside class="db-panel" aria-label="学生プロフィール活用の案内">
         <div class="db-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><ellipse cx="9" cy="5" rx="6" ry="3"></ellipse><path d="M3 5v10c0 1.7 2.7 3 6 3 1.2 0 2.4-.2 3.3-.5"></path><path d="M3 10c0 1.7 2.7 3 6 3 1 0 1.9-.1 2.8-.4"></path><path d="M14 12h6v8h-6z"></path><path d="M16 15h2"></path><path d="M16 18h2"></path></svg>
         </div>
         <div>
-          <h2>学生データベースの閲覧もご相談いただけます</h2>
+          <h2>学生プロフィールの活用もご相談いただけます</h2>
           <p>学生の動画・志望業界・深掘りプロフィールを活用した採用接点づくりを、貴社の目的に合わせてご提案いたします。まずは公開プレビューをご覧ください。</p>
-          <a class="db-link" href="/students">学生DBプレビューを見る <span aria-hidden="true">→</span></a>
+          <a class="db-link" href="/students">公開中の学生プロフィールを見る <span aria-hidden="true">→</span></a>
         </div>
       </aside>
     </section>
@@ -1227,17 +1226,17 @@
             <li><a href="/#features">サービス概要</a></li>
             <li><a href="/#process">利用の流れ</a></li>
             <li><a href="/#cases">実績・事例</a></li>
-            <li><a href="/students">学生DB</a></li>
+            <li><a href="/students">学生プロフィール</a></li>
             <li><a href="/#members">メンバー紹介</a></li>
           </ul>
         </div>
         <div>
           <h3>企業様へ</h3>
           <ul class="footer-links">
-            <li><a href="/students">学生DBを見る</a></li>
+            <li><a href="/students">公開中の学生プロフィールを見る</a></li>
             <li><a class="is-active" href="/sponsor.html">企業向け導入プラン</a></li>
             <li><a href="/sponsors_list.html">協賛企業一覧</a></li>
-            <li><a href="/login?next=/members/students">企業会員DB</a></li>
+            <li><a href="/login?next=/members/students">会員限定の学生詳細を見る</a></li>
             <li><a href="mailto:info@kinsei-career.jp">お問い合わせ</a></li>
           </ul>
         </div>

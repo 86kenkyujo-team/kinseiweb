@@ -23,7 +23,7 @@ export default function LoginPage() {
           </h2>
           <p>
             価値観、キャリア軸、志望理由の深掘り、面談リクエストまで。
-            企業会員向けの学生データベースで、次に会うべき学生を見つけられます。
+            会員限定の学生詳細ページで、次に会うべき学生を見つけられます。
           </p>
         </div>
       </section>
@@ -42,7 +42,7 @@ export default function LoginPage() {
               `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` を設定するとログインできます。
             </p>
             <Link className="secondary-link" href="/students">
-              公開DBへ戻る
+              公開中の学生プロフィールを見る
             </Link>
           </div>
         )}

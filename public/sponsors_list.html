@@ -78,20 +78,20 @@
     .header {
       position: relative;
       z-index: 5;
-      height: 64px;
+      height: 74px;
       display: flex;
       align-items: center;
-      gap: 34px;
-      padding: 0 43px;
+      gap: 40px;
+      padding: 0 48px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
+      gap: 13px;
       text-decoration: none;
       color: #0d56d8;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 900;
       letter-spacing: .02em;
       white-space: nowrap;
@@ -109,10 +109,10 @@
     }
 
     .brand-mark {
-      width: 26px;
-      height: 26px;
+      width: 31px;
+      height: 31px;
       border-radius: 7px;
-      font-size: 17px;
+      font-size: 19px;
     }
 
     .nav {
@@ -120,9 +120,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 32px;
+      gap: 36px;
       min-width: 0;
-      font-size: 11px;
+      font-size: 15px;
       font-weight: 900;
       color: #221070;
     }
@@ -131,7 +131,7 @@
       position: relative;
       text-decoration: none;
       white-space: nowrap;
-      line-height: 64px;
+      line-height: 74px;
     }
 
     .nav a.is-active {
@@ -152,7 +152,13 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+    }
+
+    .header-actions .btn {
+      min-height: 40px;
+      padding: 0 16px;
+      font-size: 14px;
     }
 
     .menu-toggle {
@@ -212,6 +218,7 @@
       text-decoration: none;
       font-size: 13px;
       font-weight: 900;
+      white-space: nowrap;
     }
 
     .mobile-menu a.is-active {
@@ -1320,16 +1327,14 @@
       </a>
       <nav class="nav" aria-label="主要ナビゲーション">
         <a href="/">TOP</a>
-        <a href="/#features">サービス</a>
-        <a href="/#process">仕組み</a>
         <a href="/#cases">実績・事例</a>
         <a class="is-active" href="/sponsors_list.html" aria-current="page">協賛企業</a>
         <a href="/sponsor.html">企業の方へ</a>
         <a href="/#members">メンバー</a>
       </nav>
       <div class="header-actions">
-        <a class="btn ghost" href="/login?next=/members/students">企業会員DB</a>
-        <a class="btn primary" href="/students">学生DBを見る</a>
+        <a class="btn ghost" href="/login?next=/members/students">ログイン</a>
+        <a class="btn primary" href="/students">公開中の学生プロフィールを見る</a>
       </div>
       <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false">
         <span></span>
@@ -1339,8 +1344,6 @@
       <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
         <div class="mobile-menu-panel">
           <a href="/">TOP</a>
-          <a href="/#features">サービス</a>
-          <a href="/#process">仕組み</a>
           <a href="/#cases">実績・事例</a>
           <a class="is-active" href="/sponsors_list.html" aria-current="page">協賛企業</a>
           <a href="/sponsor.html">企業の方へ</a>
@@ -1515,11 +1518,11 @@
         <b>企業の方へ</b>
         <a href="/sponsor.html">導入プラン</a>
         <a href="/sponsors_list.html">協賛企業一覧</a>
-        <a href="/login?next=/members/students">企業会員DB</a>
+        <a href="/login?next=/members/students">会員限定の学生詳細を見る</a>
       </div>
       <div>
         <b>メンバー</b>
-        <a href="/students">学生DBを見る</a>
+        <a href="/students">公開中の学生プロフィールを見る</a>
         <a href="/#members">メンバー紹介</a>
       </div>
       <div>

@@ -63,6 +63,7 @@
   min-height: 46px;
   padding: 0 18px;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .inactive-card a:first-child {

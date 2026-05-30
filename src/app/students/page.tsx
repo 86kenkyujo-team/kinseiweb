@@ -5,24 +5,24 @@ import { createClient } from '@/lib/supabase/server'
 import './styles.css'
 
 export const metadata: Metadata = {
-  title: '学生データベース',
+  title: '公開中の学生プロフィール',
   description:
-    'KINSEIの学生データベース。学生の動画・属性・志望業界を公開し、企業会員向けに詳細プロフィールや面談リクエスト導線を提供します。',
+    'KINSEIで公開中の学生プロフィール。学生の動画・属性・志望業界を確認し、ログイン後に詳細プロフィールや面談リクエストへ進めます。',
   alternates: {
     canonical: '/students',
   },
   openGraph: {
-    title: '学生データベース | 近世 KINSEI',
+    title: '公開中の学生プロフィール | 近世 KINSEI',
     description:
-      '学生の動画・属性・志望業界から、企業が会いたい学生を見つけるためのKINSEI学生データベース。',
+      '学生の動画・属性・志望業界から、企業が会いたい学生を見つけるためのKINSEI公開プロフィール。',
     url: '/students',
     images: ['/assets/images/student-database-hero-bg.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '学生データベース | 近世 KINSEI',
+    title: '公開中の学生プロフィール | 近世 KINSEI',
     description:
-      '学生の動画・属性・志望業界から、企業が会いたい学生を見つけるためのKINSEI学生データベース。',
+      '学生の動画・属性・志望業界から、企業が会いたい学生を見つけるためのKINSEI公開プロフィール。',
     images: ['/assets/images/student-database-hero-bg.png'],
   },
 }
@@ -143,7 +143,7 @@ export default async function StudentsPage() {
         <div>
           <span className="intro-icon intro-icon-lock" aria-hidden="true" />
           <strong>深掘りは会員限定</strong>
-          <span>価値観や意思決定の軸、面談リクエストは企業会員DBで確認できます。</span>
+          <span>価値観や意思決定の軸、面談リクエストは会員限定の学生詳細で確認できます。</span>
           <i aria-hidden="true" />
         </div>
       </section>
@@ -233,10 +233,8 @@ export default async function StudentsPage() {
                     <a href={student.tiktok_url} rel="noreferrer" target="_blank">
                       動画を見る
                     </a>
-                  ) : (
-                    <span>動画リンク準備中</span>
-                  )}
-                  <Link href="/login?next=/members/students">詳細は企業会員限定</Link>
+                  ) : null}
+                  <Link href="/login?next=/members/students">ログインして詳細プロフィールを見る</Link>
                 </div>
               </div>
             </article>

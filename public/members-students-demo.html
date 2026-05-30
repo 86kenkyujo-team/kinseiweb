@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>企業会員限定 学生データベース | 近世 KINSEI</title>
+    <title>会員限定の学生詳細 | 近世 KINSEI</title>
     <meta name="robots" content="noindex, nofollow">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,28 +57,39 @@
         .member-shell {
             min-height: calc(100vh - 80px);
         }
+
+        nav a,
+        button.inline-flex,
+        .mobile-nav-link {
+            white-space: nowrap;
+        }
+
+        #header nav > a.bg-accent,
+        #header nav > a.text-primary {
+            font-size: 14px;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
     </style>
 
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-light text-gray-800 antialiased">
 
-    <header id="header" class="fixed w-full z-50 py-4 px-6 md:px-12 bg-white/95 shadow-md text-gray-800 backdrop-blur-sm">
+    <header id="header" class="fixed w-full z-50 py-5 px-6 md:px-12 bg-white/95 shadow-md text-gray-800 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
             <a href="/" class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">K</div>
-                <span class="logo-text text-2xl font-black tracking-wider text-primary">近世 KINSEI</span>
+                <div class="w-11 h-11 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-2xl shadow-md">K</div>
+                <span class="logo-text text-[26px] font-black tracking-wider text-primary">近世 KINSEI</span>
             </a>
 
-            <nav class="hidden lg:flex gap-5 items-center font-medium text-sm">
+            <nav class="hidden lg:flex gap-6 items-center font-medium text-[16px]">
                 <a href="/" class="hover:text-primary transition">TOP</a>
-                <a href="/#features" class="hover:text-primary transition">サービス</a>
-                <a href="/#process" class="hover:text-primary transition">仕組み</a>
                 <a href="/#cases" class="hover:text-primary transition">実績・事例</a>
                 <a href="/sponsors_list.html" class="hover:text-primary transition">協賛企業</a>
                 <a href="/sponsor.html" class="hover:text-primary transition">企業の方へ</a>
-                <a href="/students" class="hover:text-primary transition">学生DB</a>
-                <a href="/login?next=/members/students" class="text-primary font-bold">企業会員DB</a>
+                <a href="/students" class="hover:text-primary transition">学生プロフィール</a>
+                <a href="/login?next=/members/students" class="text-primary font-bold">ログイン</a>
                 <a href="/#contact" class="bg-accent text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:scale-105 transition transform">
                     お問い合わせ
                 </a>
@@ -91,13 +102,11 @@
 
         <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 mobile-menu-hidden transition-all duration-300 flex flex-col items-center justify-center gap-8 text-xl font-bold">
             <a href="/" class="mobile-nav-link text-dark hover:text-primary transition">TOP</a>
-            <a href="/#features" class="mobile-nav-link text-dark hover:text-primary transition">サービス</a>
-            <a href="/#process" class="mobile-nav-link text-dark hover:text-primary transition">仕組み</a>
             <a href="/#cases" class="mobile-nav-link text-dark hover:text-primary transition">実績・事例</a>
             <a href="/sponsors_list.html" class="mobile-nav-link text-dark hover:text-primary transition">協賛企業</a>
             <a href="/sponsor.html" class="mobile-nav-link text-dark hover:text-primary transition">企業の方へ</a>
-            <a href="/students" class="mobile-nav-link text-dark hover:text-primary transition">学生DB</a>
-            <a href="/login?next=/members/students" class="mobile-nav-link text-primary transition">企業会員DB</a>
+            <a href="/students" class="mobile-nav-link text-dark hover:text-primary transition">学生プロフィール</a>
+            <a href="/login?next=/members/students" class="mobile-nav-link text-primary transition">ログイン</a>
             <a href="/#contact" class="mobile-nav-link bg-accent text-white px-10 py-4 rounded-full shadow-lg mt-4">お問い合わせ</a>
         </div>
     </header>
