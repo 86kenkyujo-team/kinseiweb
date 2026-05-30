@@ -1,15 +1,48 @@
 .members-page {
+  --members-header-height: 60px;
+  --members-reel-bottom-space: 10px;
   background:
     radial-gradient(circle at 16% 14%, rgba(0, 91, 172, 0.1), transparent 28%),
     radial-gradient(#cfe3f7 1px, transparent 1px),
     #f6f9fe;
   background-size: auto, 18px 18px, auto;
   height: 100svh;
+  height: 100dvh;
   min-height: 100vh;
   overflow-y: auto;
   scroll-behavior: smooth;
-  scroll-padding-top: 76px;
+  scroll-padding-top: var(--members-header-height);
   scroll-snap-type: y mandatory;
+}
+
+.members-page .student-db-header {
+  min-height: var(--members-header-height);
+  padding: 8px clamp(18px, 4vw, 52px);
+}
+
+.members-page .student-db-brand {
+  font-size: 19px;
+  gap: 9px;
+}
+
+.members-page .student-db-brand span {
+  height: 34px;
+  width: 34px;
+}
+
+.members-page .student-db-header nav {
+  gap: 14px;
+}
+
+.members-page .student-db-header nav a {
+  font-size: 13px;
+}
+
+.members-page .student-db-login-link,
+.members-page .student-db-header .logout-button {
+  font-size: 13px;
+  min-height: 34px;
+  padding: 0 12px;
 }
 
 .members-header {
@@ -247,10 +280,11 @@
   display: grid;
   gap: clamp(14px, 2vw, 28px);
   grid-template-columns: minmax(300px, 1fr) minmax(360px, 50svh) minmax(300px, 1fr);
-  min-height: calc(100svh - 112px);
+  min-height: calc(100svh - var(--members-header-height));
+  min-height: calc(100dvh - var(--members-header-height));
   min-width: 0;
   overflow: clip;
-  padding: clamp(14px, 2vw, 24px);
+  padding: clamp(10px, 1.6vw, 18px) clamp(14px, 2vw, 24px) var(--members-reel-bottom-space);
   scroll-margin-top: 0;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -273,7 +307,8 @@
   box-shadow:
     0 22px 70px rgba(15, 23, 42, 0.2),
     0 1px 0 rgba(255, 255, 255, 0.2) inset;
-  max-height: calc(100svh - 112px);
+  max-height: calc(100svh - var(--members-header-height) - var(--members-reel-bottom-space) - 20px);
+  max-height: calc(100dvh - var(--members-header-height) - var(--members-reel-bottom-space) - 20px);
   width: min(100%, 500px, 50svh);
 }
 
@@ -286,7 +321,8 @@
   border-radius: 8px;
   box-shadow: 0 20px 70px rgba(51, 128, 216, 0.1);
   display: grid;
-  max-height: calc(100svh - 126px);
+  max-height: calc(100svh - var(--members-header-height) - var(--members-reel-bottom-space) - 22px);
+  max-height: calc(100dvh - var(--members-header-height) - var(--members-reel-bottom-space) - 22px);
   min-width: 0;
   overflow: hidden;
 }
@@ -965,8 +1001,35 @@
 
 @media (max-width: 860px) {
   .members-page {
+    --members-header-height: 54px;
+    --members-reel-bottom-space: 8px;
     background: #020817;
-    scroll-padding-top: 64px;
+    scroll-padding-top: var(--members-header-height);
+  }
+
+  .members-page .student-db-header {
+    min-height: var(--members-header-height);
+    padding: 6px 12px;
+  }
+
+  .members-page .student-db-brand {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .members-page .student-db-brand span {
+    border-radius: 7px;
+    height: 30px;
+    width: 30px;
+  }
+
+  .members-page .student-db-menu-button {
+    height: 36px;
+    width: 36px;
+  }
+
+  .members-page .student-db-header nav {
+    top: calc(100% + 6px);
   }
 
   .members-hero {
@@ -987,10 +1050,12 @@
     background: #020817;
     display: grid;
     grid-template-columns: 1fr;
-    height: calc(100svh - 64px);
-    min-height: calc(100svh - 64px);
+    height: calc(100svh - var(--members-header-height));
+    height: calc(100dvh - var(--members-header-height));
+    min-height: calc(100svh - var(--members-header-height));
+    min-height: calc(100dvh - var(--members-header-height));
     overflow: hidden;
-    padding: 0;
+    padding: 0 0 var(--members-reel-bottom-space);
     position: relative;
   }
 
@@ -1048,7 +1113,7 @@
 
   .mobile-student-details > summary {
     align-items: end;
-    bottom: calc(46px + env(safe-area-inset-bottom));
+    bottom: calc(34px + var(--members-reel-bottom-space) + env(safe-area-inset-bottom));
     color: white;
     cursor: pointer;
     display: grid;
@@ -1157,7 +1222,8 @@
   }
 
   .mobile-student-details[open] > summary {
-    bottom: calc(min(76svh, 620px) + 12px);
+    bottom: calc(min(76svh, 620px) + 10px);
+    bottom: calc(min(76dvh, 620px) + 10px);
   }
 
   .mobile-student-details[open]::before {
@@ -1187,6 +1253,7 @@
     box-shadow: 0 -24px 70px rgba(2, 8, 23, 0.28);
     left: 0;
     max-height: min(76svh, 620px);
+    max-height: min(76dvh, 620px);
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 10px 14px calc(18px + env(safe-area-inset-bottom));
