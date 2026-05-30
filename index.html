@@ -1135,8 +1135,16 @@
       object-position: center 24%;
     }
 
+    #company-audience .audience-gallery img:first-child {
+      object-position: center center;
+    }
+
     @media (min-width: 769px) {
       #student-audience .audience-gallery {
+        display: block;
+      }
+
+      #company-audience .audience-gallery {
         display: block;
       }
 
@@ -1144,6 +1152,11 @@
         display: block;
         height: auto;
         object-position: center center;
+      }
+
+      #company-audience .audience-gallery img:first-child {
+        display: block;
+        height: 406px;
       }
 
       #student-audience .audience-gallery img:not(:first-child) {
@@ -1677,9 +1690,8 @@
       min-width: 0;
       display: flex;
       align-items: center;
-      overflow-x: auto;
-      padding: 14px 4px;
-      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
+      padding: 14px 0;
       scrollbar-width: none;
       -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
       mask-image: linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
@@ -1698,6 +1710,13 @@
 
     .logo-track {
       min-width: max-content;
+      transform: translateX(-50%);
+      animation: logo-marquee-mobile 24s linear infinite;
+      will-change: transform;
+    }
+
+    .logo-list:hover .logo-track {
+      animation-play-state: paused;
     }
 
     .logo-list span {
@@ -1749,10 +1768,10 @@
 
     .mentor-section {
       width: min(1120px, calc(100% - 96px));
-      margin: 34px auto 0;
+      margin: 42px auto 0;
       display: grid;
-      grid-template-columns: 1fr 230px;
-      gap: 24px;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 26px;
       align-items: stretch;
     }
 
@@ -1761,16 +1780,16 @@
     }
 
     .mentor-heading p {
-      margin: 6px 0 0;
+      margin: 8px 0 0;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
     }
 
     .mentor-list {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
     }
 
     .mentor-card,
@@ -1782,17 +1801,17 @@
     }
 
     .mentor-card {
-      min-height: 126px;
+      min-height: 170px;
       display: grid;
-      grid-template-columns: 58px 1fr;
-      gap: 16px;
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 22px;
       align-items: center;
-      padding: 18px;
+      padding: 26px;
     }
 
     .mentor-card img {
-      width: 54px;
-      height: 54px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center 24%;
@@ -1801,24 +1820,24 @@
     .mentor-card b {
       display: block;
       color: #132542;
-      font-size: 13px;
+      font-size: 16px;
       font-weight: 900;
-      margin-bottom: 7px;
+      margin-bottom: 9px;
     }
 
     .mentor-card p {
       margin: 0;
       color: var(--muted);
-      font-size: 10px;
-      line-height: 1.75;
+      font-size: 12px;
+      line-height: 1.85;
       font-weight: 800;
     }
 
     .mentor-consult {
-      padding: 22px;
+      padding: 24px;
       display: grid;
       align-content: center;
-      gap: 14px;
+      gap: 16px;
     }
 
     .mentor-consult b {
@@ -2852,22 +2871,36 @@
 
       .mentor-section {
         width: auto;
-        margin: 30px 20px 0;
+        margin: 34px 20px 0;
         grid-template-columns: 1fr;
+        gap: 18px;
       }
 
       .mentor-list {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
 
       .mentor-card {
-        min-height: 104px;
+        min-height: 128px;
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 18px;
+        padding: 20px;
       }
 
       .mentor-card img {
-        width: 62px;
-        height: 62px;
+        width: 76px;
+        height: 76px;
         object-position: center;
+      }
+
+      .mentor-card b {
+        font-size: 15px;
+      }
+
+      .mentor-card p {
+        font-size: 11px;
+        line-height: 1.75;
       }
 
       .growth-cta {
@@ -2994,6 +3027,14 @@
       .hero-copy {
         width: min(100%, 700px);
         min-width: 0;
+      }
+
+      .mentor-section {
+        grid-template-columns: 1fr;
+      }
+
+      .mentor-consult {
+        min-height: 148px;
       }
 
       h1 {
@@ -3595,9 +3636,7 @@
           </div>
         </div>
         <div class="audience-gallery" aria-hidden="true">
-          <img src="assets/images/kinsei-flow-profile.png" alt="">
-          <img src="assets/images/kinsei-case-new-business.png" alt="">
-          <img src="assets/images/kinsei-case-marketing.png" alt="">
+          <img src="assets/images/company-audience-meeting.png" alt="">
         </div>
       </div>
     </section>
@@ -3652,8 +3691,6 @@
         <div class="mentor-list">
           <article class="mentor-card"><img src="assets/images/katayama.jpeg" alt="片山 諒"><div><b>片山 諒</b><p>KINSEI代表<br>事業開発 / マーケティング</p></div></article>
           <article class="mentor-card"><img src="assets/images/kitajima2.jpeg" alt="北嶋 元勝"><div><b>北嶋 元勝</b><p>マーケティング責任者<br>学生支援</p></div></article>
-          <article class="mentor-card"><img src="assets/images/kinsei-case-new-business.png" alt="大橋 彩"><div><b>大橋 彩</b><p>データサイエンティスト<br>分析支援</p></div></article>
-          <article class="mentor-card"><img src="assets/images/kinsei-case-data.png" alt="佐々木 悠"><div><b>佐々木 悠</b><p>プロダクトマネージャー<br>企画伴走</p></div></article>
         </div>
         <aside class="mentor-consult"><b>メンターに相談する</b><p>キャリアやプロジェクトの相談をメンターに直接相談できます。</p><a href="mailto:info@kinsei-career.jp">相談を予約する</a></aside>
       </section>
