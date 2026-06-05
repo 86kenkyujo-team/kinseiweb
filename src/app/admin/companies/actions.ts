@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { getAdminRedirectUrl, requireAdmin } from '@/lib/admin/auth'
+import { getCompanyPasswordUpdateRedirectUrl, requireAdmin } from '@/lib/admin/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 function textValue(formData: FormData, key: string) {
@@ -20,65 +20,184 @@ function requiredText(formData: FormData, key: string) {
   return value
 }
 
-export async function createCompany(formData: FormData) {
-  const { adminClient, adminUser } = await requireAdmin()
-  const serviceClient = createAdminClient()
-  const companyName = requiredText(formData, 'companyName')
-  const contactName = requiredText(formData, 'contactName')
-  const contactEmail = requiredText(formData, 'contactEmail').toLowerCase()
-  const membershipStatus = requiredText(formData, 'membershipStatus')
-  const planName = textValue(formData, 'planName')
-  const contractStatusNote = textValue(formData, 'contractStatusNote')
-  const contractStartDate = textValue(formData, 'contractStartDate')
-  const contractEndDate = textValue(formData, 'contractEndDate')
-  const nextCheckDate = textValue(formData, 'nextCheckDate')
-  const adminNote = textValue(formData, 'adminNote')
+type AuthEmailError = {
+  code?: string
+  message?: string
+  status?: number
+}
 
-  const { data: existingCompany } = await adminClient
-    .from('companies')
-    .select('id')
-    .eq('contact_email', contactEmail)
-    .maybeSingle()
+type CompanyFormValues = {
+  adminNote: string | null
+  companyName: string
+  contactEmail: string
+  contactName: string
+  contractEndDate: string | null
+  contractStartDate: string | null
+  contractStatusNote: string | null
+  membershipStatus: string
+  nextCheckDate: string | null
+  planName: string | null
+}
 
-  if (existingCompany) {
-    redirect('/admin/companies/new?status=duplicate')
+type CompanyAccessEmailResult =
+  | { emailKind: 'invite' | 'password_reset'; status: 'ok'; userId: string }
+  | { errorStatus: string; status: 'error' }
+
+function isAlreadyRegisteredInviteError(error: AuthEmailError | null) {
+  return (
+    error?.status === 422 &&
+    /already been registered/i.test(error.message || '')
+  )
+}
+
+function getInviteErrorStatus(error: AuthEmailError | null) {
+  if (error?.code === 'email_address_invalid' || /email address .* is invalid/i.test(error?.message || '')) {
+    return 'invite_email_invalid'
   }
 
-  if (!serviceClient) {
-    redirect('/admin/companies/new?status=service_key_missing')
+  return 'invite_error'
+}
+
+function getPasswordResetErrorStatus(error: AuthEmailError | null) {
+  if (error?.code === 'email_address_invalid' || /email address .* is invalid/i.test(error?.message || '')) {
+    return 'invite_email_invalid'
   }
 
+  return 'password_reset_error'
+}
+
+function logAuthEmailError(context: string, error: AuthEmailError | null) {
+  console.error(`[admin companies] ${context}`, {
+    code: error?.code,
+    message: error?.message,
+    status: error?.status,
+  })
+}
+
+async function findAuthUserByEmail(
+  serviceClient: NonNullable<ReturnType<typeof createAdminClient>>,
+  email: string,
+) {
+  const normalizedEmail = email.toLowerCase()
+
+  for (let page = 1; page <= 20; page += 1) {
+    const { data, error } = await serviceClient.auth.admin.listUsers({
+      page,
+      perPage: 1000,
+    })
+
+    if (error) {
+      logAuthEmailError('auth user lookup failed', error)
+      return null
+    }
+
+    const user = data.users.find((candidate) => candidate.email?.toLowerCase() === normalizedEmail)
+
+    if (user) {
+      return user
+    }
+
+    if (!data.nextPage) {
+      return null
+    }
+  }
+
+  return null
+}
+
+async function sendCompanyAccessEmail(
+  serviceClient: NonNullable<ReturnType<typeof createAdminClient>>,
+  values: Pick<CompanyFormValues, 'companyName' | 'contactEmail' | 'contactName'>,
+): Promise<CompanyAccessEmailResult> {
+  const redirectTo = getCompanyPasswordUpdateRedirectUrl()
   const { data: inviteData, error: inviteError } = await serviceClient.auth.admin.inviteUserByEmail(
-    contactEmail,
+    values.contactEmail,
     {
       data: {
-        company_name: companyName,
-        contact_name: contactName,
+        company_name: values.companyName,
+        contact_name: values.contactName,
       },
-      redirectTo: getAdminRedirectUrl(),
+      redirectTo,
     },
   )
 
-  if (inviteError || !inviteData.user) {
-    redirect('/admin/companies/new?status=invite_error')
+  if (!inviteError && inviteData.user) {
+    return {
+      emailKind: 'invite',
+      status: 'ok',
+      userId: inviteData.user.id,
+    }
+  }
+
+  if (!isAlreadyRegisteredInviteError(inviteError)) {
+    logAuthEmailError('invite failed', inviteError)
+    return {
+      errorStatus: getInviteErrorStatus(inviteError),
+      status: 'error',
+    }
+  }
+
+  const existingUser = await findAuthUserByEmail(serviceClient, values.contactEmail)
+
+  if (!existingUser) {
+    logAuthEmailError('existing auth user not found after duplicate invite', inviteError)
+    return {
+      errorStatus: 'auth_user_lookup_error',
+      status: 'error',
+    }
+  }
+
+  const { error: resetError } = await serviceClient.auth.resetPasswordForEmail(values.contactEmail, {
+    redirectTo,
+  })
+
+  if (resetError) {
+    logAuthEmailError('password reset email failed', resetError)
+    return {
+      errorStatus: getPasswordResetErrorStatus(resetError),
+      status: 'error',
+    }
+  }
+
+  return {
+    emailKind: 'password_reset',
+    status: 'ok',
+    userId: existingUser.id,
+  }
+}
+
+async function insertCompany(
+  adminClient: Awaited<ReturnType<typeof requireAdmin>>['adminClient'],
+  adminUser: Awaited<ReturnType<typeof requireAdmin>>['adminUser'],
+  values: CompanyFormValues,
+  authUserId: string,
+) {
+  const { data: existingAuthCompany } = await adminClient
+    .from('companies')
+    .select('id')
+    .eq('auth_user_id', authUserId)
+    .maybeSingle()
+
+  if (existingAuthCompany) {
+    redirect('/admin/companies/new?status=auth_user_duplicate_company')
   }
 
   const { data: company, error: insertError } = await adminClient
     .from('companies')
     .insert({
-      admin_note: adminNote,
-      auth_user_id: inviteData.user.id,
-      company_name: companyName,
-      contact_email: contactEmail,
-      contact_name: contactName,
-      contract_end_date: contractEndDate,
-      contract_start_date: contractStartDate,
-      contract_status_note: contractStatusNote,
+      admin_note: values.adminNote,
+      auth_user_id: authUserId,
+      company_name: values.companyName,
+      contact_email: values.contactEmail,
+      contact_name: values.contactName,
+      contract_end_date: values.contractEndDate,
+      contract_start_date: values.contractStartDate,
+      contract_status_note: values.contractStatusNote,
       created_by_admin_id: adminUser.id,
       last_status_changed_at: new Date().toISOString(),
-      membership_status: membershipStatus,
-      next_check_date: nextCheckDate,
-      plan_name: planName,
+      membership_status: values.membershipStatus,
+      next_check_date: values.nextCheckDate,
+      plan_name: values.planName,
     })
     .select('id')
     .single()
@@ -91,21 +210,68 @@ export async function createCompany(formData: FormData) {
     adminClient.from('company_status_logs').insert({
       admin_user_id: adminUser.id,
       company_id: company.id,
-      next_status: membershipStatus,
+      next_status: values.membershipStatus,
       note: '企業登録時の初期ステータス',
     }),
     adminClient.from('admin_activity_logs').insert({
       action: 'company.create',
       admin_user_id: adminUser.id,
-      details: { contact_email: contactEmail, membership_status: membershipStatus },
+      details: {
+        contact_email: values.contactEmail,
+        membership_status: values.membershipStatus,
+      },
       target_id: company.id,
       target_table: 'companies',
     }),
   ])
 
+  return company
+}
+
+export async function createCompany(formData: FormData) {
+  const { adminClient, adminUser } = await requireAdmin()
+  const serviceClient = createAdminClient()
+  const values: CompanyFormValues = {
+    adminNote: textValue(formData, 'adminNote'),
+    companyName: requiredText(formData, 'companyName'),
+    contactEmail: requiredText(formData, 'contactEmail').toLowerCase(),
+    contactName: requiredText(formData, 'contactName'),
+    contractEndDate: textValue(formData, 'contractEndDate'),
+    contractStartDate: textValue(formData, 'contractStartDate'),
+    contractStatusNote: textValue(formData, 'contractStatusNote'),
+    membershipStatus: requiredText(formData, 'membershipStatus'),
+    nextCheckDate: textValue(formData, 'nextCheckDate'),
+    planName: textValue(formData, 'planName'),
+  }
+
+  const { data: existingCompany } = await adminClient
+    .from('companies')
+    .select('id')
+    .eq('contact_email', values.contactEmail)
+    .maybeSingle()
+
+  if (existingCompany) {
+    redirect('/admin/companies/new?status=duplicate')
+  }
+
+  if (!serviceClient) {
+    redirect('/admin/companies/new?status=service_key_missing')
+  }
+
+  const accessEmailResult = await sendCompanyAccessEmail(serviceClient, values)
+
+  if (accessEmailResult.status === 'error') {
+    redirect(`/admin/companies/new?status=${accessEmailResult.errorStatus}`)
+  }
+
+  const company = await insertCompany(adminClient, adminUser, values, accessEmailResult.userId)
+
   revalidatePath('/admin')
   revalidatePath('/admin/companies')
-  redirect(`/admin/companies/${company.id}?status=created`)
+  const createdStatus =
+    accessEmailResult.emailKind === 'password_reset' ? 'created_existing_user' : 'created'
+
+  redirect(`/admin/companies/${company.id}?status=${createdStatus}`)
 }
 
 export async function updateCompany(formData: FormData) {
@@ -165,26 +331,42 @@ export async function resendCompanyInvite(formData: FormData) {
   const serviceClient = createAdminClient()
   const companyId = requiredText(formData, 'companyId')
   const contactEmail = requiredText(formData, 'contactEmail').toLowerCase()
+  const companyName = requiredText(formData, 'companyName')
+  const contactName = requiredText(formData, 'contactName')
 
   if (!serviceClient) {
     redirect(`/admin/companies/${companyId}?status=service_key_missing`)
   }
 
-  const { error } = await serviceClient.auth.admin.inviteUserByEmail(contactEmail, {
-    redirectTo: getAdminRedirectUrl(),
+  const accessEmailResult = await sendCompanyAccessEmail(serviceClient, {
+    companyName,
+    contactEmail,
+    contactName,
   })
 
-  if (error) {
-    redirect(`/admin/companies/${companyId}?status=invite_error`)
+  if (accessEmailResult.status === 'error') {
+    redirect(`/admin/companies/${companyId}?status=${accessEmailResult.errorStatus}`)
+  }
+
+  const { error: updateAuthUserError } = await adminClient
+    .from('companies')
+    .update({ auth_user_id: accessEmailResult.userId })
+    .eq('id', companyId)
+
+  if (updateAuthUserError) {
+    redirect(`/admin/companies/${companyId}?status=error`)
   }
 
   await adminClient.from('admin_activity_logs').insert({
     action: 'company.invite_resend',
     admin_user_id: adminUser.id,
-    details: { contact_email: contactEmail },
+    details: { contact_email: contactEmail, email_kind: accessEmailResult.emailKind },
     target_id: companyId,
     target_table: 'companies',
   })
 
-  redirect(`/admin/companies/${companyId}?status=invite_sent`)
+  const sentStatus =
+    accessEmailResult.emailKind === 'password_reset' ? 'password_reset_sent' : 'invite_sent'
+
+  redirect(`/admin/companies/${companyId}?status=${sentStatus}`)
 }

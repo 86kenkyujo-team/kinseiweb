@@ -18,10 +18,15 @@ type CompanyDetailPageProps = {
 
 const statusMessages: Record<string, string> = {
   created: '企業を登録し、招待メールを送信しました。',
+  created_existing_user: '企業を登録し、既存アカウントへパスワード再設定メールを送信しました。',
   error: '企業情報を更新できませんでした。',
+  auth_user_lookup_error: '既存のログインアカウントを確認できませんでした。時間をおいて再度お試しください。',
+  invite_email_invalid: 'メールアドレスが無効と判定されました。実在する企業メールアドレスを入力してください。',
   invite_error: '招待メールを再送できませんでした。',
   invite_sent: '招待メールを再送しました。',
-  service_key_missing: '招待メールの再送には Vercel の SUPABASE_SERVICE_ROLE_KEY 設定が必要です。',
+  password_reset_error: '既存アカウントへのパスワード再設定メールを送信できませんでした。',
+  password_reset_sent: '既存アカウントへパスワード再設定メールを送信しました。',
+  service_key_missing: 'ログイン案内の送信には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
   updated: '企業情報を更新しました。',
 }
 
@@ -48,7 +53,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
         <div>
           <p>Company Detail</p>
           <h1>{company.company_name}</h1>
-          <span>契約状況の台帳と、企業会員DBの閲覧可否を管理します。</span>
+          <span>契約状況の台帳、企業会員DBの閲覧可否、ログイン案内を管理します。</span>
         </div>
         <Link className="admin-button secondary" href="/admin/companies">
           一覧へ戻る
@@ -73,7 +78,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
         <div className="admin-form-grid">
           <div className="admin-form-section full">
             <p>基本情報</p>
-            <span>企業名と担当者情報です。担当者メールアドレスは招待メールの再送にも使います。</span>
+            <span>企業名と担当者情報です。担当者メールアドレスはログイン案内の再送にも使います。</span>
           </div>
           <label>
             <span className="admin-label-text">企業名</span>
@@ -87,7 +92,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
           </label>
           <label>
             <span className="admin-label-text">担当者メールアドレス</span>
-            <span className="admin-field-hint">ログイン・招待メールの宛先です。</span>
+            <span className="admin-field-hint">招待メールまたはパスワード再設定メールの宛先です。</span>
             <input name="contactEmail" required type="email" defaultValue={company.contact_email} />
           </label>
           <label>
@@ -152,12 +157,17 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
       </form>
 
       <section className="admin-panel">
-        <h2>招待リンク</h2>
-        <p>企業担当者がリンクを見失った場合は、担当者メールアドレスへ招待メールを再送します。</p>
+        <h2>ログイン案内</h2>
+        <p>
+          企業担当者がリンクを見失った場合は、担当者メールアドレスへログイン案内を再送します。
+          既存アカウントにはパスワード再設定メールを送ります。
+        </p>
         <form action={resendCompanyInvite} className="admin-inline-form">
           <input name="companyId" type="hidden" value={company.id} />
+          <input name="companyName" type="hidden" value={company.company_name} />
           <input name="contactEmail" type="hidden" value={company.contact_email} />
-          <button type="submit">招待メールを再送</button>
+          <input name="contactName" type="hidden" value={company.contact_name} />
+          <button type="submit">ログイン案内を再送</button>
         </form>
       </section>
     </>

@@ -10,10 +10,14 @@ type NewCompanyPageProps = {
 }
 
 const statusMessages: Record<string, string> = {
+  auth_user_duplicate_company: 'このメールアドレスのログインアカウントは、すでに別の企業に紐づいています。',
+  auth_user_lookup_error: '既存のログインアカウントを確認できませんでした。時間をおいて再度お試しください。',
   company_error: '企業情報を作成できませんでした。',
   duplicate: 'このメールアドレスの企業はすでに登録されています。',
+  invite_email_invalid: 'メールアドレスが無効と判定されました。実在する企業メールアドレスを入力してください。',
   invite_error: '招待メールを送信できませんでした。',
-  service_key_missing: '企業招待メールの送信には Vercel の SUPABASE_SERVICE_ROLE_KEY 設定が必要です。',
+  password_reset_error: '既存アカウントへのパスワード再設定メールを送信できませんでした。',
+  service_key_missing: '企業ログイン案内の送信には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
 }
 
 export default async function NewCompanyPage({ searchParams }: NewCompanyPageProps) {
@@ -28,7 +32,7 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
         <div>
           <p>New Company</p>
           <h1>企業を登録</h1>
-          <span>担当者メールアドレスへ招待リンクを送り、企業側でパスワードを設定します。</span>
+          <span>担当者メールアドレスへログイン案内を送り、企業側でパスワードを設定します。</span>
         </div>
         <Link className="admin-button secondary" href="/admin/companies">
           一覧へ戻る
@@ -41,7 +45,9 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
         <div className="admin-form-grid">
           <div className="admin-form-section full">
             <p>基本情報</p>
-            <span>企業名と担当者情報です。担当者メールアドレス宛に招待メールが送られます。</span>
+            <span>
+              企業名と担当者情報です。新規アカウントには招待メール、既存アカウントにはパスワード再設定メールが送られます。
+            </span>
           </div>
           <label>
             <span className="admin-label-text">企業名</span>
@@ -55,7 +61,7 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
           </label>
           <label>
             <span className="admin-label-text">担当者メールアドレス</span>
-            <span className="admin-field-hint">このメールに招待リンクが送信されます。</span>
+            <span className="admin-field-hint">このメールにログイン案内が送信されます。</span>
             <input name="contactEmail" required type="email" />
           </label>
           <label>
@@ -110,7 +116,7 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
           </label>
         </div>
         <div className="admin-form-actions">
-          <button type="submit">登録して招待を送る</button>
+          <button type="submit">登録してログイン案内を送る</button>
         </div>
       </form>
     </>

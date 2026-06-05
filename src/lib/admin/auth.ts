@@ -69,19 +69,37 @@ export async function requireAdmin() {
   }
 }
 
-export function getAdminRedirectUrl() {
+function getSiteUrl() {
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.VERCEL_PROJECT_PRODUCTION_URL ||
     process.env.VERCEL_URL
+  const fallbackSiteUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : null
+
+  if (!siteUrl && !fallbackSiteUrl) {
+    return undefined
+  }
+
+  const rawUrl = siteUrl || fallbackSiteUrl || ''
+  return rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`
+}
+
+export function getAdminRedirectUrl() {
+  const siteUrl = getSiteUrl()
 
   if (!siteUrl) {
     return undefined
   }
 
-  const normalizedUrl = siteUrl.startsWith('http')
-    ? siteUrl
-    : `https://${siteUrl}`
+  return `${siteUrl}/login?next=/members/students`
+}
 
-  return `${normalizedUrl}/login?next=/members/students`
+export function getCompanyPasswordUpdateRedirectUrl() {
+  const siteUrl = getSiteUrl()
+
+  if (!siteUrl) {
+    return undefined
+  }
+
+  return `${siteUrl}/password-update?next=${encodeURIComponent('/members/students')}`
 }
