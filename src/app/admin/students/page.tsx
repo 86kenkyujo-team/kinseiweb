@@ -16,6 +16,15 @@ type Student = {
   updated_at: string
 }
 
+type AdminStudentsPageProps = {
+  searchParams?: Promise<{ status?: string }>
+}
+
+const statusMessages: Record<string, string> = {
+  deleted: '学生を削除しました。',
+  delete_not_found: '削除対象の学生が見つかりませんでした。',
+}
+
 function normalizeProfile(profile: Student['student_member_profiles']) {
   if (Array.isArray(profile)) {
     return profile[0] || null
@@ -24,7 +33,8 @@ function normalizeProfile(profile: Student['student_member_profiles']) {
   return profile
 }
 
-export default async function AdminStudentsPage() {
+export default async function AdminStudentsPage({ searchParams }: AdminStudentsPageProps) {
+  const query = await searchParams
   const { adminClient } = await requireAdmin()
   const { data: students, error } = await adminClient
     .from('students')
@@ -44,6 +54,7 @@ export default async function AdminStudentsPage() {
     )
     .order('updated_at', { ascending: false })
     .returns<Student[]>()
+  const message = query?.status ? statusMessages[query.status] : null
 
   return (
     <>
@@ -59,6 +70,7 @@ export default async function AdminStudentsPage() {
       </section>
 
       {error ? <div className="admin-notice">{error.message}</div> : null}
+      {message ? <div className="admin-notice">{message}</div> : null}
 
       <div className="admin-table-wrap">
         <table className="admin-table">

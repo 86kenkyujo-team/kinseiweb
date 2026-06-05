@@ -91,12 +91,62 @@
   justify-content: center;
   min-height: 48px;
   padding: 0 18px;
+  position: relative;
   text-decoration: none;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease,
+    transform 160ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-login-page .login-card button:hover,
+.admin-login-page .secondary-link:hover {
+  background: #0a8f6a;
+  box-shadow: 0 16px 28px rgba(10, 143, 106, 0.2);
+  transform: translateY(-1px);
+}
+
+.admin-login-page .login-card button:active,
+.admin-login-page .secondary-link:active {
+  box-shadow: 0 10px 18px rgba(10, 143, 106, 0.16);
+  transform: translateY(1px) scale(0.98);
+}
+
+.admin-login-page .login-card button:focus-visible,
+.admin-login-page .secondary-link:focus-visible {
+  box-shadow: 0 0 0 4px rgba(10, 143, 106, 0.15);
+  outline: none;
 }
 
 .admin-login-page .login-card button:disabled {
   cursor: wait;
   opacity: 0.7;
+  transform: none;
+}
+
+.admin-login-page .login-card button.is-loading {
+  gap: 10px;
+}
+
+.admin-login-page .login-card button.is-loading::before {
+  animation: adminLoginButtonSpin 760ms linear infinite;
+  border: 2px solid rgba(255, 255, 255, 0.46);
+  border-top-color: #ffffff;
+  border-radius: 999px;
+  content: '';
+  height: 16px;
+  width: 16px;
+}
+
+.admin-login-page .login-button-label {
+  transition: transform 160ms ease;
+}
+
+.admin-login-page .login-card button.is-loading .login-button-label {
+  transform: translateX(2px);
 }
 
 .admin-login-page .login-helper-link {
@@ -113,6 +163,12 @@
   text-decoration: underline;
 }
 
+.admin-login-page .login-helper-link:focus-visible {
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(10, 143, 106, 0.12);
+  outline: none;
+}
+
 .admin-login-page .error-message {
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -124,6 +180,12 @@
   padding: 12px 14px;
 }
 
+@keyframes adminLoginButtonSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 860px) {
   .admin-login-page {
     grid-template-columns: 1fr;
@@ -133,5 +195,17 @@
 @media (max-width: 520px) {
   .admin-login-page .login-card {
     padding: 24px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-login-page .login-card button,
+  .admin-login-page .secondary-link,
+  .admin-login-page .login-button-label {
+    transition: none;
+  }
+
+  .admin-login-page .login-card button.is-loading::before {
+    animation: none;
   }
 }

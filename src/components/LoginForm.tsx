@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { initializeSessionLifetime } from '@/lib/auth/sessionLifetime'
 import { createClient } from '@/lib/supabase/client'
@@ -33,6 +33,10 @@ export function LoginForm({
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  useEffect(() => {
+    router.prefetch(nextPath)
+  }, [nextPath, router])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -100,8 +104,8 @@ export function LoginForm({
 
       {error ? <p className="error-message">{error}</p> : null}
 
-      <button disabled={isSubmitting} type="submit">
-        {isSubmitting ? '確認中...' : submitLabel}
+      <button className={isSubmitting ? 'is-loading' : undefined} disabled={isSubmitting} type="submit">
+        <span className="login-button-label">{isSubmitting ? '確認中...' : submitLabel}</span>
       </button>
 
       <a className="login-helper-link" href={forgotPasswordHref}>

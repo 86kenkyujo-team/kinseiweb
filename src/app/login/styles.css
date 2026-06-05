@@ -208,13 +208,65 @@
   justify-content: center;
   min-height: 48px;
   padding: 0 18px;
+  position: relative;
   text-decoration: none;
+  transition:
+    box-shadow 160ms ease,
+    filter 160ms ease,
+    opacity 160ms ease,
+    transform 160ms ease;
+  user-select: none;
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.login-card button:hover,
+.secondary-link:hover {
+  box-shadow: 0 18px 34px rgba(23, 105, 232, 0.26);
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+
+.login-card button:active,
+.secondary-link:active {
+  box-shadow: 0 10px 20px rgba(23, 105, 232, 0.2);
+  transform: translateY(1px) scale(0.98);
+}
+
+.login-card button:focus-visible,
+.secondary-link:focus-visible {
+  box-shadow:
+    0 14px 30px rgba(23, 105, 232, 0.2),
+    0 0 0 4px rgba(23, 105, 232, 0.14);
+  outline: none;
 }
 
 .login-card button:disabled {
   cursor: wait;
   opacity: 0.7;
+  transform: none;
+}
+
+.login-card button.is-loading {
+  gap: 10px;
+}
+
+.login-card button.is-loading::before {
+  animation: loginButtonSpin 760ms linear infinite;
+  border: 2px solid rgba(255, 255, 255, 0.46);
+  border-top-color: #ffffff;
+  border-radius: 999px;
+  content: '';
+  height: 16px;
+  width: 16px;
+}
+
+.login-button-label {
+  transition: transform 160ms ease;
+}
+
+.login-card button.is-loading .login-button-label {
+  transform: translateX(2px);
 }
 
 .login-helper-link {
@@ -231,6 +283,12 @@
   text-decoration: underline;
 }
 
+.login-helper-link:focus-visible {
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(23, 105, 232, 0.12);
+  outline: none;
+}
+
 .error-message {
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -240,6 +298,12 @@
   line-height: 1.6;
   margin: 0;
   padding: 12px 14px;
+}
+
+@keyframes loginButtonSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 900px) {
@@ -256,6 +320,18 @@
 
   .login-panel {
     padding: 0 18px 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-card button,
+  .secondary-link,
+  .login-button-label {
+    transition: none;
+  }
+
+  .login-card button.is-loading::before {
+    animation: none;
   }
 }
 

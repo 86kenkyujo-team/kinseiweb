@@ -17,6 +17,23 @@
   z-index: 10;
 }
 
+.admin-route-progress {
+  background: linear-gradient(90deg, #0a8f6a, #5dc9aa);
+  height: 3px;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  width: 100%;
+  z-index: 30;
+}
+
+.admin-route-progress.active {
+  animation: adminRouteProgress 260ms ease-out both;
+}
+
 .admin-brand {
   color: inherit;
   font-weight: 900;
@@ -45,6 +62,13 @@
   font-weight: 800;
   padding: 9px 13px;
   text-decoration: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .admin-nav a:hover,
@@ -54,10 +78,36 @@
   color: #ffffff;
 }
 
+.admin-nav a:hover {
+  box-shadow: 0 10px 20px rgba(10, 143, 106, 0.16);
+  transform: translateY(-1px);
+}
+
+.admin-nav a:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.admin-nav a:focus-visible {
+  box-shadow: 0 0 0 4px rgba(10, 143, 106, 0.15);
+  outline: none;
+}
+
 .admin-main {
   margin: 0 auto;
   max-width: 1180px;
   padding: 34px clamp(18px, 4vw, 52px) 64px;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.admin-main > * {
+  animation: adminFadeSlide 220ms ease both;
+}
+
+html[data-admin-navigating='true'] .admin-main {
+  opacity: 0.94;
+  transform: translateY(2px);
 }
 
 .admin-page-title {
@@ -91,7 +141,8 @@
 
 .admin-button,
 .admin-form button,
-.admin-inline-form button {
+.admin-inline-form button,
+.admin-delete-form button {
   align-items: center;
   background: #17211d;
   border: 0;
@@ -104,6 +155,15 @@
   min-height: 44px;
   padding: 0 18px;
   text-decoration: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease,
+    transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .admin-button.secondary,
@@ -111,6 +171,38 @@
   background: #ffffff;
   border: 1px solid #cbd8d0;
   color: #17211d;
+}
+
+.admin-button:hover,
+.admin-form button:hover,
+.admin-inline-form button:hover,
+.admin-delete-form button:hover {
+  box-shadow: 0 14px 24px rgba(23, 33, 29, 0.14);
+  transform: translateY(-1px);
+}
+
+.admin-button:active,
+.admin-form button:active,
+.admin-inline-form button:active,
+.admin-delete-form button:active {
+  box-shadow: 0 8px 16px rgba(23, 33, 29, 0.12);
+  transform: translateY(1px) scale(0.98);
+}
+
+.admin-button:focus-visible,
+.admin-form button:focus-visible,
+.admin-inline-form button:focus-visible,
+.admin-delete-form button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(10, 143, 106, 0.15);
+  outline: none;
+}
+
+.admin-form button:disabled,
+.admin-inline-form button:disabled,
+.admin-delete-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  transform: none;
 }
 
 .admin-grid {
@@ -198,6 +290,16 @@
   justify-content: space-between;
   padding: 12px 0 2px;
   text-decoration: none;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    padding 160ms ease;
+}
+
+.admin-list a:hover {
+  color: #0a6f55;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .admin-list small,
@@ -225,6 +327,16 @@
   vertical-align: top;
 }
 
+.admin-table tbody tr {
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.admin-table tbody tr:hover {
+  background: #f8fcfa;
+}
+
 .admin-table th {
   color: #5d6b64;
   font-size: 12px;
@@ -235,6 +347,16 @@
   color: #0a6f55;
   font-weight: 900;
   text-decoration: none;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+.admin-table a:hover {
+  color: #075c47;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .status-pill {
@@ -318,6 +440,19 @@
   font: inherit;
   min-height: 44px;
   padding: 10px 12px;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  background: #ffffff;
+  border-color: #0a8f6a;
+  box-shadow: 0 0 0 4px rgba(10, 143, 106, 0.12);
+  outline: none;
 }
 
 .admin-form textarea {
@@ -446,6 +581,22 @@
   min-height: 40px;
   padding: 0 14px;
   position: relative;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-form .admin-file-picker:hover {
+  border-color: #0a8f6a;
+  box-shadow: 0 10px 20px rgba(10, 143, 106, 0.12);
+  transform: translateY(-1px);
+}
+
+.admin-form .admin-file-picker:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .admin-form .admin-file-picker input {
@@ -566,6 +717,23 @@
   gap: 6px;
   min-height: 36px;
   padding: 0 12px;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-choice-grid label:has(input:checked) {
+  background: #e5f4ee;
+  border-color: #0a8f6a;
+  color: #075c47;
+}
+
+.admin-choice-grid label:hover {
+  border-color: #9ecab9;
+  transform: translateY(-1px);
 }
 
 .admin-choice-grid input {
@@ -587,10 +755,44 @@
   max-width: 560px;
 }
 
+.admin-delete-form label:not(.admin-check-row) {
+  color: #31413a;
+  display: grid;
+  font-size: 13px;
+  font-weight: 900;
+  gap: 8px;
+}
+
+.admin-delete-form input:not([type='checkbox']):not([type='hidden']) {
+  background: #fffafa;
+  border: 1px solid #efc2bc;
+  border-radius: 8px;
+  color: #17211d;
+  font: inherit;
+  min-height: 44px;
+  padding: 10px 12px;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.admin-delete-form input:not([type='checkbox']):not([type='hidden']):focus {
+  background: #ffffff;
+  border-color: #b83224;
+  box-shadow: 0 0 0 4px rgba(184, 50, 36, 0.13);
+  outline: none;
+}
+
 .admin-check-row {
   align-items: center;
   display: flex;
   gap: 10px;
+  transition: transform 160ms ease;
+}
+
+.admin-check-row:hover {
+  transform: translateX(2px);
 }
 
 .admin-check-row input {
@@ -606,13 +808,20 @@
 }
 
 .admin-danger-button {
+  border: 0;
+  border-radius: 999px;
   background: #b83224;
+  cursor: pointer;
+  font-weight: 900;
+  min-height: 44px;
+  padding: 0 18px;
   color: #ffffff;
   width: fit-content;
 }
 
 .admin-danger-button:hover {
   background: #982519;
+  box-shadow: 0 14px 24px rgba(184, 50, 36, 0.2);
 }
 
 .admin-notice {
@@ -629,6 +838,39 @@
   padding: 18px;
 }
 
+@keyframes adminRouteProgress {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 1;
+    transform: scaleX(0.78);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes adminFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 760px) {
   .admin-page-title {
     display: grid;
@@ -642,5 +884,32 @@
 
   .admin-media-uploader {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-route-progress {
+    display: none;
+  }
+
+  .admin-main,
+  .admin-main > *,
+  .admin-nav a,
+  .admin-button,
+  .admin-form button,
+  .admin-inline-form button,
+  .admin-delete-form button,
+  .admin-list a,
+  .admin-table tbody tr,
+  .admin-table a,
+  .admin-form input,
+  .admin-form select,
+  .admin-form textarea,
+  .admin-form .admin-file-picker,
+  .admin-choice-grid label,
+  .admin-check-row,
+  .admin-delete-form input:not([type='checkbox']):not([type='hidden']) {
+    animation: none;
+    transition: none;
   }
 }

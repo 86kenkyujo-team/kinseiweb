@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { AdminNavLink } from './AdminNavLink'
+import { AdminShellMotion } from './AdminShellMotion'
 import './styles.css'
 
 const navItems = [
@@ -11,6 +13,7 @@ const navItems = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="admin-shell">
+      <AdminShellMotion />
       <header className="admin-header">
         <Link className="admin-brand" href="/admin">
           KINSEI Admin
@@ -18,9 +21,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </Link>
         <nav className="admin-nav" aria-label="Admin navigation">
           {navItems.map((item) => (
-            <Link href={item.href} key={item.href}>
-              {item.label}
-            </Link>
+            <AdminNavLink href={item.href} key={item.href} label={item.label} />
           ))}
         </nav>
       </header>
