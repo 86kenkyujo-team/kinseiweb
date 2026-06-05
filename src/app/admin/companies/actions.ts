@@ -326,6 +326,71 @@ export async function updateCompany(formData: FormData) {
   redirect(`/admin/companies/${companyId}?status=updated`)
 }
 
+export async function deleteCompany(formData: FormData) {
+  const { adminClient, adminUser } = await requireAdmin()
+  const companyId = requiredText(formData, 'companyId')
+  const expectedCompanyName = requiredText(formData, 'companyName')
+  const enteredCompanyName = requiredText(formData, 'companyNameConfirmation')
+  const isConfirmed = formData.get('confirmDelete') === 'on'
+
+  if (!isConfirmed) {
+    redirect(`/admin/companies/${companyId}?status=delete_confirm_required`)
+  }
+
+  if (enteredCompanyName !== expectedCompanyName) {
+    redirect(`/admin/companies/${companyId}?status=delete_name_mismatch`)
+  }
+
+  const { data: company } = await adminClient
+    .from('companies')
+    .select('id, company_name, contact_email')
+    .eq('id', companyId)
+    .maybeSingle()
+
+  if (!company) {
+    redirect('/admin/companies?status=delete_not_found')
+  }
+
+  const { count: interviewRequestCount } = await adminClient
+    .from('interview_requests')
+    .select('id', { count: 'exact', head: true })
+    .eq('company_id', companyId)
+
+  const { error: interviewDeleteError } = await adminClient
+    .from('interview_requests')
+    .delete()
+    .eq('company_id', companyId)
+
+  if (interviewDeleteError) {
+    redirect(`/admin/companies/${companyId}?status=delete_error`)
+  }
+
+  const { error: companyDeleteError } = await adminClient
+    .from('companies')
+    .delete()
+    .eq('id', companyId)
+
+  if (companyDeleteError) {
+    redirect(`/admin/companies/${companyId}?status=delete_error`)
+  }
+
+  await adminClient.from('admin_activity_logs').insert({
+    action: 'company.delete',
+    admin_user_id: adminUser.id,
+    details: {
+      company_name: company.company_name,
+      contact_email: company.contact_email,
+      deleted_interview_request_count: interviewRequestCount || 0,
+    },
+    target_id: company.id,
+    target_table: 'companies',
+  })
+
+  revalidatePath('/admin')
+  revalidatePath('/admin/companies')
+  redirect('/admin/companies?status=deleted')
+}
+
 export async function resendCompanyInvite(formData: FormData) {
   const { adminClient, adminUser } = await requireAdmin()
   const serviceClient = createAdminClient()

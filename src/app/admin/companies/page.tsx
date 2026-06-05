@@ -4,6 +4,10 @@ import { getCompanyMembershipStatusLabel, isAccessibleCompanyStatus } from '@/li
 
 export const dynamic = 'force-dynamic'
 
+type AdminCompaniesPageProps = {
+  searchParams?: Promise<{ status?: string }>
+}
+
 type Company = {
   company_name: string
   contact_email: string
@@ -16,7 +20,14 @@ type Company = {
   updated_at: string
 }
 
-export default async function AdminCompaniesPage() {
+const statusMessages: Record<string, string> = {
+  delete_not_found: '削除対象の企業が見つかりませんでした。',
+  deleted: '企業を削除しました。',
+}
+
+export default async function AdminCompaniesPage({ searchParams }: AdminCompaniesPageProps) {
+  const params = await searchParams
+  const message = params?.status ? statusMessages[params.status] : null
   const { adminClient } = await requireAdmin()
   const { data: companies, error } = await adminClient
     .from('companies')
@@ -40,6 +51,7 @@ export default async function AdminCompaniesPage() {
       </section>
 
       {error ? <div className="admin-notice">{error.message}</div> : null}
+      {message ? <div className="admin-notice">{message}</div> : null}
 
       <div className="admin-table-wrap">
         <table className="admin-table">

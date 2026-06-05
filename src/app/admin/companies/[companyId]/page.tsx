@@ -7,7 +7,7 @@ import {
   getCompanyMembershipStatusLabel,
   isAccessibleCompanyStatus,
 } from '@/lib/admin/companyMembershipStatus'
-import { resendCompanyInvite, updateCompany } from '../actions'
+import { deleteCompany, resendCompanyInvite, updateCompany } from '../actions'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,6 +21,9 @@ const statusMessages: Record<string, string> = {
   created_existing_user: '企業を登録し、既存アカウントへパスワード再設定メールを送信しました。',
   error: '企業情報を更新できませんでした。',
   auth_user_lookup_error: '既存のログインアカウントを確認できませんでした。時間をおいて再度お試しください。',
+  delete_confirm_required: '削除する場合は確認チェックを入れてください。',
+  delete_error: '企業を削除できませんでした。関連データを確認して、時間をおいて再度お試しください。',
+  delete_name_mismatch: '入力した企業名が一致しません。削除する企業名を正確に入力してください。',
   invite_email_invalid: 'メールアドレスが無効と判定されました。実在する企業メールアドレスを入力してください。',
   invite_error: '招待メールを再送できませんでした。',
   invite_sent: '招待メールを再送しました。',
@@ -168,6 +171,29 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
           <input name="contactEmail" type="hidden" value={company.contact_email} />
           <input name="contactName" type="hidden" value={company.contact_name} />
           <button type="submit">ログイン案内を再送</button>
+        </form>
+      </section>
+
+      <section className="admin-panel danger">
+        <h2>企業を削除</h2>
+        <p>
+          この企業、関連する面談依頼、閲覧状態の履歴を削除します。ログインアカウント自体は削除しません。
+        </p>
+        <form action={deleteCompany} className="admin-delete-form">
+          <input name="companyId" type="hidden" value={company.id} />
+          <input name="companyName" type="hidden" value={company.company_name} />
+          <label>
+            <span className="admin-label-text">削除する企業名</span>
+            <span className="admin-field-hint">確認のため「{company.company_name}」と入力してください。</span>
+            <input name="companyNameConfirmation" required />
+          </label>
+          <label className="admin-check-row">
+            <input name="confirmDelete" type="checkbox" />
+            <span>この企業を削除することを確認しました。</span>
+          </label>
+          <button className="admin-danger-button" type="submit">
+            企業を削除
+          </button>
         </form>
       </section>
     </>
