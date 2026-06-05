@@ -155,6 +155,21 @@
   margin: 0 0 14px;
 }
 
+.admin-status-summary {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-status-summary p {
+  color: #5d6b64;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.7;
+  margin: 0;
+}
+
 .admin-list {
   display: grid;
   gap: 10px;

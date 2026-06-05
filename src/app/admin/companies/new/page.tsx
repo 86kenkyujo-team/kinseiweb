@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/admin/auth'
+import { companyMembershipStatusOptions } from '@/lib/admin/companyMembershipStatus'
 import { createCompany } from '../actions'
+
+export const dynamic = 'force-dynamic'
 
 type NewCompanyPageProps = {
   searchParams?: Promise<{ status?: string }>
@@ -36,51 +39,74 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
 
       <form action={createCompany} className="admin-form">
         <div className="admin-form-grid">
+          <div className="admin-form-section full">
+            <p>基本情報</p>
+            <span>企業名と担当者情報です。担当者メールアドレス宛に招待メールが送られます。</span>
+          </div>
           <label>
-            企業名
+            <span className="admin-label-text">企業名</span>
+            <span className="admin-field-hint">管理画面と企業会員DBで表示する会社名です。</span>
             <input name="companyName" required />
           </label>
           <label>
-            担当者名
+            <span className="admin-label-text">担当者名</span>
+            <span className="admin-field-hint">ログイン案内を受け取る企業側の担当者です。</span>
             <input name="contactName" required />
           </label>
           <label>
-            担当者メールアドレス
+            <span className="admin-label-text">担当者メールアドレス</span>
+            <span className="admin-field-hint">このメールに招待リンクが送信されます。</span>
             <input name="contactEmail" required type="email" />
           </label>
           <label>
-            会員ステータス
+            <span className="admin-label-text">閲覧状態</span>
+            <span className="admin-field-hint">企業が学生DBを閲覧できるかを決めます。保存値はそのままです。</span>
             <select name="membershipStatus" required defaultValue="trial">
-              <option value="trial">trial</option>
-              <option value="active">active</option>
-              <option value="past_due">past_due</option>
-              <option value="suspended">suspended</option>
-              <option value="cancelled">cancelled</option>
+              {companyMembershipStatusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}（{option.description}）
+                </option>
+              ))}
             </select>
           </label>
+
+          <div className="admin-form-section full">
+            <p>契約・確認スケジュール</p>
+            <span>外部決済や契約台帳で確認した内容を、運営用のメモとして残します。</span>
+          </div>
           <label>
-            プラン名
+            <span className="admin-label-text">プラン名</span>
+            <span className="admin-field-hint">例: Standard / Pro / 月額プラン など</span>
             <input name="planName" placeholder="例: Standard" />
           </label>
           <label>
-            契約開始日
+            <span className="admin-label-text">契約開始日</span>
             <input name="contractStartDate" type="date" />
           </label>
           <label>
-            契約終了日
+            <span className="admin-label-text">契約終了日</span>
+            <span className="admin-field-hint">終了日が未定の場合は空欄で大丈夫です。</span>
             <input name="contractEndDate" type="date" />
           </label>
           <label>
-            次回確認日
+            <span className="admin-label-text">次回確認日</span>
+            <span className="admin-field-hint">支払い・継続確認など、次に見る日を入れます。</span>
             <input name="nextCheckDate" type="date" />
           </label>
           <label className="full">
-            契約状況メモ
-            <textarea name="contractStatusNote" placeholder="外部で確認した契約・サブスク状況" />
+            <span className="admin-label-text">契約状況メモ</span>
+            <span className="admin-field-hint">外部で確認した契約・サブスク状況を残します。</span>
+            <textarea name="contractStatusNote" placeholder="例: Stripeで月額契約を確認済み。次回更新日は..." />
           </label>
+
+          <div className="admin-form-section full">
+            <p>運営メモ</p>
+            <span>社内共有用のメモです。企業側には表示されません。</span>
+          </div>
           <label className="full">
-            運営メモ
-            <textarea name="adminNote" />
+            <span className="admin-label-text">運営メモ</span>
+            <span className="admin-field-hint">対応履歴、注意点、社内で見ておきたい情報を自由に残せます。</span>
+            <textarea name="adminNote" placeholder="例: 初回面談済み。担当は..." />
           </label>
         </div>
         <div className="admin-form-actions">

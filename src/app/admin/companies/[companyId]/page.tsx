@@ -1,6 +1,12 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/lib/admin/auth'
+import {
+  companyMembershipStatusOptions,
+  getCompanyMembershipStatusDescription,
+  getCompanyMembershipStatusLabel,
+  isAccessibleCompanyStatus,
+} from '@/lib/admin/companyMembershipStatus'
 import { resendCompanyInvite, updateCompany } from '../actions'
 
 export const dynamic = 'force-dynamic'
@@ -34,6 +40,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
   }
 
   const message = query?.status ? statusMessages[query.status] : null
+  const isAccessible = isAccessibleCompanyStatus(company.membership_status)
 
   return (
     <>
@@ -50,58 +57,92 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
 
       {message ? <div className="admin-notice">{message}</div> : null}
 
+      <section className="admin-panel">
+        <h2>現在の閲覧状態</h2>
+        <div className="admin-status-summary">
+          <span className={`status-pill ${!isAccessible ? 'blocked' : ''}`}>
+            {getCompanyMembershipStatusLabel(company.membership_status)}
+          </span>
+          <p>{getCompanyMembershipStatusDescription(company.membership_status)}</p>
+        </div>
+      </section>
+
       <form action={updateCompany} className="admin-form">
         <input name="companyId" type="hidden" value={company.id} />
         <input name="previousStatus" type="hidden" value={company.membership_status} />
         <div className="admin-form-grid">
+          <div className="admin-form-section full">
+            <p>基本情報</p>
+            <span>企業名と担当者情報です。担当者メールアドレスは招待メールの再送にも使います。</span>
+          </div>
           <label>
-            企業名
+            <span className="admin-label-text">企業名</span>
+            <span className="admin-field-hint">管理画面と企業会員DBで表示する会社名です。</span>
             <input name="companyName" required defaultValue={company.company_name} />
           </label>
           <label>
-            担当者名
+            <span className="admin-label-text">担当者名</span>
+            <span className="admin-field-hint">企業側の主担当者です。</span>
             <input name="contactName" required defaultValue={company.contact_name} />
           </label>
           <label>
-            担当者メールアドレス
+            <span className="admin-label-text">担当者メールアドレス</span>
+            <span className="admin-field-hint">ログイン・招待メールの宛先です。</span>
             <input name="contactEmail" required type="email" defaultValue={company.contact_email} />
           </label>
           <label>
-            会員ステータス
+            <span className="admin-label-text">閲覧状態</span>
+            <span className="admin-field-hint">「トライアル中」「閲覧可能」の企業だけが学生DBを閲覧できます。</span>
             <select name="membershipStatus" required defaultValue={company.membership_status}>
-              <option value="trial">trial</option>
-              <option value="active">active</option>
-              <option value="past_due">past_due</option>
-              <option value="suspended">suspended</option>
-              <option value="cancelled">cancelled</option>
+              {companyMembershipStatusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}（{option.description}）
+                </option>
+              ))}
             </select>
           </label>
+
+          <div className="admin-form-section full">
+            <p>契約・確認スケジュール</p>
+            <span>契約状況、終了日、次回確認日など、運営側で見る情報です。</span>
+          </div>
           <label>
-            プラン名
+            <span className="admin-label-text">プラン名</span>
+            <span className="admin-field-hint">例: Standard / Pro / 月額プラン など</span>
             <input name="planName" defaultValue={company.plan_name || ''} />
           </label>
           <label>
-            契約開始日
+            <span className="admin-label-text">契約開始日</span>
             <input name="contractStartDate" type="date" defaultValue={company.contract_start_date || ''} />
           </label>
           <label>
-            契約終了日
+            <span className="admin-label-text">契約終了日</span>
+            <span className="admin-field-hint">終了日が未定の場合は空欄で大丈夫です。</span>
             <input name="contractEndDate" type="date" defaultValue={company.contract_end_date || ''} />
           </label>
           <label>
-            次回確認日
+            <span className="admin-label-text">次回確認日</span>
+            <span className="admin-field-hint">支払い・継続確認など、次に見る日を入れます。</span>
             <input name="nextCheckDate" type="date" defaultValue={company.next_check_date || ''} />
           </label>
           <label className="full">
-            契約状況メモ
+            <span className="admin-label-text">契約状況メモ</span>
+            <span className="admin-field-hint">外部で確認した契約・サブスク状況を残します。</span>
             <textarea name="contractStatusNote" defaultValue={company.contract_status_note || ''} />
           </label>
+
+          <div className="admin-form-section full">
+            <p>変更メモ・運営メモ</p>
+            <span>閲覧状態を変えた理由や、社内共有用のメモを残せます。</span>
+          </div>
           <label className="full">
-            ステータス変更メモ
+            <span className="admin-label-text">閲覧状態変更メモ</span>
+            <span className="admin-field-hint">閲覧状態を切り替えた理由を残せます。変更がない場合は空欄で大丈夫です。</span>
             <textarea name="statusNote" />
           </label>
           <label className="full">
-            運営メモ
+            <span className="admin-label-text">運営メモ</span>
+            <span className="admin-field-hint">対応履歴、注意点、社内で見ておきたい情報を自由に残せます。</span>
             <textarea name="adminNote" defaultValue={company.admin_note || ''} />
           </label>
         </div>

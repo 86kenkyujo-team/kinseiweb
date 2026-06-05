@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getAdminContext } from '@/lib/admin/auth'
+import { getCompanyMembershipStatusLabel } from '@/lib/admin/companyMembershipStatus'
 import { getStudentPublicationStatusLabel } from '@/lib/admin/studentPublicationStatus'
 import { redirect } from 'next/navigation'
 
@@ -119,7 +120,7 @@ export default async function AdminDashboardPage() {
             <Link href={`/admin/companies/${company.id}`} key={company.id}>
               <span>
                 {company.company_name}
-                <small>{company.membership_status}</small>
+                <small>{getCompanyMembershipStatusLabel(company.membership_status)}</small>
               </span>
               <strong>確認</strong>
             </Link>

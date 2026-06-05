@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/admin/auth'
+import { getCompanyMembershipStatusLabel, isAccessibleCompanyStatus } from '@/lib/admin/companyMembershipStatus'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,10 +14,6 @@ type Company = {
   next_check_date: string | null
   plan_name: string | null
   updated_at: string
-}
-
-function isBlockedStatus(status: string) {
-  return !['active', 'trial'].includes(status)
 }
 
 export default async function AdminCompaniesPage() {
@@ -68,8 +65,8 @@ export default async function AdminCompaniesPage() {
                   <small>{company.contact_email}</small>
                 </td>
                 <td>
-                  <span className={`status-pill ${isBlockedStatus(company.membership_status) ? 'blocked' : ''}`}>
-                    {company.membership_status}
+                  <span className={`status-pill ${!isAccessibleCompanyStatus(company.membership_status) ? 'blocked' : ''}`}>
+                    {getCompanyMembershipStatusLabel(company.membership_status)}
                   </span>
                 </td>
                 <td>{company.contract_end_date || '終了日未設定'}</td>
