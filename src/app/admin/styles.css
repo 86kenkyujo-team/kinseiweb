@@ -260,6 +260,90 @@ html[data-admin-navigating='true'] .admin-main {
   color: #6b3a32;
 }
 
+.admin-link-panel {
+  border-color: #b8ddcf;
+  box-shadow: 0 18px 40px rgba(10, 143, 106, 0.1);
+}
+
+.admin-link-panel-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.admin-link-panel-heading p {
+  color: #0a8f6a;
+  font-size: 12px;
+  font-weight: 900;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.admin-link-panel-heading h2 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+.admin-link-panel-heading span:not(.status-pill) {
+  color: #5d6b64;
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.admin-copy-field {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.admin-copy-input,
+.admin-copy-message {
+  background: #f8faf9;
+  border: 1px solid #cfdad3;
+  border-radius: 8px;
+  color: #17211d;
+  font: inherit;
+  padding: 11px 12px;
+  width: 100%;
+}
+
+.admin-copy-input {
+  font-size: 13px;
+  min-height: 44px;
+}
+
+.admin-copy-message {
+  line-height: 1.7;
+  min-height: 154px;
+  resize: vertical;
+}
+
+.admin-copy-input:focus,
+.admin-copy-message:focus {
+  background: #ffffff;
+  border-color: #0a8f6a;
+  box-shadow: 0 0 0 4px rgba(10, 143, 106, 0.12);
+  outline: none;
+}
+
+.admin-copy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.admin-copy-status {
+  color: #0a6f55;
+  font-size: 13px;
+  font-weight: 900;
+  margin: 12px 0 0;
+}
+
 .admin-status-summary {
   align-items: center;
   display: flex;
@@ -876,6 +960,10 @@ html[data-admin-navigating='true'] .admin-main {
     display: grid;
   }
 
+  .admin-link-panel-heading {
+    display: grid;
+  }
+
   .admin-grid,
   .admin-form-grid,
   .admin-question-grid {
@@ -905,6 +993,8 @@ html[data-admin-navigating='true'] .admin-main {
   .admin-form input,
   .admin-form select,
   .admin-form textarea,
+  .admin-copy-input,
+  .admin-copy-message,
   .admin-form .admin-file-picker,
   .admin-choice-grid label,
   .admin-check-row,

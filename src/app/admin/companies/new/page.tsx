@@ -13,13 +13,11 @@ const statusMessages: Record<string, string> = {
   auth_user_duplicate_company: 'このメールアドレスのログインアカウントは、すでに別の企業に紐づいています。',
   auth_user_lookup_error: '既存のログインアカウントを確認できませんでした。時間をおいて再度お試しください。',
   company_error: '企業情報を作成できませんでした。',
-  custom_email_error: 'Kinsei名義のログイン案内メールを送信できませんでした。Resendの送信元ドメイン設定を確認してください。',
   duplicate: 'このメールアドレスの企業はすでに登録されています。',
-  email_service_missing: 'Kinsei名義のログイン案内メール送信には Vercel の RESEND_API_KEY 設定が必要です。',
   invite_email_invalid: 'メールアドレスが無効と判定されました。実在する企業メールアドレスを入力してください。',
-  invite_error: 'ログイン設定リンクを作成できませんでした。',
-  password_reset_error: '既存アカウント用のログイン設定リンクを作成できませんでした。',
-  service_key_missing: '企業ログイン案内の送信には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
+  invite_error: 'ログイン設定リンクを発行できませんでした。',
+  password_reset_error: '既存アカウント用のログイン設定リンクを発行できませんでした。',
+  service_key_missing: 'ログイン設定リンクの発行には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
 }
 
 export default async function NewCompanyPage({ searchParams }: NewCompanyPageProps) {
@@ -34,7 +32,7 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
         <div>
           <p>New Company</p>
           <h1>企業を登録</h1>
-          <span>担当者メールアドレスへログイン案内を送り、企業側でパスワードを設定します。</span>
+          <span>担当者メールアドレスでログイン設定リンクを発行し、画面でコピーできます。</span>
         </div>
         <Link className="admin-button secondary" href="/admin/companies">
           一覧へ戻る
@@ -48,7 +46,7 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
           <div className="admin-form-section full">
             <p>基本情報</p>
             <span>
-              企業名と担当者情報です。新規・既存アカウントどちらにも、Kinsei名義のログイン設定メールを送ります。
+              企業名と担当者情報です。新規・既存アカウントどちらも、登録後に画面上でログイン設定リンクをコピーできます。
             </span>
           </div>
           <label>
@@ -58,12 +56,12 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
           </label>
           <label>
             <span className="admin-label-text">担当者名</span>
-            <span className="admin-field-hint">ログイン案内を受け取る企業側の担当者です。</span>
+            <span className="admin-field-hint">ログイン設定リンクを共有する企業側の担当者です。</span>
             <input name="contactName" required />
           </label>
           <label>
             <span className="admin-label-text">担当者メールアドレス</span>
-            <span className="admin-field-hint">このメールにログイン案内が送信されます。</span>
+            <span className="admin-field-hint">ログインアカウントとして使うメールアドレスです。リンクは登録後に画面で発行されます。</span>
             <input name="contactEmail" required type="email" />
           </label>
           <label>
@@ -118,7 +116,7 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
           </label>
         </div>
         <div className="admin-form-actions">
-          <button type="submit">登録してログイン案内を送る</button>
+          <button type="submit">登録してリンクを発行</button>
         </div>
       </form>
     </>

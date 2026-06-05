@@ -18,7 +18,7 @@ export default function PasswordUpdatePage() {
             パスワードを登録。
           </h2>
           <p>
-            メールの再設定リンクから開いた場合のみ、ここで新しいパスワードを保存できます。
+            ログイン設定リンクから開いた場合のみ、ここで新しいパスワードを保存できます。
           </p>
         </div>
       </section>

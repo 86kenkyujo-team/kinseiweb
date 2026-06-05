@@ -34,7 +34,7 @@ export function PasswordUpdateForm() {
         }
 
         if (!data.session) {
-          setError('再設定リンクが無効、または有効期限切れです。もう一度メールを送信してください。')
+          setError('ログイン設定リンクが無効、または有効期限切れです。新しいリンクの発行を運営へ依頼してください。')
           return
         }
 

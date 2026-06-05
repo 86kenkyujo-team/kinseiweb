@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/lib/admin/auth'
+import { getCompanyAccessLinkFlash } from '@/lib/admin/companyAccessLinkFlash'
 import {
   companyMembershipStatusOptions,
   getCompanyMembershipStatusDescription,
   getCompanyMembershipStatusLabel,
   isAccessibleCompanyStatus,
 } from '@/lib/admin/companyMembershipStatus'
-import { deleteCompany, resendCompanyInvite, updateCompany } from '../actions'
+import { CompanyAccessLinkPanel } from '../CompanyAccessLinkPanel'
+import { deleteCompany, generateCompanyAccessLinkForCompany, updateCompany } from '../actions'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,21 +19,20 @@ type CompanyDetailPageProps = {
 }
 
 const statusMessages: Record<string, string> = {
-  created: '企業を登録し、Kinsei名義のログイン設定メールを送信しました。',
-  created_existing_user: '企業を登録し、既存アカウントへKinsei名義のログイン設定メールを送信しました。',
-  error: '企業情報を更新できませんでした。',
+  auth_user_duplicate_company: 'このメールアドレスのログインアカウントは、すでに別の企業に紐づいています。',
   auth_user_lookup_error: '既存のログインアカウントを確認できませんでした。時間をおいて再度お試しください。',
-  custom_email_error: 'Kinsei名義のログイン案内メールを送信できませんでした。Resendの送信元ドメイン設定を確認してください。',
+  created_existing_user_link: '企業を登録し、既存アカウント用のログイン設定リンクを発行しました。',
+  created_link: '企業を登録し、ログイン設定リンクを発行しました。コピーして企業担当者へ送ってください。',
   delete_confirm_required: '削除する場合は確認チェックを入れてください。',
   delete_error: '企業を削除できませんでした。関連データを確認して、時間をおいて再度お試しください。',
   delete_name_mismatch: '入力した企業名が一致しません。削除する企業名を正確に入力してください。',
-  email_service_missing: 'Kinsei名義のログイン案内メール送信には Vercel の RESEND_API_KEY 設定が必要です。',
+  error: '企業情報を更新できませんでした。',
   invite_email_invalid: 'メールアドレスが無効と判定されました。実在する企業メールアドレスを入力してください。',
-  invite_error: 'ログイン設定リンクを作成できませんでした。',
-  invite_sent: 'Kinsei名義のログイン設定メールを再送しました。',
-  password_reset_error: '既存アカウント用のログイン設定リンクを作成できませんでした。',
-  password_reset_sent: '既存アカウントへKinsei名義のログイン設定メールを送信しました。',
-  service_key_missing: 'ログイン案内の送信には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
+  invite_error: 'ログイン設定リンクを発行できませんでした。',
+  invite_link_generated: 'ログイン設定リンクを発行しました。コピーして企業担当者へ送ってください。',
+  password_reset_error: '既存アカウント用のログイン設定リンクを発行できませんでした。',
+  password_reset_link_generated: '既存アカウント用のログイン設定リンクを発行しました。',
+  service_key_missing: 'ログイン設定リンクの発行には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
   updated: '企業情報を更新しました。',
 }
 
@@ -51,6 +52,8 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
 
   const message = query?.status ? statusMessages[query.status] : null
   const isAccessible = isAccessibleCompanyStatus(company.membership_status)
+  const accessLinkFlash = await getCompanyAccessLinkFlash()
+  const accessLink = accessLinkFlash?.companyId === company.id ? accessLinkFlash : null
 
   return (
     <>
@@ -58,7 +61,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
         <div>
           <p>Company Detail</p>
           <h1>{company.company_name}</h1>
-          <span>契約状況の台帳、企業会員DBの閲覧可否、ログイン案内を管理します。</span>
+          <span>契約状況の台帳、企業会員DBの閲覧可否、ログイン設定リンクを管理します。</span>
         </div>
         <Link className="admin-button secondary" href="/admin/companies">
           一覧へ戻る
@@ -66,6 +69,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
       </section>
 
       {message ? <div className="admin-notice">{message}</div> : null}
+      {accessLink ? <CompanyAccessLinkPanel link={accessLink} /> : null}
 
       <section className="admin-panel">
         <h2>現在の閲覧状態</h2>
@@ -83,7 +87,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
         <div className="admin-form-grid">
           <div className="admin-form-section full">
             <p>基本情報</p>
-            <span>企業名と担当者情報です。担当者メールアドレスはログイン案内の再送にも使います。</span>
+            <span>企業名と担当者情報です。担当者メールアドレスはログインアカウントとして使います。</span>
           </div>
           <label>
             <span className="admin-label-text">企業名</span>
@@ -97,7 +101,7 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
           </label>
           <label>
             <span className="admin-label-text">担当者メールアドレス</span>
-            <span className="admin-field-hint">招待メールまたはパスワード再設定メールの宛先です。</span>
+            <span className="admin-field-hint">ログインアカウントとして使うメールアドレスです。</span>
             <input name="contactEmail" required type="email" defaultValue={company.contact_email} />
           </label>
           <label>
@@ -162,17 +166,17 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
       </form>
 
       <section className="admin-panel">
-        <h2>ログイン案内</h2>
+        <h2>ログイン設定リンク</h2>
         <p>
-          企業担当者がリンクを見失った場合は、担当者メールアドレスへKinsei名義のログイン設定メールを再送します。
-          既存アカウントにも同じ案内文で送信します。
+          企業担当者がリンクを見失った場合は、ここで新しいログイン設定リンクを発行できます。
+          発行後、画面に出るリンクや文面をコピーして、既存のチャットで送ってください。
         </p>
-        <form action={resendCompanyInvite} className="admin-inline-form">
+        <form action={generateCompanyAccessLinkForCompany} className="admin-inline-form">
           <input name="companyId" type="hidden" value={company.id} />
           <input name="companyName" type="hidden" value={company.company_name} />
           <input name="contactEmail" type="hidden" value={company.contact_email} />
           <input name="contactName" type="hidden" value={company.contact_name} />
-          <button type="submit">ログイン案内を再送</button>
+          <button type="submit">ログイン設定リンクを発行</button>
         </form>
       </section>
 

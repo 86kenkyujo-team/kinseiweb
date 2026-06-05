@@ -18,7 +18,7 @@ export function LoginForm({
   defaultNextPath = '/members/students',
   eyebrow = 'Company Member Login',
   forgotPasswordHref = '/password-reset?next=/members/students',
-  lead = '招待メールで設定したメールアドレスとパスワードでログインしてください。',
+  lead = 'ログイン設定リンクで登録したメールアドレスとパスワードでログインしてください。',
   submitLabel = 'ログイン',
   title = '企業会員ログイン',
 }: LoginFormProps = {}) {
