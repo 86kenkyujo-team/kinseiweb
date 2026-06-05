@@ -50,11 +50,11 @@ export async function requireAdmin() {
   const context = await getAdminContext()
 
   if (!context.isConfigured || !context.adminClient) {
-    redirect('/login?next=/admin')
+    redirect('/admin/login?next=/admin')
   }
 
   if (!context.user) {
-    redirect('/login?next=/admin')
+    redirect('/admin/login?next=/admin')
   }
 
   if (!context.adminUser) {

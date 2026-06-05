@@ -5,14 +5,30 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { initializeSessionLifetime } from '@/lib/auth/sessionLifetime'
 import { createClient } from '@/lib/supabase/client'
 
-export function LoginForm() {
+type LoginFormProps = {
+  defaultNextPath?: string
+  eyebrow?: string
+  forgotPasswordHref?: string
+  lead?: string
+  submitLabel?: string
+  title?: string
+}
+
+export function LoginForm({
+  defaultNextPath = '/members/students',
+  eyebrow = 'Company Member Login',
+  forgotPasswordHref = '/password-reset?next=/members/students',
+  lead = '招待メールで設定したメールアドレスとパスワードでログインしてください。',
+  submitLabel = 'ログイン',
+  title = '企業会員ログイン',
+}: LoginFormProps = {}) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const requestedNextPath = searchParams.get('next')
   const nextPath =
     requestedNextPath?.startsWith('/') && !requestedNextPath.startsWith('//')
       ? requestedNextPath
-      : '/members/students'
+      : defaultNextPath
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -43,7 +59,7 @@ export function LoginForm() {
 
       router.replace(nextPath)
     } catch {
-      setError('ログイン設定がまだ完了していません。運営側の設定を確認してください。')
+      setError('Supabase Authに接続できません。ネットワークまたはログイン設定を確認してください。')
     } finally {
       setIsSubmitting(false)
     }
@@ -52,11 +68,9 @@ export function LoginForm() {
   return (
     <form className="login-card" onSubmit={handleSubmit}>
       <div>
-        <p className="eyebrow">Company Member Login</p>
-        <h1>企業会員ログイン</h1>
-        <p className="lead">
-          招待メールで設定したメールアドレスとパスワードでログインしてください。
-        </p>
+        <p className="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p className="lead">{lead}</p>
       </div>
 
       <label>
@@ -87,8 +101,12 @@ export function LoginForm() {
       {error ? <p className="error-message">{error}</p> : null}
 
       <button disabled={isSubmitting} type="submit">
-        {isSubmitting ? '確認中...' : 'ログイン'}
+        {isSubmitting ? '確認中...' : submitLabel}
       </button>
+
+      <a className="login-helper-link" href={forgotPasswordHref}>
+        パスワードを再設定する
+      </a>
     </form>
   )
 }

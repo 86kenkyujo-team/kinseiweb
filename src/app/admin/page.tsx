@@ -27,7 +27,7 @@ export default async function AdminDashboardPage() {
   }
 
   if (!user) {
-    redirect('/login?next=/admin')
+    redirect('/admin/login?next=/admin')
   }
 
   if (!adminUser) {

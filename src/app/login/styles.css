@@ -217,6 +217,20 @@
   opacity: 0.7;
 }
 
+.login-helper-link {
+  color: #1769e8;
+  font-size: 14px;
+  font-weight: 900;
+  justify-self: center;
+  line-height: 1.6;
+  text-align: center;
+  text-decoration: none;
+}
+
+.login-helper-link:hover {
+  text-decoration: underline;
+}
+
 .error-message {
   background: #fef2f2;
   border: 1px solid #fecaca;

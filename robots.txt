@@ -5,4 +5,4 @@ Disallow: /login
 Disallow: /members/
 Disallow: /membership-inactive
 
-Sitemap: https://kinseiweb-murex.vercel.app/sitemap.xml
+Sitemap: https://kinsei-inc.com/sitemap.xml

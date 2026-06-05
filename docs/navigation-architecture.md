@@ -28,6 +28,8 @@ TOP リデザイン後の静的 HTML ページと、Next.js で実装してい�
 | メンバー | `/index.html#members` | TOP 内のメンター・メンバー紹介 |
 | 学生DBを見る | `/students` | Next.js の公開学生 DB |
 | 企業会員DB | `/login?next=/members/students` | ログイン後、企業会員 DB へ遷移 |
+| 管理画面ログイン | `/admin/login` | 運営担当者専用ログイン |
+| パスワード再設定 | `/password-reset` | 企業会員・管理者のパスワード再設定メール送信 |
 | お問い合わせ | `/index.html#contact` | TOP 内のお問い合わせ |
 
 ## ページごとの役割
@@ -42,7 +44,10 @@ TOP リデザイン後の静的 HTML ページと、Next.js で実装してい�
 
 - `/students`: Supabase の `students` から公開学生を取得する公開 DB
 - `/login`: Supabase Auth によるログイン
+- `/password-reset`: Supabase Auth によるパスワード再設定メール送信
+- `/password-update`: 再設定リンクから新しいパスワードを保存
 - `/members/students`: 有効な企業会員だけが閲覧できる会員 DB
+- `/admin/login`: 運営担当者専用ログイン
 - `/membership-inactive`: 会員ステータス無効時の案内
 - `/admin`: 運営管理画面
 
@@ -66,5 +71,7 @@ npm run dev
 - `http://localhost:3000/index.html`
 - `http://localhost:3000/students`
 - `http://localhost:3000/login?next=/members/students`
+- `http://localhost:3000/admin/login`
+- `http://localhost:3000/password-reset?next=/admin`
 - `http://localhost:3000/sponsor.html`
 - `http://localhost:3000/sponsors_list.html`
