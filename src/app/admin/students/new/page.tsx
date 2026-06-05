@@ -1,4 +1,7 @@
+import { requireAdmin } from '@/lib/admin/auth'
 import { StudentForm } from '../StudentForm'
+
+export const dynamic = 'force-dynamic'
 
 type NewStudentPageProps = {
   searchParams?: Promise<{ status?: string }>
@@ -6,6 +9,7 @@ type NewStudentPageProps = {
 
 export default async function NewStudentPage({ searchParams }: NewStudentPageProps) {
   const params = await searchParams
+  await requireAdmin()
 
   return (
     <>

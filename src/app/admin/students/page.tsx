@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/admin/auth'
+import { getStudentPublicationStatusLabel, isPublishedStudentStatus } from '@/lib/admin/studentPublicationStatus'
 import { allStudentQuestionFields, countDeepDiveAnswers } from '@/lib/studentProfileQuestions'
 
 export const dynamic = 'force-dynamic'
@@ -95,8 +96,8 @@ export default async function AdminStudentsPage() {
                     <small>第1層〜第3層の回答数</small>
                   </td>
                   <td>
-                    <span className={`status-pill ${student.publication_status !== 'published' ? 'blocked' : ''}`}>
-                      {student.publication_status}
+                    <span className={`status-pill ${!isPublishedStudentStatus(student.publication_status) ? 'blocked' : ''}`}>
+                      {getStudentPublicationStatusLabel(student.publication_status)}
                     </span>
                   </td>
                   <td>

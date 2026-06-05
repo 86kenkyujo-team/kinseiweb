@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getAdminContext } from '@/lib/admin/auth'
+import { getStudentPublicationStatusLabel } from '@/lib/admin/studentPublicationStatus'
 import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
@@ -102,7 +103,7 @@ export default async function AdminDashboardPage() {
             <Link href={`/admin/students/${student.id}/edit`} key={student.id}>
               <span>
                 {student.display_name}
-                <small>{student.publication_status}</small>
+                <small>{getStudentPublicationStatusLabel(student.publication_status)}</small>
               </span>
               <strong>編集</strong>
             </Link>

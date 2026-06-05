@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import { studentPublicationStatusOptions } from '@/lib/admin/studentPublicationStatus'
 import { createStudent, updateStudent } from './actions'
+import { AdminMediaUploader } from './AdminMediaUploader'
 import {
   getDeepDiveList,
   getDeepDiveText,
@@ -64,92 +66,134 @@ export function StudentForm({ student }: StudentFormProps) {
       <input name="previousStatus" type="hidden" value={student?.publication_status || ''} />
 
       <div className="admin-form-grid">
+        <div className="admin-form-section full">
+          <p>基本情報</p>
+          <span>学生DBのカードや検索で使う基本項目です。公開前でも下書き保存できます。</span>
+        </div>
         <label>
-          表示名
+          <span className="admin-label-text">表示名</span>
+          <span className="admin-field-hint">企業会員側に表示される名前です。</span>
           <input name="displayName" required defaultValue={student?.display_name || ''} />
         </label>
         <label>
-          本名
+          <span className="admin-label-text">本名</span>
+          <span className="admin-field-hint">運営確認用です。未入力でも登録できます。</span>
           <input name="realName" defaultValue={profile?.real_name || ''} />
         </label>
         <label>
-          イニシャル
+          <span className="admin-label-text">イニシャル</span>
+          <span className="admin-field-hint">一覧やカードで短く見せる表記です。</span>
           <input name="initials" required defaultValue={student?.initials || ''} />
         </label>
         <label>
-          公開ステータス
+          <span className="admin-label-text">公開状態</span>
+          <span className="admin-field-hint">内部値はそのまま保存されます。表示だけ分かりやすくしています。</span>
           <select name="publicationStatus" required defaultValue={student?.publication_status || 'draft'}>
-            <option value="draft">draft</option>
-            <option value="published">published</option>
-            <option value="archived">archived</option>
+            {studentPublicationStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}（{option.description}）
+              </option>
+            ))}
           </select>
         </label>
         <label>
-          学部
+          <span className="admin-label-text">学部</span>
           <input name="faculty" required defaultValue={student?.faculty || ''} />
         </label>
         <label>
-          学年
+          <span className="admin-label-text">学年</span>
           <input name="grade" required defaultValue={student?.grade || ''} />
         </label>
         <label>
-          地域
+          <span className="admin-label-text">地域</span>
+          <span className="admin-field-hint">例: 大阪 / 東京 / 福岡</span>
           <input name="location" defaultValue={student?.location || ''} />
         </label>
         <label>
-          志望業界
+          <span className="admin-label-text">志望業界</span>
+          <span className="admin-field-hint">複数ある場合は「IT, 広告, 人材」のように区切ってください。</span>
           <input name="desiredIndustries" defaultValue={joinValues(student?.desired_industries)} />
         </label>
         <label>
-          属性タグ
+          <span className="admin-label-text">属性タグ</span>
+          <span className="admin-field-hint">検索・分類用のタグです。複数入力できます。</span>
           <input name="attributes" defaultValue={joinValues(student?.attributes)} />
         </label>
         <label>
-          TikTok URL
+          <span className="admin-label-text">TikTok URL</span>
+          <span className="admin-field-hint">投稿やアカウントのURLを貼り付けます。</span>
           <input name="tiktokUrl" defaultValue={student?.tiktok_url || ''} />
         </label>
-        <label>
-          プロフィール画像 URL
-          <input name="profileImageUrl" defaultValue={student?.profile_image_url || ''} />
-        </label>
-        <label>
-          紹介動画 URL
-          <input name="videoUrl" defaultValue={student?.video_url || ''} />
-        </label>
+
+        <div className="admin-form-section full">
+          <p>画像・動画</p>
+          <span>ファイルを選ぶだけでアップロードできます。すでにURLがある場合は直接貼り付けても保存できます。</span>
+        </div>
+        <AdminMediaUploader
+          accept="image/jpeg,image/png,image/webp,image/gif"
+          helpText="プロフィールカードに表示する画像です。10MB以内の JPG / PNG / WebP / GIF を選べます。"
+          initialUrl={student?.profile_image_url}
+          kind="image"
+          label="プロフィール画像"
+          maxSizeMb={10}
+          name="profileImageUrl"
+        />
+        <AdminMediaUploader
+          accept="video/mp4,video/webm,video/quicktime"
+          helpText="学生紹介で再生する動画です。50MB以内の MP4 / WebM / MOV を選べます。"
+          initialUrl={student?.video_url}
+          kind="video"
+          label="紹介動画"
+          maxSizeMb={50}
+          name="videoUrl"
+        />
+
+        <div className="admin-form-section full">
+          <p>公開プロフィール</p>
+          <span>ログイン前後の学生DBで、企業に見せる文章です。</span>
+        </div>
         <label className="full">
-          キャッチコピー
+          <span className="admin-label-text">キャッチコピー</span>
+          <span className="admin-field-hint">一覧で最初に目に入る短い紹介文です。</span>
           <input name="catchCopy" required defaultValue={student?.catch_copy || ''} />
         </label>
         <label className="full">
-          公開プロフィール概要
+          <span className="admin-label-text">公開プロフィール概要</span>
+          <span className="admin-field-hint">学生の雰囲気や強みが分かる紹介文です。</span>
           <textarea name="profileSummary" defaultValue={student?.profile_summary || ''} />
         </label>
+
+        <div className="admin-form-section full">
+          <p>企業会員限定プロフィール</p>
+          <span>ログイン後の企業会員DBで、より詳しく見せる情報です。</span>
+        </div>
         <label className="full">
-          価値観
+          <span className="admin-label-text">価値観</span>
           <textarea name="valuesText" defaultValue={profile?.values_text || ''} />
         </label>
         <label className="full">
-          思考スタイル
+          <span className="admin-label-text">思考スタイル</span>
           <textarea name="thinkingStyle" defaultValue={profile?.thinking_style || ''} />
         </label>
         <label className="full">
-          キャリアの軸
+          <span className="admin-label-text">キャリアの軸</span>
+          <span className="admin-field-hint">複数ある場合はカンマ区切りで入力できます。</span>
           <input name="careerAxis" defaultValue={joinValues(profile?.career_axis)} />
         </label>
         <label className="full">
-          志望理由の深掘り
+          <span className="admin-label-text">志望理由の深掘り</span>
           <textarea name="motivationDetail" defaultValue={profile?.motivation_detail || ''} />
         </label>
         <label className="full">
-          意思決定の軸
+          <span className="admin-label-text">意思決定の軸</span>
           <textarea name="decisionAxis" defaultValue={profile?.decision_axis || ''} />
         </label>
         <label className="full">
-          将来像
+          <span className="admin-label-text">将来像</span>
           <textarea name="futureVision" defaultValue={profile?.future_vision || ''} />
         </label>
         <label className="full">
-          面談希望条件
+          <span className="admin-label-text">面談希望条件</span>
           <textarea name="meetingPreference" defaultValue={profile?.meeting_preference || ''} />
         </label>
         <div className="admin-form-section full">
@@ -201,7 +245,8 @@ export function StudentForm({ student }: StudentFormProps) {
           </fieldset>
         ))}
         <label className="full">
-          公開ステータス変更メモ
+          <span className="admin-label-text">公開状態変更メモ</span>
+          <span className="admin-field-hint">公開・非公開を切り替えた理由を残せます。状態変更がない場合は空欄で大丈夫です。</span>
           <textarea name="publicationNote" />
         </label>
       </div>
