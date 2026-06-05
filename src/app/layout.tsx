@@ -3,7 +3,7 @@ import { AuthSessionManager } from '@/components/AuthSessionManager'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kinsei-inc.com'),
+  metadataBase: new URL('https://www.kinsei-inc.com'),
   title: {
     default: '近世 KINSEI',
     template: '%s | 近世 KINSEI',
