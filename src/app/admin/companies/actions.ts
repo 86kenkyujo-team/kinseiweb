@@ -3,6 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { getCompanyPasswordUpdateRedirectUrl, requireAdmin } from '@/lib/admin/auth'
+import {
+  canSendCompanyAccessEmail,
+  sendCompanyAccessEmail as sendKinseiCompanyAccessEmail,
+} from '@/lib/email/companyAccessEmail'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 function textValue(formData: FormData, key: string) {
@@ -43,6 +47,12 @@ type CompanyAccessEmailResult =
   | { emailKind: 'invite' | 'password_reset'; status: 'ok'; userId: string }
   | { errorStatus: string; status: 'error' }
 
+type LinkProperties = {
+  action_link: string
+  hashed_token?: string
+  verification_type?: string
+}
+
 function isAlreadyRegisteredInviteError(error: AuthEmailError | null) {
   return (
     error?.status === 422 &&
@@ -72,6 +82,24 @@ function logAuthEmailError(context: string, error: AuthEmailError | null) {
     message: error?.message,
     status: error?.status,
   })
+}
+
+function logCustomEmailError(context: string, message: string) {
+  console.error(`[admin companies] ${context}`, { message })
+}
+
+function buildCompanyAccessActionLink(properties: LinkProperties, redirectTo?: string) {
+  if (!redirectTo || !properties.hashed_token || !properties.verification_type) {
+    return properties.action_link
+  }
+
+  const siteOrigin = new URL(redirectTo).origin
+  const url = new URL('/auth/confirm', siteOrigin)
+  url.searchParams.set('token_hash', properties.hashed_token)
+  url.searchParams.set('type', properties.verification_type)
+  url.searchParams.set('next', '/members/students')
+
+  return url.toString()
 }
 
 async function findAuthUserByEmail(
@@ -105,23 +133,55 @@ async function findAuthUserByEmail(
   return null
 }
 
-async function sendCompanyAccessEmail(
+async function sendCompanyAccessLinkEmail(
   serviceClient: NonNullable<ReturnType<typeof createAdminClient>>,
   values: Pick<CompanyFormValues, 'companyName' | 'contactEmail' | 'contactName'>,
 ): Promise<CompanyAccessEmailResult> {
+  if (!canSendCompanyAccessEmail()) {
+    return {
+      errorStatus: 'email_service_missing',
+      status: 'error',
+    }
+  }
+
   const redirectTo = getCompanyPasswordUpdateRedirectUrl()
-  const { data: inviteData, error: inviteError } = await serviceClient.auth.admin.inviteUserByEmail(
-    values.contactEmail,
-    {
+  const { data: inviteData, error: inviteError } = await serviceClient.auth.admin.generateLink({
+    email: values.contactEmail,
+    options: {
       data: {
         company_name: values.companyName,
         contact_name: values.contactName,
       },
       redirectTo,
     },
-  )
+    type: 'invite',
+  })
 
-  if (!inviteError && inviteData.user) {
+  if (!inviteError && inviteData.user && inviteData.properties?.action_link) {
+    const emailResult = await sendKinseiCompanyAccessEmail({
+      actionLink: buildCompanyAccessActionLink(inviteData.properties, redirectTo),
+      companyName: values.companyName,
+      contactName: values.contactName,
+      emailKind: 'invite',
+      to: values.contactEmail,
+    })
+
+    if (emailResult.status !== 'ok') {
+      if (emailResult.status === 'missing_config') {
+        return {
+          errorStatus: 'email_service_missing',
+          status: 'error',
+        }
+      }
+
+      logCustomEmailError('custom invite email failed', emailResult.message)
+      await serviceClient.auth.admin.deleteUser(inviteData.user.id)
+      return {
+        errorStatus: 'custom_email_error',
+        status: 'error',
+      }
+    }
+
     return {
       emailKind: 'invite',
       status: 'ok',
@@ -129,8 +189,16 @@ async function sendCompanyAccessEmail(
     }
   }
 
+  if (!inviteError && inviteData.user) {
+    await serviceClient.auth.admin.deleteUser(inviteData.user.id)
+    return {
+      errorStatus: 'invite_error',
+      status: 'error',
+    }
+  }
+
   if (!isAlreadyRegisteredInviteError(inviteError)) {
-    logAuthEmailError('invite failed', inviteError)
+    logAuthEmailError('invite link generation failed', inviteError)
     return {
       errorStatus: getInviteErrorStatus(inviteError),
       status: 'error',
@@ -147,14 +215,41 @@ async function sendCompanyAccessEmail(
     }
   }
 
-  const { error: resetError } = await serviceClient.auth.resetPasswordForEmail(values.contactEmail, {
-    redirectTo,
+  const { data: resetData, error: resetError } = await serviceClient.auth.admin.generateLink({
+    email: values.contactEmail,
+    options: {
+      redirectTo,
+    },
+    type: 'recovery',
   })
 
-  if (resetError) {
-    logAuthEmailError('password reset email failed', resetError)
+  if (resetError || !resetData.properties?.action_link) {
+    logAuthEmailError('password reset link generation failed', resetError)
     return {
       errorStatus: getPasswordResetErrorStatus(resetError),
+      status: 'error',
+    }
+  }
+
+  const emailResult = await sendKinseiCompanyAccessEmail({
+    actionLink: buildCompanyAccessActionLink(resetData.properties, redirectTo),
+    companyName: values.companyName,
+    contactName: values.contactName,
+    emailKind: 'password_reset',
+    to: values.contactEmail,
+  })
+
+  if (emailResult.status !== 'ok') {
+    if (emailResult.status === 'missing_config') {
+      return {
+        errorStatus: 'email_service_missing',
+        status: 'error',
+      }
+    }
+
+    logCustomEmailError('custom password reset email failed', emailResult.message)
+    return {
+      errorStatus: 'custom_email_error',
       status: 'error',
     }
   }
@@ -258,7 +353,7 @@ export async function createCompany(formData: FormData) {
     redirect('/admin/companies/new?status=service_key_missing')
   }
 
-  const accessEmailResult = await sendCompanyAccessEmail(serviceClient, values)
+  const accessEmailResult = await sendCompanyAccessLinkEmail(serviceClient, values)
 
   if (accessEmailResult.status === 'error') {
     redirect(`/admin/companies/new?status=${accessEmailResult.errorStatus}`)
@@ -403,7 +498,7 @@ export async function resendCompanyInvite(formData: FormData) {
     redirect(`/admin/companies/${companyId}?status=service_key_missing`)
   }
 
-  const accessEmailResult = await sendCompanyAccessEmail(serviceClient, {
+  const accessEmailResult = await sendCompanyAccessLinkEmail(serviceClient, {
     companyName,
     contactEmail,
     contactName,

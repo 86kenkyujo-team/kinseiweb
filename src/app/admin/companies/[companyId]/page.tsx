@@ -17,18 +17,20 @@ type CompanyDetailPageProps = {
 }
 
 const statusMessages: Record<string, string> = {
-  created: '企業を登録し、招待メールを送信しました。',
-  created_existing_user: '企業を登録し、既存アカウントへパスワード再設定メールを送信しました。',
+  created: '企業を登録し、Kinsei名義のログイン設定メールを送信しました。',
+  created_existing_user: '企業を登録し、既存アカウントへKinsei名義のログイン設定メールを送信しました。',
   error: '企業情報を更新できませんでした。',
   auth_user_lookup_error: '既存のログインアカウントを確認できませんでした。時間をおいて再度お試しください。',
+  custom_email_error: 'Kinsei名義のログイン案内メールを送信できませんでした。Resendの送信元ドメイン設定を確認してください。',
   delete_confirm_required: '削除する場合は確認チェックを入れてください。',
   delete_error: '企業を削除できませんでした。関連データを確認して、時間をおいて再度お試しください。',
   delete_name_mismatch: '入力した企業名が一致しません。削除する企業名を正確に入力してください。',
+  email_service_missing: 'Kinsei名義のログイン案内メール送信には Vercel の RESEND_API_KEY 設定が必要です。',
   invite_email_invalid: 'メールアドレスが無効と判定されました。実在する企業メールアドレスを入力してください。',
-  invite_error: '招待メールを再送できませんでした。',
-  invite_sent: '招待メールを再送しました。',
-  password_reset_error: '既存アカウントへのパスワード再設定メールを送信できませんでした。',
-  password_reset_sent: '既存アカウントへパスワード再設定メールを送信しました。',
+  invite_error: 'ログイン設定リンクを作成できませんでした。',
+  invite_sent: 'Kinsei名義のログイン設定メールを再送しました。',
+  password_reset_error: '既存アカウント用のログイン設定リンクを作成できませんでした。',
+  password_reset_sent: '既存アカウントへKinsei名義のログイン設定メールを送信しました。',
   service_key_missing: 'ログイン案内の送信には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
   updated: '企業情報を更新しました。',
 }
@@ -162,8 +164,8 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
       <section className="admin-panel">
         <h2>ログイン案内</h2>
         <p>
-          企業担当者がリンクを見失った場合は、担当者メールアドレスへログイン案内を再送します。
-          既存アカウントにはパスワード再設定メールを送ります。
+          企業担当者がリンクを見失った場合は、担当者メールアドレスへKinsei名義のログイン設定メールを再送します。
+          既存アカウントにも同じ案内文で送信します。
         </p>
         <form action={resendCompanyInvite} className="admin-inline-form">
           <input name="companyId" type="hidden" value={company.id} />

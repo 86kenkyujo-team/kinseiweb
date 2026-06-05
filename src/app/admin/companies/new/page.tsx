@@ -13,10 +13,12 @@ const statusMessages: Record<string, string> = {
   auth_user_duplicate_company: 'このメールアドレスのログインアカウントは、すでに別の企業に紐づいています。',
   auth_user_lookup_error: '既存のログインアカウントを確認できませんでした。時間をおいて再度お試しください。',
   company_error: '企業情報を作成できませんでした。',
+  custom_email_error: 'Kinsei名義のログイン案内メールを送信できませんでした。Resendの送信元ドメイン設定を確認してください。',
   duplicate: 'このメールアドレスの企業はすでに登録されています。',
+  email_service_missing: 'Kinsei名義のログイン案内メール送信には Vercel の RESEND_API_KEY 設定が必要です。',
   invite_email_invalid: 'メールアドレスが無効と判定されました。実在する企業メールアドレスを入力してください。',
-  invite_error: '招待メールを送信できませんでした。',
-  password_reset_error: '既存アカウントへのパスワード再設定メールを送信できませんでした。',
+  invite_error: 'ログイン設定リンクを作成できませんでした。',
+  password_reset_error: '既存アカウント用のログイン設定リンクを作成できませんでした。',
   service_key_missing: '企業ログイン案内の送信には Vercel の SUPABASE_SECRET_KEY 設定が必要です。',
 }
 
@@ -46,7 +48,7 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
           <div className="admin-form-section full">
             <p>基本情報</p>
             <span>
-              企業名と担当者情報です。新規アカウントには招待メール、既存アカウントにはパスワード再設定メールが送られます。
+              企業名と担当者情報です。新規・既存アカウントどちらにも、Kinsei名義のログイン設定メールを送ります。
             </span>
           </div>
           <label>
