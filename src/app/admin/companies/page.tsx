@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/admin/auth'
 import { getCompanyMembershipStatusLabel, isAccessibleCompanyStatus } from '@/lib/admin/companyMembershipStatus'
+import { getCompanyPublicStatusLabel, isPublishedCompanyPublicStatus } from '@/lib/admin/companyPublicStatus'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,6 +18,7 @@ type Company = {
   membership_status: string
   next_check_date: string | null
   plan_name: string | null
+  public_status: string
   updated_at: string
 }
 
@@ -32,7 +34,7 @@ export default async function AdminCompaniesPage({ searchParams }: AdminCompanie
   const { data: companies, error } = await adminClient
     .from('companies')
     .select(
-      'id, company_name, contact_name, contact_email, membership_status, plan_name, contract_end_date, next_check_date, updated_at',
+      'id, company_name, contact_name, contact_email, membership_status, public_status, plan_name, contract_end_date, next_check_date, updated_at',
     )
     .order('updated_at', { ascending: false })
     .returns<Company[]>()
@@ -60,6 +62,7 @@ export default async function AdminCompaniesPage({ searchParams }: AdminCompanie
               <th>企業</th>
               <th>担当者</th>
               <th>ステータス</th>
+              <th>学生向け</th>
               <th>契約</th>
               <th>次回確認</th>
               <th />
@@ -79,6 +82,11 @@ export default async function AdminCompaniesPage({ searchParams }: AdminCompanie
                 <td>
                   <span className={`status-pill ${!isAccessibleCompanyStatus(company.membership_status) ? 'blocked' : ''}`}>
                     {getCompanyMembershipStatusLabel(company.membership_status)}
+                  </span>
+                </td>
+                <td>
+                  <span className={`status-pill ${!isPublishedCompanyPublicStatus(company.public_status || 'draft') ? 'blocked' : ''}`}>
+                    {getCompanyPublicStatusLabel(company.public_status || 'draft')}
                   </span>
                 </td>
                 <td>{company.contract_end_date || '終了日未設定'}</td>

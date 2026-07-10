@@ -2,8 +2,13 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { requireAdmin } from '@/lib/admin/auth'
+import { getStudentPasswordUpdateRedirectUrl, requireAdmin } from '@/lib/admin/auth'
+import {
+  setStudentAccessLinkFlash,
+  type StudentAccessKind,
+} from '@/lib/admin/studentAccessLinkFlash'
 import { buildDeepDiveAnswersFromForm } from '@/lib/studentProfileQuestions'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 const studentMediaBucket = process.env.NEXT_PUBLIC_STUDENT_MEDIA_BUCKET || 'student-media'
 
@@ -45,11 +50,182 @@ function publicStudentPayload(formData: FormData) {
     grade: requiredText(formData, 'grade'),
     initials: requiredText(formData, 'initials'),
     location: textValue(formData, 'location'),
+    login_email: textValue(formData, 'loginEmail')?.toLowerCase() || null,
+    login_status: requiredText(formData, 'loginStatus'),
     profile_image_url: textValue(formData, 'profileImageUrl'),
+    profile_share_status: requiredText(formData, 'profileShareStatus'),
     profile_summary: textValue(formData, 'profileSummary'),
     publication_status: requiredText(formData, 'publicationStatus'),
     tiktok_url: textValue(formData, 'tiktokUrl'),
     video_url: textValue(formData, 'videoUrl'),
+  }
+}
+
+type AuthEmailError = {
+  code?: string
+  message?: string
+  status?: number
+}
+
+type LinkProperties = {
+  action_link: string
+  hashed_token?: string
+  verification_type?: string
+}
+
+type StudentAccessLinkResult =
+  | { accessKind: StudentAccessKind; actionLink: string; status: 'ok'; userId: string }
+  | { errorStatus: string; status: 'error' }
+
+function isAlreadyRegisteredInviteError(error: AuthEmailError | null) {
+  return (
+    error?.status === 422 &&
+    /already been registered/i.test(error.message || '')
+  )
+}
+
+function getInviteErrorStatus(error: AuthEmailError | null) {
+  if (error?.code === 'email_address_invalid' || /email address .* is invalid/i.test(error?.message || '')) {
+    return 'invite_email_invalid'
+  }
+
+  return 'invite_error'
+}
+
+function getPasswordResetErrorStatus(error: AuthEmailError | null) {
+  if (error?.code === 'email_address_invalid' || /email address .* is invalid/i.test(error?.message || '')) {
+    return 'invite_email_invalid'
+  }
+
+  return 'password_reset_error'
+}
+
+function logAuthLinkError(context: string, error: AuthEmailError | null) {
+  console.error(`[admin students] ${context}`, {
+    code: error?.code,
+    message: error?.message,
+    status: error?.status,
+  })
+}
+
+function buildStudentAccessActionLink(properties: LinkProperties, redirectTo?: string) {
+  if (!redirectTo || !properties.hashed_token || !properties.verification_type) {
+    return properties.action_link
+  }
+
+  const siteOrigin = new URL(redirectTo).origin
+  const url = new URL('/auth/confirm', siteOrigin)
+  url.searchParams.set('token_hash', properties.hashed_token)
+  url.searchParams.set('type', properties.verification_type)
+  url.searchParams.set('next', '/student/profile')
+
+  return url.toString()
+}
+
+async function findAuthUserByEmail(
+  serviceClient: NonNullable<ReturnType<typeof createAdminClient>>,
+  email: string,
+) {
+  const normalizedEmail = email.toLowerCase()
+
+  for (let page = 1; page <= 20; page += 1) {
+    const { data, error } = await serviceClient.auth.admin.listUsers({
+      page,
+      perPage: 1000,
+    })
+
+    if (error) {
+      logAuthLinkError('auth user lookup failed', error)
+      return null
+    }
+
+    const user = data.users.find((candidate) => candidate.email?.toLowerCase() === normalizedEmail)
+
+    if (user) {
+      return user
+    }
+
+    if (!data.nextPage) {
+      return null
+    }
+  }
+
+  return null
+}
+
+async function generateStudentAccessLink(
+  serviceClient: NonNullable<ReturnType<typeof createAdminClient>>,
+  values: { email: string; studentDisplayName: string },
+): Promise<StudentAccessLinkResult> {
+  const redirectTo = getStudentPasswordUpdateRedirectUrl()
+  const { data: inviteData, error: inviteError } = await serviceClient.auth.admin.generateLink({
+    email: values.email,
+    options: {
+      data: {
+        student_display_name: values.studentDisplayName,
+        user_type: 'student',
+      },
+      redirectTo,
+    },
+    type: 'invite',
+  })
+
+  if (!inviteError && inviteData.user && inviteData.properties?.action_link) {
+    return {
+      accessKind: 'invite',
+      actionLink: buildStudentAccessActionLink(inviteData.properties, redirectTo),
+      status: 'ok',
+      userId: inviteData.user.id,
+    }
+  }
+
+  if (!inviteError && inviteData.user) {
+    await serviceClient.auth.admin.deleteUser(inviteData.user.id)
+    return {
+      errorStatus: 'invite_error',
+      status: 'error',
+    }
+  }
+
+  if (!isAlreadyRegisteredInviteError(inviteError)) {
+    logAuthLinkError('invite link generation failed', inviteError)
+    return {
+      errorStatus: getInviteErrorStatus(inviteError),
+      status: 'error',
+    }
+  }
+
+  const existingUser = await findAuthUserByEmail(serviceClient, values.email)
+
+  if (!existingUser) {
+    logAuthLinkError('existing auth user not found after duplicate invite', inviteError)
+    return {
+      errorStatus: 'auth_user_lookup_error',
+      status: 'error',
+    }
+  }
+
+  const { data: resetData, error: resetError } = await serviceClient.auth.admin.generateLink({
+    email: values.email,
+    options: {
+      redirectTo,
+    },
+    type: 'recovery',
+  })
+
+  if (resetError || !resetData.properties?.action_link) {
+    logAuthLinkError('password reset link generation failed', resetError)
+    return {
+      errorStatus: getPasswordResetErrorStatus(resetError),
+      status: 'error',
+    }
+  }
+
+  return {
+    accessKind: 'password_reset',
+    actionLink: buildStudentAccessActionLink(resetData.properties, redirectTo),
+    status: 'ok',
+    userId: existingUser.id,
   }
 }
 
@@ -170,7 +346,78 @@ export async function updateStudent(formData: FormData) {
   revalidatePath(`/admin/students/${studentId}/edit`)
   revalidatePath('/students')
   revalidatePath('/members/students')
+  revalidatePath('/student/profile')
   redirect(`/admin/students/${studentId}/edit?status=updated`)
+}
+
+export async function generateStudentAccessLinkForStudent(formData: FormData) {
+  const { adminClient, adminUser } = await requireAdmin()
+  const serviceClient = createAdminClient()
+  const studentId = requiredText(formData, 'studentId')
+  const studentDisplayName = requiredText(formData, 'studentDisplayName')
+  const loginEmail = requiredText(formData, 'loginEmail').toLowerCase()
+
+  if (!serviceClient) {
+    redirect(`/admin/students/${studentId}/edit?status=service_key_missing`)
+  }
+
+  const accessLinkResult = await generateStudentAccessLink(serviceClient, {
+    email: loginEmail,
+    studentDisplayName,
+  })
+
+  if (accessLinkResult.status === 'error') {
+    redirect(`/admin/students/${studentId}/edit?status=${accessLinkResult.errorStatus}`)
+  }
+
+  const { data: duplicateAuthStudent } = await adminClient
+    .from('students')
+    .select('id')
+    .eq('auth_user_id', accessLinkResult.userId)
+    .neq('id', studentId)
+    .maybeSingle()
+
+  if (duplicateAuthStudent) {
+    redirect(`/admin/students/${studentId}/edit?status=auth_user_duplicate_student`)
+  }
+
+  const { error: updateStudentError } = await adminClient
+    .from('students')
+    .update({
+      auth_user_id: accessLinkResult.userId,
+      login_email: loginEmail,
+      login_status: 'invited',
+    })
+    .eq('id', studentId)
+
+  if (updateStudentError) {
+    redirect(`/admin/students/${studentId}/edit?status=error`)
+  }
+
+  await adminClient.from('admin_activity_logs').insert({
+    action: 'student.access_link_generate',
+    admin_user_id: adminUser.id,
+    details: { access_kind: accessLinkResult.accessKind, login_email: loginEmail },
+    target_id: studentId,
+    target_table: 'students',
+  })
+
+  await setStudentAccessLinkFlash({
+    accessKind: accessLinkResult.accessKind,
+    actionLink: accessLinkResult.actionLink,
+    contactEmail: loginEmail,
+    createdAt: new Date().toISOString(),
+    studentDisplayName,
+    studentId,
+  })
+
+  revalidatePath('/admin/students')
+  revalidatePath(`/admin/students/${studentId}/edit`)
+
+  const generatedStatus =
+    accessLinkResult.accessKind === 'password_reset' ? 'student_password_reset_link_generated' : 'student_invite_link_generated'
+
+  redirect(`/admin/students/${studentId}/edit?status=${generatedStatus}`)
 }
 
 export async function deleteStudent(formData: FormData) {

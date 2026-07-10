@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 
 export async function createInterviewRequest(formData: FormData) {
@@ -20,22 +21,41 @@ export async function createInterviewRequest(formData: FormData) {
     redirect('/members/students?request=setup')
   }
 
-  const { data: claimsData } = await supabase.auth.getClaims()
+  const { data: userData } = await supabase.auth.getUser()
+  const user = userData.user
 
-  if (!claimsData?.claims) {
+  if (!user) {
     redirect('/login?next=/members/students')
   }
 
-  const { data: company } = await supabase
+  const serviceClient = createAdminClient()
+
+  if (!serviceClient) {
+    redirect('/members/students?request=setup')
+  }
+
+  const { data: company } = await serviceClient
     .from('companies')
     .select('id, membership_status')
-    .single()
+    .eq('auth_user_id', user.id)
+    .maybeSingle()
 
   if (!company || !['active', 'trial'].includes(company.membership_status)) {
     redirect('/membership-inactive')
   }
 
-  const { error } = await supabase.from('interview_requests').insert({
+  const { data: student } = await serviceClient
+    .from('students')
+    .select('id')
+    .eq('id', studentId)
+    .eq('publication_status', 'published')
+    .maybeSingle()
+
+  if (!student) {
+    redirect('/members/students?request=error')
+  }
+
+  const { error } = await serviceClient.from('interview_requests').insert({
     company_id: company.id,
     preferred_method: preferredMethod,
     preferred_schedule: preferredSchedule || null,

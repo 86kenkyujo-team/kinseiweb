@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export type AdminUser = {
   auth_user_id: string
@@ -37,9 +38,10 @@ export async function getAdminContext() {
     .select('id, auth_user_id, display_name, role')
     .eq('auth_user_id', user.id)
     .maybeSingle<AdminUser>()
+  const privilegedClient = createAdminClient()
 
   return {
-    adminClient: supabase,
+    adminClient: privilegedClient || supabase,
     adminUser: adminUser || null,
     isConfigured: true,
     user,
@@ -102,4 +104,14 @@ export function getCompanyPasswordUpdateRedirectUrl() {
   }
 
   return `${siteUrl}/password-update?next=${encodeURIComponent('/members/students')}`
+}
+
+export function getStudentPasswordUpdateRedirectUrl() {
+  const siteUrl = getSiteUrl()
+
+  if (!siteUrl) {
+    return undefined
+  }
+
+  return `${siteUrl}/password-update?next=${encodeURIComponent('/student/profile')}`
 }

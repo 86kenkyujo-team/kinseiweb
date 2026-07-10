@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import { StudentList } from './StudentList'
 import './styles.css'
@@ -103,16 +104,35 @@ export default async function MembersStudentsPage({ searchParams }: MembersStude
     )
   }
 
-  const { data: claimsData } = await supabase.auth.getClaims()
+  const { data: userData } = await supabase.auth.getUser()
+  const user = userData.user
 
-  if (!claimsData?.claims) {
+  if (!user) {
     redirect('/login?next=/members/students')
   }
 
-  const { data: company } = await supabase
+  const serviceClient = createAdminClient()
+
+  if (!serviceClient) {
+    return (
+      <main className="members-page">
+        <section className="setup-card">
+          <p>Setup Required</p>
+          <h1>Supabase管理キー設定待ち</h1>
+          <span>
+            `SUPABASE_SECRET_KEY` を設定すると、企業会員判定と会員限定DBが動作します。
+          </span>
+          <Link href="/login">ログイン画面へ</Link>
+        </section>
+      </main>
+    )
+  }
+
+  const { data: company } = await serviceClient
     .from('companies')
     .select('company_name, membership_status')
-    .single<Company>()
+    .eq('auth_user_id', user.id)
+    .maybeSingle<Company>()
 
   if (!company || !['active', 'trial'].includes(company.membership_status)) {
     redirect('/membership-inactive')

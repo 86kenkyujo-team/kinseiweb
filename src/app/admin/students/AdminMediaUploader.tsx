@@ -55,6 +55,7 @@ export function AdminMediaUploader({
   const fileInputId = useId()
   const urlInputId = useId()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const localPreviewUrlRef = useRef<string | null>(null)
   const [errorMessage, setErrorMessage] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [localPreviewUrl, setLocalPreviewUrl] = useState<string | null>(null)
@@ -66,24 +67,29 @@ export function AdminMediaUploader({
   const isSelectedFileTooLarge = Boolean(selectedFile && selectedFile.size > maxSizeBytes)
 
   useEffect(() => {
-    if (!selectedFile) {
-      setLocalPreviewUrl(null)
-      return
-    }
-
-    const nextPreviewUrl = URL.createObjectURL(selectedFile)
-    setLocalPreviewUrl(nextPreviewUrl)
-
     return () => {
-      URL.revokeObjectURL(nextPreviewUrl)
+      if (localPreviewUrlRef.current) {
+        URL.revokeObjectURL(localPreviewUrlRef.current)
+      }
     }
-  }, [selectedFile])
+  }, [])
+
+  function updateLocalPreview(file: File | null) {
+    if (localPreviewUrlRef.current) {
+      URL.revokeObjectURL(localPreviewUrlRef.current)
+    }
+
+    const nextPreviewUrl = file ? URL.createObjectURL(file) : null
+    localPreviewUrlRef.current = nextPreviewUrl
+    setLocalPreviewUrl(nextPreviewUrl)
+  }
 
   function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] || null
     setErrorMessage('')
     setSuccessMessage('')
     setSelectedFile(file)
+    updateLocalPreview(file)
 
     if (file && file.size > maxSizeBytes) {
       setErrorMessage(`${maxSizeMb}MB以内のファイルを選んでください。`)
@@ -120,6 +126,7 @@ export function AdminMediaUploader({
       const { data } = supabase.storage.from(bucketName).getPublicUrl(storagePath)
       setUrl(data.publicUrl)
       setSelectedFile(null)
+      updateLocalPreview(null)
       setSuccessMessage('アップロードしました。URL欄に自動で反映されています。')
 
       if (fileInputRef.current) {

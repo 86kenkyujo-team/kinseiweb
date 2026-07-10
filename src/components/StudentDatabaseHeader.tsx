@@ -3,14 +3,16 @@ import { createClient } from '@/lib/supabase/server'
 import { LogoutButton } from './LogoutButton'
 
 type StudentDatabaseHeaderProps = {
-  active?: 'public' | 'members' | 'login'
+  active?: 'companies' | 'login' | 'members' | 'public' | 'student'
+  logoutRedirectTo?: string
 }
 
-export async function StudentDatabaseHeader({ active }: StudentDatabaseHeaderProps) {
+export async function StudentDatabaseHeader({ active, logoutRedirectTo = '/login' }: StudentDatabaseHeaderProps) {
   const supabase = await createClient()
   const { data } = supabase ? await supabase.auth.getUser() : { data: { user: null } }
   const isLoggedIn = Boolean(data.user)
   const memberDatabaseHref = isLoggedIn ? '/members/students' : '/login?next=/members/students'
+  const studentHref = isLoggedIn ? '/student/profile' : '/student/login'
 
   return (
     <header className="student-db-header">
@@ -30,6 +32,9 @@ export async function StudentDatabaseHeader({ active }: StudentDatabaseHeaderPro
           <Link href="/sponsors_list.html">協賛企業</Link>
           <Link href="/sponsor.html">企業の方へ</Link>
           <Link href="/index.html#members">メンバー</Link>
+          <Link aria-current={active === 'companies' ? 'page' : undefined} href="/companies">
+            企業を探す
+          </Link>
           <Link aria-current={active === 'public' ? 'page' : undefined} href="/students">
             学生プロフィールを見る
           </Link>
@@ -38,10 +43,17 @@ export async function StudentDatabaseHeader({ active }: StudentDatabaseHeaderPro
             className="student-db-login-link"
             href={memberDatabaseHref}
           >
-            ログイン
+            企業ログイン
+          </Link>
+          <Link
+            aria-current={active === 'student' ? 'page' : undefined}
+            className="student-db-login-link"
+            href={studentHref}
+          >
+            {isLoggedIn ? 'マイページ' : '学生ログイン'}
           </Link>
           <Link href="/index.html#contact">お問い合わせ</Link>
-          {isLoggedIn ? <LogoutButton /> : null}
+          {isLoggedIn ? <LogoutButton redirectTo={logoutRedirectTo} /> : null}
         </nav>
       </details>
     </header>

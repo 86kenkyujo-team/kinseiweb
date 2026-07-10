@@ -6,6 +6,7 @@
     radial-gradient(#cfe3f7 1px, transparent 1px),
     #f6f9fe;
   background-size: auto, 18px 18px, auto;
+  height: 100vh;
   height: 100svh;
   height: 100dvh;
   min-height: 100vh;
@@ -280,10 +281,11 @@
   display: grid;
   gap: clamp(14px, 2vw, 28px);
   grid-template-columns: minmax(300px, 1fr) minmax(360px, 50svh) minmax(300px, 1fr);
+  min-height: calc(100vh - var(--members-header-height));
   min-height: calc(100svh - var(--members-header-height));
   min-height: calc(100dvh - var(--members-header-height));
   min-width: 0;
-  overflow: clip;
+  overflow: hidden;
   padding: clamp(10px, 1.6vw, 18px) clamp(14px, 2vw, 24px) var(--members-reel-bottom-space);
   scroll-margin-top: 0;
   scroll-snap-align: start;
@@ -307,6 +309,7 @@
   box-shadow:
     0 22px 70px rgba(15, 23, 42, 0.2),
     0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  max-height: calc(100vh - var(--members-header-height) - var(--members-reel-bottom-space) - 20px);
   max-height: calc(100svh - var(--members-header-height) - var(--members-reel-bottom-space) - 20px);
   max-height: calc(100dvh - var(--members-header-height) - var(--members-reel-bottom-space) - 20px);
   width: min(100%, 500px, 50svh);
@@ -321,6 +324,7 @@
   border-radius: 8px;
   box-shadow: 0 20px 70px rgba(51, 128, 216, 0.1);
   display: grid;
+  max-height: calc(100vh - var(--members-header-height) - var(--members-reel-bottom-space) - 22px);
   max-height: calc(100svh - var(--members-header-height) - var(--members-reel-bottom-space) - 22px);
   max-height: calc(100dvh - var(--members-header-height) - var(--members-reel-bottom-space) - 22px);
   min-width: 0;
@@ -1050,8 +1054,10 @@
     background: #020817;
     display: grid;
     grid-template-columns: 1fr;
+    height: calc(100vh - var(--members-header-height));
     height: calc(100svh - var(--members-header-height));
     height: calc(100dvh - var(--members-header-height));
+    min-height: calc(100vh - var(--members-header-height));
     min-height: calc(100svh - var(--members-header-height));
     min-height: calc(100dvh - var(--members-header-height));
     overflow: hidden;
@@ -1383,6 +1389,41 @@
   .mobile-student-sheet {
     padding-left: 12px;
     padding-right: 12px;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .members-page {
+    height: 100svh;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .student-reel {
+    min-height: calc(100svh - var(--members-header-height));
+  }
+
+  .student-reel-video {
+    max-height: calc(100svh - var(--members-header-height) - var(--members-reel-bottom-space) - 20px);
+  }
+
+  .student-basic-panel,
+  .student-action-panel {
+    max-height: calc(100svh - var(--members-header-height) - var(--members-reel-bottom-space) - 22px);
+  }
+
+  @media (max-width: 860px) {
+    .student-reel {
+      height: calc(100svh - var(--members-header-height));
+      min-height: calc(100svh - var(--members-header-height));
+    }
+
+    .mobile-student-details[open] > summary {
+      bottom: calc(min(76svh, 620px) + 10px);
+    }
+
+    .mobile-student-sheet {
+      max-height: min(76svh, 620px);
+    }
   }
 }
 

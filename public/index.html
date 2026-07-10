@@ -108,8 +108,8 @@
     .nav {
       display: flex;
       align-items: center;
-      gap: 48px;
-      font-size: 19px;
+      gap: clamp(20px, 2.4vw, 36px);
+      font-size: 17px;
       font-weight: 800;
       flex: 1;
     }
@@ -121,12 +121,12 @@
 
     .header-actions {
       display: flex;
-      gap: 12px;
+      gap: 10px;
     }
 
     .header-actions .btn {
       height: 44px;
-      padding: 0 20px;
+      padding: 0 18px;
       font-size: 15px;
     }
 
@@ -298,6 +298,38 @@
       color: #1769e8;
       border: 1px solid rgba(31, 101, 198, .42);
       box-shadow: none;
+    }
+
+    .audience-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .audience-actions a {
+      align-items: center;
+      border-radius: 10px;
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 900;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .audience-actions a:first-child {
+      background: linear-gradient(135deg, #2a7cff, #0961db);
+      box-shadow: 0 14px 30px rgba(16, 101, 224, .22);
+      color: white;
+    }
+
+    .audience-actions a:last-child {
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(31, 101, 198, .32);
+      color: #1769e8;
     }
 
     .proof {
@@ -2399,6 +2431,16 @@
         width: 100%;
       }
 
+      .audience-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 18px;
+      }
+
+      .audience-actions a {
+        width: 100%;
+      }
+
       .desktop-label {
         display: none;
       }
@@ -3653,11 +3695,11 @@
     <header class="header">
       <a class="brand" href="/" aria-label="KINSEI トップ"><div class="brand-mark">K</div><span>KINSEI</span></a>
       <nav class="nav">
-        <a href="/">TOP</a><a href="/#cases">実績・事例</a><a href="/sponsors_list.html">協賛企業</a><a href="/sponsor.html">企業の方へ</a><a href="/#members">メンバー</a>
+        <a href="/">TOP</a><a href="/companies">企業を探す</a><a href="/#cases">実績・事例</a><a href="/sponsors_list.html">協賛企業</a><a href="/sponsor.html">企業の方へ</a><a href="/#members">メンバー</a>
       </nav>
       <div class="header-actions">
-        <a class="btn ghost" href="/login?next=/members/students">ログイン</a>
-        <a class="btn primary" href="/students">公開中の学生プロフィールを見る</a>
+        <a class="btn ghost" href="/login?next=/members/students">企業ログイン</a>
+        <a class="btn primary" href="/student/login">学生ログイン</a>
       </div>
       <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false">
         <span></span>
@@ -3671,8 +3713,9 @@
           <a href="/sponsors_list.html">協賛企業</a>
           <a href="/sponsor.html">企業の方へ</a>
           <a href="/#members">メンバー</a>
-          <a class="is-cta" href="/login?next=/members/students">ログイン</a>
-          <a class="is-cta" href="/students">公開中の学生</a>
+          <a href="/companies">企業を探す</a>
+          <a class="is-cta" href="/student/login">学生ログイン・プロフィール確認</a>
+          <a class="is-cta" href="/login?next=/members/students">企業ログイン</a>
         </div>
       </div>
     </header>
@@ -3683,8 +3726,8 @@
         <h1>学びと実践で、<br><span class="blue">未来のキャリア</span>をつくる。</h1>
         <p class="hero-lead">KINSEIは、学生の挑戦と実績を可視化し、<br>企業との最適な出会いをつくるキャリアプラットフォームです。</p>
         <div class="hero-actions">
-          <a class="btn primary" href="/students"><span class="desktop-label">公開中の学生プロフィールを見る</span><span class="responsive-label">公開中の学生</span></a>
-          <a class="btn outline" href="/sponsor.html"><span class="desktop-label">企業向け資料を見る</span><span class="responsive-label">企業向け資料</span></a>
+          <a class="btn primary" href="/student/login"><span class="desktop-label">学生ログイン・プロフィール確認</span><span class="responsive-label">学生ログイン</span></a>
+          <a class="btn outline" href="/companies"><span class="desktop-label">掲載企業・求人を見る</span><span class="responsive-label">企業を探す</span></a>
         </div>
         <div class="proof">
           <div class="proof-avatars">
@@ -3776,6 +3819,10 @@
           <small>KINSEIが選ばれる理由</small>
           <h2>実績があなたの可能性に</h2>
           <p>プロジェクトを通じてスキルを磨き、信頼できる企業と出会える。</p>
+          <div class="audience-actions">
+            <a href="/student/login">プロフィールを確認する</a>
+            <a href="/companies">掲載企業を見る</a>
+          </div>
           <div class="audience-features">
             <article class="audience-feature"><div class="audience-icon">◎</div><b>実績を可視化</b><p>プロジェクトの成果やスキルをスコア化し、強みが一目で伝わる。</p></article>
             <article class="audience-feature"><div class="audience-icon">⌘</div><b>最適なマッチング</b><p>あなたの志向に合った企業・プロジェクトと出会える。</p></article>

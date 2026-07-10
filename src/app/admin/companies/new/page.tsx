@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/admin/auth'
 import { companyMembershipStatusOptions } from '@/lib/admin/companyMembershipStatus'
+import { companyPublicStatusOptions } from '@/lib/admin/companyPublicStatus'
 import { createCompany } from '../actions'
 
 export const dynamic = 'force-dynamic'
@@ -74,6 +75,56 @@ export default async function NewCompanyPage({ searchParams }: NewCompanyPagePro
                 </option>
               ))}
             </select>
+          </label>
+
+          <div className="admin-form-section full">
+            <p>学生向け公開情報</p>
+            <span>学生が見る企業一覧・企業詳細で表示する情報です。担当者メールとは分けて管理します。</span>
+          </div>
+          <label>
+            <span className="admin-label-text">学生向け公開状態</span>
+            <select name="publicStatus" required defaultValue="draft">
+              {companyPublicStatusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}（{option.description}）
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span className="admin-label-text">表示順</span>
+            <span className="admin-field-hint">小さい数字ほど先に表示します。</span>
+            <input name="sortOrder" inputMode="numeric" type="number" defaultValue="100" />
+          </label>
+          <label>
+            <span className="admin-label-text">企業ロゴURL</span>
+            <input name="logoUrl" placeholder="https://example.com/logo.png" />
+          </label>
+          <label>
+            <span className="admin-label-text">業界カテゴリ</span>
+            <input name="industryCategory" placeholder="例: IT / 人材 / 広告" />
+          </label>
+          <label className="full">
+            <span className="admin-label-text">学生向け企業説明</span>
+            <textarea name="companyDescription" placeholder="学生に向けて事業内容や募集背景を説明します。" />
+          </label>
+          <label>
+            <span className="admin-label-text">公開用公式サイトURL</span>
+            <input name="publicWebsiteUrl" placeholder="https://example.com" />
+          </label>
+          <label>
+            <span className="admin-label-text">学生向け公開メール</span>
+            <span className="admin-field-hint">学生が連絡する宛先です。担当者ログインメールとは別にしてください。</span>
+            <input name="publicContactEmail" type="email" placeholder="recruit@example.com" />
+          </label>
+          <label>
+            <span className="admin-label-text">所在地・勤務地概要</span>
+            <input name="publicLocation" placeholder="例: 大阪 / 東京 / フルリモート" />
+          </label>
+          <label>
+            <span className="admin-label-text">表示タグ</span>
+            <span className="admin-field-hint">複数ある場合はカンマ区切りで入力できます。</span>
+            <input name="publicTags" placeholder="例: 長期インターン, 新規事業, 裁量大" />
           </label>
 
           <div className="admin-form-section full">

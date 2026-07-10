@@ -1,5 +1,9 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/admin/auth'
+import {
+  getStudentLoginStatusLabel,
+  getStudentProfileShareStatusLabel,
+} from '@/lib/admin/studentLoginStatus'
 import { getStudentPublicationStatusLabel, isPublishedStudentStatus } from '@/lib/admin/studentPublicationStatus'
 import { allStudentQuestionFields, countDeepDiveAnswers } from '@/lib/studentProfileQuestions'
 
@@ -11,7 +15,10 @@ type Student = {
   faculty: string
   grade: string
   id: string
+  login_email: string | null
+  login_status: string
   publication_status: string
+  profile_share_status: string
   student_member_profiles: { deep_dive_answers: unknown } | { deep_dive_answers: unknown }[] | null
   updated_at: string
 }
@@ -46,6 +53,9 @@ export default async function AdminStudentsPage({ searchParams }: AdminStudentsP
         grade,
         desired_industries,
         publication_status,
+        login_email,
+        login_status,
+        profile_share_status,
         updated_at,
         student_member_profiles (
           deep_dive_answers
@@ -79,6 +89,7 @@ export default async function AdminStudentsPage({ searchParams }: AdminStudentsP
               <th>学生</th>
               <th>所属</th>
               <th>志望業界</th>
+              <th>学生ログイン</th>
               <th>質問項目</th>
               <th>公開状態</th>
               <th />
@@ -101,6 +112,13 @@ export default async function AdminStudentsPage({ searchParams }: AdminStudentsP
                     <small>{student.grade}</small>
                   </td>
                   <td>{student.desired_industries?.join(', ') || '未設定'}</td>
+                  <td>
+                    <span className={`status-pill ${student.login_status === 'suspended' ? 'blocked' : ''}`}>
+                      {getStudentLoginStatusLabel(student.login_status)}
+                    </span>
+                    <small>{student.login_email || 'メール未設定'}</small>
+                    <small>{getStudentProfileShareStatusLabel(student.profile_share_status)}</small>
+                  </td>
                   <td>
                     <span className={`status-pill ${answeredCount === 0 ? 'blocked' : ''}`}>
                       {answeredCount}/{totalCount}

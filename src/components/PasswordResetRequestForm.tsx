@@ -17,12 +17,19 @@ export function PasswordResetRequestForm() {
   const loginHref =
     nextPath === '/admin'
       ? '/admin/login?next=/admin'
+      : nextPath.startsWith('/student')
+        ? `/student/login?next=${encodeURIComponent(nextPath)}`
       : `/login?next=${encodeURIComponent(nextPath)}`
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [sentEmail, setSentEmail] = useState('')
-  const destinationLabel = nextPath === '/admin' ? '管理画面' : '企業会員ページ'
+  const destinationLabel =
+    nextPath === '/admin'
+      ? '管理画面'
+      : nextPath.startsWith('/student')
+        ? '学生マイページ'
+        : '企業会員ページ'
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

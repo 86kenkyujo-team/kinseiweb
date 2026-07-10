@@ -8,13 +8,16 @@ export function AdminShellMotion() {
   const [isChanging, setIsChanging] = useState(false)
 
   useEffect(() => {
-    setIsChanging(true)
-    const timerId = window.setTimeout(() => {
+    const startTimerId = window.setTimeout(() => {
+      setIsChanging(true)
+    }, 0)
+    const endTimerId = window.setTimeout(() => {
       setIsChanging(false)
     }, 260)
 
     return () => {
-      window.clearTimeout(timerId)
+      window.clearTimeout(startTimerId)
+      window.clearTimeout(endTimerId)
     }
   }, [pathname])
 

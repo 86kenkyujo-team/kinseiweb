@@ -8,6 +8,11 @@ import {
   getCompanyMembershipStatusLabel,
   isAccessibleCompanyStatus,
 } from '@/lib/admin/companyMembershipStatus'
+import {
+  companyPublicStatusOptions,
+  getCompanyPublicStatusLabel,
+  isPublishedCompanyPublicStatus,
+} from '@/lib/admin/companyPublicStatus'
 import { CompanyAccessLinkPanel } from '../CompanyAccessLinkPanel'
 import { deleteCompany, generateCompanyAccessLinkForCompany, updateCompany } from '../actions'
 
@@ -77,6 +82,9 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
           <span className={`status-pill ${!isAccessible ? 'blocked' : ''}`}>
             {getCompanyMembershipStatusLabel(company.membership_status)}
           </span>
+          <span className={`status-pill ${!isPublishedCompanyPublicStatus(company.public_status || 'draft') ? 'blocked' : ''}`}>
+            学生向け: {getCompanyPublicStatusLabel(company.public_status || 'draft')}
+          </span>
           <p>{getCompanyMembershipStatusDescription(company.membership_status)}</p>
         </div>
       </section>
@@ -114,6 +122,55 @@ export default async function CompanyDetailPage({ params, searchParams }: Compan
                 </option>
               ))}
             </select>
+          </label>
+
+          <div className="admin-form-section full">
+            <p>学生向け公開情報</p>
+            <span>学生が見る企業一覧・企業詳細・求人連絡導線で使う情報です。</span>
+          </div>
+          <label>
+            <span className="admin-label-text">学生向け公開状態</span>
+            <select name="publicStatus" required defaultValue={company.public_status || 'draft'}>
+              {companyPublicStatusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}（{option.description}）
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span className="admin-label-text">表示順</span>
+            <input name="sortOrder" inputMode="numeric" type="number" defaultValue={company.sort_order ?? 100} />
+          </label>
+          <label>
+            <span className="admin-label-text">企業ロゴURL</span>
+            <input name="logoUrl" defaultValue={company.logo_url || ''} />
+          </label>
+          <label>
+            <span className="admin-label-text">業界カテゴリ</span>
+            <input name="industryCategory" defaultValue={company.industry_category || ''} />
+          </label>
+          <label className="full">
+            <span className="admin-label-text">学生向け企業説明</span>
+            <textarea name="companyDescription" defaultValue={company.company_description || ''} />
+          </label>
+          <label>
+            <span className="admin-label-text">公開用公式サイトURL</span>
+            <input name="publicWebsiteUrl" defaultValue={company.public_website_url || ''} />
+          </label>
+          <label>
+            <span className="admin-label-text">学生向け公開メール</span>
+            <span className="admin-field-hint">学生が連絡する宛先です。担当者メールとは分けてください。</span>
+            <input name="publicContactEmail" type="email" defaultValue={company.public_contact_email || ''} />
+          </label>
+          <label>
+            <span className="admin-label-text">所在地・勤務地概要</span>
+            <input name="publicLocation" defaultValue={company.public_location || ''} />
+          </label>
+          <label>
+            <span className="admin-label-text">表示タグ</span>
+            <span className="admin-field-hint">複数ある場合はカンマ区切りで入力できます。</span>
+            <input name="publicTags" defaultValue={company.public_tags?.join(', ') || ''} />
           </label>
 
           <div className="admin-form-section full">

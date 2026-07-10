@@ -1,4 +1,8 @@
 import Link from 'next/link'
+import {
+  studentLoginStatusOptions,
+  studentProfileShareStatusOptions,
+} from '@/lib/admin/studentLoginStatus'
 import { studentPublicationStatusOptions } from '@/lib/admin/studentPublicationStatus'
 import { createStudent, updateStudent } from './actions'
 import { AdminMediaUploader } from './AdminMediaUploader'
@@ -31,7 +35,10 @@ type Student = {
   id?: string
   initials?: string
   location?: string | null
+  login_email?: string | null
+  login_status?: string
   profile_image_url?: string | null
+  profile_share_status?: string
   profile_summary?: string | null
   publication_status?: string
   student_member_profiles?: MemberProfile | MemberProfile[] | null
@@ -90,6 +97,36 @@ export function StudentForm({ student }: StudentFormProps) {
           <span className="admin-field-hint">内部値はそのまま保存されます。表示だけ分かりやすくしています。</span>
           <select name="publicationStatus" required defaultValue={student?.publication_status || 'draft'}>
             {studentPublicationStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}（{option.description}）
+              </option>
+            ))}
+          </select>
+        </label>
+        <div className="admin-form-section full">
+          <p>学生ログイン</p>
+          <span>学生本人がマイページでプロフィール確認と企業連絡導線を使うための設定です。</span>
+        </div>
+        <label>
+          <span className="admin-label-text">学生ログイン用メールアドレス</span>
+          <span className="admin-field-hint">学生本人がログインに使うメールアドレスです。</span>
+          <input name="loginEmail" type="email" defaultValue={student?.login_email || ''} />
+        </label>
+        <label>
+          <span className="admin-label-text">学生ログイン状態</span>
+          <select name="loginStatus" required defaultValue={student?.login_status || 'not_invited'}>
+            {studentLoginStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}（{option.description}）
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <span className="admin-label-text">プロフィール共有可否</span>
+          <span className="admin-field-hint">共有可の場合のみ、学生はプロフィール付き連絡導線を使えます。</span>
+          <select name="profileShareStatus" required defaultValue={student?.profile_share_status || 'disabled'}>
+            {studentProfileShareStatusOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}（{option.description}）
               </option>

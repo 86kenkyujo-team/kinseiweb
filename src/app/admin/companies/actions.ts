@@ -33,14 +33,23 @@ type AuthEmailError = {
 type CompanyFormValues = {
   adminNote: string | null
   companyName: string
+  companyDescription: string | null
   contactEmail: string
   contactName: string
   contractEndDate: string | null
   contractStartDate: string | null
   contractStatusNote: string | null
+  industryCategory: string | null
+  logoUrl: string | null
   membershipStatus: string
   nextCheckDate: string | null
   planName: string | null
+  publicContactEmail: string | null
+  publicLocation: string | null
+  publicStatus: string
+  publicTags: string[]
+  publicWebsiteUrl: string | null
+  sortOrder: number
 }
 
 type CompanyAccessLinkResult =
@@ -82,6 +91,24 @@ function logAuthLinkError(context: string, error: AuthEmailError | null) {
     message: error?.message,
     status: error?.status,
   })
+}
+
+function arrayValue(formData: FormData, key: string) {
+  const value = textValue(formData, key)
+
+  if (!value) {
+    return []
+  }
+
+  return value
+    .split(/[\n,]/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+}
+
+function numberValue(formData: FormData, key: string, fallback: number) {
+  const value = Number(textValue(formData, key))
+  return Number.isFinite(value) ? value : fallback
 }
 
 function buildCompanyAccessActionLink(properties: LinkProperties, redirectTo?: string) {
@@ -227,16 +254,25 @@ async function insertCompany(
       admin_note: values.adminNote,
       auth_user_id: authUserId,
       company_name: values.companyName,
+      company_description: values.companyDescription,
       contact_email: values.contactEmail,
       contact_name: values.contactName,
       contract_end_date: values.contractEndDate,
       contract_start_date: values.contractStartDate,
       contract_status_note: values.contractStatusNote,
       created_by_admin_id: adminUser.id,
+      industry_category: values.industryCategory,
       last_status_changed_at: new Date().toISOString(),
+      logo_url: values.logoUrl,
       membership_status: values.membershipStatus,
       next_check_date: values.nextCheckDate,
       plan_name: values.planName,
+      public_contact_email: values.publicContactEmail,
+      public_location: values.publicLocation,
+      public_status: values.publicStatus,
+      public_tags: values.publicTags,
+      public_website_url: values.publicWebsiteUrl,
+      sort_order: values.sortOrder,
     })
     .select('id')
     .single()
@@ -273,14 +309,23 @@ export async function createCompany(formData: FormData) {
   const values: CompanyFormValues = {
     adminNote: textValue(formData, 'adminNote'),
     companyName: requiredText(formData, 'companyName'),
+    companyDescription: textValue(formData, 'companyDescription'),
     contactEmail: requiredText(formData, 'contactEmail').toLowerCase(),
     contactName: requiredText(formData, 'contactName'),
     contractEndDate: textValue(formData, 'contractEndDate'),
     contractStartDate: textValue(formData, 'contractStartDate'),
     contractStatusNote: textValue(formData, 'contractStatusNote'),
+    industryCategory: textValue(formData, 'industryCategory'),
+    logoUrl: textValue(formData, 'logoUrl'),
     membershipStatus: requiredText(formData, 'membershipStatus'),
     nextCheckDate: textValue(formData, 'nextCheckDate'),
     planName: textValue(formData, 'planName'),
+    publicContactEmail: textValue(formData, 'publicContactEmail')?.toLowerCase() || null,
+    publicLocation: textValue(formData, 'publicLocation'),
+    publicStatus: requiredText(formData, 'publicStatus'),
+    publicTags: arrayValue(formData, 'publicTags'),
+    publicWebsiteUrl: textValue(formData, 'publicWebsiteUrl'),
+    sortOrder: numberValue(formData, 'sortOrder', 100),
   }
 
   const { data: existingCompany } = await adminClient
@@ -317,6 +362,7 @@ export async function createCompany(formData: FormData) {
 
   revalidatePath('/admin')
   revalidatePath('/admin/companies')
+  revalidatePath('/companies')
   const createdStatus =
     accessLinkResult.accessKind === 'password_reset' ? 'created_existing_user_link' : 'created_link'
 
@@ -334,16 +380,25 @@ export async function updateCompany(formData: FormData) {
     .update({
       admin_note: textValue(formData, 'adminNote'),
       company_name: requiredText(formData, 'companyName'),
+      company_description: textValue(formData, 'companyDescription'),
       contact_email: requiredText(formData, 'contactEmail').toLowerCase(),
       contact_name: requiredText(formData, 'contactName'),
       contract_end_date: textValue(formData, 'contractEndDate'),
       contract_start_date: textValue(formData, 'contractStartDate'),
       contract_status_note: textValue(formData, 'contractStatusNote'),
+      industry_category: textValue(formData, 'industryCategory'),
       last_status_changed_at:
         previousStatus !== membershipStatus ? new Date().toISOString() : undefined,
+      logo_url: textValue(formData, 'logoUrl'),
       membership_status: membershipStatus,
       next_check_date: textValue(formData, 'nextCheckDate'),
       plan_name: textValue(formData, 'planName'),
+      public_contact_email: textValue(formData, 'publicContactEmail')?.toLowerCase() || null,
+      public_location: textValue(formData, 'publicLocation'),
+      public_status: requiredText(formData, 'publicStatus'),
+      public_tags: arrayValue(formData, 'publicTags'),
+      public_website_url: textValue(formData, 'publicWebsiteUrl'),
+      sort_order: numberValue(formData, 'sortOrder', 100),
     })
     .eq('id', companyId)
 
@@ -372,6 +427,8 @@ export async function updateCompany(formData: FormData) {
   revalidatePath('/admin')
   revalidatePath('/admin/companies')
   revalidatePath(`/admin/companies/${companyId}`)
+  revalidatePath('/companies')
+  revalidatePath(`/companies/${companyId}`)
   redirect(`/admin/companies/${companyId}?status=updated`)
 }
 
@@ -437,6 +494,7 @@ export async function deleteCompany(formData: FormData) {
 
   revalidatePath('/admin')
   revalidatePath('/admin/companies')
+  revalidatePath('/companies')
   redirect('/admin/companies?status=deleted')
 }
 
