@@ -137,6 +137,52 @@
   width: 100%;
 }
 
+.login-panel-stack {
+  display: grid;
+  gap: 14px;
+  max-width: 440px;
+  width: 100%;
+}
+
+.login-panel-stack .login-card {
+  max-width: none;
+}
+
+.login-register-note {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(62, 122, 220, 0.18);
+  border-radius: 8px;
+  box-shadow: 0 14px 38px rgba(23, 105, 232, 0.1);
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+}
+
+.login-register-note strong {
+  color: #0f1f3a;
+  font-size: 15px;
+}
+
+.login-register-note p {
+  color: #5f7190;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.login-register-note a {
+  color: #1769e8;
+  font-size: 14px;
+  font-weight: 900;
+  justify-self: start;
+  text-decoration: none;
+}
+
+.login-register-note a:hover {
+  text-decoration: underline;
+}
+
 .eyebrow {
   color: #1769e8;
   font-size: 13px;

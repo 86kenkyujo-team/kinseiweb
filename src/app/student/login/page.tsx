@@ -7,6 +7,9 @@ import '../../login/styles.css'
 
 export const dynamic = 'force-dynamic'
 
+const studentRegistrationMailHref =
+  'mailto:r.katayama@kinsei-inc.com?subject=KINSEI%E5%AD%A6%E7%94%9F%E7%99%BB%E9%8C%B2%E5%B8%8C%E6%9C%9B'
+
 export default function StudentLoginPage() {
   const { isConfigured } = getSupabaseBrowserEnv()
 
@@ -29,16 +32,23 @@ export default function StudentLoginPage() {
 
       <section className="login-panel">
         {isConfigured ? (
-          <Suspense fallback={<div className="login-card">ログインフォームを読み込んでいます。</div>}>
-            <LoginForm
-              defaultNextPath="/student/profile"
-              eyebrow="Student Login"
-              forgotPasswordHref="/password-reset?next=/student/profile"
-              lead="KINSEI運営から案内されたメールアドレスとパスワードでログインしてください。"
-              submitLabel="学生マイページへログイン"
-              title="学生ログイン"
-            />
-          </Suspense>
+          <div className="login-panel-stack">
+            <Suspense fallback={<div className="login-card">ログインフォームを読み込んでいます。</div>}>
+              <LoginForm
+                defaultNextPath="/student/profile"
+                eyebrow="Student Login"
+                forgotPasswordHref="/password-reset?next=/student/profile"
+                lead="KINSEI運営から案内されたメールアドレスとパスワードでログインしてください。"
+                submitLabel="学生マイページへログイン"
+                title="学生ログイン"
+              />
+            </Suspense>
+            <div className="login-register-note">
+              <strong>まだ学生登録がない方へ</strong>
+              <p>求人詳細の確認には、KINSEI運営による学生プロフィール登録が必要です。</p>
+              <a href={studentRegistrationMailHref}>登録希望をメールする</a>
+            </div>
+          </div>
         ) : (
           <div className="login-card">
             <p className="eyebrow">Setup Required</p>

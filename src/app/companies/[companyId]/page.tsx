@@ -4,12 +4,15 @@ import { notFound } from 'next/navigation'
 import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
-import { getStudentContext } from '@/lib/student/auth'
+import { requireStudent } from '@/lib/student/auth'
 import { buildMailBody, buildMailSubject, getContactEmail } from '@/lib/student/contactMail'
 import { ContactCompanyForm } from './ContactCompanyForm'
 import '../styles.css'
 
 export const dynamic = 'force-dynamic'
+
+const studentRegistrationMailHref =
+  'mailto:r.katayama@kinsei-inc.com?subject=KINSEI%E5%AD%A6%E7%94%9F%E7%99%BB%E9%8C%B2%E5%B8%8C%E6%9C%9B'
 
 type CompanyDetailPageProps = {
   params: Promise<{ companyId: string }>
@@ -59,7 +62,7 @@ export async function generateMetadata({ params }: CompanyDetailPageProps): Prom
   }
 }
 
-function disabledReasonForStudent(studentContext: Awaited<ReturnType<typeof getStudentContext>>) {
+function disabledReasonForStudent(studentContext: Awaited<ReturnType<typeof requireStudent>>) {
   if (!studentContext.user || !studentContext.student) {
     return undefined
   }
@@ -104,8 +107,35 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
           .order('published_at', { ascending: false })
           .returns<JobPost[]>()
       : { data: null, error: null },
-    getStudentContext(),
+    requireStudent(`/companies/${companyId}`),
   ])
+
+  if (!studentContext.isConfigured) {
+    return (
+      <main className="companies-page">
+        <StudentDatabaseHeader active="companies" logoutRedirectTo="/student/login" />
+        <section className="companies-notice">
+          <h2>Supabase設定待ち</h2>
+          <p>環境変数を設定すると、学生ログイン後に求人詳細を確認できます。</p>
+        </section>
+      </main>
+    )
+  }
+
+  if (!studentContext.student) {
+    return (
+      <main className="companies-page">
+        <StudentDatabaseHeader active="companies" logoutRedirectTo="/student/login" />
+        <section className="companies-notice">
+          <h2>学生プロフィールがまだ紐づいていません</h2>
+          <p>求人詳細の確認には、KINSEI運営が登録した学生プロフィールとの紐づけが必要です。</p>
+          <a className="company-login-cta" href={studentRegistrationMailHref}>
+            登録・確認をメールする
+          </a>
+        </section>
+      </main>
+    )
+  }
 
   const company = companyResult.data
 
@@ -115,11 +145,11 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
 
   const jobs = jobsResult.data || []
   const student = studentContext.student
-  const contactLookupClient = student ? createAdminClient() || supabase : null
+  const contactLookupClient = createAdminClient() || supabase
   let companyPublicContactEmail: string | null = null
   const jobContactEmailById = new Map<string, string | null>()
 
-  if (student && contactLookupClient) {
+  if (contactLookupClient) {
     const [companyContactResult, jobContactResult] = await Promise.all([
       contactLookupClient
         .from('companies')
@@ -145,12 +175,10 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
     company_name: company.company_name,
     public_contact_email: companyPublicContactEmail,
   }
-  const loginHref = `/student/login?next=${encodeURIComponent(`/companies/${company.id}`)}`
   const disabledReason = disabledReasonForStudent(studentContext)
-  const canPreview = Boolean(student)
-  const companySubject = student ? buildMailSubject(contactCompany, student) : ''
-  const companyBody = student ? buildMailBody(contactCompany, student) : ''
-  const companyContactEmail = student ? getContactEmail(contactCompany) : null
+  const companySubject = buildMailSubject(contactCompany, student)
+  const companyBody = buildMailBody(contactCompany, student)
+  const companyContactEmail = getContactEmail(contactCompany)
 
   return (
     <main className="companies-page">
@@ -236,20 +264,14 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
                       {job.tags?.map((tag) => <span key={tag}>{tag}</span>)}
                     </div>
                     <div className="job-contact-block">
-                      {canPreview ? (
-                        <ContactCompanyForm
-                          body={body}
-                          companyId={company.id}
-                          contactEmail={contactEmail}
-                          disabledReason={disabledReason}
-                          jobPostId={job.id}
-                          subject={subject}
-                        />
-                      ) : (
-                        <Link className="company-login-cta" href={loginHref}>
-                          ログインしてプロフィール情報を添えて連絡する
-                        </Link>
-                      )}
+                      <ContactCompanyForm
+                        body={body}
+                        companyId={company.id}
+                        contactEmail={contactEmail}
+                        disabledReason={disabledReason}
+                        jobPostId={job.id}
+                        subject={subject}
+                      />
                     </div>
                   </article>
                 )
@@ -265,19 +287,13 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
             <h2>企業へ連絡</h2>
           </div>
           <p>企業単位で連絡する場合はこちらからメール本文を確認できます。</p>
-          {canPreview ? (
-            <ContactCompanyForm
-              body={companyBody}
-              companyId={company.id}
-              contactEmail={companyContactEmail}
-              disabledReason={disabledReason}
-              subject={companySubject}
-            />
-          ) : (
-            <Link className="company-login-cta" href={loginHref}>
-              ログインしてプロフィール情報を添えて連絡する
-            </Link>
-          )}
+          <ContactCompanyForm
+            body={companyBody}
+            companyId={company.id}
+            contactEmail={companyContactEmail}
+            disabledReason={disabledReason}
+            subject={companySubject}
+          />
           <div className="company-tag-row">
             {company.public_tags?.map((tag) => <span key={tag}>{tag}</span>)}
           </div>
