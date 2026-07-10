@@ -5,7 +5,10 @@ import './globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.kinsei-inc.com'),
   verification: {
-    google: 'wIUM2xr9X1XNtKbgpjje-siH7ghWVqdwT_x0t3SQju0',
+    google: [
+      'wIUM2xr9X1XNtKbgpjje-siH7ghWVqdwT_x0t3SQju0',
+      'U0-BPefDVk7Y6OCVpCiOvpB_e8mYjViBiRZJxt67YQQ',
+    ],
   },
   title: {
     default: '近世 KINSEI',
