@@ -37,7 +37,7 @@ export default async function StudentProfilePage() {
           <p>Account Setup</p>
           <h1>学生プロフィールがまだ紐づいていません</h1>
           <span>ログイン中のアカウントに学生プロフィールが紐づいていません。KINSEI運営へ確認してください。</span>
-          <a href="mailto:info@kinsei-career.jp?subject=学生プロフィール紐づけ確認">運営へ確認する</a>
+          <a href="mailto:r.katayama@kinsei-inc.com?subject=学生プロフィール紐づけ確認">運営へ確認する</a>
         </section>
       </main>
     )
@@ -139,7 +139,7 @@ export default async function StudentProfilePage() {
               <h2>内容に誤りがありますか？</h2>
               <p>プロフィール修正はKINSEI運営が確認して反映します。</p>
             </div>
-            <a href={`mailto:info@kinsei-career.jp?subject=${encodeURIComponent('学生プロフィール修正依頼')}`}>
+            <a href={`mailto:r.katayama@kinsei-inc.com?subject=${encodeURIComponent('学生プロフィール修正依頼')}`}>
               修正を依頼する
             </a>
           </div>
