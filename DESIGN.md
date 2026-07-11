@@ -58,6 +58,9 @@ Avoid heavy beige, brown, purple-dominant gradients, and dark hero sections for 
   - K logo at left.
   - Navigation: サービス, 仕組み, 実績・事例, メンバー, 企業の方へ.
   - Actions: ログイン, 無料で始める or お問い合わせ.
+  - Mobile navigation uses a solid white panel rather than a translucent overlay.
+  - Each mobile menu item is a separate pale-blue row with a visible blue-gray border, deep navy text, and at least 46px tap height.
+  - The active item uses a stronger blue surface and accent edge. Login and registration actions use solid primary blue so they remain distinct from navigation links.
 
 - Hero:
   - Soft radial blue background.

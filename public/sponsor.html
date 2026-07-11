@@ -964,20 +964,25 @@
       }
 
       .ks-mobile-panel {
+        background: #ffffff;
+        border: 1px solid #c9dcf4;
+        border-radius: 14px;
+        box-shadow: 0 24px 60px rgba(17, 66, 128, .20);
         overflow: hidden;
         display: grid;
         gap: 8px;
+        padding: 10px;
       }
 
       .ks-mobile-menu a {
-        min-height: 44px;
+        min-height: 48px;
         padding: 0 14px;
         border-radius: 10px;
         display: flex;
         align-items: center;
-        color: #172947;
-        background: rgba(255,255,255,.62);
-        border: 1px solid rgba(101, 153, 221, .16);
+        color: #0f1f3a;
+        background: #eef6ff;
+        border: 1px solid #d4e4f7;
         text-decoration: none;
         font-size: 13px;
         font-weight: 900;
@@ -985,7 +990,17 @@
       }
 
       .ks-mobile-menu a.is-active {
-        color: var(--blue);
+        color: #0b3f9f;
+        background: #dcecff;
+        border-color: #8dbcf4;
+        box-shadow: inset 4px 0 0 var(--blue);
+      }
+
+      .ks-mobile-menu a:hover,
+      .ks-mobile-menu a:focus-visible {
+        color: #0b3f9f;
+        background: #dcecff;
+        border-color: #8dbcf4;
       }
     }
 
