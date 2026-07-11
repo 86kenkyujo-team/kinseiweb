@@ -8,6 +8,7 @@ const navItems = [
   { href: '/admin/companies', label: '企業管理' },
   { href: '/admin/job-posts', label: '求人管理' },
   { href: '/admin/students', label: '学生管理' },
+  { href: '/admin/access-accounts', label: 'ログイン状況' },
   { href: '/admin/student-contacts', label: '連絡履歴' },
   { href: '/admin/requests', label: '面談リクエスト' },
 ]
