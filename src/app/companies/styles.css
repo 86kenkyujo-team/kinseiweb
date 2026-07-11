@@ -647,6 +647,11 @@
   margin-top: 24px;
 }
 
+.company-detail-hero *,
+.company-detail-layout * {
+  min-width: 0;
+}
+
 /* Shared company detail styles */
 .companies-page .student-db-header {
   background: rgba(255, 255, 255, 0.96);
@@ -722,6 +727,7 @@
   color: var(--companies-muted);
   line-height: 1.8;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .company-detail-actions {
@@ -882,6 +888,7 @@
   color: var(--companies-navy);
   font: inherit;
   padding: 10px 12px;
+  width: 100%;
 }
 
 .contact-preview-grid textarea {
@@ -1152,6 +1159,27 @@
 }
 
 @media (max-width: 480px) {
+  .company-detail-hero,
+  .company-detail-layout,
+  .companies-notice {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .company-section,
+  .company-detail-side,
+  .companies-notice,
+  .job-card {
+    padding: 16px;
+  }
+
+  .company-detail-actions a,
+  .company-login-cta,
+  .company-contact-form button,
+  .company-back-link {
+    min-height: 44px;
+  }
+
   .companies-header {
     padding-left: 14px;
     padding-right: 14px;
@@ -1159,6 +1187,16 @@
 
   .companies-brand {
     font-size: 16px;
+    min-height: 44px;
+  }
+
+  .companies-menu-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .companies-hero-actions a.secondary {
+    min-height: 44px;
   }
 
   .companies-search-panel {

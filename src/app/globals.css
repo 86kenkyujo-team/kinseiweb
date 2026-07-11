@@ -94,6 +94,7 @@ select {
 }
 
 .student-db-menu {
+  display: none;
   margin-left: auto;
 }
 
@@ -136,6 +137,10 @@ select {
 }
 
 @media (max-width: 960px) {
+  .student-db-desktop-nav {
+    display: none;
+  }
+
   .student-db-header {
     align-items: center;
     flex-direction: row;
@@ -214,7 +219,7 @@ select {
     font-size: 13px;
     justify-content: flex-start;
     line-height: 1.25;
-    min-height: 36px;
+    min-height: 44px;
     padding: 0 10px;
     text-align: left;
     width: 100%;
@@ -277,6 +282,31 @@ select {
   .login-page .student-db-header .logout-button {
     border-color: rgba(23, 105, 232, 0.1);
     color: #1769e8;
+  }
+}
+
+@media (max-width: 760px) {
+  button,
+  summary,
+  .student-hero-actions a,
+  .public-card-actions a,
+  .login-helper-link,
+  .secondary-link {
+    min-height: 44px;
+  }
+
+  .student-db-brand,
+  .student-db-menu-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .student-hero-actions a,
+  .public-card-actions a,
+  .login-helper-link,
+  .secondary-link {
+    align-items: center;
+    display: inline-flex;
   }
 }
 

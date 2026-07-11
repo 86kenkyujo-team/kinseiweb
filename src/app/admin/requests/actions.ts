@@ -18,12 +18,14 @@ export async function updateRequestStatus(formData: FormData) {
     redirect('/admin/requests?status=missing')
   }
 
-  const { error } = await adminClient
+  const { data: updatedRequest, error } = await adminClient
     .from('interview_requests')
     .update({ status })
     .eq('id', requestId)
+    .select('id')
+    .maybeSingle()
 
-  if (error) {
+  if (error || !updatedRequest) {
     redirect('/admin/requests?status=error')
   }
 

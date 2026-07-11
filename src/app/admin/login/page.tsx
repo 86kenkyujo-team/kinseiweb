@@ -28,6 +28,7 @@ export default function AdminLoginPage() {
             lead="運営担当者として登録済みのメールアドレスとパスワードでログインしてください。"
             submitLabel="管理画面へログイン"
             title="管理画面ログイン"
+            titleLevel="h2"
           />
         </Suspense>
       ) : (

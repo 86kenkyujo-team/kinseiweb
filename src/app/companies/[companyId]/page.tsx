@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
+import { SafeImage } from '@/components/SafeImage'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import { requireStudent } from '@/lib/student/auth'
@@ -188,7 +189,13 @@ export default async function CompanyDetailPage({ params }: CompanyDetailPagePro
         <Link className="company-back-link" href="/companies">企業一覧へ戻る</Link>
         <div className="company-detail-heading">
           <div className="company-logo large">
-            {company.logo_url ? <img src={company.logo_url} alt="" /> : <span>{company.company_name.slice(0, 1)}</span>}
+            {company.logo_url ? (
+              <SafeImage
+                alt={`${company.company_name}のロゴ`}
+                fallbackText={company.company_name.slice(0, 1)}
+                src={company.logo_url}
+              />
+            ) : <span>{company.company_name.slice(0, 1)}</span>}
           </div>
           <div>
             <p>{company.industry_category || 'カテゴリ未設定'}</p>

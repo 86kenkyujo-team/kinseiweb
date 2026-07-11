@@ -10,6 +10,7 @@ type LoginFormProps = {
   eyebrow?: string
   forgotPasswordHref?: string
   lead?: string
+  titleLevel?: 'h1' | 'h2'
   submitLabel?: string
   title?: string
 }
@@ -21,6 +22,7 @@ export function LoginForm({
   lead = 'ログイン設定リンクで登録したメールアドレスとパスワードでログインしてください。',
   submitLabel = 'ログイン',
   title = '企業会員ログイン',
+  titleLevel = 'h1',
 }: LoginFormProps = {}) {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -33,6 +35,7 @@ export function LoginForm({
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const Title = titleLevel
 
   useEffect(() => {
     router.prefetch(nextPath)
@@ -73,7 +76,7 @@ export function LoginForm({
     <form className="login-card" onSubmit={handleSubmit}>
       <div>
         <p className="eyebrow">{eyebrow}</p>
-        <h1>{title}</h1>
+        <Title>{title}</Title>
         <p className="lead">{lead}</p>
       </div>
 

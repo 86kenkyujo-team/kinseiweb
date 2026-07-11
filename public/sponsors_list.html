@@ -568,6 +568,20 @@
       text-overflow: ellipsis;
     }
 
+    .sponsor-empty {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px dashed rgba(25, 91, 170, 0.28);
+      border-radius: 14px;
+      color: #23446d;
+      display: flex;
+      font-weight: 800;
+      justify-content: center;
+      min-height: 132px;
+      padding: 24px;
+      text-align: center;
+    }
+
     .medium-card b {
       font-size: 13px;
     }
@@ -1317,6 +1331,38 @@
         filter: none;
       }
     }
+    @media (max-width: 760px) {
+      nav a,
+      footer a,
+      .mobile-menu a,
+      .btn,
+      .menu-toggle,
+      .see-all,
+      .arrow {
+        min-height: 46px !important;
+      }
+
+      .brand,
+      .menu-toggle,
+      .arrow {
+        min-height: 44px !important;
+        min-width: 44px !important;
+      }
+
+      .footer a {
+        align-items: center;
+        display: inline-flex;
+        min-height: 46px !important;
+      }
+
+      nav a,
+      footer a,
+      .mobile-menu a,
+      .see-all {
+        align-items: center;
+        display: inline-flex;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1379,21 +1425,7 @@
           <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
         </div>
 
-        <div class="carousel" aria-label="大手企業リスト">
-          <button class="arrow left" type="button" aria-label="前へ">‹</button>
-          <div class="carousel-window">
-            <div class="card-track">
-              <a class="sponsor-card enterprise-card is-peek" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card enterprise-card" href="/sponsor.html"><span class="logo-box">Enterprise Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-            </div>
-          </div>
-          <button class="arrow right" type="button" aria-label="次へ">›</button>
-        </div>
-        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="sponsor-empty">掲載準備中です。協賛に関するご相談は「すべて見る」からお問い合わせください。</div>
       </article>
 
       <article class="sponsor-band ambassador">
@@ -1407,22 +1439,7 @@
           <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
         </div>
 
-        <div class="carousel" aria-label="アンバサダー導入企業リスト">
-          <button class="arrow left" type="button" aria-label="前へ">‹</button>
-          <div class="carousel-window">
-            <div class="card-track">
-              <a class="sponsor-card medium-card is-peek" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Company Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-            </div>
-          </div>
-          <button class="arrow right" type="button" aria-label="次へ">›</button>
-        </div>
-        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="sponsor-empty">掲載準備中です。導入企業の情報は確認が取れ次第掲載します。</div>
       </article>
 
       <article class="sponsor-band featured">
@@ -1436,22 +1453,7 @@
           <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
         </div>
 
-        <div class="carousel" aria-label="情報ページ掲載プラン企業リスト">
-          <button class="arrow left" type="button" aria-label="前へ">‹</button>
-          <div class="carousel-window">
-            <div class="card-track">
-              <a class="sponsor-card medium-card is-peek" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card medium-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-            </div>
-          </div>
-          <button class="arrow right" type="button" aria-label="次へ">›</button>
-        </div>
-        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="sponsor-empty">掲載準備中です。企業名・ロゴの掲載許諾後に公開します。</div>
       </article>
 
       <article class="sponsor-band light">
@@ -1465,24 +1467,7 @@
           <a class="see-all" href="/sponsor.html">すべて見る&nbsp;&nbsp;→</a>
         </div>
 
-        <div class="carousel" aria-label="ライトプラン企業リスト">
-          <button class="arrow left" type="button" aria-label="前へ">‹</button>
-          <div class="carousel-window">
-            <div class="card-track">
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-              <a class="sponsor-card light-card" href="/sponsor.html"><span class="logo-box">Logo</span><b>⚪︎⚪︎⚪︎</b></a>
-            </div>
-          </div>
-          <button class="arrow right" type="button" aria-label="次へ">›</button>
-        </div>
-        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="sponsor-empty">掲載準備中です。確認済みの協賛企業のみ順次公開します。</div>
       </article>
 
       <section class="join-cta" aria-label="企業向けお問い合わせ">

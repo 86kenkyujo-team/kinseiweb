@@ -15,6 +15,7 @@ export function PasswordUpdateForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const nextPath = getSafeNextPath(searchParams.get('next'))
+  const linkStatus = searchParams.get('status')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [error, setError] = useState('')
@@ -25,6 +26,16 @@ export function PasswordUpdateForm() {
     let isMounted = true
 
     async function checkRecoverySession() {
+      if (linkStatus === 'invalid_link') {
+        setError('ログイン設定リンクが無効、または有効期限切れです。新しいリンクの発行を運営へ依頼してください。')
+        return
+      }
+
+      if (linkStatus === 'setup_required') {
+        setError('Supabase Authの設定が不足しています。運営へ確認してください。')
+        return
+      }
+
       try {
         const supabase = createClient()
         const { data } = await supabase.auth.getSession()
@@ -51,7 +62,7 @@ export function PasswordUpdateForm() {
     return () => {
       isMounted = false
     }
-  }, [])
+  }, [linkStatus])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

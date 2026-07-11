@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { SafeImage } from '@/components/SafeImage'
 import { createClient } from '@/lib/supabase/server'
 import { getStudentContext } from '@/lib/student/auth'
 import './styles.css'
@@ -246,7 +247,11 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
                 <div className="company-card-main">
                   <div className="company-logo">
                     {company.logo_url ? (
-                      <img src={company.logo_url} alt={`${company.company_name}のロゴ`} />
+                      <SafeImage
+                        alt={`${company.company_name}のロゴ`}
+                        fallbackText={company.company_name.slice(0, 1)}
+                        src={company.logo_url}
+                      />
                     ) : (
                       <span>{company.company_name.slice(0, 1)}</span>
                     )}

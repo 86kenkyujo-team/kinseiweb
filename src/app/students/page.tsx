@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { SafeImage } from '@/components/SafeImage'
 import { StudentDatabaseHeader } from '@/components/StudentDatabaseHeader'
 import { createClient } from '@/lib/supabase/server'
 import './styles.css'
@@ -175,9 +176,10 @@ export default async function StudentsPage() {
               <div className="student-public-profile">
                 <div className="student-public-face">
                   {student.profile_image_url ? (
-                    <img
+                    <SafeImage
                       src={student.profile_image_url}
-                      alt=""
+                      alt={`${student.display_name}のプロフィール画像`}
+                      fallbackText={student.initials}
                       style={getProfileImageStyle(student.profile_image_url)}
                     />
                   ) : (
@@ -204,7 +206,11 @@ export default async function StudentsPage() {
                     src={student.video_url}
                   />
                 ) : student.profile_image_url ? (
-                  <img src={student.profile_image_url} alt="" />
+                  <SafeImage
+                    alt={`${student.display_name}のプロフィール画像`}
+                    fallbackText={student.initials}
+                    src={student.profile_image_url}
+                  />
                 ) : null}
                 <div className="video-scrim" />
                 <div className="video-label">ショート動画</div>

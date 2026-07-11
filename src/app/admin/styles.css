@@ -105,6 +105,17 @@
   animation: adminFadeSlide 220ms ease both;
 }
 
+.admin-main,
+.admin-main > *,
+.admin-panel,
+.admin-form,
+.admin-form-grid,
+.admin-form-grid > *,
+.admin-link-panel-heading,
+.admin-link-panel-heading > * {
+  min-width: 0;
+}
+
 html[data-admin-navigating='true'] .admin-main {
   opacity: 0.94;
   transform: translateY(2px);
@@ -461,6 +472,12 @@ html[data-admin-navigating='true'] .admin-main {
     padding: 14px 18px;
   }
 
+  .admin-brand {
+    align-items: center;
+    display: inline-flex;
+    min-height: 44px;
+  }
+
   .admin-nav {
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -472,10 +489,12 @@ html[data-admin-navigating='true'] .admin-main {
   .admin-nav a {
     flex: 0 0 auto;
     font-size: 13px;
+    min-height: 44px;
     padding: 8px 11px;
   }
 
   .admin-main {
+    overflow-x: clip;
     padding: 26px 18px 52px;
   }
 
@@ -523,7 +542,9 @@ html[data-admin-navigating='true'] .admin-main {
   color: #17211d;
   font: inherit;
   min-height: 44px;
+  max-width: 100%;
   padding: 10px 12px;
+  width: 100%;
   transition:
     background 160ms ease,
     border-color 160ms ease,
@@ -972,6 +993,19 @@ html[data-admin-navigating='true'] .admin-main {
 
   .admin-media-uploader {
     grid-template-columns: 1fr;
+  }
+
+  .admin-form,
+  .admin-panel {
+    padding: 16px;
+  }
+
+  .admin-page-title h1,
+  .admin-link-panel-heading,
+  .admin-field-heading,
+  .admin-selected-file,
+  .admin-field-hint {
+    overflow-wrap: anywhere;
   }
 }
 

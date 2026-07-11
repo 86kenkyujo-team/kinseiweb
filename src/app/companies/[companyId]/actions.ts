@@ -101,12 +101,22 @@ export async function createCompanyContactMailto(formData: FormData): Promise<Co
   const body = buildMailBody(company, context.student, jobPost)
   const profileSnapshot = buildStudentProfileSnapshot(context.student)
 
+  const consentAt = new Date().toISOString()
+  const { error: consentUpdateError } = await serviceClient
+    .from('students')
+    .update({ profile_share_consent_at: consentAt })
+    .eq('id', context.student.id)
+
+  if (consentUpdateError) {
+    return { error: 'プロフィール共有の同意日時を保存できませんでした。運営へ確認してください。', ok: false }
+  }
+
   const { error } = await serviceClient
     .from('student_company_contacts')
     .insert({
       company_id: companyId,
       contact_email: contactEmail,
-      consent_at: new Date().toISOString(),
+      consent_at: consentAt,
       job_post_id: jobPostId,
       mail_body_snapshot: body,
       mail_subject: subject,
